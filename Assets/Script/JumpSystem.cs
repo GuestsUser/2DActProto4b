@@ -7,7 +7,7 @@ public class JumpSystem : MonoBehaviour
 {
     /*ジャンプ用変数*/
     [SerializeField] public float jumpForce = 5.0f; /*ジャンプ力*/
-    [SerializeField] public int doubleJump = 0;      /*ジャンプ回数*/
+    [SerializeField] public int dubleJump = 0;      /*ジャンプ回数*/
     [SerializeField] public bool jump = false;      /*ジャンプフラグ*/
     /*ジャンプ用変数*/
 
@@ -68,7 +68,7 @@ public class JumpSystem : MonoBehaviour
             if (rayHit.collider.tag == "ground")
             {
 
-                doubleJump = 2;  /*残りジャンプ回数*/
+                dubleJump = 2;  /*残りジャンプ回数*/
                 jump = true;    /*ジャンプフラグ*/
 
             }
@@ -77,7 +77,7 @@ public class JumpSystem : MonoBehaviour
         else if (jump)
         {
 
-            doubleJump = 1;  /*ジャンプ回数を減らす*/
+            dubleJump = 1;  /*ジャンプ回数を減らす*/
             jump = false;   /*ジャンプフラグをfalseにする*/
 
         }
@@ -88,17 +88,17 @@ public class JumpSystem : MonoBehaviour
         if (Keyboard.current.spaceKey.wasPressedThisFrame)
         {
             /*残りジャンプ回数によりジャンプさせる*/
-            if (doubleJump == 2 && jump)
+            if (dubleJump == 2 && jump)
             {
 
-                doubleJump--;
+                dubleJump--;
                 Jump();
 
             }
-            else if (doubleJump >= 1 && !jump)
+            else if (dubleJump >= 1 && !jump)
             {
 
-                doubleJump--;
+                dubleJump--;
                 Jump();
 
             }
@@ -116,14 +116,14 @@ public class JumpSystem : MonoBehaviour
     //    {
 
     //        jump = true;
-    //        doubleJump = 2;
+    //        dubleJump = 2;
 
     //    }
     //    else
     //    {
 
     //        jump = false;
-    //        doubleJump = 1;
+    //        dubleJump = 1;
 
     //    }
 
@@ -136,7 +136,7 @@ public class JumpSystem : MonoBehaviour
     //    {
 
     //        jump = false;
-    //        doubleJump = 1;
+    //        dubleJump = 1;
 
     //    }
     //}

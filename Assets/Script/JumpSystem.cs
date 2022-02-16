@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class JumpSystem : MonoBehaviour
+public class JanpSystem : MonoBehaviour
 {
 
     [SerializeField] public float jumpForce = 5.0f;

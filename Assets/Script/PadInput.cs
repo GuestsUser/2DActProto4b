@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class TestJump : MonoBehaviour
+public class Padinput : MonoBehaviour
 {
     /*PlayerInput型の変数を用意。入力をとれる*/
     PlayerInput input;

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class Test_JumpSystem : MonoBehaviour
+public class JumpSystem : MonoBehaviour
 {
 
     [SerializeField] public float jumpForce = 5.0f;
@@ -16,7 +16,7 @@ public class Test_JumpSystem : MonoBehaviour
     public Ray ray;
     public RaycastHit rayHit;
 
-    [SerializeField] public float rayDistance = 5f;
+    [SerializeField] public float rayDistance = 0.55f;
 
     public Rigidbody rb;
     /*レイキャスト用変数*/

@@ -7,6 +7,7 @@ public class Padinput : MonoBehaviour
 {
     /*PlayerInput型の変数を用意。入力をとれる*/
     PlayerInput input;
+    public PlayerInput _input { get{ return input; } }
 
     void Awake()
     {
@@ -17,36 +18,36 @@ public class Padinput : MonoBehaviour
     {
         /*[]中は『Actions名』を入れる*/
         input.actions["Jump"].started += OnJump;
-        input.actions["Special"].started += OnSpecial;
-        input.actions["PlayerMove"].started += OnPlayerMove;
+        input.actions["Skill"].started += OnSkill;
+        input.actions["Move"].started += OnMove;
     }
     void OnDisable()
     {
         /*[]中は『Actions名』を入れる*/
         input.actions["Jump"].started -= OnJump;
-        input.actions["Special"].started -= OnSpecial;
-        input.actions["PlayerMove"].started -= OnPlayerMove;
+        input.actions["Skill"].started -= OnSkill;
+        input.actions["Move"].started -= OnMove;
     }
 
     /*継承先でoverrideして動作を設定*/
     public virtual void Jump() {; }
-    public virtual void Special() {; }
-    public virtual void PlayerMove() {; }
-    public virtual void CursorMove() {; } /*選択しているくつの切り替え用*/
+    public virtual void Skill() {; }
+    public virtual void Move() {; }
+    public virtual void Change() {; } /*選択しているくつの切り替え用*/
 
     public void OnJump(InputAction.CallbackContext context)
     {
         Jump(); 
-        //Debug.Log("Aボタン入力しました");
+        Debug.Log("Aボタン入力しました");
     }
-    public void OnSpecial(InputAction.CallbackContext context)
+    public void OnSkill(InputAction.CallbackContext context)
     {
-        Special();
-        //Debug.Log("Xボタン入力しました");
+        Skill();
+        Debug.Log("Xボタン入力しました");
     }
-    public void OnPlayerMove(InputAction.CallbackContext context)
+    public void OnMove(InputAction.CallbackContext context)
     {
-        PlayerMove();
+        Move();
 
         /*↓これで右入力か左入力かをとれるよ(右入力:1.0,0.0 左入力:-1.0,0.0)*/　
         //var value = context.ReadValue<Vector2>();

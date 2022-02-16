@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class JanpSystem : MonoBehaviour
+public class Test_JumpSystem : MonoBehaviour
 {
 
     [SerializeField] public float jumpForce = 5.0f;
@@ -16,7 +16,7 @@ public class JanpSystem : MonoBehaviour
     public Ray ray;
     public RaycastHit rayHit;
 
-    [SerializeField] public float rayJump = 0.5f;
+    [SerializeField] public float rayDistance = 5f;
 
     public Rigidbody rb;
     /*レイキャスト用変数*/
@@ -34,50 +34,57 @@ public class JanpSystem : MonoBehaviour
     {
 
         /*レイキャストの使い方がわからないのでお願いします（プレイやの当たり判定をレイキャストにする）参照元： https://getabakoclub.com/2020/05/11/unity%e3%81%a7%e5%9c%b0%e9%9d%a2%e3%81%ae%e5%bd%93%e3%81%9f%e3%82%8a%e5%88%a4%e5%ae%9a%e3%82%92%e8%b6%b3%e5%85%83%e3%81%a0%e3%81%91%e5%8f%96%e5%be%97%e3%81%99%e3%82%8b%e3%80%903d%e3%80%91/ */
-        rayPosition = transform.position + new Vector3(0, 0.5f, 0);
+        rayPosition = rb.transform.position;
         ray = new Ray(rayPosition, transform.up * -1);
-        Debug.DrawRay(ray.origin, ray.direction * rayJump, Color.red);
+        Debug.DrawRay(rayPosition, ray.direction * rayDistance, Color.red);
         print(jump);
-        if (Physics.Raycast(ray, out rayHit, rayJump))
+        if (Physics.Raycast(ray, out rayHit, rayDistance))
         {
 
             if (rayHit.collider.tag == "ground")
             {
 
+                dubleJump = 2;
                 jump = true;
 
             }
-            else
-            {
 
-                jump = false;
-
-            }
+        }
+        else if (jump)
+        {
+            dubleJump = 1;
+            jump = false;
 
         }
         /*レイキャストの使い方がわからないのでお願いします（プレイやの当たり判定をレイキャストにする）参照元： https://getabakoclub.com/2020/05/11/unity%e3%81%a7%e5%9c%b0%e9%9d%a2%e3%81%ae%e5%bd%93%e3%81%9f%e3%82%8a%e5%88%a4%e5%ae%9a%e3%82%92%e8%b6%b3%e5%85%83%e3%81%a0%e3%81%91%e5%8f%96%e5%be%97%e3%81%99%e3%82%8b%e3%80%903d%e3%80%91/ */
 
         /*Colliderを使った当たり判定処理（二弾ジャンプ）*/
         //print(jump);
-        //if (Keyboard.current.spaceKey.wasPressedThisFrame)
-        //{
-        //    if (jump)
-        //    {
+        if (Keyboard.current.spaceKey.wasPressedThisFrame)
+        {
+            if (dubleJump == 2 && jump)
+            {
 
-        //        dubleJump--;
-        //        Jump();
+                dubleJump--;
+                Jump();
 
-        //    }
-        //    else if (dubleJump == 1)
-        //    {
+            }
+            else if (dubleJump >= 1 && !jump)
+            {
 
-        //        dubleJump--;
-        //        Jump();
+                dubleJump--;
+                Jump();
 
-        //    }
+            }
+            //else
+            //{
+
+            //    dubleJump = 2;
+
+            //}
 
 
-        //}
+        }
         /*Colliderを使った当たり判定処理（二弾ジャンプ）*/
 
     }

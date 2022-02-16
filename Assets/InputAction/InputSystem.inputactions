@@ -1,5 +1,5 @@
 {
-    "name": "testInput",
+    "name": "InputSystem",
     "maps": [
         {
             "name": "Player",
@@ -33,6 +33,14 @@
                     "name": "Skill",
                     "type": "Button",
                     "id": "d1407d50-de09-43c0-9e96-35e8742265e1",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "Pause",
+                    "type": "Button",
+                    "id": "8c83ffd8-6ace-451f-99cf-b561d51ae09e",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": ""
@@ -212,6 +220,17 @@
                     "processors": "",
                     "groups": "Gamepad",
                     "action": "Skill",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "c44bc046-6726-4585-8909-322f8a4751b2",
+                    "path": "<Gamepad>/start",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Gamepad",
+                    "action": "Pause",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

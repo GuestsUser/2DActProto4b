@@ -12,10 +12,10 @@ GameObject:
   - component: {fileID: 5047130680581012108}
   - component: {fileID: 7623431902998431801}
   - component: {fileID: 5556297574982674881}
-  - component: {fileID: 7508454676242104403}
+  - component: {fileID: 1797999703610680838}
   m_Layer: 0
   m_Name: saveBlock
-  m_TagString: Untagged
+  m_TagString: SavePoint
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -94,7 +94,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &7508454676242104403
+--- !u!114 &1797999703610680838
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -103,7 +103,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 2482068615103368010}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 99120a486e8d95a49a62a9a1a0751b51, type: 3}
+  m_Script: {fileID: 11500000, guid: 924d42177b9a9db43b9e3ae396f29fab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  retrySystem: {fileID: 0}

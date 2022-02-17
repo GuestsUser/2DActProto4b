@@ -20,7 +20,7 @@ public class Padinput : MonoBehaviour
         /*[]中は『Actions名』を入れる*/
         input.actions["Jump"].started += OnJump;
         input.actions["Skill"].started += OnSkill;
-        input.actions["Move"].started += OnMove;
+        input.actions["Move"].performed += OnMove;
         input.actions["Change"].started += OnChange;
     }
     void OnDisable()
@@ -28,7 +28,7 @@ public class Padinput : MonoBehaviour
         /*[]中は『Actions名』を入れる*/
         input.actions["Jump"].started -= OnJump;
         input.actions["Skill"].started -= OnSkill;
-        input.actions["Move"].started -= OnMove;
+        input.actions["Move"].performed -= OnMove;
         input.actions["Change"].started -= OnChange;
     }
 
@@ -51,7 +51,7 @@ public class Padinput : MonoBehaviour
     public void OnMove(InputAction.CallbackContext context)
     {
         Move();
-
+        //Debug.Log("通ってます");
         /*↓これで右入力か左入力かをとれるよ(右入力:1.0,0.0 左入力:-1.0,0.0)*/　
         //var value = context.ReadValue<Vector2>();
         //Debug.Log(value);

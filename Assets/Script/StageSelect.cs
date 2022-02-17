@@ -9,51 +9,59 @@ public class StageSelect : MonoBehaviour
 {
 
     private int stageNumber;    /*タイトル画面のセレクト番号*/
-    private bool pushFlag;      /*縦に押したときの判定*/
+
+    //追加
+    private bool pushFlg;
 
     public GameObject stagenumber_object = null;    /*仮：ステージ表記*/
 
     void Start()
     {
         stageNumber = 1;    /*ステージ1固定*/
-        pushFlag = false;
+        pushFlg = false;
     }
 
     void Update()
     {
-        /*ゲームパッドのAボタンが押されたら*/
-        if (Gamepad.current.buttonSouth.wasPressedThisFrame)
-        {
-            if (pushFlag == false)
-            {
-                /*押した判定にする*/
-                pushFlag = true;
-                Debug.Log("下を押した");
-                /*選択が一番下に来たら*/
-                if (++stageNumber > 2)
-                    /*選択を一番上に戻す*/
-                    stageNumber = 1;
-            }
-        }
-        /*ゲームパッドのYボタンが押されたら*/
-        else if (Gamepad.current.buttonNorth.wasPressedThisFrame)
-        {
+        StageSelectCursol();
 
-            if (pushFlag == false)
+        /*（仮表記）何ステージかわかるように*/
+        Text stagenumber_text = stagenumber_object.GetComponent<Text>();
+        stagenumber_text.text = "ステージ : " + stageNumber;
+    }
+
+
+    private void StageSelectCursol()
+    {
+        Debug.Log("カーソル動きます");
+
+        if (Gamepad.current.leftStick.up.ReadValue() == 1)
+        {
+            if (!pushFlg)
             {
-                /*押した判定にする*/
-                pushFlag = true;
-                Debug.Log("上を押した");
-                /*選択が一番上に来たら*/
+                pushFlg = true;
+                Debug.Log("1回だけ押した");
                 if (--stageNumber < 1)
-                    /*選択を一番下に戻す*/
-                    stageNumber = 2;
+                {
+                    stageNumber = 3;
+                }
             }
         }
-        /*上記2つが押されてないなら*/
+        else if (Gamepad.current.leftStick.down.ReadValue() == 1)
+        {
+            if (!pushFlg)
+            {
+                pushFlg = true;
+                Debug.Log("1回だけ押した");
+                if (++stageNumber > 3)
+                {
+                    stageNumber = 1;
+                }
+            }
+        }
         else
         {
-            pushFlag = false;
+            pushFlg = false;
         }
 
         /*ゲームパッドのBボタンを押したら*/
@@ -61,13 +69,6 @@ public class StageSelect : MonoBehaviour
         {
             SceneChenge();
         }
-
-
-
-
-        /*（仮表記）何ステージかわかるように*/
-        Text stagenumber_text = stagenumber_object.GetComponent<Text>();
-        stagenumber_text.text = "ステージ : " + stageNumber;
     }
 
     /*stageNumberに応じてシーンを切り替える関数*/

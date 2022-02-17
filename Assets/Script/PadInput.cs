@@ -7,6 +7,7 @@ public class Padinput : MonoBehaviour
 {
     /*PlayerInput型の変数を用意。入力をとれる*/
     PlayerInput input;
+    
     public PlayerInput _input { get{ return input; } }
 
     void Awake()
@@ -20,6 +21,7 @@ public class Padinput : MonoBehaviour
         input.actions["Jump"].started += OnJump;
         input.actions["Skill"].started += OnSkill;
         input.actions["Move"].started += OnMove;
+        input.actions["Change"].started += OnChange;
     }
     void OnDisable()
     {
@@ -27,6 +29,7 @@ public class Padinput : MonoBehaviour
         input.actions["Jump"].started -= OnJump;
         input.actions["Skill"].started -= OnSkill;
         input.actions["Move"].started -= OnMove;
+        input.actions["Change"].started -= OnChange;
     }
 
     /*継承先でoverrideして動作を設定*/
@@ -52,5 +55,9 @@ public class Padinput : MonoBehaviour
         /*↓これで右入力か左入力かをとれるよ(右入力:1.0,0.0 左入力:-1.0,0.0)*/　
         //var value = context.ReadValue<Vector2>();
         //Debug.Log(value);
+    }
+    public void OnChange(InputAction.CallbackContext context)
+    {
+        Change();
     }
 }

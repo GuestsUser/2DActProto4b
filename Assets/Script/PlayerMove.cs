@@ -13,7 +13,7 @@ public class PlayerMove : Padinput
     public override void Move()
     {
         Debug.Log("通ってます");
-        if (Gamepad.current.leftStick.x.ReadValue() == 1)
+        if (Gamepad.current.leftStick.x.ReadValue() == 1 || (Gamepad.current.dpad.x.ReadValue() == 1))
         {
             right = 1;
         }
@@ -21,17 +21,18 @@ public class PlayerMove : Padinput
         {
             right = 0;
         }
-        if (Gamepad.current.leftStick.x.ReadValue() == -1)
+        if (Gamepad.current.leftStick.x.ReadValue() == -1 || (Gamepad.current.dpad.x.ReadValue() == -1))
         {
-            left = 1;
+            left = -1;
         }
         else
         {
             left = 0;
         }
 
-        move = Gamepad.current.leftStick.ReadValue();
        
+        move = new Vector3(x,0,0);
+
     }
     public override void MoveStop()
     {
@@ -41,6 +42,6 @@ public class PlayerMove : Padinput
     {
         const float Speed = 3f;
         transform.Translate(move * Speed * Time.deltaTime);
-        
+        Debug.Log(Gamepad.current.dpad.x.ReadValue());
     }
 }

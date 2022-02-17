@@ -42,6 +42,6 @@ public class PlayerMove : Padinput
     {
         const float Speed = 3f;
         transform.Translate(move * Speed * Time.deltaTime);
-        Debug.Log(Gamepad.current.dpad.x.ReadValue());
+        //Debug.Log(Gamepad.current.dpad.x.ReadValue());
     }
 }

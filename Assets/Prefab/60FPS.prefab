@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1850324954778445476}
-  - component: {fileID: 1850324954778445479}
+  - component: {fileID: 1193897982761754248}
   m_Layer: 0
   m_Name: 60FPS
   m_TagString: Untagged
@@ -31,7 +31,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1850324954778445479
+--- !u!114 &1193897982761754248
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -40,6 +40,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 1850324954778445478}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e9cc715685b2141409dd052a84bbb4f5, type: 3}
+  m_Script: {fileID: 11500000, guid: a7cc23e13d4f39540aea4a0b3c39b7fd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Rate: 60
+  FixedRate: 60

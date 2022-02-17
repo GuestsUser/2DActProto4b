@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class JumpSystem : MonoBehaviour
+public class JumpSystem : Padinput
 {
     /*ジャンプ用変数*/
     [SerializeField] public float jumpForce = 5.0f; /*ジャンプ力*/
@@ -56,8 +56,8 @@ public class JumpSystem : MonoBehaviour
         Debug.DrawRay(rayPosition, ray4.direction * rayDistance, Color.red);
         Debug.DrawRay(rayPosition, ray5.direction * rayDistance, Color.red);
 
-        print(jump);/*デバッグログ,ジャンプフラグを出力*/
-
+        //print(jump);/*デバッグログ,ジャンプフラグを出力*/
+        Debug.Log(Gamepad.current.leftStick);
         /*脳筋式レイキャストの当たり判定処理*/
         if (Physics.Raycast(ray, out rayHit, rayDistance) || Physics.Raycast(ray2, out rayHit, rayDistance)
             || Physics.Raycast(ray3, out rayHit, rayDistance) || Physics.Raycast(ray4, out rayHit, rayDistance)
@@ -83,28 +83,29 @@ public class JumpSystem : MonoBehaviour
         }
         /*レイキャストの使い方がわからないのでお願いします（プレイやの当たり判定をレイキャストにする）参照元： https://getabakoclub.com/2020/05/11/unity%e3%81%a7%e5%9c%b0%e9%9d%a2%e3%81%ae%e5%bd%93%e3%81%9f%e3%82%8a%e5%88%a4%e5%ae%9a%e3%82%92%e8%b6%b3%e5%85%83%e3%81%a0%e3%81%91%e5%8f%96%e5%be%97%e3%81%99%e3%82%8b%e3%80%903d%e3%80%91/ */
 
-        /*Colliderを使った当たり判定処理（二弾ジャンプ）*/
-        /*スペースキーが押されたら*/
-        if (Keyboard.current.spaceKey.wasPressedThisFrame)
-        {
-            /*残りジャンプ回数によりジャンプさせる*/
-            if (dubleJump == 2 && jump)
-            {
+        ///*Colliderを使った当たり判定処理（二弾ジャンプ）*/
+        ///*スペースキーが押されたら*/
+        //if (Keyboard.current.spaceKey.wasPressedThisFrame)
+        //{
+        //    /*残りジャンプ回数によりジャンプさせる*/
+        //    if (dubleJump == 2 && jump)
+        //    {
 
-                dubleJump--;
-                Jump();
+        //        dubleJump--;
+        //        Jump();
 
-            }
-            else if (dubleJump >= 1 && !jump)
-            {
+        //    }
+        //    else if (dubleJump >= 1 && !jump)
+        //    {
 
-                dubleJump--;
-                Jump();
+        //        dubleJump--;
+        //        Jump();
 
-            }
+        //    }
 
-        }
-        /*Colliderを使った当たり判定処理（二弾ジャンプ）*/
+        //}
+        ///*Colliderを使った当たり判定処理（二弾ジャンプ）*/
+
 
     }
 
@@ -143,11 +144,32 @@ public class JumpSystem : MonoBehaviour
     /*Colliderを使った当たり判定処理（二弾ジャンプ）*/
 
     /*ジャンプするだけ（質量無視の同じジャンプ力）*/
-    void Jump()
+    override public void Jump()
     {
 
-        rb.AddForce(0, jumpForce, 0, ForceMode.VelocityChange);
-        rb.velocity = Vector3.zero;
+        /*PadInputを継承した処理*/
+        /*オーバーライドした関数呼び出し*/
+        /*残りジャンプ回数によりジャンプさせる*/
+        if (dubleJump == 2 && jump)
+        {
+
+            dubleJump--;
+
+            rb.AddForce(0, jumpForce, 0, ForceMode.VelocityChange);
+            rb.velocity = Vector3.zero;
+        }
+        else if (dubleJump >= 1 && !jump)
+        {
+
+            dubleJump--;
+
+            rb.AddForce(0, jumpForce, 0, ForceMode.VelocityChange);
+            rb.velocity = Vector3.zero;
+        }
+
+        ///*PadInputを継承した処理*/
+        //rb.AddForce(0, jumpForce, 0, ForceMode.VelocityChange);
+        //rb.velocity = Vector3.zero;
 
     }
 

@@ -440,6 +440,18 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 502666674}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1575453047 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1295556919604752168, guid: b195647894bfa7141a991fe34c4b5bef,
+    type: 3}
+  m_PrefabInstance: {fileID: 1295556918619303356}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a0a68a414d7559a4d9fa07b9cf6510c3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1598988104
 GameObject:
   m_ObjectHideFlags: 0
@@ -539,6 +551,197 @@ PrefabInstance:
         type: 3}
       propertyPath: rayDistance
       value: 0.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 1494268845509788525, guid: b195647894bfa7141a991fe34c4b5bef,
+        type: 3}
+      propertyPath: m_ActionEvents.Array.size
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 1494268845509788525, guid: b195647894bfa7141a991fe34c4b5bef,
+        type: 3}
+      propertyPath: m_ActionEvents.Array.data[0].m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1494268845509788525, guid: b195647894bfa7141a991fe34c4b5bef,
+        type: 3}
+      propertyPath: m_Actions
+      value: 
+      objectReference: {fileID: -944628639613478452, guid: c6e4543dc36f6e140a5f249ee97ebb96,
+        type: 3}
+    - target: {fileID: 1494268845509788525, guid: b195647894bfa7141a991fe34c4b5bef,
+        type: 3}
+      propertyPath: m_ActionEvents.Array.data[0].m_ActionId
+      value: 10468589-d770-4cca-93dd-fcac214ca25e
+      objectReference: {fileID: 0}
+    - target: {fileID: 1494268845509788525, guid: b195647894bfa7141a991fe34c4b5bef,
+        type: 3}
+      propertyPath: m_ActionEvents.Array.data[0].m_ActionName
+      value: Player/Move[/XInputControllerWindows/leftStick,/Keyboard/w,/XInputControllerWindows/dpad/up,/Keyboard/s,/XInputControllerWindows/dpad/down,/Keyboard/a,/XInputControllerWindows/dpad/left,/Keyboard/d,/XInputControllerWindows/dpad/right]
+      objectReference: {fileID: 0}
+    - target: {fileID: 1494268845509788525, guid: b195647894bfa7141a991fe34c4b5bef,
+        type: 3}
+      propertyPath: m_ActionEvents.Array.data[1].m_ActionId
+      value: 4269f554-dcd9-43d3-8055-cd6777836962
+      objectReference: {fileID: 0}
+    - target: {fileID: 1494268845509788525, guid: b195647894bfa7141a991fe34c4b5bef,
+        type: 3}
+      propertyPath: m_ActionEvents.Array.data[1].m_ActionName
+      value: Player/Jump[/XInputControllerWindows/buttonSouth]
+      objectReference: {fileID: 0}
+    - target: {fileID: 1494268845509788525, guid: b195647894bfa7141a991fe34c4b5bef,
+        type: 3}
+      propertyPath: m_ActionEvents.Array.data[2].m_ActionId
+      value: 34a0386e-daf1-432c-bed7-246564c92ac4
+      objectReference: {fileID: 0}
+    - target: {fileID: 1494268845509788525, guid: b195647894bfa7141a991fe34c4b5bef,
+        type: 3}
+      propertyPath: m_ActionEvents.Array.data[2].m_ActionName
+      value: Player/Change[/XInputControllerWindows/rightShoulder,/XInputControllerWindows/leftShoulder]
+      objectReference: {fileID: 0}
+    - target: {fileID: 1494268845509788525, guid: b195647894bfa7141a991fe34c4b5bef,
+        type: 3}
+      propertyPath: m_ActionEvents.Array.data[3].m_ActionId
+      value: d1407d50-de09-43c0-9e96-35e8742265e1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1494268845509788525, guid: b195647894bfa7141a991fe34c4b5bef,
+        type: 3}
+      propertyPath: m_ActionEvents.Array.data[3].m_ActionName
+      value: Player/Skill[/XInputControllerWindows/buttonWest]
+      objectReference: {fileID: 0}
+    - target: {fileID: 1494268845509788525, guid: b195647894bfa7141a991fe34c4b5bef,
+        type: 3}
+      propertyPath: m_ActionEvents.Array.data[4].m_ActionId
+      value: 8c83ffd8-6ace-451f-99cf-b561d51ae09e
+      objectReference: {fileID: 0}
+    - target: {fileID: 1494268845509788525, guid: b195647894bfa7141a991fe34c4b5bef,
+        type: 3}
+      propertyPath: m_ActionEvents.Array.data[4].m_ActionName
+      value: Player/Pause[/XInputControllerWindows/start]
+      objectReference: {fileID: 0}
+    - target: {fileID: 1494268845509788525, guid: b195647894bfa7141a991fe34c4b5bef,
+        type: 3}
+      propertyPath: m_ActionEvents.Array.data[5].m_ActionId
+      value: 696c2a17-0557-4020-a95d-e4fa9e4d717e
+      objectReference: {fileID: 0}
+    - target: {fileID: 1494268845509788525, guid: b195647894bfa7141a991fe34c4b5bef,
+        type: 3}
+      propertyPath: m_ActionEvents.Array.data[5].m_ActionName
+      value: UI/Navigate[/XInputControllerWindows/leftStick/up,/XInputControllerWindows/rightStick/up,/XInputControllerWindows/leftStick/down,/XInputControllerWindows/rightStick/down,/XInputControllerWindows/leftStick/left,/XInputControllerWindows/rightStick/left,/XInputControllerWindows/leftStick/right,/XInputControllerWindows/rightStick/right,/XInputControllerWindows/dpad,/Keyboard/w,/Keyboard/upArrow,/Keyboard/s,/Keyboard/downArrow,/Keyboard/a,/Keyboard/leftArrow,/Keyboard/d,/Keyboard/rightArrow]
+      objectReference: {fileID: 0}
+    - target: {fileID: 1494268845509788525, guid: b195647894bfa7141a991fe34c4b5bef,
+        type: 3}
+      propertyPath: m_ActionEvents.Array.data[6].m_ActionId
+      value: ad07e347-9750-498c-9f06-36cc741f4e82
+      objectReference: {fileID: 0}
+    - target: {fileID: 1494268845509788525, guid: b195647894bfa7141a991fe34c4b5bef,
+        type: 3}
+      propertyPath: m_ActionEvents.Array.data[6].m_ActionName
+      value: UI/Submit[/Keyboard/enter,/XInputControllerWindows/buttonSouth]
+      objectReference: {fileID: 0}
+    - target: {fileID: 1494268845509788525, guid: b195647894bfa7141a991fe34c4b5bef,
+        type: 3}
+      propertyPath: m_ActionEvents.Array.data[7].m_ActionId
+      value: 68090b14-1511-431c-9d02-b0db2c0040bb
+      objectReference: {fileID: 0}
+    - target: {fileID: 1494268845509788525, guid: b195647894bfa7141a991fe34c4b5bef,
+        type: 3}
+      propertyPath: m_ActionEvents.Array.data[7].m_ActionName
+      value: UI/Cancel[/Keyboard/escape,/XInputControllerWindows/buttonEast]
+      objectReference: {fileID: 0}
+    - target: {fileID: 1494268845509788525, guid: b195647894bfa7141a991fe34c4b5bef,
+        type: 3}
+      propertyPath: m_ActionEvents.Array.data[8].m_ActionId
+      value: 78f0457d-a82f-419f-823e-e8b39dddf500
+      objectReference: {fileID: 0}
+    - target: {fileID: 1494268845509788525, guid: b195647894bfa7141a991fe34c4b5bef,
+        type: 3}
+      propertyPath: m_ActionEvents.Array.data[8].m_ActionName
+      value: UI/Point[/Mouse/position,/Pen/position]
+      objectReference: {fileID: 0}
+    - target: {fileID: 1494268845509788525, guid: b195647894bfa7141a991fe34c4b5bef,
+        type: 3}
+      propertyPath: m_ActionEvents.Array.data[9].m_ActionId
+      value: 670902cd-fede-4a0e-b53d-b01a16292fc1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1494268845509788525, guid: b195647894bfa7141a991fe34c4b5bef,
+        type: 3}
+      propertyPath: m_ActionEvents.Array.data[9].m_ActionName
+      value: UI/Click[/Mouse/leftButton,/Pen/tip]
+      objectReference: {fileID: 0}
+    - target: {fileID: 1494268845509788525, guid: b195647894bfa7141a991fe34c4b5bef,
+        type: 3}
+      propertyPath: m_ActionEvents.Array.data[10].m_ActionId
+      value: 34844f72-2e4b-447a-bb3a-65d369793021
+      objectReference: {fileID: 0}
+    - target: {fileID: 1494268845509788525, guid: b195647894bfa7141a991fe34c4b5bef,
+        type: 3}
+      propertyPath: m_ActionEvents.Array.data[10].m_ActionName
+      value: UI/ScrollWheel[/Mouse/scroll]
+      objectReference: {fileID: 0}
+    - target: {fileID: 1494268845509788525, guid: b195647894bfa7141a991fe34c4b5bef,
+        type: 3}
+      propertyPath: m_ActionEvents.Array.data[11].m_ActionId
+      value: afc88d91-97a4-420e-9dc6-53bfe31418ac
+      objectReference: {fileID: 0}
+    - target: {fileID: 1494268845509788525, guid: b195647894bfa7141a991fe34c4b5bef,
+        type: 3}
+      propertyPath: m_ActionEvents.Array.data[11].m_ActionName
+      value: UI/MiddleClick[/Mouse/middleButton]
+      objectReference: {fileID: 0}
+    - target: {fileID: 1494268845509788525, guid: b195647894bfa7141a991fe34c4b5bef,
+        type: 3}
+      propertyPath: m_ActionEvents.Array.data[12].m_ActionId
+      value: 142a6855-a98d-41be-b53c-16f83c2f4265
+      objectReference: {fileID: 0}
+    - target: {fileID: 1494268845509788525, guid: b195647894bfa7141a991fe34c4b5bef,
+        type: 3}
+      propertyPath: m_ActionEvents.Array.data[12].m_ActionName
+      value: UI/RightClick[/Mouse/rightButton]
+      objectReference: {fileID: 0}
+    - target: {fileID: 1494268845509788525, guid: b195647894bfa7141a991fe34c4b5bef,
+        type: 3}
+      propertyPath: m_ActionEvents.Array.data[13].m_ActionId
+      value: 4f49b12c-8578-44db-bf63-4a537e2b96e3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1494268845509788525, guid: b195647894bfa7141a991fe34c4b5bef,
+        type: 3}
+      propertyPath: m_ActionEvents.Array.data[13].m_ActionName
+      value: UI/TrackedDevicePosition
+      objectReference: {fileID: 0}
+    - target: {fileID: 1494268845509788525, guid: b195647894bfa7141a991fe34c4b5bef,
+        type: 3}
+      propertyPath: m_ActionEvents.Array.data[14].m_ActionId
+      value: 64aa4211-c05f-46c1-a4ac-aed98e4e9e2b
+      objectReference: {fileID: 0}
+    - target: {fileID: 1494268845509788525, guid: b195647894bfa7141a991fe34c4b5bef,
+        type: 3}
+      propertyPath: m_ActionEvents.Array.data[14].m_ActionName
+      value: UI/TrackedDeviceOrientation
+      objectReference: {fileID: 0}
+    - target: {fileID: 1494268845509788525, guid: b195647894bfa7141a991fe34c4b5bef,
+        type: 3}
+      propertyPath: m_DefaultControlScheme
+      value: Gamepad
+      objectReference: {fileID: 0}
+    - target: {fileID: 1494268845509788525, guid: b195647894bfa7141a991fe34c4b5bef,
+        type: 3}
+      propertyPath: m_ActionEvents.Array.data[0].m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1575453047}
+    - target: {fileID: 1494268845509788525, guid: b195647894bfa7141a991fe34c4b5bef,
+        type: 3}
+      propertyPath: m_ActionEvents.Array.data[0].m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OnMove
+      objectReference: {fileID: 0}
+    - target: {fileID: 1494268845509788525, guid: b195647894bfa7141a991fe34c4b5bef,
+        type: 3}
+      propertyPath: m_ActionEvents.Array.data[0].m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1494268845509788525, guid: b195647894bfa7141a991fe34c4b5bef,
+        type: 3}
+      propertyPath: m_ActionEvents.Array.data[0].m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 3978852389522291217, guid: b195647894bfa7141a991fe34c4b5bef,
         type: 3}

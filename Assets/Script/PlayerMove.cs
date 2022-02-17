@@ -7,6 +7,7 @@ public class PlayerMove : Padinput
 {
     float right;
     float left;
+    /*PlayerのX値*/
     float x {get{ return right + left; } }
     Vector3 move;
     public override void Move()
@@ -31,6 +32,10 @@ public class PlayerMove : Padinput
 
         move = Gamepad.current.leftStick.ReadValue();
        
+    }
+    public override void MoveStop()
+    {
+        move = Vector3.zero;
     }
     void Update()
     {

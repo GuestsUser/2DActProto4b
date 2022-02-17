@@ -21,6 +21,7 @@ public class Padinput : MonoBehaviour
         input.actions["Jump"].started += OnJump;
         input.actions["Skill"].started += OnSkill;
         input.actions["Move"].performed += OnMove;
+        input.actions["Move"].canceled += OnMoveStop;
         input.actions["Change"].started += OnChange;
     }
     void OnDisable()
@@ -29,6 +30,7 @@ public class Padinput : MonoBehaviour
         input.actions["Jump"].started -= OnJump;
         input.actions["Skill"].started -= OnSkill;
         input.actions["Move"].performed -= OnMove;
+        input.actions["Move"].canceled -= OnMoveStop;
         input.actions["Change"].started -= OnChange;
     }
 
@@ -36,6 +38,7 @@ public class Padinput : MonoBehaviour
     public virtual void Jump() {; }
     public virtual void Skill() {; }
     public virtual void Move() {; }
+    public virtual void MoveStop() {; }
     public virtual void Change() {; } /*選択しているくつの切り替え用*/
 
     public void OnJump(InputAction.CallbackContext context)
@@ -56,6 +59,11 @@ public class Padinput : MonoBehaviour
         //var value = context.ReadValue<Vector2>();
         //Debug.Log(value);
     }
+    public void OnMoveStop(InputAction.CallbackContext context)
+    {
+        MoveStop();
+    }
+
     public void OnChange(InputAction.CallbackContext context)
     {
         Change();

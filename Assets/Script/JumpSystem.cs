@@ -56,8 +56,7 @@ public class JumpSystem : Padinput
         Debug.DrawRay(rayPosition, ray4.direction * rayDistance, Color.red);
         Debug.DrawRay(rayPosition, ray5.direction * rayDistance, Color.red);
 
-        //print(jump);/*デバッグログ,ジャンプフラグを出力*/
-        Debug.Log(Gamepad.current.leftStick);
+        print(jump);/*デバッグログ,ジャンプフラグを出力*/
         /*脳筋式レイキャストの当たり判定処理*/
         if (Physics.Raycast(ray, out rayHit, rayDistance) || Physics.Raycast(ray2, out rayHit, rayDistance)
             || Physics.Raycast(ray3, out rayHit, rayDistance) || Physics.Raycast(ray4, out rayHit, rayDistance)

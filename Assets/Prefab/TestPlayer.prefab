@@ -18,6 +18,8 @@ GameObject:
   - component: {fileID: 3978852389522291217}
   - component: {fileID: 6253949078690169363}
   - component: {fileID: 822714632791372254}
+  - component: {fileID: 1721052262}
+  - component: {fileID: 1721052263}
   m_Layer: 0
   m_Name: TestPlayer
   m_TagString: Player
@@ -233,7 +235,7 @@ MonoBehaviour:
   dubleJump: 0
   jump: 0
   rayPosition: {x: 0, y: 0, z: 0}
-  rayDistance: 0.6
+  rayDistance: 0.5591
   rb: {fileID: 0}
 --- !u!114 &3978852389522291217
 MonoBehaviour:
@@ -276,3 +278,33 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8f268c6982455eb46b390e5d0c93b12a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1721052262
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5105905518289073308}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a2fcc87cc20d944a9f5704bdc0d75c5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1721052263
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5105905518289073308}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cb3731bba25b58f4ebca09b49f4b22ae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  parent: {fileID: 0}
+  _item_obj:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  _selector_obj: {fileID: 0}

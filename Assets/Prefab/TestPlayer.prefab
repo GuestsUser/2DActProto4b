@@ -14,7 +14,6 @@ GameObject:
   - component: {fileID: 5105905518289073309}
   - component: {fileID: 600034387657383262}
   - component: {fileID: 1494268845509788525}
-  - component: {fileID: 1295556919604752175}
   - component: {fileID: 3978852389522291217}
   - component: {fileID: 6253949078690169363}
   - component: {fileID: 822714632791372254}
@@ -219,24 +218,6 @@ MonoBehaviour:
   m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
---- !u!114 &1295556919604752175
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5105905518289073308}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 04ee5617f535b25479798af6e6d94425, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  jumpForce: 5
-  dubleJump: 0
-  jump: 0
-  rayPosition: {x: 0, y: 0, z: 0}
-  rayDistance: 0.5591
-  rb: {fileID: 0}
 --- !u!114 &3978852389522291217
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -308,3 +289,4 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   _selector_obj: {fileID: 0}
+  Shoes: 000000000100000002000000

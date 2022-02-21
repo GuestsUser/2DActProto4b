@@ -28,12 +28,12 @@ public class ChangeShoes : Padinput
     {
         if (leftShoulder == 1)
         {
-            if (++menu_number > 2) menu_number = 0;
+            if (--menu_number < 0) menu_number = 2;
 
         }
         if (rightShoulder == 1)
         {
-            if (--menu_number < 0) menu_number = 2;
+            if (++menu_number > 2) menu_number = 0;
         }
 
         /*これをプレイヤーの方で管理*/

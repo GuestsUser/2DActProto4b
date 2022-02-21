@@ -98,7 +98,7 @@ public class PlayerMove : Padinput
     {
         
         Debug.Log(state);/*プレイヤーの状態*/
-        Debug.Log(move_x);
+        //Debug.Log(move_x);
         //Debug.Log(input_abs);
         switch (state)
         {
@@ -126,7 +126,7 @@ public class PlayerMove : Padinput
             run_time += Time.deltaTime;
             if (run_time < eas_time)
             {
-                move_x = Easing.ExpOut(run_time, eas_time, 2f, max_move_x);
+                move_x = ExpOut(run_time, eas_time, 2f, max_move_x);
             }
             else
             {

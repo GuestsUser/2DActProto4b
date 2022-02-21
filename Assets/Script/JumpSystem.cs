@@ -63,9 +63,9 @@ public class JumpSystem : Padinput
 
 
         /*脳筋式レイキャストの当たり判定処理*/
-        if (Physics.Raycast(ray, out rayHit, rayDistance) || Physics.Raycast(ray2, out rayHit, rayDistance)
+        if ((Physics.Raycast(ray, out rayHit, rayDistance) || Physics.Raycast(ray2, out rayHit, rayDistance)
             || Physics.Raycast(ray3, out rayHit, rayDistance) || Physics.Raycast(ray4, out rayHit, rayDistance)
-            || Physics.Raycast(ray5, out rayHit, rayDistance))
+            || Physics.Raycast(ray5, out rayHit, rayDistance)) && rayHit.collider.tag == "ground")
         {
             /*追加した部分*/
             switch (change_shoes.type)

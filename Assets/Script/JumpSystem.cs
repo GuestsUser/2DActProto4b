@@ -37,6 +37,7 @@ public class JumpSystem : Padinput
     {
 
         rb = GetComponent<Rigidbody>();
+        change_shoes = GetComponent<ChangeShoes>();
 
     }
 

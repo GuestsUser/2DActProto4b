@@ -52,21 +52,44 @@ public class DashSystem : Padinput
             rayHit.collider.gameObject.SetActive(false);
 
         }
-        /*ダッシュフラグがtrueだったら*/
-        if (dashFlg)
-        {
-            /*アビリティ発動ボタンが押されたら*/
-            if (dashFlg && Gamepad.current.buttonWest.wasPressedThisFrame)
-            {
 
-                /*ダッシュ発動（中身はジャンプの向きを変えただけ）*/
-                Dush();
+        /*コメントアウトした部分*/
+        ///*ダッシュフラグがtrueだったら*/
+        //if (dashFlg)
+        //{
+        //    /*アビリティ発動ボタンが押されたら*/
+        //    if (dashFlg && Gamepad.current.buttonWest.wasPressedThisFrame)
+        //    {
 
-            }
-            coolTime = 0;/*クールタイムリセット*/
+        //        /*ダッシュ発動（中身はジャンプの向きを変えただけ）*/
+        //        Dush();
 
-        }
-        else
+        //    }
+        //    coolTime = 0;/*クールタイムリセット*/
+
+        //}
+        //else
+        //{
+        //    /*クールタイムを計測*/
+        //    if (coolTime < 5f)
+        //    {
+
+        //        coolTime += Time.deltaTime;
+
+        //    }
+        //    else
+        //    {
+        //        coolTime = 0;   /*リセット*/
+        //        dashFlg = true;/*フラグをtrueに*/
+
+        //    }
+
+
+        //}
+        /*コメントアウトした部分*/
+
+        /*追加部分*/
+        if (dashFlg == false)
         {
             /*クールタイムを計測*/
             if (coolTime < 5f)
@@ -81,11 +104,25 @@ public class DashSystem : Padinput
                 dashFlg = true;/*フラグをtrueに*/
 
             }
+        }
+        /*追加部分*/
+    }
 
+    public override void Skill()
+    {
+        if (dashFlg)
+        {
+            /*アビリティ発動ボタンが押されたら*/
+            if (dashFlg && Gamepad.current.buttonWest.wasPressedThisFrame)
+            {
+
+                /*ダッシュ発動（中身はジャンプの向きを変えただけ）*/
+                Dush();
+
+            }
+            coolTime = 0;/*クールタイムリセット*/
 
         }
-
-
     }
 
     /*ダッシュシステム(ジャンプの向きをよこに変えただけ)*/

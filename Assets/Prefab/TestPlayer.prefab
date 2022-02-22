@@ -19,6 +19,8 @@ GameObject:
   - component: {fileID: 822714632791372254}
   - component: {fileID: 1721052262}
   - component: {fileID: 1721052263}
+  - component: {fileID: 1347058618}
+  - component: {fileID: 1347058619}
   m_Layer: 0
   m_Name: TestPlayer
   m_TagString: Player
@@ -271,6 +273,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a2fcc87cc20d944a9f5704bdc0d75c5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  max_move_x: 0
+  eas_time: 2
 --- !u!114 &1721052263
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -290,3 +294,39 @@ MonoBehaviour:
   - {fileID: 0}
   _selector_obj: {fileID: 0}
   Shoes: 000000000100000002000000
+--- !u!114 &1347058618
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5105905518289073308}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 04ee5617f535b25479798af6e6d94425, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  change_shoes: {fileID: 1721052263}
+  jumpForce: 5
+  dubleJump: 0
+  jump: 0
+  rayPosition: {x: 0, y: 0, z: 0}
+  rayDistance: 0.5591
+  rb: {fileID: 0}
+--- !u!114 &1347058619
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5105905518289073308}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5dae5df0cb4f8c7468f37f5a79b2942c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dashFlg: 1
+  coolTime: 0
+  dashForce: 5
+  change_shoes: {fileID: 0}
+  rb: {fileID: 0}

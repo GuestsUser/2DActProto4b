@@ -143,7 +143,7 @@ public class JumpSystem : Padinput
 
                     --dubleJump;
 
-                    rb.AddForce(0, jumpForce, 0, ForceMode.VelocityChange);
+                    rb.AddForce(rb.velocity.x, jumpForce, 0, ForceMode.VelocityChange);
                     rb.velocity = Vector3.zero;
                 }
                 /*追加した部分*/

@@ -84,7 +84,7 @@ public class ChangeShoes : Padinput
         Debug.Log(type);
         var CursorY = _item_obj[menu_number].transform.position.y;
         _selector_obj.transform.parent = _item_obj[menu_number].transform; //親要素変更
-        _selector_obj.transform.position = new Vector3(_item_obj[menu_number].transform.position.x, CursorY - 20, 0);
+        _selector_obj.transform.position = new Vector3(_item_obj[menu_number].transform.position.x, CursorY, 0);
     }
 
 }

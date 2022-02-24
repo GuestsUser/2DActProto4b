@@ -6,7 +6,7 @@ using UnityEngine;
 /* 落下死を実装したいステージのプレイヤーに付けるスクリプト */
 public class FallDownSystem : MonoBehaviour
 {
-    [SerializeField] private List<GameObject> fallPoint; /* 落下死地点集、x座標の整数部が重ならないようお願いしたい */
+    [Tooltip("落下死地点集、x座標の整数部が重ならないようお願いしたい")] [SerializeField] private List<GameObject> fallPoint;
     private RetrySystem rty;
     // Start is called before the first frame update
     void Start()

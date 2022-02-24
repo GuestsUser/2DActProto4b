@@ -52,7 +52,7 @@ public class KuttukuTest : Padinput
         if (change_shoes.type == ShoesType.Magnet_Shoes)
         {
 
-            if (Physics.Raycast(ray, out rayHit, rayDistance) || Physics.Raycast(ray2, out rayHit, rayDistance)&& rayHit.collider.tag == "kuttuku")
+            if ((Physics.Raycast(ray, out rayHit, rayDistance) || Physics.Raycast(ray2, out rayHit, rayDistance))&& rayHit.collider.tag == "kuttuku")
             {
                 /*コライダーを持つオブジェクトから、タグを読み取る（壁をkuttukuに設定）*/
                 if (rayHit.collider.tag == "kuttuku")

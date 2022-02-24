@@ -18,10 +18,6 @@ public class DashSystem : Padinput
 
     /*脳筋式レイキャスト変数*/
     public Ray ray;
-    //public Ray ray2;
-    //public Ray ray3;
-    //public Ray ray4;
-    //public Ray ray5;
     public RaycastHit rayHit;
 
     /*（レイキャスト）可視光線の長さ*/

@@ -49,47 +49,13 @@ public class DashSystem : Padinput
         Debug.DrawRay(rayPosition, ray.direction * rayDistance, Color.red);
         if ((Physics.Raycast(ray, out rayHit, rayDistance)) && rayHit.collider.tag == "Enemy")
         {
-            rayHit.collider.gameObject.SetActive(false);
+
+            rayHit.collider.gameObject.SetActive(false);/*レイキャストに触れたenemyタグを持つオブジェクトは消えることになる*/
 
         }
 
-        /*コメントアウトした部分*/
-        ///*ダッシュフラグがtrueだったら*/
-        //if (dashFlg)
-        //{
-        //    /*アビリティ発動ボタンが押されたら*/
-        //    if (dashFlg && Gamepad.current.buttonWest.wasPressedThisFrame)
-        //    {
-
-        //        /*ダッシュ発動（中身はジャンプの向きを変えただけ）*/
-        //        Dush();
-
-        //    }
-        //    coolTime = 0;/*クールタイムリセット*/
-
-        //}
-        //else
-        //{
-        //    /*クールタイムを計測*/
-        //    if (coolTime < 5f)
-        //    {
-
-        //        coolTime += Time.deltaTime;
-
-        //    }
-        //    else
-        //    {
-        //        coolTime = 0;   /*リセット*/
-        //        dashFlg = true;/*フラグをtrueに*/
-
-        //    }
-
-
-        //}
-        /*コメントアウトした部分*/
-
         /*追加部分*/
-        if (dashFlg == false)
+        if (!dashFlg)
         {
             /*クールタイムを計測*/
             if (coolTime < 5f)

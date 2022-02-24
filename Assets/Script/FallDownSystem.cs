@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(RetrySystem))] /* リトライスクリプト必須化 */
-/* 落下死を実装したいステージのプレイヤーに付けるスクリプト */
 public class FallDownSystem : MonoBehaviour
 {
+    [Header("落下死ステージのプレイヤーに付ける")]
     [Tooltip("落下死地点集、x座標の整数部が重ならないようお願いしたい")] [SerializeField] private List<GameObject> fallPoint;
     private RetrySystem rty;
     // Start is called before the first frame update

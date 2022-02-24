@@ -6,7 +6,8 @@ using UnityEngine;
 /* プレイヤーに付けるスクリプトに変更 */
 public class RetrySystem : MonoBehaviour
 {
-    [SerializeField] private GameObject retryPoint; /* リトライ時の開始位置指示用オブジェクト、リトライ時この位置から開始、最初にここに入ってるオブジェクトの位置からステージ開始 */
+    [Header("プレイヤーに付ける復活システム")]
+    [Tooltip("リトライ時の開始位置指示用オブジェクト、リトライ時この位置から開始、最初にここに入ってるオブジェクトの位置からステージ開始")] [SerializeField] GameObject retryPoint;
     // Start is called before the first frame update
     void Start()
     {

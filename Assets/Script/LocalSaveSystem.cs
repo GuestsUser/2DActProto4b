@@ -5,12 +5,27 @@ using UnityEngine;
 
 public class LocalSaveSystem : MonoBehaviour
 {
-    string path = Application.persistentDataPath + "/" + "save.json";
-    LocalSave save;
+    [SerializeField] private string fileName= "save"; /* セーブファイル名(拡張子除く) */
+    [SerializeField] private int saveVol = 0; /* セーブファイル数 */
+    [SerializeField] private GameObject[] text;
+    string path;
+    LocalSave[] save;
+
+    private void OnValidate() /* inspectorの値を変更した時呼び出される */
+    {
+        if (text.Length != saveVol) { text = new GameObject[saveVol]; } /* セーブファイル数を書き換えた時連動してtextのサイズも合わせられる */
+    }
     // Start is called before the first frame update
     void Start()
     {
-        FileRead();
+        path = Application.persistentDataPath + "/" + "save.json";
+        save = new LocalSave[saveVol];
+        for (int i = 0; i < saveVol; i++)
+        {
+            FileRead(i);
+            //foreach(GameObject obj in text.)
+        }
+        //save[i].version = Application.version;
         FileWrite();
     }
     public void FileWrite()
@@ -21,21 +36,15 @@ public class LocalSaveSystem : MonoBehaviour
         st.Flush();
         st.Close();
     }
-    public void FileRead()
+    public void FileRead(int num)
     {
-        if (File.Exists(path))
+        string directory = path + fileName + num.ToString() + ".json";
+        if (File.Exists(directory))
         {
-            StreamReader st = new StreamReader(path);
+            StreamReader st = new StreamReader(directory);
             string json = st.ReadToEnd();
             st.Close();
-            save = JsonUtility.FromJson<LocalSave>(json);
+            save[num] = JsonUtility.FromJson<LocalSave>(directory);
         }
-        else { save = new LocalSave(); }
     }
-
-    //public void FolderIni()
-    //{
-
-    //    if(Directory.Exists())
-    //}
 }

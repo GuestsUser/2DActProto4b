@@ -8,6 +8,7 @@ public class StageClear : MonoBehaviour
 
     static public bool isStage1Clear;   /*ステージ1をクリアしたかどうか*/
     static public bool isStage2Clear;   /*ステージ2をクリアしたかどうか*/
+    static public bool isStage3Clear;   /*ステージ3をクリアしたかどうか*/
 
     void Start()
     {
@@ -15,16 +16,18 @@ public class StageClear : MonoBehaviour
         isStage1Clear = false;
         /*ステージ2が始まったらクリアしてない状態になるから、どうにかしないといけない*/
         isStage2Clear = false;
+        /*ステージ3が始まったらクリアしてない状態になるから、どうにかしないといけない*/
+        isStage3Clear = false;
     }
 
 
     void Update()
     {
         /*ステージ1またはステージ2がクリアしていたら*/
-        if (isStage1Clear || isStage2Clear)
+        if (isStage1Clear || isStage2Clear || isStage3Clear)
         {
             /*シーンをステージクリア画面に切り替える*/
-            SceneManager.LoadScene(4);
+            SceneManager.LoadScene(5);
         }
     }
 
@@ -57,6 +60,21 @@ public class StageClear : MonoBehaviour
                     /*ステージ2をクリアにする*/
                     isStage2Clear = true;
                     Debug.Log("ステージ2クリア" + isStage2Clear);
+                }
+            }
+        }
+        /*現在のシーンがStage3なら*/
+        else if (SceneManager.GetActiveScene().name == "Game4")
+        {
+            /*触れたオブジェクトのタグがPlayerなら*/
+            if (other.gameObject.tag == ("Player"))
+            {
+                /*isStage2Clearがfalseなら*/
+                if (!isStage3Clear)
+                {
+                    /*ステージ2をクリアにする*/
+                    isStage3Clear = true;
+                    Debug.Log("ステージ2クリア" + isStage3Clear);
                 }
             }
         }

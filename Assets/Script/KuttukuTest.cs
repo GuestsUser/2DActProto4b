@@ -11,7 +11,7 @@ public class KuttukuTest : Padinput
 
     /*脳筋式レイキャスト変数*/
     public Ray ray;     /*足元*/
-    public Ray ray2;    /*正面*/    
+    public Ray ray2;    /*正面*/
     public Ray ray3;    /*頭*/
 
     public RaycastHit rayHit;
@@ -52,7 +52,7 @@ public class KuttukuTest : Padinput
         if (change_shoes.type == ShoesType.Magnet_Shoes)
         {
 
-            if ((Physics.Raycast(ray, out rayHit, rayDistance) || Physics.Raycast(ray2, out rayHit, rayDistance))&& rayHit.collider.tag == "kuttuku")
+            if ((Physics.Raycast(ray, out rayHit, rayDistance) || Physics.Raycast(ray2, out rayHit, rayDistance)) && rayHit.collider.tag == "kuttuku")
             {
                 /*コライダーを持つオブジェクトから、タグを読み取る（壁をkuttukuに設定）*/
                 if (rayHit.collider.tag == "kuttuku")
@@ -79,6 +79,19 @@ public class KuttukuTest : Padinput
                     Debug.Log("くっつく");
                     Physics.gravity = new Vector3(-9.8f, 0, 0);
                 }
+            }
+            else
+            {
+                Physics.gravity = new Vector3(0, -9.8f, 0);
+                Transform myTransform = this.transform;
+
+                /* ワールド座標を基準に、回転を取得*/
+                Vector3 worldAngle = myTransform.eulerAngles;
+                worldAngle.x = 0.0f; /* ワールド座標を基準に、x軸を軸にした回転を10度に変更*/
+                worldAngle.y = 0.0f; /* ワールド座標を基準に、y軸を軸にした回転を10度に変更*/
+                worldAngle.z = 0.0f; /* ワールド座標を基準に、z軸を軸にした回転を10度に変更*/
+                myTransform.eulerAngles = worldAngle; /* 回転角度を設定*/
+
             }
 
         }

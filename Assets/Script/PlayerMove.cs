@@ -12,6 +12,7 @@ enum State /*プレイヤーの移動状態*/
 
 public class PlayerMove : Padinput
 {
+
     /*プレイヤーの移動状態*/
     State state;
 
@@ -47,18 +48,20 @@ public class PlayerMove : Padinput
     }
     public override void Move()
     {
-        if (Gamepad.current.leftStick.x.ReadValue() > 0 || (Gamepad.current.dpad.x.ReadValue() == 1))
+        if (Gamepad.current.leftStick.x.ReadValue() > 0)
         {
             right = Gamepad.current.leftStick.x.ReadValue();
+            left = 0;
         }
         else
         {
             right = 0;
         }
 
-        if (Gamepad.current.leftStick.x.ReadValue() < 0 || (Gamepad.current.dpad.x.ReadValue() == -1))
+        if (Gamepad.current.leftStick.x.ReadValue() < 0)
         {
             left = Gamepad.current.leftStick.x.ReadValue();
+            right = 0;
         }
         else
         {
@@ -69,13 +72,25 @@ public class PlayerMove : Padinput
         if (input_abs <= 0.5f)
         {
             state = State.walk; /*歩き*/
+
+            move_x = 2f; /*プレイヤーを回転させれば符号を変える必要はない*/
+
             if(right != 0)
             {
-                move_x = 2f;
+
+                /*追加部分*/
+                //transform.Rotate(new Vector3(0, 0, 0));
+                /*追加部分*/
+
+                //move_x = 2f;
             }
             else if(left != 0)
             {
-                move_x = -2f;
+                /*追加部分*/
+                //transform.Rotate(new Vector3(0, 180, 0));
+                /*追加部分*/
+
+                //move_x = -2f;
             }
             
         }
@@ -96,9 +111,23 @@ public class PlayerMove : Padinput
     }
     void Update()
     {
-        
+
+        /*追加部分*/
+        if (Gamepad.current.leftStick.x.ReadValue() > 0)
+        {
+            //Quaternion.Lerp();
+            transform.rotation = Quaternion.Euler(0, 0, 0);
+        }
+        else if (Gamepad.current.leftStick.x.ReadValue() < 0)
+        {
+            //transform.Rotate(new Vector3(0, 180, 0));
+            transform.rotation = Quaternion.Euler(0, 180, 0);
+        }
+        /*追加部分*/
+
         Debug.Log(state);/*プレイヤーの状態*/
-        //Debug.Log(move_x);
+        //Debug.Log(right);
+        //Debug.Log(Gamepad.current.leftStick.x.ReadValue());
         //Debug.Log(input_abs);
         switch (state)
         {
@@ -121,31 +150,43 @@ public class PlayerMove : Padinput
     }
     private void RunAccel() /*走る時の加速処理*/
     {
-        if (right != 0)
+        /*追加部分*/ /*プレイヤーを回転させる場合これのみでok*/
+        run_time += Time.deltaTime;
+        if (run_time < eas_time)
         {
-            run_time += Time.deltaTime;
-            if (run_time < eas_time)
-            {
-                move_x = ExpOut(run_time, eas_time, 2f, max_move_x);
-            }
-            else
-            {
-                move_x = max_move_x;
-            }
+            move_x = ExpOut(run_time, eas_time, 2f, max_move_x);
+        }
+        else
+        {
+            move_x = max_move_x;
+        }
+        /*追加部分*/
+
+        //if (right != 0)
+        //{
+        //    run_time += Time.deltaTime;
+        //    if (run_time < eas_time)
+        //    {
+        //        move_x = ExpOut(run_time, eas_time, 2f, max_move_x);
+        //    }
+        //    else
+        //    {
+        //        move_x = max_move_x;
+        //    }
             
-        }
-        else if (left != 0)
-        {
-            run_time += Time.deltaTime;
-            if (run_time < eas_time)
-            {
-                move_x = ExpOut(run_time, eas_time, -2f, -max_move_x);
-            }
-            else
-            {
-                move_x = -max_move_x;
-            }
-        }
+        //}
+        //else if (left != 0)
+        //{
+        //    run_time += Time.deltaTime;
+        //    if (run_time < eas_time)
+        //    {
+        //        move_x = ExpOut(run_time, eas_time, -2f, -max_move_x);
+        //    }
+        //    else
+        //    {
+        //        move_x = -max_move_x;
+        //    }
+        //}
     }
     public static float ExpOut(float t, float totaltime, float min, float max) /*加速関数*/
     {

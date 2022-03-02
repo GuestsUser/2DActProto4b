@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class LocalSaveSystem : MonoBehaviour
 {
@@ -10,6 +11,13 @@ public class LocalSaveSystem : MonoBehaviour
     [SerializeField] private GameObject[] text;
     string path;
     LocalSave[] save;
+
+    Vector2Int select=Vector2Int.zero; /* 選択肢の現在位置記録用 */
+    Vector2Int selectMax; /* 選択肢最大数記録 */
+    [SerializeField] Vector2Int layout; /* セーブファイルの横縦配置数 */
+    [SerializeField] GameObject basePanel; /* 下に敷かれてるパネル */
+    private enum moveType { lr,ud } /* lr=左右  ud=上下 */
+    [SerializeField] moveType cursorMove; /* ページスクロール方向 */
 
     private void OnValidate() /* inspectorの値を変更した時呼び出される */
     {
@@ -27,6 +35,8 @@ public class LocalSaveSystem : MonoBehaviour
         }
         //save[i].version = Application.version;
         FileWrite();
+
+
     }
     public void FileWrite()
     {

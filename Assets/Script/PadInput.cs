@@ -7,6 +7,8 @@ public class Padinput : MonoBehaviour
 {
     /*PlayerInput型の変数を用意。入力をとれる*/
     PlayerInput input;
+
+    bool stage_flg; /*ステージセレクトでステージを決定した時用*/
     
     public PlayerInput _input { get{ return input; } }
 
@@ -53,7 +55,11 @@ public class Padinput : MonoBehaviour
     }
     public void OnMove(InputAction.CallbackContext context)
     {
-        Move();
+        if (stage_flg == false)
+        {
+
+            Move();
+        }
         //Debug.Log("通ってます");
         /*↓これで右入力か左入力かをとれるよ(右入力:1.0,0.0 左入力:-1.0,0.0)*/　
         //var value = context.ReadValue<Vector2>();

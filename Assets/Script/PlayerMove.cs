@@ -104,11 +104,13 @@ public class PlayerMove : Padinput
     {
         if (right != 0)
         {
-            transform.rotation = Quaternion.Euler(0, 0, 0);
+            Quaternion q = transform.rotation;
+            transform.rotation = Quaternion.Euler(q.x, 0, q.z);
         }
         else if (left != 0)
         {
-            transform.rotation = Quaternion.Euler(0, 180, 0);
+            Quaternion q = transform.rotation;
+            transform.rotation = Quaternion.Euler(q.x, 180, q.z);
         }
         /*追加部分*/
         //if (Gamepad.current.leftStick.x.ReadValue() > 0)

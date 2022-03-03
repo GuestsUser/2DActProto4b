@@ -357,7 +357,6 @@ GameObject:
   - component: {fileID: 323842905}
   - component: {fileID: 323842904}
   - component: {fileID: 323842903}
-  - component: {fileID: 323842902}
   m_Layer: 0
   m_Name: MagnetFloor
   m_TagString: kuttuku
@@ -379,22 +378,6 @@ Transform:
   m_Father: {fileID: 1645949291}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &323842902
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 323842900}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a9ee317a65b3b1f4cb4574162f6e50d3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  rayPosition: {x: 0, y: 0, z: 0}
-  change_shoes: {fileID: 0}
-  rayDistance: 0.5591
-  rb: {fileID: 0}
 --- !u!65 &323842903
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -647,6 +630,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1347058618, guid: b195647894bfa7141a991fe34c4b5bef, type: 3}
+      propertyPath: change_shoes
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 1347058619, guid: b195647894bfa7141a991fe34c4b5bef, type: 3}
       propertyPath: dashForce
       value: 10
@@ -683,10 +670,20 @@ PrefabInstance:
       propertyPath: _selector_obj
       value: 
       objectReference: {fileID: 2006839177}
+    - target: {fileID: 600034387657383262, guid: b195647894bfa7141a991fe34c4b5bef,
+        type: 3}
+      propertyPath: m_Constraints
+      value: 80
+      objectReference: {fileID: 0}
     - target: {fileID: 3978852389522291217, guid: b195647894bfa7141a991fe34c4b5bef,
         type: 3}
       propertyPath: retryPoint
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 3978852389522291217, guid: b195647894bfa7141a991fe34c4b5bef,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5105905518289073304, guid: b195647894bfa7141a991fe34c4b5bef,
         type: 3}
@@ -762,6 +759,11 @@ PrefabInstance:
         type: 3}
       propertyPath: fallPoint.Array.data[2]
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 6253949078690169363, guid: b195647894bfa7141a991fe34c4b5bef,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b195647894bfa7141a991fe34c4b5bef, type: 3}

@@ -37,7 +37,7 @@ public class KuttukuTest : Padinput
         rayPosition = rb.transform.position;    /*レイキャストの位置*/
 
         ray = new Ray(rayPosition, transform.up * -4f);
-        ray2 = new Ray(rayPosition, transform.right * -1f);
+        ray2 = new Ray(rayPosition, transform.right * 1f);
         ray3 = new Ray(rayPosition, transform.up * 1.5f);
 
 

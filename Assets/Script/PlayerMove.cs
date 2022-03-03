@@ -10,7 +10,7 @@ enum State /*プレイヤーの移動状態*/
     run,
 }
 
-public class Test_PlayerMove : Padinput
+public class PlayerMove : Padinput
 {
 
     /*プレイヤーの移動状態*/

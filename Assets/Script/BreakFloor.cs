@@ -13,6 +13,9 @@ public class BreakFloor : MonoBehaviour
     List<Color32> childColor; /* 子のオブジェクトの元の色 */
     Color32 clear;/* 透明色 */
 
+    List<bool> isCollider; /* コンポーネントの有無チェック */
+    List<bool> isRender; /* 同上 */
+
     bool useFlg = false; /* 破壊と再生のコルーチンが使用中か否かフラグ */
 
     // Start is called before the first frame update
@@ -21,19 +24,28 @@ public class BreakFloor : MonoBehaviour
         allObj = new List<GameObject>();
         childColor = new List<Color32>();
         clear = new Color32(255, 255, 255, 0);
+        isCollider = new List<bool>();
+        isRender = new List<bool>();
 
         /* 関数の方では自身を格納できないので先に入れておく */
         allObj.Add(gameObject);
-        childColor.Add(gameObject.GetComponent<MeshRenderer>().material.color);
+
+        isCollider.Add(GetComponent<Collider>() != null); /* コライダーの有無チェックはキャッシュ以上の意味を持たない…… */
+        isRender.Add(GetComponent<MeshRenderer>() != null); /* MeshRendererがついていればtrueを格納 */
+        if (isRender[0]) { childColor.Add(gameObject.GetComponent<MeshRenderer>().material.color); }
+
         GetChildren(gameObject);
-        
     }
     private void GetChildren(GameObject obj) /* listオブジェクトに格納する為の関数 */
     {
-        foreach(Transform child in transform)
+        foreach(Transform child in obj.transform)
         {
             allObj.Add(child.gameObject);
-            childColor.Add(child.gameObject.GetComponent<MeshRenderer>().material.color);
+
+            isCollider.Add(child.GetComponent<Collider>() != null);
+            isRender.Add(child.GetComponent<MeshRenderer>() != null); /* MeshRendererがついていればtrueを格納 */
+            if (isRender[isRender.Count-1]) { childColor.Add(child.GetComponent<MeshRenderer>().material.color); }
+            
             GetChildren(child.gameObject); /* 再帰式にする事で子から孫まで全てを取得できる */
         }
     }
@@ -49,10 +61,15 @@ public class BreakFloor : MonoBehaviour
                 i += Time.deltaTime;
                 yield return StartCoroutine(TimeScaleYield.TimeStop());
             }
+            int sub = 0; /* childColorはmeshrendererがついてないオブジェクトは飛ばすのでallObjと添え字が合わない事態を回避する為独自に添え字を用意してた */
             for (int i= 0; i < allObj.Count; i++) /* 所属オブジェクトの透明度と当たり判定の削除 */
             {
-                allObj[i].GetComponent<MeshRenderer>().material.color = flg ? childColor[i] : clear;
-                allObj[i].GetComponent<Collider>().enabled = flg;
+                if (isRender[i])
+                {
+                    allObj[i].GetComponent<MeshRenderer>().material.color = flg ? childColor[sub] : clear;
+                    sub++;
+                }
+                if (isCollider[i]) { allObj[i].GetComponent<Collider>().enabled = flg; }
             }
         }
         useFlg = false; /* 解放 */

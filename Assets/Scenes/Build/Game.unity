@@ -652,6 +652,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: ProtoStage
       objectReference: {fileID: 0}
+    - target: {fileID: 8550637583074405258, guid: 7fb9e456aa0cc05479236c44f2ee9f0b,
+        type: 3}
+      propertyPath: m_TagString
+      value: ground
+      objectReference: {fileID: 0}
     - target: {fileID: 9019195376394155564, guid: 7fb9e456aa0cc05479236c44f2ee9f0b,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1042,7 +1047,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.7766497, y: 1}
+    m_SensorSize: {x: 2.1698112, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0

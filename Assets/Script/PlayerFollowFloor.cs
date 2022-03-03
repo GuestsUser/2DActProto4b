@@ -12,14 +12,14 @@ public class PlayerFollowFloor : MonoBehaviour
     }
     private void OnCollisionEnter(Collision other)
     {
-        if (other.gameObject.tag == "Player")
+        if (other.gameObject.tag == "Player" || other.gameObject.tag == "Enemy")
         {
             other.gameObject.transform.parent = transform;
         }
     }
     private void OnCollisionExit(Collision other)
     {
-        if (other.gameObject.tag == "Player")
+        if (other.gameObject.tag == "Player" || other.gameObject.tag == "Enemy")
         {
             other.gameObject.transform.parent = null;
         }

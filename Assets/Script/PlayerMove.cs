@@ -75,24 +75,14 @@ public class PlayerMove : Padinput
 
             move_x = 2f; /*プレイヤーを回転させれば符号を変える必要はない*/
 
-            if(right != 0)
-            {
-                transform.rotation = Quaternion.Euler(0, 0, 0);
-                /*追加部分*/
-                //transform.Rotate(new Vector3(0, 0, 0));
-                /*追加部分*/
-
-                //move_x = 2f;
-            }
-            else if(left != 0)
-            {
-                transform.rotation = Quaternion.Euler(0, 180, 0);
-                /*追加部分*/
-                //transform.Rotate(new Vector3(0, 180, 0));
-                /*追加部分*/
-
-                //move_x = -2f;
-            }
+            //if(right != 0)
+            //{
+            //    transform.rotation = Quaternion.Euler(0, 0, 0);
+            //}
+            //else if(left != 0)
+            //{
+            //    transform.rotation = Quaternion.Euler(0, 180, 0);
+            //}
             
         }
         else if(input_abs > 0.5f)
@@ -112,12 +102,19 @@ public class PlayerMove : Padinput
     }
     void Update()
     {
-
+        if (right != 0)
+        {
+            transform.rotation = Quaternion.Euler(0, 0, 0);
+        }
+        else if (left != 0)
+        {
+            transform.rotation = Quaternion.Euler(0, 180, 0);
+        }
         /*追加部分*/
         //if (Gamepad.current.leftStick.x.ReadValue() > 0)
         //{
         //    //Quaternion.Lerp();
-            
+
         //}
         //else if (Gamepad.current.leftStick.x.ReadValue() < 0)
         //{

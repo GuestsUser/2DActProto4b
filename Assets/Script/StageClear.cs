@@ -34,7 +34,7 @@ public class StageClear : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         /*現在のシーンがStage1なら*/
-        if (SceneManager.GetActiveScene().name == "Game")
+        if (SceneManager.GetActiveScene().name == "PreStage1")
         {
             /*触れたオブジェクトのタグがPlayerなら*/
             if (other.gameObject.tag == ("Player"))

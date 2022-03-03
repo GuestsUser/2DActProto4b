@@ -27,7 +27,7 @@ using UnityEngine.Assertions;
 public class Fade : MonoBehaviour
 {
 	IFade fade;
-	[SerializeField] bool startFade;
+	public bool startFade;
 
 	void Start ()
 	{
@@ -49,11 +49,11 @@ public class Fade : MonoBehaviour
 	void OnValidate ()
 	{
 		Init ();
-		if (startFade)
-		{
-			cutoutRange = 1;
-		}
-		fade.Range = cutoutRange;
+		//if (startFade)
+		//{
+		//	cutoutRange = 1;
+		//}
+		//fade.Range = cutoutRange;
 	}
 
 	IEnumerator FadeoutCoroutine (float time, System.Action action)

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class FadeOut : MonoBehaviour
 {
-    [SerializeField] Fade fade;
+    public Fade fade;
 
     void Start()
     {

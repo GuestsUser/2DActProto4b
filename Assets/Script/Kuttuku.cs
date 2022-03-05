@@ -89,22 +89,6 @@ public class Kuttuku : Padinput
                     Physics.gravity = new Vector3(-9.8f, 0, 0);
                 }
             }
-            //else if (bool_ray_hit == true) /*←追加部分*/
-            //{
-            //    Physics.gravity = new Vector3(0, -9.8f, 0);
-            //    Transform myTransform = this.transform;
-
-            //    /* ワールド座標を基準に、回転を取得*/
-            //    Vector3 worldAngle = myTransform.eulerAngles;
-            //    worldAngle.x = 0.0f; /* ワールド座標を基準に、x軸を軸にした回転を10度に変更*/
-            //    worldAngle.y = 0.0f; /* ワールド座標を基準に、y軸を軸にした回転を10度に変更*/
-            //    worldAngle.z = 0.0f; /* ワールド座標を基準に、z軸を軸にした回転を10度に変更*/
-            //    myTransform.eulerAngles = worldAngle; /* 回転角度を設定*/
-
-            //    /*追加部分*/
-            //    bool_ray_hit = false;
-            //    /*追加部分*/
-            //}
 
         }
         else if (bool_ray_hit == true) /*←追加部分*/

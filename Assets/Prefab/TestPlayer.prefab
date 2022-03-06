@@ -21,6 +21,7 @@ GameObject:
   - component: {fileID: 1721052263}
   - component: {fileID: 1347058618}
   - component: {fileID: 1347058619}
+  - component: {fileID: 1691528546941976017}
   m_Layer: 0
   m_Name: TestPlayer
   m_TagString: Player
@@ -273,6 +274,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a2fcc87cc20d944a9f5704bdc0d75c5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  kuttuku: {fileID: 1691528546941976017}
+  right: 0
+  left: 0
   max_move_x: 0
   eas_time: 2
 --- !u!114 &1721052263
@@ -329,4 +333,24 @@ MonoBehaviour:
   coolTime: 0
   dashForce: 5
   change_shoes: {fileID: 0}
+  rayPosition: {x: 0, y: 0, z: 0}
+  obj: {fileID: 0}
+  rayDistance: 5
+  rb: {fileID: 0}
+--- !u!114 &1691528546941976017
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5105905518289073308}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a97a8f694c389c4eac720f88d49591a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rayPosition: {x: 0, y: 0, z: 0}
+  change_shoes: {fileID: 0}
+  bool_ray_hit: 0
+  rayDistance: 0.5591
   rb: {fileID: 0}

@@ -259,6 +259,11 @@ PrefabInstance:
       propertyPath: retryPoint
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 3978852389522291217, guid: b195647894bfa7141a991fe34c4b5bef,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5105905518289073304, guid: b195647894bfa7141a991fe34c4b5bef,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -922,7 +927,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2cd0cb1548d233d449c0d9a0fee18bd3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fade: {fileID: 1150843144}
 --- !u!114 &517812333
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2078,7 +2082,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.7777778, y: 1}
+    m_SensorSize: {x: 1.7783985, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0

@@ -12,13 +12,13 @@ enum State /*プレイヤーの移動状態*/
 
 public class PlayerMove : Padinput
 {
-
+    [SerializeField] Kuttuku kuttuku;
     /*プレイヤーの移動状態*/
     State state;
 
     /*左右の入力値*/
-    float right;
-    float left;
+    public float right;
+    public float left;
 
     /*X軸の入力値*/
     float input_xAxis { get { return right + left; } }
@@ -38,6 +38,11 @@ public class PlayerMove : Padinput
     /*動きのベクトル*/
     Vector3 move;
 
+    Quaternion player_direction; //プレイヤーの方向
+    bool direction_init;
+    bool bool_left_direction; //true:左に向いています
+    bool bool_right_direction; //true:右に向いています
+
     /*イージング用*/
     [SerializeField] private float eas_time = 2f;/*イージングをかける時間*/
     private float run_time;/*走り始めてからの時間*/
@@ -45,6 +50,9 @@ public class PlayerMove : Padinput
     private void Start()
     {
         max_move_x = 13f;
+        bool_left_direction = false;
+        bool_right_direction = false;
+        direction_init = false;
     }
     public override void Move()
     {
@@ -74,6 +82,30 @@ public class PlayerMove : Padinput
             state = State.walk; /*歩き*/
 
             move_x = 2f; /*プレイヤーを回転させれば符号を変える必要はない*/
+            //if(kuttuku.bool_kuttuki == false)
+            //{
+                //if (right != 0)
+                //{
+                //    //transform.localRotation = Quaternion.Euler(kuttuku.rotation.x, 0, kuttuku.rotation.z);
+                //    transform.localRotation = Quaternion.Euler(0, 0, 0);
+                //}
+                //else if (left != 0)
+                //{
+                //    //transform.localRotation = Quaternion.Euler(kuttuku.rotation.x, 180, kuttuku.rotation.z);
+                //    transform.localRotation = Quaternion.Euler(0, 180, 0);
+                //}
+            //}
+            //else
+            //{
+            //    if (right != 0)
+            //    {
+
+            //    }
+            //    else if (left != 0)
+            //    {
+
+            //    }
+            //}
 
             //if(right != 0)
             //{
@@ -83,7 +115,7 @@ public class PlayerMove : Padinput
             //{
             //    transform.rotation = Quaternion.Euler(0, 180, 0);
             //}
-            
+
         }
         else if(input_abs > 0.5f)
         {
@@ -102,32 +134,64 @@ public class PlayerMove : Padinput
     }
     void Update()
     {
-        if (right != 0)
+        if(kuttuku.bool_ray_hit == false)
         {
-            Quaternion q = transform.rotation;
-            transform.rotation = Quaternion.Euler(q.x, 0, q.z);
-        }
-        else if (left != 0)
-        {
-            Quaternion q = transform.rotation;
-            transform.rotation = Quaternion.Euler(q.x, 180, q.z);
-        }
-        /*追加部分*/
-        //if (Gamepad.current.leftStick.x.ReadValue() > 0)
-        //{
-        //    //Quaternion.Lerp();
+            Debug.Log("今はくっついてません");
+            if (direction_init) //方向の初期化
+            {
+                direction_init = false;
+            }
 
-        //}
-        //else if (Gamepad.current.leftStick.x.ReadValue() < 0)
-        //{
-        //    //transform.Rotate(new Vector3(0, 180, 0));
-        //    transform.rotation = Quaternion.Euler(0, 180, 0);
-        //}
-        /*追加部分*/
+            if (right != 0)
+            {
+                player_direction = Quaternion.Euler(0, 0, 0);
+                transform.localRotation = player_direction;
+            }
+            else if (left != 0)
+            {
+                player_direction = Quaternion.Euler(0, 180, 0);
+                transform.localRotation = player_direction;
+            }
+        }
+        else if(kuttuku.bool_ray_hit == true)
+        {
+            Debug.Log("今はくっついてます");
+            
+
+            if (right != 0)
+            {
+                bool_left_direction = false;
+                if (bool_right_direction == false)
+                {
+                    Quaternion rot = Quaternion.AngleAxis(180, Vector3.up);
+                    Quaternion q = this.transform.localRotation;
+
+                    this.transform.localRotation = q * rot;
+                    bool_right_direction = true;
+
+                }
+                
+
+            }
+            else if (left != 0)
+            {
+                bool_right_direction = false;
+                if (bool_left_direction == false)
+                {
+                    Quaternion rot = Quaternion.AngleAxis(180, Vector3.up);
+                    Quaternion q = this.transform.localRotation;
+
+                    this.transform.localRotation = q * rot;
+                    bool_left_direction = true;
+                }
+                
+
+            }
+        }
 
         Debug.Log(state);/*プレイヤーの状態*/
         //Debug.Log(right);
-        //Debug.Log(Gamepad.current.leftStick.x.ReadValue());
+        //Debug.Log(transform.localRotation.y);
         //Debug.Log(input_abs);
         switch (state)
         {
@@ -146,7 +210,16 @@ public class PlayerMove : Padinput
         }
 
         move = new Vector3(move_x, 0, 0);
-        transform.Translate((move/10) * speed * Time.deltaTime);
+
+        //if (kuttuku.bool_kuttuki == false)
+        //{
+        //    move = new Vector3(move_x, 0, 0);
+        //}
+        //else
+        //{
+        //    move = new Vector3( 0, move_x, 0);
+        //}
+            transform.Translate((move/10) * speed * Time.deltaTime);
     }
     private void RunAccel() /*走る時の加速処理*/
     {

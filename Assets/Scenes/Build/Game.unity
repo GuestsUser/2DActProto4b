@@ -1038,11 +1038,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 1170084435}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a9ee317a65b3b1f4cb4574162f6e50d3, type: 3}
+  m_Script: {fileID: 11500000, guid: 9a97a8f694c389c4eac720f88d49591a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   rayPosition: {x: 0, y: 0, z: 0}
   change_shoes: {fileID: 0}
+  bool_ray_hit: 0
   rayDistance: 0.5591
   rb: {fileID: 0}
 --- !u!1 &1172393145 stripped
@@ -1116,7 +1117,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 2.1698112, y: 1}
+    m_SensorSize: {x: 1.7808219, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -1656,6 +1657,10 @@ PrefabInstance:
       propertyPath: rayDistance
       value: 0.3
       objectReference: {fileID: 0}
+    - target: {fileID: 1721052262, guid: b195647894bfa7141a991fe34c4b5bef, type: 3}
+      propertyPath: kuttuku
+      value: 
+      objectReference: {fileID: 1170084436}
     - target: {fileID: 1721052263, guid: b195647894bfa7141a991fe34c4b5bef, type: 3}
       propertyPath: parent
       value: 

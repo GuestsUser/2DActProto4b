@@ -183,11 +183,15 @@ public class PlayerMove : Padinput
                 bool_right_direction = false;
                 if (bool_left_direction == false)
                 {
-                    Quaternion rot = Quaternion.AngleAxis(180, Vector3.up);
-                    Quaternion q = this.transform.localRotation;
+                    if (this.transform.localRotation.y != -90f)
+                    {
+                        Quaternion rot = Quaternion.AngleAxis(180, Vector3.up);
+                        Quaternion q = this.transform.localRotation;
 
-                    this.transform.localRotation = q * rot;
-                    bool_left_direction = true;
+                        this.transform.localRotation = q * rot;
+                        bool_left_direction = true;
+                    }
+                    
                 }
                 
 

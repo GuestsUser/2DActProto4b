@@ -47,8 +47,12 @@ public class PlayerMove : Padinput
     [SerializeField] private float eas_time = 2f;/*イージングをかける時間*/
     private float run_time;/*走り始めてからの時間*/
 
+    //アニメーション用
+    [SerializeField] Animator animator;
+
     private void Start()
     {
+        this.transform.localRotation = Quaternion.Euler(0, 90, 0);
         max_move_x = 13f;
         bool_left_direction = false;
         bool_right_direction = false;
@@ -134,7 +138,8 @@ public class PlayerMove : Padinput
     }
     void Update()
     {
-        if(kuttuku.bool_ray_hit == false)
+        ApplyAnimator();
+        if (kuttuku.bool_ray_hit == false)
         {
             Debug.Log("今はくっついてません");
             if (direction_init) //方向の初期化
@@ -144,12 +149,12 @@ public class PlayerMove : Padinput
 
             if (right != 0)
             {
-                player_direction = Quaternion.Euler(0, 0, 0);
+                player_direction = Quaternion.Euler(0, 90, 0);
                 transform.localRotation = player_direction;
             }
             else if (left != 0)
             {
-                player_direction = Quaternion.Euler(0, 180, 0);
+                player_direction = Quaternion.Euler(0, 270, 0);
                 transform.localRotation = player_direction;
             }
         }
@@ -209,7 +214,7 @@ public class PlayerMove : Padinput
                 break;
         }
 
-        move = new Vector3(move_x, 0, 0);
+        move = new Vector3(0, 0, move_x);
 
         //if (kuttuku.bool_kuttuki == false)
         //{
@@ -265,5 +270,9 @@ public class PlayerMove : Padinput
     {
         max -= min;
         return t == totaltime ? max + min : max * (-Mathf.Pow(2, -10 * t / totaltime) + 1) + min;
+    }
+    void ApplyAnimator()
+    {
+        animator.SetFloat("Speed", move_x, 0.1f, Time.deltaTime);
     }
 }

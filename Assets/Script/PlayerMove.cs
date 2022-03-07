@@ -39,7 +39,6 @@ public class PlayerMove : Padinput
     Vector3 move;
 
     Quaternion player_direction; //プレイヤーの方向
-    bool direction_init;
     bool bool_left_direction; //true:左に向いています
     bool bool_right_direction; //true:右に向いています
 
@@ -54,9 +53,12 @@ public class PlayerMove : Padinput
     {
         this.transform.localRotation = Quaternion.Euler(0, 0, 0);
         max_move_x = 13f;
-        bool_left_direction = false;
-        bool_right_direction = false;
-        direction_init = false;
+
+        /*falseだとくっついた時にプレイヤーが下を向いてしまう*/
+        bool_left_direction = true;
+        bool_right_direction = true;
+        /*falseだとくっついた時にプレイヤーが下を向いてしまう*/
+
     }
     public override void Move()
     {
@@ -141,11 +143,11 @@ public class PlayerMove : Padinput
         ApplyAnimator();
         if (kuttuku.bool_ray_hit == false)
         {
-            Debug.Log("今はくっついてません");
-            if (direction_init) //方向の初期化
-            {
-                direction_init = false;
-            }
+            /*下の処理の効果：くっついた際にプレイヤーが下を向いてしまう問題を改善*/
+            /*3月7日追加部分*/
+            bool_left_direction = true;
+            bool_right_direction = true;
+            /*3月7日追加部分*/
 
             if (right != 0)
             {

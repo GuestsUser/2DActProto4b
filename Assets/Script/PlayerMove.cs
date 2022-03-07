@@ -52,7 +52,7 @@ public class PlayerMove : Padinput
 
     private void Start()
     {
-        this.transform.localRotation = Quaternion.Euler(0, 90, 0);
+        this.transform.localRotation = Quaternion.Euler(0, 0, 0);
         max_move_x = 13f;
         bool_left_direction = false;
         bool_right_direction = false;
@@ -149,12 +149,12 @@ public class PlayerMove : Padinput
 
             if (right != 0)
             {
-                player_direction = Quaternion.Euler(0, 90, 0);
+                player_direction = Quaternion.Euler(0, 0, 0);
                 transform.localRotation = player_direction;
             }
             else if (left != 0)
             {
-                player_direction = Quaternion.Euler(0, 270, 0);
+                player_direction = Quaternion.Euler(0, 180, 0);
                 transform.localRotation = player_direction;
             }
         }
@@ -218,7 +218,7 @@ public class PlayerMove : Padinput
                 break;
         }
 
-        move = new Vector3(0, 0, move_x);
+        move = new Vector3(move_x, 0, 0);
 
         //if (kuttuku.bool_kuttuki == false)
         //{

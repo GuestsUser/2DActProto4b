@@ -1208,7 +1208,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1498393975}
-  m_LocalRotation: {x: -0.0029499717, y: -0.000000017206832, z: -5.075989e-11, w: 0.99999565}
+  m_LocalRotation: {x: -0.002949952, y: 0.000000017206832, z: 5.075955e-11, w: 0.99999565}
   m_LocalPosition: {x: 0, y: 0, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -1306,7 +1306,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1598988104}
-  m_LocalRotation: {x: -0.0029499717, y: -0.000000017206832, z: -5.075989e-11, w: 0.99999565}
+  m_LocalRotation: {x: -0.002949952, y: 0.000000017206832, z: 5.075955e-11, w: 0.99999565}
   m_LocalPosition: {x: 0, y: 0, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -1589,7 +1589,17 @@ PrefabInstance:
     - target: {fileID: 6346024904048878347, guid: 1b398051e4fdfd044b3b928e875c85b5,
         type: 3}
       propertyPath: m_CollisionDetection
-      value: 2
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6346024904048878347, guid: 1b398051e4fdfd044b3b928e875c85b5,
+        type: 3}
+      propertyPath: m_Interpolate
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6346024904048878347, guid: 1b398051e4fdfd044b3b928e875c85b5,
+        type: 3}
+      propertyPath: m_IsKinematic
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6346024904048878348, guid: 1b398051e4fdfd044b3b928e875c85b5,
         type: 3}

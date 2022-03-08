@@ -66,7 +66,7 @@ public class JumpSystem : Padinput
         /*脳筋式レイキャストの当たり判定処理*/
         if ((Physics.Raycast(ray, out rayHit, rayDistance) || Physics.Raycast(ray2, out rayHit, rayDistance)
             || Physics.Raycast(ray3, out rayHit, rayDistance) || Physics.Raycast(ray4, out rayHit, rayDistance)
-            || Physics.Raycast(ray5, out rayHit, rayDistance)) && rayHit.collider.tag == "ground")
+            || Physics.Raycast(ray5, out rayHit, rayDistance)) && (rayHit.collider.tag == "ground" || rayHit.collider.tag == "kuttuku"))
         {
             /*追加した部分*/
             switch (change_shoes.type)
@@ -85,9 +85,9 @@ public class JumpSystem : Padinput
             }
             Debug.Log(dubleJump);
             /*追加した部分*/
-
+            
             /*コライダーを持つオブジェクトから、タグを読み取る（地面オブジェクトをgroundに設定）*/
-            if (rayHit.collider.tag == "ground")
+            if (rayHit.collider.tag == "ground" || rayHit.collider.tag == "kuttuku")
             {
 
                 //dubleJump = 2;  /*残りジャンプ回数*/
@@ -124,7 +124,7 @@ public class JumpSystem : Padinput
 
                     --dubleJump;
 
-                    rb.AddForce(0, jumpForce, 0, ForceMode.VelocityChange);
+                    rb.AddRelativeForce(0, jumpForce, 0, ForceMode.VelocityChange);
                     rb.velocity = Vector3.zero;
                 }
                 else if (dubleJump >= 1 && !jump)
@@ -132,7 +132,7 @@ public class JumpSystem : Padinput
 
                     --dubleJump;
 
-                    rb.AddForce(0, jumpForce, 0, ForceMode.VelocityChange);
+                    rb.AddRelativeForce(0, jumpForce, 0, ForceMode.VelocityChange);
                     rb.velocity = Vector3.zero;
                 }
                 break;
@@ -144,7 +144,7 @@ public class JumpSystem : Padinput
 
                     --dubleJump;
 
-                    rb.AddForce(rb.velocity.x, jumpForce, 0, ForceMode.VelocityChange);
+                    rb.AddRelativeForce(rb.velocity.x, jumpForce, 0, ForceMode.VelocityChange);
                     rb.velocity = Vector3.zero;
                 }
                 /*追加した部分*/
@@ -157,35 +157,12 @@ public class JumpSystem : Padinput
 
                     --dubleJump;
 
-                    rb.AddForce(0, jumpForce, 0, ForceMode.VelocityChange);
+                    rb.AddRelativeForce(0, jumpForce, 0, ForceMode.VelocityChange);
                     rb.velocity = Vector3.zero;
                 }
                 /*追加した部分*/
                 break;
         }
-        //Debug.Log("ジャンプ");
-        //if (dubleJump == 1) --dubleJump;//ジャンプ回数を減らす
-        /*追加した部分*/
-
-        ///*PadInputを継承した処理*/
-        ///*オーバーライドした関数呼び出し*/
-        ///*残りジャンプ回数によりジャンプさせる*/
-        //if (dubleJump == 2 && jump)
-        //{
-
-        //    --dubleJump;
-
-        //    rb.AddForce(0, jumpForce, 0, ForceMode.VelocityChange);
-        //    rb.velocity = Vector3.zero;
-        //}
-        //else if (dubleJump >= 1 && !jump)
-        //{
-
-        //    --dubleJump;
-
-        //    rb.AddForce(0, jumpForce, 0, ForceMode.VelocityChange);
-        //    rb.velocity = Vector3.zero;
-        //}
 
     }
 }

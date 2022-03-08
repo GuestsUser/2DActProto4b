@@ -96,14 +96,14 @@ public class DashSystem : Padinput
         switch (change_shoes.type)
         {
             case ShoesType.Speed_Shoes:
-                if(transform.rotation.y == 0)
-                {
-                    rb.AddForce(dashForce + rb.velocity.x, rb.velocity.y, 0, ForceMode.VelocityChange);
-                }
-                else
-                {
-                    rb.AddForce(-dashForce + rb.velocity.x, rb.velocity.y, 0, ForceMode.VelocityChange);
-                }
+                //if(transform.rotation.y == 0)
+                //{
+                    rb.AddRelativeForce(dashForce + rb.velocity.x, rb.velocity.y, 0, ForceMode.VelocityChange);
+                //}
+                //else
+                //{
+                //    rb.AddForce(-dashForce + rb.velocity.x, rb.velocity.y, 0, ForceMode.VelocityChange);
+                //}
                 
                 rb.velocity = Vector3.zero;
                 dashFlg = false;

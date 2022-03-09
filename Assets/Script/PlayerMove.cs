@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-enum State /*プレイヤーの移動状態*/
+public enum State /*プレイヤーの移動状態*/
 {
     idle,
     walk,
@@ -14,7 +14,8 @@ public class PlayerMove : Padinput
 {
     [SerializeField] Kuttuku kuttuku;
     /*プレイヤーの移動状態*/
-    State state;
+    public State state;
+    public bool idle;
 
     /*左右の入力値*/
     public float right;
@@ -49,6 +50,11 @@ public class PlayerMove : Padinput
     //アニメーション用
     [SerializeField] Animator animator;
 
+    /*Kuttukuで使うプレイヤーポジション*/
+    //[SerializeField] GameObject player;
+    //public Vector3 player_pos {get{ return player.transform.position; } }
+
+
     private void Start()
     {
         this.transform.localRotation = Quaternion.Euler(0, 0, 0);
@@ -58,7 +64,8 @@ public class PlayerMove : Padinput
         bool_left_direction = true;
         bool_right_direction = true;
         /*falseだとくっついた時にプレイヤーが下を向いてしまう*/
-
+        //move = Vector3.zero;
+        idle = true;
     }
     public override void Move()
     {
@@ -140,6 +147,14 @@ public class PlayerMove : Padinput
     }
     void Update()
     {
+        if (state == State.idle)
+        {
+            idle = true;
+        }
+        else
+        {
+            idle = false;
+        }
         ApplyAnimator();
         if (kuttuku.bool_ray_hit == false)
         {
@@ -230,7 +245,13 @@ public class PlayerMove : Padinput
         //{
         //    move = new Vector3( 0, move_x, 0);
         //}
-            transform.Translate((move/10) * speed * Time.deltaTime);
+        if (state == State.idle)
+        {
+            move = Vector3.zero;
+        }
+        transform.Translate((move / 10) * speed * Time.deltaTime);
+        
+            
     }
     private void RunAccel() /*走る時の加速処理*/
     {

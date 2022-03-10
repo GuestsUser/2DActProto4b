@@ -64,7 +64,7 @@ public class PlayerMove : Padinput
     private void Start()
     {
         this.transform.localRotation = Quaternion.Euler(0, 0, 0);
-        max_move_x = 11f;
+        max_move_x = 13f;
 
         /*falseだとくっついた時にプレイヤーが下を向いてしまう*/
         bool_left_direction = true;
@@ -126,7 +126,10 @@ public class PlayerMove : Padinput
         //player_front = new Ray(rayPosition, transform.right * ray_direction);
         //Debug.DrawRay(rayPosition, player_front.direction * rayDistance, Color.blue);
 
-
+        //if(kuttuku.collider_exit == true)
+        //{
+        //    move_x = 5;
+        //}
 
         if (state == State.idle)
         {

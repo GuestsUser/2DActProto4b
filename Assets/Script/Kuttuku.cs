@@ -16,7 +16,7 @@ public class Kuttuku : Padinput
     kuttuki_move_state move_type;
     PlayerMove player;
     Vector3 now_gravity;
-    bool collider_exit;
+    public bool collider_exit;
     /*1フレーム前の位置*/
     private Vector3 _prevPosition;
     int kuttuki_time; /*くっつきオブジェクトから離れたときの時間*/
@@ -48,6 +48,9 @@ public class Kuttuku : Padinput
     /*レイキャスト用変数*/
 
     public Rigidbody rb;    /*みんな大好きリジッドボデー*/
+
+    /*くっついた時の浮き状態を改善するためのもの*/
+    Vector3 kuttuki_pos;
 
     void Start()
     {
@@ -332,6 +335,9 @@ public class Kuttuku : Padinput
                     /* クォータニオン → オイラー角への変換*/
                     Vector3 rotationAngles = rotation.eulerAngles;
 
+                    /*くっついた時の浮き状態を改善するためのもの*/
+                    Vector3 kuttuki_pos = new Vector3(-0.5f,0 , 0);
+
                     /*x軸がキャラクターの前後の場合*/
                     rotationAngles.z = 90.0f;
 
@@ -343,7 +349,7 @@ public class Kuttuku : Padinput
                     rotation = Quaternion.Euler(rotationAngles);
 
                     /* Transform値を設定する*/
-                    this.transform.localPosition = position;
+                    this.transform.localPosition = position + kuttuki_pos;
                     this.transform.localRotation = rotation;
                     this.transform.localScale = scale;
 
@@ -418,8 +424,14 @@ public class Kuttuku : Padinput
                                     Quaternion rotation = this.transform.localRotation;
                                     Quaternion rot  = Quaternion.AngleAxis(-90, Vector3.forward);
                                     Quaternion q = this.transform.localRotation;
+
+                                    
+
                                     this.transform.localRotation = q * rot;
 
+                                    Vector3 position = this.transform.localPosition;
+                                    kuttuki_pos = new Vector3(0, -0.2f, 0);
+                                    this.transform.localPosition = position + kuttuki_pos;
                                    
                                 }
                                 else if (player.left != 0 && this.transform.rotation != kuttuki_rot)
@@ -428,9 +440,12 @@ public class Kuttuku : Padinput
                                     Quaternion rot = Quaternion.AngleAxis(-90, Vector3.forward);
                                     Quaternion q = this.transform.localRotation;
                                     this.transform.localRotation = q * rot;
+
+                                    Vector3 position = this.transform.localPosition;
+                                    kuttuki_pos = new Vector3(0, -0.2f, 0);
+                                    this.transform.localPosition = position + kuttuki_pos;
                                 }
 
-                                Physics.gravity = new Vector3(0, -15f, 0);
                                 Physics.gravity = new Vector3(0, -9.8f, 0);
 
                                 //collider_exit = false;
@@ -451,7 +466,10 @@ public class Kuttuku : Padinput
                                     Quaternion q = this.transform.localRotation;
 
                                     this.transform.localRotation = q * rot;
-                                    
+
+                                    Vector3 position = this.transform.localPosition;
+                                    kuttuki_pos = new Vector3(0, 0.2f, 0);
+                                    this.transform.localPosition = position + kuttuki_pos;
                                 }
                                 else if (player.left != 0 && this.transform.rotation != kuttuki_rot)
                                 {
@@ -459,8 +477,11 @@ public class Kuttuku : Padinput
                                     Quaternion rot = Quaternion.AngleAxis(-90, Vector3.forward);
                                     Quaternion q = this.transform.localRotation;
                                     this.transform.localRotation = q * rot;
+
+                                    Vector3 position = this.transform.localPosition;
+                                    kuttuki_pos = new Vector3(0, 0.2f, 0);
+                                    this.transform.localPosition = position + kuttuki_pos;
                                 }
-                                Physics.gravity = new Vector3(0, 15f, 0);
                                 Physics.gravity = new Vector3(0, 9.8f, 0);
 
                                 //collider_exit = false;
@@ -478,8 +499,10 @@ public class Kuttuku : Padinput
                                     Quaternion q = this.transform.localRotation;
 
                                     this.transform.localRotation = q * rot;
-                                    
 
+                                    Vector3 position = this.transform.localPosition;
+                                    kuttuki_pos = new Vector3(-0.2f,0 , 0);
+                                    this.transform.localPosition = position + kuttuki_pos;
                                 }
                                 if (player.left != 0 && this.transform.rotation != kuttuki_rot)
                                 {
@@ -490,10 +513,11 @@ public class Kuttuku : Padinput
                                     Quaternion q = this.transform.localRotation;
 
                                     this.transform.localRotation = q * rot;
-                                    //Physics.gravity = new Vector3(-9.8f, 0, 0);
 
+                                    Vector3 position = this.transform.localPosition;
+                                    kuttuki_pos = new Vector3(-0.2f, 0, 0);
+                                    this.transform.localPosition = position + kuttuki_pos;
                                 }
-                                Physics.gravity = new Vector3(-15f, 0, 0);
                                 Physics.gravity = new Vector3(-9.8f, 0, 0);
                                 //collider_exit = false;
 
@@ -511,7 +535,10 @@ public class Kuttuku : Padinput
                                     Quaternion q = this.transform.localRotation;
 
                                     this.transform.localRotation = q * rot;
-                                    
+
+                                    Vector3 position = this.transform.localPosition;
+                                    kuttuki_pos = new Vector3(0.2f, 0, 0);
+                                    this.transform.localPosition = position + kuttuki_pos;
                                 }
                                 if (player.left != 0 && this.transform.rotation != kuttuki_rot)
                                 {
@@ -522,9 +549,11 @@ public class Kuttuku : Padinput
                                     Quaternion q = this.transform.localRotation;
 
                                     this.transform.localRotation = q * rot;
-                                    //Physics.gravity = new Vector3(9.8f, 0, 0);
+
+                                    Vector3 position = this.transform.localPosition;
+                                    kuttuki_pos = new Vector3(0.2f, 0, 0);
+                                    this.transform.localPosition = position + kuttuki_pos;
                                 }
-                                Physics.gravity = new Vector3(15f, 0, 0);
                                 Physics.gravity = new Vector3(9.8f, 0, 0);
 
                                 //collider_exit = false;

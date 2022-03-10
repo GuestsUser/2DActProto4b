@@ -2003,6 +2003,11 @@ PrefabInstance:
       propertyPath: fallPoint.Array.data[0]
       value: 
       objectReference: {fileID: 1885292523558873254}
+    - target: {fileID: 6346024904048878348, guid: 1b398051e4fdfd044b3b928e875c85b5,
+        type: 3}
+      propertyPath: rayDistance
+      value: 0.3
+      objectReference: {fileID: 0}
     - target: {fileID: 6346024904048878349, guid: 1b398051e4fdfd044b3b928e875c85b5,
         type: 3}
       propertyPath: parent
@@ -8367,7 +8372,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.7779887, y: 1}
+    m_SensorSize: {x: 1.7777778, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0

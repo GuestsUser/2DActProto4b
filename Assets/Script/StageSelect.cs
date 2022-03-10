@@ -111,7 +111,7 @@ public class StageSelect : MonoBehaviour
         else if (collision.gameObject.name == "Stage2")
         {
             /*ステージ2に切り替える*/
-            fade.FadeIn(1.5f, () => SceneManager.LoadScene(3));
+            fade.FadeIn(1.5f, () => SceneManager.LoadScene(8));
         }
         else if (collision.gameObject.name == "Stage3")
         {

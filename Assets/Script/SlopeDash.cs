@@ -56,7 +56,7 @@ public class SlopeDash : Padinput
         if (!dashFlg)
         {
             /*クールタイムを計測*/
-            if (coolTime < 5f)
+            if (coolTime < 0.2f)
             {
 
                 coolTime += Time.deltaTime;

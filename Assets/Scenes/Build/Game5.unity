@@ -5070,6 +5070,71 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6346024904048878345, guid: 1b398051e4fdfd044b3b928e875c85b5,
+        type: 3}
+      propertyPath: fallPoint.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6346024904048878345, guid: 1b398051e4fdfd044b3b928e875c85b5,
+        type: 3}
+      propertyPath: fallPoint.Array.data[0]
+      value: 
+      objectReference: {fileID: 1885292523558873254}
+    - target: {fileID: 6346024904048878345, guid: 1b398051e4fdfd044b3b928e875c85b5,
+        type: 3}
+      propertyPath: fallPoint.Array.data[1]
+      value: 
+      objectReference: {fileID: 2646622474754965211}
+    - target: {fileID: 6346024904048878345, guid: 1b398051e4fdfd044b3b928e875c85b5,
+        type: 3}
+      propertyPath: fallPoint.Array.data[2]
+      value: 
+      objectReference: {fileID: 8865450858840137385}
+    - target: {fileID: 6346024904048878348, guid: 1b398051e4fdfd044b3b928e875c85b5,
+        type: 3}
+      propertyPath: rayDistance
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6346024904048878348, guid: 1b398051e4fdfd044b3b928e875c85b5,
+        type: 3}
+      propertyPath: dashForce
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 6346024904048878349, guid: 1b398051e4fdfd044b3b928e875c85b5,
+        type: 3}
+      propertyPath: parent
+      value: 
+      objectReference: {fileID: 845230607}
+    - target: {fileID: 6346024904048878349, guid: 1b398051e4fdfd044b3b928e875c85b5,
+        type: 3}
+      propertyPath: _selector_obj
+      value: 
+      objectReference: {fileID: 536704631}
+    - target: {fileID: 6346024904048878349, guid: 1b398051e4fdfd044b3b928e875c85b5,
+        type: 3}
+      propertyPath: _item_obj.Array.data[0]
+      value: 
+      objectReference: {fileID: 845230607}
+    - target: {fileID: 6346024904048878349, guid: 1b398051e4fdfd044b3b928e875c85b5,
+        type: 3}
+      propertyPath: _item_obj.Array.data[1]
+      value: 
+      objectReference: {fileID: 559329908}
+    - target: {fileID: 6346024904048878349, guid: 1b398051e4fdfd044b3b928e875c85b5,
+        type: 3}
+      propertyPath: _item_obj.Array.data[2]
+      value: 
+      objectReference: {fileID: 1487926685}
+    - target: {fileID: 6346024904048878350, guid: 1b398051e4fdfd044b3b928e875c85b5,
+        type: 3}
+      propertyPath: retryPoint
+      value: 
+      objectReference: {fileID: 1346767539}
+    - target: {fileID: 6346024904048878351, guid: 1b398051e4fdfd044b3b928e875c85b5,
+        type: 3}
+      propertyPath: change_shoes
+      value: 
+      objectReference: {fileID: 1293469509}
     - target: {fileID: 6346024904048878582, guid: 1b398051e4fdfd044b3b928e875c85b5,
         type: 3}
       propertyPath: m_Name
@@ -5083,6 +5148,18 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1293469507}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1293469509 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6346024904048878349, guid: 1b398051e4fdfd044b3b928e875c85b5,
+    type: 3}
+  m_PrefabInstance: {fileID: 1293469507}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cb3731bba25b58f4ebca09b49f4b22ae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1329553291
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5218,7 +5295,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.9792285, y: 1}
+    m_SensorSize: {x: 1.7777778, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0

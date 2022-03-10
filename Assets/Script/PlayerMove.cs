@@ -53,12 +53,18 @@ public class PlayerMove : Padinput
     /*Kuttukuで使うプレイヤーポジション*/
     //[SerializeField] GameObject player;
     //public Vector3 player_pos {get{ return player.transform.position; } }
+    
+    
 
+    /*（レイキャスト）可視光線の長さ*/
+    [SerializeField] public float rayDistance = 0.2f;
+
+    public float height;
 
     private void Start()
     {
         this.transform.localRotation = Quaternion.Euler(0, 0, 0);
-        max_move_x = 13f;
+        max_move_x = 11f;
 
         /*falseだとくっついた時にプレイヤーが下を向いてしまう*/
         bool_left_direction = true;
@@ -66,6 +72,7 @@ public class PlayerMove : Padinput
         /*falseだとくっついた時にプレイヤーが下を向いてしまう*/
         //move = Vector3.zero;
         idle = true;
+        height = 0;
     }
     public override void Move()
     {
@@ -95,39 +102,7 @@ public class PlayerMove : Padinput
             state = State.walk; /*歩き*/
 
             move_x = 2f; /*プレイヤーを回転させれば符号を変える必要はない*/
-            //if(kuttuku.bool_kuttuki == false)
-            //{
-                //if (right != 0)
-                //{
-                //    //transform.localRotation = Quaternion.Euler(kuttuku.rotation.x, 0, kuttuku.rotation.z);
-                //    transform.localRotation = Quaternion.Euler(0, 0, 0);
-                //}
-                //else if (left != 0)
-                //{
-                //    //transform.localRotation = Quaternion.Euler(kuttuku.rotation.x, 180, kuttuku.rotation.z);
-                //    transform.localRotation = Quaternion.Euler(0, 180, 0);
-                //}
-            //}
-            //else
-            //{
-            //    if (right != 0)
-            //    {
-
-            //    }
-            //    else if (left != 0)
-            //    {
-
-            //    }
-            //}
-
-            //if(right != 0)
-            //{
-            //    transform.rotation = Quaternion.Euler(0, 0, 0);
-            //}
-            //else if(left != 0)
-            //{
-            //    transform.rotation = Quaternion.Euler(0, 180, 0);
-            //}
+            
 
         }
         else if(input_abs > 0.5f)
@@ -147,6 +122,12 @@ public class PlayerMove : Padinput
     }
     void Update()
     {
+        //rayPosition = transform.position /*+ new Vector3(0,1,0)*/;
+        //player_front = new Ray(rayPosition, transform.right * ray_direction);
+        //Debug.DrawRay(rayPosition, player_front.direction * rayDistance, Color.blue);
+
+
+
         if (state == State.idle)
         {
             idle = true;
@@ -237,14 +218,6 @@ public class PlayerMove : Padinput
 
         move = new Vector3(move_x, 0, 0);
 
-        //if (kuttuku.bool_kuttuki == false)
-        //{
-        //    move = new Vector3(move_x, 0, 0);
-        //}
-        //else
-        //{
-        //    move = new Vector3( 0, move_x, 0);
-        //}
         if (state == State.idle)
         {
             move = Vector3.zero;
@@ -265,33 +238,6 @@ public class PlayerMove : Padinput
         {
             move_x = max_move_x;
         }
-        /*追加部分*/
-
-        //if (right != 0)
-        //{
-        //    run_time += Time.deltaTime;
-        //    if (run_time < eas_time)
-        //    {
-        //        move_x = ExpOut(run_time, eas_time, 2f, max_move_x);
-        //    }
-        //    else
-        //    {
-        //        move_x = max_move_x;
-        //    }
-            
-        //}
-        //else if (left != 0)
-        //{
-        //    run_time += Time.deltaTime;
-        //    if (run_time < eas_time)
-        //    {
-        //        move_x = ExpOut(run_time, eas_time, -2f, -max_move_x);
-        //    }
-        //    else
-        //    {
-        //        move_x = -max_move_x;
-        //    }
-        //}
     }
     public static float ExpOut(float t, float totaltime, float min, float max) /*加速関数*/
     {

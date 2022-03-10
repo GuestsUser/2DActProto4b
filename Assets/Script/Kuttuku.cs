@@ -19,6 +19,10 @@ public class Kuttuku : Padinput
     bool collider_exit;
     /*1フレーム前の位置*/
     private Vector3 _prevPosition;
+    int kuttuki_time; /*くっつきオブジェクトから離れたときの時間*/
+
+    /*ジャンプ移動の不具合修正に必要*/
+    bool jump;
 
     /*レイキャスト用変数*/
     public Vector3 rayPosition; /*レイキャストの位置*/
@@ -34,6 +38,7 @@ public class Kuttuku : Padinput
 
     /*追加部分*/
     public bool bool_ray_hit;
+    bool kuttuki_left; /*true:左入力をしている状態でくっつきオブジェクトにくっつく*/
     /*追加部分*/
 
     /*（レイキャスト）可視光線の長さ*/
@@ -58,6 +63,9 @@ public class Kuttuku : Padinput
         move_type = kuttuki_move_state.none;
         // 初期位置を保持
         _prevPosition = transform.position;
+
+        jump = false;
+        kuttuki_left = false;
     }
     //private void Update()
     //{
@@ -270,7 +278,7 @@ public class Kuttuku : Padinput
         /*3月9日追加部分*/
 
         Debug.Log(move_type);
-        //Debug.Log(bool_ray_hit);
+        Debug.Log(kuttuki_time);
         Debug.Log(collider_exit);
         Debug.Log(Physics.gravity);
 
@@ -286,8 +294,23 @@ public class Kuttuku : Padinput
         Debug.DrawRay(rayPosition, ray2.direction * rayDistance, Color.blue);
         Debug.DrawRay(rayPosition, ray3.direction * rayDistance, Color.yellow);
 
-        /*レイキャストの当たり判定処理*/
+        //if(collider_exit == true)
+        //{
+        //    kuttuki_time++;
+        //    if(kuttuki_time > 30)
+        //    {
+        //        collider_exit = true;
+        //        bool_ray_hit = false;
+        //        kuttuki_time = 0;
+        //    }
+        //}
+        //else
+        //{
+            
+        //}
 
+        /*レイキャストの当たり判定処理*/
+        /*くっつく処理ここから↓*/
         if (change_shoes.type == ShoesType.Magnet_Shoes)
         {
             /*下のif文から外したもの(Physics.Raycast(ray, out rayHit, rayDistance) || */
@@ -348,12 +371,42 @@ public class Kuttuku : Padinput
                 if (Physics.Raycast(ray, out rayHit, rayDistance) && rayHit.collider.tag == "kuttuku")
                 {
                     ; /*足元から出ているレイが当たっているときは何もしなくていい*/
+
                 }
                 else if (collider_exit == true) /*離れた場合は重力の方向を変える必要がある*/
                 {
-
                     Quaternion kuttuki_rot;
-                    if (player.idle == false)
+
+                    /*離れてから時間経過が長い場合の処理*/
+                    kuttuki_time++;
+                    if(jump == true)
+                    {
+                        if (kuttuki_time > 47) //47はジャンプの滞空時間
+                        {
+                            collider_exit = false;
+                            bool_ray_hit = false;
+                            kuttuki_time = 0;
+                            kuttuki_rot = Quaternion.Euler(0, 0, 0);
+                            this.transform.localRotation = kuttuki_rot;
+                            Physics.gravity = new Vector3(0, -9.8f, 0);
+                        }
+                    }
+                    else
+                    {
+                        if (kuttuki_time > 5) //回転時に離れた時
+                        {
+                            collider_exit = false;
+                            bool_ray_hit = false;
+                            kuttuki_time = 0;
+                            kuttuki_rot = Quaternion.Euler(0, 0, 0);
+                            this.transform.localRotation = kuttuki_rot;
+                            Physics.gravity = new Vector3(0, -9.8f, 0);
+                        }
+                    }
+                    
+                    /*離れてから時間経過が長い場合の処理*/
+
+                    if (player.idle == false && jump == false && kuttuki_time != 0)
                     {
                         switch (move_type)
                         {
@@ -367,7 +420,7 @@ public class Kuttuku : Padinput
                                     Quaternion q = this.transform.localRotation;
                                     this.transform.localRotation = q * rot;
 
-                                    //Physics.gravity = new Vector3(0, -9.8f, 0);
+                                   
                                 }
                                 else if (player.left != 0 && this.transform.rotation != kuttuki_rot)
                                 {
@@ -377,6 +430,7 @@ public class Kuttuku : Padinput
                                     this.transform.localRotation = q * rot;
                                 }
 
+                                Physics.gravity = new Vector3(0, -15f, 0);
                                 Physics.gravity = new Vector3(0, -9.8f, 0);
 
                                 //collider_exit = false;
@@ -406,6 +460,7 @@ public class Kuttuku : Padinput
                                     Quaternion q = this.transform.localRotation;
                                     this.transform.localRotation = q * rot;
                                 }
+                                Physics.gravity = new Vector3(0, 15f, 0);
                                 Physics.gravity = new Vector3(0, 9.8f, 0);
 
                                 //collider_exit = false;
@@ -438,6 +493,7 @@ public class Kuttuku : Padinput
                                     //Physics.gravity = new Vector3(-9.8f, 0, 0);
 
                                 }
+                                Physics.gravity = new Vector3(-15f, 0, 0);
                                 Physics.gravity = new Vector3(-9.8f, 0, 0);
                                 //collider_exit = false;
 
@@ -468,7 +524,7 @@ public class Kuttuku : Padinput
                                     this.transform.localRotation = q * rot;
                                     //Physics.gravity = new Vector3(9.8f, 0, 0);
                                 }
-
+                                Physics.gravity = new Vector3(15f, 0, 0);
                                 Physics.gravity = new Vector3(9.8f, 0, 0);
 
                                 //collider_exit = false;
@@ -514,8 +570,10 @@ public class Kuttuku : Padinput
 
     private void OnCollisionEnter(Collision collision)
     {
+        jump = false;
         if (collision.gameObject.tag == "kuttuku"/* && bool_ray_hit == true && collider_exit == true*/)
         {
+            kuttuki_time = 0;
             collider_exit = false;
             Debug.Log("離れた後にくっついた判定");
         }
@@ -574,19 +632,23 @@ public class Kuttuku : Padinput
             /*追加部分*/
         }
     }
-    bool x_pos_different(float now_pos, float old_pos)
+    //bool x_pos_different(float now_pos, float old_pos)
+    //{
+    //    if(now_pos != old_pos)
+    //    {
+    //        //値が違う場合trueを返す
+    //        return true;
+    //    }
+    //    else
+    //    {
+    //        //値が一緒の場合falseを返す
+    //        return false;
+    //    }
+
+    //}
+    public override void Jump()
     {
-        if(now_pos != old_pos)
-        {
-            //値が違う場合trueを返す
-            return true;
-        }
-        else
-        {
-            //値が一緒の場合falseを返す
-            return false;
-        }
-        
+        jump = true;
     }
 }
 

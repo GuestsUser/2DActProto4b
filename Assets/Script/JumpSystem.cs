@@ -46,6 +46,7 @@ public class JumpSystem : Padinput
 
         /*レイキャストの使い方がわからないのでお願いします（プレイやの当たり判定をレイキャストにする）参照元： https://getabakoclub.com/2020/05/11/unity%e3%81%a7%e5%9c%b0%e9%9d%a2%e3%81%ae%e5%bd%93%e3%81%9f%e3%82%8a%e5%88%a4%e5%ae%9a%e3%82%92%e8%b6%b3%e5%85%83%e3%81%a0%e3%81%91%e5%8f%96%e5%be%97%e3%81%99%e3%82%8b%e3%80%903d%e3%80%91/ */
         rayPosition = rb.transform.position;/*レイキャストの位置*/
+        rayPosition.y += 0.5f;
         /*レイキャストの位置,レイキャストの角度*/
         ray = new Ray(rayPosition, transform.up * -1f);
         ray2 = new Ray(rayPosition, new Vector3(0.5f, -1f, 0));
@@ -53,11 +54,11 @@ public class JumpSystem : Padinput
         ray4 = new Ray(rayPosition, new Vector3(-0.5f, -1f, 0));
         ray5 = new Ray(rayPosition, new Vector3(0, -1f, -0.5f));
         /*デバッグ用の可視光線*/
-        Debug.DrawRay(rayPosition, ray.direction * rayDistance, Color.red);
-        Debug.DrawRay(rayPosition, ray2.direction * rayDistance, Color.red);
-        Debug.DrawRay(rayPosition, ray3.direction * rayDistance, Color.red);
-        Debug.DrawRay(rayPosition, ray4.direction * rayDistance, Color.red);
-        Debug.DrawRay(rayPosition, ray5.direction * rayDistance, Color.red);
+        Debug.DrawRay(rayPosition, ray.direction * rayDistance, Color.green);
+        Debug.DrawRay(rayPosition, ray2.direction * rayDistance, Color.green);
+        Debug.DrawRay(rayPosition, ray3.direction * rayDistance, Color.green);
+        Debug.DrawRay(rayPosition, ray4.direction * rayDistance, Color.green);
+        Debug.DrawRay(rayPosition, ray5.direction * rayDistance, Color.green);
 
         print(jump);/*デバッグログ,ジャンプフラグを出力*/
 

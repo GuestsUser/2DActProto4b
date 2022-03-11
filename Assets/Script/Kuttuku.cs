@@ -20,6 +20,8 @@ public class Kuttuku : Padinput
     /*1フレーム前の位置*/
     private Vector3 _prevPosition;
     int kuttuki_time; /*くっつきオブジェクトから離れたときの時間*/
+    /*くっつき時の浮く問題解決に必要*/
+    float move_x = 0.5f;
 
     /*ジャンプ移動の不具合修正に必要*/
     bool jump;
@@ -69,6 +71,7 @@ public class Kuttuku : Padinput
 
         jump = false;
         kuttuki_left = false;
+        move_x = 0.5f;
     }
     //private void Update()
     //{
@@ -317,8 +320,15 @@ public class Kuttuku : Padinput
         if (change_shoes.type == ShoesType.Magnet_Shoes)
         {
             /*下のif文から外したもの(Physics.Raycast(ray, out rayHit, rayDistance) || */
-            if (Physics.Raycast(ray2, out rayHit, rayDistance) && rayHit.collider.tag == "kuttuku")
+            if (Physics.Raycast(ray2, out rayHit, rayDistance))
             {
+                if(bool_ray_hit == true && rayHit.collider.tag != "kuttuku")
+                {
+                    bool_ray_hit = false;
+                    this.transform.localRotation = Quaternion.Euler(0, 0, 0);
+                    Physics.gravity = new Vector3(0, -9.8f, 0);
+                    collider_exit = false;
+                }
                 Debug.Log("通りました");
                 /*コライダーを持つオブジェクトから、タグを読み取る（壁をkuttukuに設定）*/
                 if (rayHit.collider.tag == "kuttuku" && bool_ray_hit == false)
@@ -336,7 +346,25 @@ public class Kuttuku : Padinput
                     Vector3 rotationAngles = rotation.eulerAngles;
 
                     /*くっついた時の浮き状態を改善するためのもの*/
-                    Vector3 kuttuki_pos = new Vector3(-0.5f,0 , 0);
+                    if(player.right != 0)
+                    {
+                        move_x = 0.5f;
+                    }
+                    else
+                    {
+                        move_x = -0.5f;
+                    }
+                    Vector3 kuttuki_pos = new Vector3(move_x, 0 , 0);
+                    //if (player.left != 0)
+                    //{
+                    //    Vector3 kuttuki_pos = new Vector3(-0.5f, 0, 0);
+                    //}
+                    //else if (player.right != 0)
+                    //{
+                    //    Debug.Log("めっちゃ右に行くはず");
+                    //    Vector3 kuttuki_pos = new Vector3(10f, 0, 0);
+                    //}
+                    
 
                     /*x軸がキャラクターの前後の場合*/
                     rotationAngles.z = 90.0f;
@@ -349,8 +377,9 @@ public class Kuttuku : Padinput
                     rotation = Quaternion.Euler(rotationAngles);
 
                     /* Transform値を設定する*/
-                    this.transform.localPosition = position + kuttuki_pos;
+                    
                     this.transform.localRotation = rotation;
+                    
                     this.transform.localScale = scale;
 
                     Debug.Log("くっつく");
@@ -365,7 +394,7 @@ public class Kuttuku : Padinput
                     {
                         Physics.gravity = new Vector3(-9.8f, 0, 0);
                     }
-
+                    this.transform.localPosition = position + kuttuki_pos;
                 }
             }
             /*今迷走してる部分*/

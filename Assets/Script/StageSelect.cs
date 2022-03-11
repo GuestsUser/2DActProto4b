@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;  //シーンマネジメントを有効にする
 using UnityEngine.InputSystem;
+using Cinemachine;
 
 public class StageSelect : MonoBehaviour
 {
@@ -91,6 +92,7 @@ public class StageSelect : MonoBehaviour
     /*new*/
     /*[SerializeField]用*/
     [SerializeField] Fade fade;
+    [Tooltip("追従対象切り替え用")] [SerializeField] CinemachineVirtualCamera vcam;
 
     private void Start()
     {
@@ -105,18 +107,42 @@ public class StageSelect : MonoBehaviour
     {
         if (collision.gameObject.name == "Stage1")
         {
+            ControlStop(); /* 入力受付終了 */
             /*ステージ1に切り替える*/
             fade.FadeIn(1.5f, () => SceneManager.LoadScene(2));
         }
         else if (collision.gameObject.name == "Stage2")
         {
+            ControlStop();
             /*ステージ2に切り替える*/
             fade.FadeIn(1.5f, () => SceneManager.LoadScene(8));
         }
         else if (collision.gameObject.name == "Stage3")
         {
+            ControlStop();
             /*ステージ3に切り替える*/
             fade.FadeIn(1.5f, () => SceneManager.LoadScene(4));
+        }
+
+        void ControlStop() /* 入力を処理するコンポーネント全停止で入力受付終了とする */
+        {
+            vcam.Follow = collision.gameObject.transform; /* カメラの追跡対象をワープゾーンに切り替える */
+            ObjAllInVisible(gameObject); /* スクリプトを付けたオブジェクトの子から孫まで全て不可視化 */
+
+            /* 入力を処理してるコンポーネント全停止 */
+            GetComponent<PlayerMove>().enabled = false;
+            GetComponent<JumpSystem>().enabled = false;
+            GetComponent<DashSystem>().enabled = false;
+            GetComponent<Kuttuku>().enabled = false;
+            GetComponent<ChangeShoes>().enabled = false;
+        }
+        void ObjAllInVisible(GameObject obj) /* objに入れたオブジェクトの子から孫まで全てを不可視化する関数 */
+        {
+            foreach (Transform child in obj.transform) /* objの子全てに処理(孫まで検知しないので再起式を用いて孫の処理をする) */
+            {
+                if (child.GetComponent<Renderer>() != null) { child.GetComponent<Renderer>().enabled = false; } /* レンダラーコンポーネントが付いてたらfalseにして不可視化 */
+                ObjAllInVisible(child.gameObject); /* 再帰式にする事で子から孫まで全てを取得できる */
+            }
         }
     }
 }

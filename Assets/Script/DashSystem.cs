@@ -38,18 +38,7 @@ public class DashSystem : Padinput
     {
         
 
-        /*レイキャストの使い方がわからないのでお願いします（プレイやの当たり判定をレイキャストにする）参照元： https://getabakoclub.com/2020/05/11/unity%e3%81%a7%e5%9c%b0%e9%9d%a2%e3%81%ae%e5%bd%93%e3%81%9f%e3%82%8a%e5%88%a4%e5%ae%9a%e3%82%92%e8%b6%b3%e5%85%83%e3%81%a0%e3%81%91%e5%8f%96%e5%be%97%e3%81%99%e3%82%8b%e3%80%903d%e3%80%91/ */
-        rayPosition = rb.transform.position;/*レイキャストの位置*/
-        /*レイキャストの位置,レイキャストの角度*/
-        ray = new Ray(rayPosition, transform.right);
-        /*デバッグ用の可視光線*/
-        Debug.DrawRay(rayPosition, ray.direction * rayDistance, Color.red);
-        if ((Physics.Raycast(ray, out rayHit, rayDistance)) && rayHit.collider.tag == "Enemy")
-        {
-
-            rayHit.collider.gameObject.SetActive(false);/*レイキャストに触れたenemyタグを持つオブジェクトは消えることになる*/
-
-        }
+        
 
         /*追加部分*/
         if (!dashFlg)
@@ -104,7 +93,17 @@ public class DashSystem : Padinput
                 //{
                 //    rb.AddForce(-dashForce + rb.velocity.x, rb.velocity.y, 0, ForceMode.VelocityChange);
                 //}
-                
+
+                /*レイキャストの使い方がわからないのでお願いします（プレイやの当たり判定をレイキャストにする）参照元： https://getabakoclub.com/2020/05/11/unity%e3%81%a7%e5%9c%b0%e9%9d%a2%e3%81%ae%e5%bd%93%e3%81%9f%e3%82%8a%e5%88%a4%e5%ae%9a%e3%82%92%e8%b6%b3%e5%85%83%e3%81%a0%e3%81%91%e5%8f%96%e5%be%97%e3%81%99%e3%82%8b%e3%80%903d%e3%80%91/ */
+                rayPosition = rb.transform.position;/*レイキャストの位置*/
+                /*レイキャストの位置,レイキャストの角度*/
+                ray = new Ray(rayPosition, transform.right);
+                /*デバッグ用の可視光線*/
+                Debug.DrawRay(rayPosition, ray.direction * rayDistance, Color.red);
+                if ((Physics.Raycast(ray, out rayHit, rayDistance)) && rayHit.collider.tag == "Enemy")
+                {
+                    rayHit.collider.gameObject.SetActive(false);/*レイキャストに触れたenemyタグを持つオブジェクトは消えることになる*/
+                }
                 rb.velocity = Vector3.zero;
                 dashFlg = false;
                 break;

@@ -321,6 +321,10 @@ public class Kuttuku : Padinput
         /*くっつく処理ここから↓*/
         if (change_shoes.type == ShoesType.Magnet_Shoes)
         {
+            if (Physics.Raycast(ray, out rayHit, rayDistance))
+            {
+                bool_ray_hit = true;
+            }
             /*下のif文から外したもの(Physics.Raycast(ray, out rayHit, rayDistance) || */
             if (Physics.Raycast(ray2, out rayHit, rayDistance))
             {
@@ -398,9 +402,8 @@ public class Kuttuku : Padinput
                     this.transform.localPosition = position + kuttuki_pos;
                 }
                 /*くっつき状態でもう一つのくっつきオブジェクトに接触した場合*/
-                else if (rayHit.collider.tag == "kuttuku" && bool_ray_hit == true) 
+                else if (Physics.Raycast(ray2, out rayHit, rayDistance) && rayHit.collider.tag == "kuttuku" && bool_ray_hit == true) 
                 {
-                    Debug.Log("ココにはきてる？");
                     kuttuki_To_kuttuki = true;
                     Quaternion kuttuki_rot;
                     switch (move_type)
@@ -419,7 +422,7 @@ public class Kuttuku : Padinput
                                 this.transform.localRotation = q * rot;
 
                                 Vector3 position = this.transform.localPosition;
-                                kuttuki_pos = new Vector3(0, 0.2f, 0);
+                                kuttuki_pos = new Vector3(0, 0.3f, 0);
                                 this.transform.localPosition = position + kuttuki_pos;
 
                             }
@@ -431,7 +434,7 @@ public class Kuttuku : Padinput
                                 this.transform.localRotation = q * rot;
 
                                 Vector3 position = this.transform.localPosition;
-                                kuttuki_pos = new Vector3(0, 0.2f, 0);
+                                kuttuki_pos = new Vector3(0, 0.3f, 0);
                                 this.transform.localPosition = position + kuttuki_pos;
                             }
 
@@ -457,20 +460,21 @@ public class Kuttuku : Padinput
                                 this.transform.localRotation = q * rot;
 
                                 Vector3 position = this.transform.localPosition;
-                                kuttuki_pos = new Vector3(0, -0.2f, 0);
+                                kuttuki_pos = new Vector3(0, -0.3f, 0);
                                 this.transform.localPosition = position + kuttuki_pos;
                             }
                             else if (player.left != 0 && this.transform.rotation != kuttuki_rot)
                             {
-                                Debug.Log("ここに入るはず");
+
                                 Quaternion rotation = this.transform.localRotation;
                                 Quaternion rot = Quaternion.AngleAxis(90, Vector3.forward);
                                 Quaternion q = this.transform.localRotation;
                                 this.transform.localRotation = q * rot;
 
                                 Vector3 position = this.transform.localPosition;
-                                kuttuki_pos = new Vector3(0, -0.2f, 0);
+                                kuttuki_pos = new Vector3(0, -0.3f, 0);
                                 this.transform.localPosition = position + kuttuki_pos;
+                                Debug.Log("こことおってるかも");
                             }
                             Physics.gravity = new Vector3(0, -9.8f, 0);
 
@@ -491,7 +495,7 @@ public class Kuttuku : Padinput
                                 this.transform.localRotation = q * rot;
 
                                 Vector3 position = this.transform.localPosition;
-                                kuttuki_pos = new Vector3(0.2f, 0, 0);
+                                kuttuki_pos = new Vector3(0.3f, 0, 0);
                                 this.transform.localPosition = position + kuttuki_pos;
                             }
                             if (player.left != 0 && this.transform.rotation != kuttuki_rot)
@@ -505,7 +509,7 @@ public class Kuttuku : Padinput
                                 this.transform.localRotation = q * rot;
 
                                 Vector3 position = this.transform.localPosition;
-                                kuttuki_pos = new Vector3(0.2f, 0, 0);
+                                kuttuki_pos = new Vector3(0.3f, 0, 0);
                                 this.transform.localPosition = position + kuttuki_pos;
                             }
                             Physics.gravity = new Vector3(9.8f, 0, 0);
@@ -527,7 +531,7 @@ public class Kuttuku : Padinput
                                 this.transform.localRotation = q * rot;
 
                                 Vector3 position = this.transform.localPosition;
-                                kuttuki_pos = new Vector3(-0.2f, 0, 0);
+                                kuttuki_pos = new Vector3(-0.3f, 0, 0);
                                 this.transform.localPosition = position + kuttuki_pos;
                             }
                             if (player.left != 0 && this.transform.rotation != kuttuki_rot)
@@ -541,7 +545,7 @@ public class Kuttuku : Padinput
                                 this.transform.localRotation = q * rot;
 
                                 Vector3 position = this.transform.localPosition;
-                                kuttuki_pos = new Vector3(-0.2f, 0, 0);
+                                kuttuki_pos = new Vector3(-0.3f, 0, 0);
                                 this.transform.localPosition = position + kuttuki_pos;
                             }
                             Physics.gravity = new Vector3(-9.8f, 0, 0);
@@ -614,7 +618,7 @@ public class Kuttuku : Padinput
                                     this.transform.localRotation = q * rot;
 
                                     Vector3 position = this.transform.localPosition;
-                                    kuttuki_pos = new Vector3(0, -0.2f, 0);
+                                    kuttuki_pos = new Vector3(0, -0.3f, 0); 
                                     this.transform.localPosition = position + kuttuki_pos;
                                    
                                 }
@@ -626,7 +630,7 @@ public class Kuttuku : Padinput
                                     this.transform.localRotation = q * rot;
 
                                     Vector3 position = this.transform.localPosition;
-                                    kuttuki_pos = new Vector3(0, -0.2f, 0);
+                                    kuttuki_pos = new Vector3(0, -0.1f, 0); /*ココだけなぜか、-0.2,-0.3だと不具合発生*/
                                     this.transform.localPosition = position + kuttuki_pos;
                                 }
 
@@ -652,7 +656,7 @@ public class Kuttuku : Padinput
                                     this.transform.localRotation = q * rot;
 
                                     Vector3 position = this.transform.localPosition;
-                                    kuttuki_pos = new Vector3(0, 0.2f, 0);
+                                    kuttuki_pos = new Vector3(0, 0.1f, 0); /*変更箇所*/
                                     this.transform.localPosition = position + kuttuki_pos;
                                 }
                                 else if (player.left != 0 && this.transform.rotation != kuttuki_rot)
@@ -663,7 +667,7 @@ public class Kuttuku : Padinput
                                     this.transform.localRotation = q * rot;
 
                                     Vector3 position = this.transform.localPosition;
-                                    kuttuki_pos = new Vector3(0, 0.2f, 0);
+                                    kuttuki_pos = new Vector3(0, 0.3f, 0);
                                     this.transform.localPosition = position + kuttuki_pos;
                                 }
                                 Physics.gravity = new Vector3(0, 9.8f, 0);
@@ -685,7 +689,7 @@ public class Kuttuku : Padinput
                                     this.transform.localRotation = q * rot;
 
                                     Vector3 position = this.transform.localPosition;
-                                    kuttuki_pos = new Vector3(-0.2f,0 , 0);
+                                    kuttuki_pos = new Vector3(-0.3f,0 , 0);
                                     this.transform.localPosition = position + kuttuki_pos;
                                 }
                                 if (player.left != 0 && this.transform.rotation != kuttuki_rot)
@@ -699,7 +703,7 @@ public class Kuttuku : Padinput
                                     this.transform.localRotation = q * rot;
 
                                     Vector3 position = this.transform.localPosition;
-                                    kuttuki_pos = new Vector3(-0.2f, 0, 0);
+                                    kuttuki_pos = new Vector3(-0.3f, 0, 0);
                                     this.transform.localPosition = position + kuttuki_pos;
                                 }
                                 Physics.gravity = new Vector3(-9.8f, 0, 0);
@@ -721,7 +725,7 @@ public class Kuttuku : Padinput
                                     this.transform.localRotation = q * rot;
 
                                     Vector3 position = this.transform.localPosition;
-                                    kuttuki_pos = new Vector3(0.2f, 0, 0);
+                                    kuttuki_pos = new Vector3(0.3f, 0, 0);
                                     this.transform.localPosition = position + kuttuki_pos;
                                 }
                                 if (player.left != 0 && this.transform.rotation != kuttuki_rot)
@@ -735,7 +739,7 @@ public class Kuttuku : Padinput
                                     this.transform.localRotation = q * rot;
 
                                     Vector3 position = this.transform.localPosition;
-                                    kuttuki_pos = new Vector3(0.2f, 0, 0);
+                                    kuttuki_pos = new Vector3(0.3f, 0, 0);
                                     this.transform.localPosition = position + kuttuki_pos;
                                     Debug.Log("ここ通ってる説ある");
                                 }

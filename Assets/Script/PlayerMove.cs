@@ -249,6 +249,23 @@ public class PlayerMove : Padinput
     }
     void ApplyAnimator()
     {
-        animator.SetFloat("Speed", move_x, 0.1f, Time.deltaTime);
+        var speed = Mathf.Abs(input_abs);
+        animator.SetFloat("Speed", speed, 0.1f, Time.deltaTime);
+
+        //if (speed == 0)
+        //{
+        //    state = State.idle;
+        //    Debug.Log("止まり状態");
+        //}
+        //else if (speed <= 0.7f)
+        //{
+        //    state = State.walk;
+        //    Debug.Log("歩き状態");
+        //}
+        //else if (speed > 0.7f)
+        //{
+        //    state = State.run;
+        //    Debug.Log("走り状態");
+        //}
     }
 }

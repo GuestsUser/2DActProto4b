@@ -36,9 +36,13 @@ public class DashSystem : Padinput
     // Update is called once per frame
     void FixedUpdate()
     {
-        
 
-        
+
+
+        if ((Physics.Raycast(ray, out rayHit, rayDistance)) && rayHit.collider.tag == "ground"&& rayHit.collider.tag == "kuttuku")
+        {
+            rb.velocity = Vector3.zero;
+        }
 
         /*追加部分*/
         if (!dashFlg)

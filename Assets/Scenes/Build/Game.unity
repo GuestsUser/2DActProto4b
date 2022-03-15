@@ -748,6 +748,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1193897982761754248, guid: 3afea97a9403a2f4f9afff7beeeba6c5,
+        type: 3}
+      propertyPath: Rate
+      value: 60
+      objectReference: {fileID: 0}
+    - target: {fileID: 1193897982761754248, guid: 3afea97a9403a2f4f9afff7beeeba6c5,
+        type: 3}
+      propertyPath: FixedRate
+      value: 60
+      objectReference: {fileID: 0}
     - target: {fileID: 1850324954778445476, guid: 3afea97a9403a2f4f9afff7beeeba6c5,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -822,6 +832,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1073783810}
     m_Modifications:
+    - target: {fileID: 2756084503466480817, guid: 094923b744d05cf46ae1534307a0a660,
+        type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 3509451402016856926, guid: 094923b744d05cf46ae1534307a0a660,
         type: 3}
       propertyPath: m_Name
@@ -1272,7 +1287,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.7783985, y: 1}
+    m_SensorSize: {x: 1.7777778, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -1669,7 +1684,7 @@ PrefabInstance:
     - target: {fileID: 6346024904048878347, guid: 1b398051e4fdfd044b3b928e875c85b5,
         type: 3}
       propertyPath: m_CollisionDetection
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6346024904048878347, guid: 1b398051e4fdfd044b3b928e875c85b5,
         type: 3}
@@ -1685,6 +1700,11 @@ PrefabInstance:
         type: 3}
       propertyPath: dashForce
       value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 6346024904048878348, guid: 1b398051e4fdfd044b3b928e875c85b5,
+        type: 3}
+      propertyPath: rayDistance
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 6346024904048878349, guid: 1b398051e4fdfd044b3b928e875c85b5,
         type: 3}
@@ -1724,14 +1744,24 @@ PrefabInstance:
     - target: {fileID: 6346024904048878351, guid: 1b398051e4fdfd044b3b928e875c85b5,
         type: 3}
       propertyPath: rayDistance
-      value: 0.1
+      value: 0.53
       objectReference: {fileID: 0}
     - target: {fileID: 6346024904048878576, guid: 1b398051e4fdfd044b3b928e875c85b5,
         type: 3}
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 6346024904048878577, guid: 1b398051e4fdfd044b3b928e875c85b5,
+        type: 3}
+      propertyPath: m_IsTrigger
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6346024904048878578, guid: 1b398051e4fdfd044b3b928e875c85b5,
+        type: 3}
+      propertyPath: rayDistance
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6346024904048878579, guid: 1b398051e4fdfd044b3b928e875c85b5,
         type: 3}
       propertyPath: rayDistance
       value: 0.5

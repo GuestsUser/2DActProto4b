@@ -24,8 +24,9 @@ public class Kuttuku : Padinput
     float move_x = 0.5f;
     bool kuttuki_To_kuttuki;
 
-    /*下にくっついてる状態で靴を切り替えると床を貫通する問題解決に必要*/
+    /*くっついてる状態で靴を切り替えるとオブジェクトを貫通する問題解決に必要*/
     bool kuttuki_down;
+    //bool kuttuki_
 
     /*ジャンプ移動の不具合修正に必要*/
     bool jump;
@@ -452,6 +453,7 @@ public class Kuttuku : Padinput
                         case kuttuki_move_state.move_down: //下に走って、オブジェクトから離れた場合
                                                            //Vector3 gravity_up = new Vector3(0, 9.8f, 0);
                                                            //Physics.gravity = Vector3.Lerp(now_gravity, gravity_up, Time.deltaTime);
+                            kuttuki_down = false;
                             kuttuki_rot = Quaternion.Euler(0, 0, 0);
                             if (player.right != 0 && this.transform.rotation != kuttuki_rot)
                             {
@@ -487,6 +489,7 @@ public class Kuttuku : Padinput
                             break;
 
                         case kuttuki_move_state.move_right: //右に走って、オブジェクトから離れた場合
+                            kuttuki_down = false;
                             kuttuki_rot = Quaternion.Euler(0, 0, 90);
                             if (player.right != 0 && this.transform.rotation != kuttuki_rot)
                             {
@@ -523,6 +526,7 @@ public class Kuttuku : Padinput
                             break;
 
                         case kuttuki_move_state.move_left: //左に走って、オブジェクトから離れた場合
+                            kuttuki_down = false;
                             kuttuki_rot = Quaternion.Euler(0, 0, 90);
                             if (player.right != 0 && this.transform.rotation != kuttuki_rot)
                             {
@@ -609,6 +613,7 @@ public class Kuttuku : Padinput
                         switch (move_type)
                         {
                             case kuttuki_move_state.move_up: //上に走って、オブジェクトから離れた場合
+                                kuttuki_down = false;
                                 kuttuki_rot = Quaternion.Euler(0, 0, 0);
                                 if (player.right != 0 && this.transform.rotation != kuttuki_rot)
                                 {
@@ -681,6 +686,7 @@ public class Kuttuku : Padinput
                                 break;
 
                             case kuttuki_move_state.move_right: //右に走って、オブジェクトから離れた場合
+                                kuttuki_down = false;
                                 kuttuki_rot = Quaternion.Euler(0, 0, 90);
                                 if (player.right != 0 && this.transform.rotation != kuttuki_rot)
                                 {
@@ -717,6 +723,7 @@ public class Kuttuku : Padinput
                                 break;
 
                             case kuttuki_move_state.move_left: //左に走って、オブジェクトから離れた場合
+                                kuttuki_down = false;
                                 kuttuki_rot = Quaternion.Euler(0, 0, 90);
                                 if (player.right != 0 && this.transform.rotation != kuttuki_rot)
                                 {
@@ -819,6 +826,7 @@ public class Kuttuku : Padinput
             Debug.Log("離れた後にくっついた判定");
         }
     }
+    
     private void OnCollisionExit(Collision collision)
     {
         

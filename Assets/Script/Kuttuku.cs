@@ -24,6 +24,9 @@ public class Kuttuku : Padinput
     float move_x = 0.5f;
     bool kuttuki_To_kuttuki;
 
+    /*下にくっついてる状態で靴を切り替えると床を貫通する問題解決に必要*/
+    bool kuttuki_down;
+
     /*ジャンプ移動の不具合修正に必要*/
     bool jump;
 
@@ -74,6 +77,7 @@ public class Kuttuku : Padinput
         kuttuki_left = false;
         move_x = 0.5f;
         kuttuki_To_kuttuki = false;
+        kuttuki_down = false;
     }
     //private void Update()
     //{
@@ -439,7 +443,7 @@ public class Kuttuku : Padinput
                             }
 
                             Physics.gravity = new Vector3(0, 9.8f, 0);
-
+                            kuttuki_down = true;
                             //collider_exit = false;
 
                             //bool_ray_hit = false;
@@ -671,7 +675,7 @@ public class Kuttuku : Padinput
                                     this.transform.localPosition = position + kuttuki_pos;
                                 }
                                 Physics.gravity = new Vector3(0, 9.8f, 0);
-
+                                kuttuki_down = true;
                                 collider_exit = false;
                                 //bool_ray_hit = false;
                                 break;
@@ -765,14 +769,32 @@ public class Kuttuku : Padinput
         else /*靴がマグネットシューズ意外になったときに発動*/
         {
             Physics.gravity = new Vector3(0, -9.8f, 0);
-            Transform myTransform = this.transform;
+            Transform myTransform;
+            
+            if (kuttuki_down == true)
+            {
+                Vector3 player_pos = this.transform.position;
+                Vector3 plus_pos = new Vector3(0,-1,0);
+                this.transform.position = player_pos + plus_pos;
 
-            /* ワールド座標を基準に、回転を取得*/
-            Vector3 worldAngle = myTransform.eulerAngles;
-            worldAngle.x = 0.0f; /* ワールド座標を基準に、x軸を軸にした回転を10度に変更*/
-            worldAngle.y = 0.0f; /* ワールド座標を基準に、y軸を軸にした回転を10度に変更*/
-            worldAngle.z = 0.0f; /* ワールド座標を基準に、z軸を軸にした回転を10度に変更*/
-            myTransform.eulerAngles = worldAngle; /* 回転角度を設定*/
+                Quaternion rot = Quaternion.AngleAxis(180f, Vector3.right);
+                Quaternion q = this.transform.localRotation;
+                this.transform.localRotation = q * rot;
+
+                
+                kuttuki_down = false;
+            }
+            else
+            {
+                myTransform = this.transform;
+                /* ワールド座標を基準に、回転を取得*/
+                Vector3 worldAngle = myTransform.eulerAngles;
+                worldAngle.x = 0.0f; /* ワールド座標を基準に、x軸を軸にした回転を10度に変更*/
+                worldAngle.y = 0.0f; /* ワールド座標を基準に、y軸を軸にした回転を10度に変更*/
+                worldAngle.z = 0.0f; /* ワールド座標を基準に、z軸を軸にした回転を10度に変更*/
+                myTransform.eulerAngles = worldAngle; /* 回転角度を設定*/
+            }
+            
 
             /*追加部分*/
             bool_ray_hit = false;

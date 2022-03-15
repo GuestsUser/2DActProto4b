@@ -67,6 +67,8 @@ public class PlayerMove : Padinput
         this.transform.localRotation = Quaternion.Euler(0, 0, 0);
         max_move_x = 13f;
 
+        animator = GetComponent<Animator>();
+
         /*falseだとくっついた時にプレイヤーが下を向いてしまう*/
         bool_left_direction = true;
         bool_right_direction = true;

@@ -208,11 +208,11 @@ public class PlayerMove : Padinput
                 break;
         }
         /*壁にめり込まないようにする処理(自分版)*/
-        if (hit_wall_left || hit_wall_right)
+        if (hit_wall_left == true || hit_wall_right == true)
         {
             move = Vector3.zero;
         }
-        else
+        else if(hit_wall_left == false && hit_wall_right == false)
         {
             move = new Vector3(move_x, 0, 0);
         }
@@ -422,14 +422,14 @@ public class PlayerMove : Padinput
             /*ポジションをめり込まないようにする処理*/
             if (right != 0 && distance <= 1.3f)
             {
-                //Debug.Log("ここ通っていればめり込まないはず");
+                Debug.Log("ここ通っていればめり込まないはず");
                 player_oldpos = this.transform.position;
                 transform.position = player_oldpos;
                 hit_wall_right = true;
             }
             else if (left != 0 && distance <= 1.3f)
             {
-                //Debug.Log("ここ通っていればめり込まないはず");
+                Debug.Log("ここ通っていればめり込まないはず");
                 player_oldpos = this.transform.position;
                 transform.position = player_oldpos;
                 hit_wall_left = true;

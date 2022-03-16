@@ -291,15 +291,15 @@ public class Kuttuku : Padinput
         /*3月9日追加部分*/
 
         Debug.Log(move_type);
-        Debug.Log(kuttuki_time);
-        Debug.Log(collider_exit);
-        Debug.Log(Physics.gravity);
+        //Debug.Log(kuttuki_time);
+        //Debug.Log(collider_exit);
+        //Debug.Log(Physics.gravity);
 
         rayPosition = rb.transform.position;    /*レイキャストの位置*/
 
-        ray = new Ray(rayPosition, transform.up * -4f);
-        ray2 = new Ray(rayPosition, transform.right * 1f);
-        ray3 = new Ray(rayPosition, transform.up * 1.5f);
+        ray = new Ray(rayPosition, transform.up * -4f);     /*足元*/
+        ray2 = new Ray(rayPosition, transform.right * 1f);  /*正面*/
+        ray3 = new Ray(rayPosition, transform.up * 1.5f);   /*頭*/
 
 
         /*デバッグ用の可視光線*/
@@ -319,27 +319,67 @@ public class Kuttuku : Padinput
         //}
         //else
         //{
-            
+
         //}
 
-        /*レイキャストの当たり判定処理*/
-        /*くっつく処理ここから↓*/
-        if (change_shoes.type == ShoesType.Magnet_Shoes)
+       
+        Kuttuki();
+
+
+        // 前フレーム位置を更新
+        _prevPosition = now_position;
+
+    }/*Updateの終了部分*/
+    private void Kuttuki() /*くっつき処理*/
+    {
+        if (change_shoes.type == ShoesType.Magnet_Shoes) /*靴のタイプがマグネットの時*/
         {
-            if (Physics.Raycast(ray, out rayHit, rayDistance))
+            if (Physics.Raycast(ray, out rayHit, rayDistance))/*足元から出ているレイが当たっていたら*/
             {
-                bool_ray_hit = true;
-            }
-            /*下のif文から外したもの(Physics.Raycast(ray, out rayHit, rayDistance) || */
-            if (Physics.Raycast(ray2, out rayHit, rayDistance))
-            {
-                if(bool_ray_hit == true && rayHit.collider.tag != "kuttuku")
+                if(rayHit.collider.tag == "kuttuku")
                 {
-                    bool_ray_hit = false;
-                    this.transform.localRotation = Quaternion.Euler(0, 0, 0);
-                    Physics.gravity = new Vector3(0, -9.8f, 0);
-                    collider_exit = false;
+                    bool_ray_hit = true; /*くっつき時のフラグ(bool_ray_hit)をtrueにする*/
                 }
+                /*下の処理はくっつき状態でそのまま移動していて足元がくっつきオブジェクトからノーマルオブジェクトに変わったときの処理*/
+                else if (bool_ray_hit == true && rayHit.collider.tag != "kuttuku") /*この処理は上りでは使えない、回転が変わり続ける→戻る→落ちる→くっつくのループ*/
+                {
+                    if (kuttuki_down == true) /*オブジェクトの下にくっついている状態の時*/
+                    {
+                        Physics.gravity = new Vector3(0, -9.8f, 0);
+                        bool_ray_hit = false;
+                        Vector3 player_pos = this.transform.position;
+                        Vector3 plus_pos = new Vector3(0, -1, 0);
+                        this.transform.position = player_pos + plus_pos;
+
+                        //Quaternion rot = Quaternion.AngleAxis(180f, Vector3.right);
+                        //Quaternion q = this.transform.localRotation;
+                        //this.transform.localRotation = q * rot;
+                        collider_exit = false;
+
+                        kuttuki_down = false;
+                    }
+                    else
+                    {
+                        bool_ray_hit = false;
+                        this.transform.localRotation = Quaternion.Euler(0, 0, 0);
+                        Physics.gravity = new Vector3(0, -9.8f, 0);
+                        collider_exit = false;
+                    }
+                   
+                }
+
+                //if (bool_ray_hit == true && rayHit.collider.tag != "kuttuku")/*既にくっつき状態で、レイが当たっているオブジェクトのタグがkuttuku以外なら*/
+                //{
+                //    bool_ray_hit = false;
+                //    this.transform.localRotation = Quaternion.Euler(0, 0, 0);
+                //    Physics.gravity = new Vector3(0, -9.8f, 0);
+                //    collider_exit = false;
+                //}
+            }
+            
+            if (Physics.Raycast(ray2, out rayHit, rayDistance)) /*プレイヤーの正面から出ているレイが当たっている時*/
+            {
+                
                 Debug.Log("通りました");
                 /*コライダーを持つオブジェクトから、タグを読み取る（壁をkuttukuに設定）*/
                 if (rayHit.collider.tag == "kuttuku" && bool_ray_hit == false)
@@ -357,7 +397,7 @@ public class Kuttuku : Padinput
                     Vector3 rotationAngles = rotation.eulerAngles;
 
                     /*くっついた時の浮き状態を改善するためのもの*/
-                    if(player.right != 0)
+                    if (player.right != 0)
                     {
                         move_x = 0.5f;
                     }
@@ -365,7 +405,7 @@ public class Kuttuku : Padinput
                     {
                         move_x = -0.5f;
                     }
-                    Vector3 kuttuki_pos = new Vector3(move_x, 0 , 0);
+                    Vector3 kuttuki_pos = new Vector3(move_x, 0, 0);
                     //if (player.left != 0)
                     //{
                     //    Vector3 kuttuki_pos = new Vector3(-0.5f, 0, 0);
@@ -375,7 +415,7 @@ public class Kuttuku : Padinput
                     //    Debug.Log("めっちゃ右に行くはず");
                     //    Vector3 kuttuki_pos = new Vector3(10f, 0, 0);
                     //}
-                    
+
 
                     /*x軸がキャラクターの前後の場合*/
                     rotationAngles.z = 90.0f;
@@ -388,9 +428,9 @@ public class Kuttuku : Padinput
                     rotation = Quaternion.Euler(rotationAngles);
 
                     /* Transform値を設定する*/
-                    
+
                     this.transform.localRotation = rotation;
-                    
+
                     this.transform.localScale = scale;
 
 
@@ -407,17 +447,18 @@ public class Kuttuku : Padinput
                     this.transform.localPosition = position + kuttuki_pos;
                 }
                 /*くっつき状態でもう一つのくっつきオブジェクトに接触した場合*/
-                else if (Physics.Raycast(ray2, out rayHit, rayDistance) && rayHit.collider.tag == "kuttuku" && bool_ray_hit == true) 
+                else if (Physics.Raycast(ray2, out rayHit, rayDistance) && rayHit.collider.tag == "kuttuku" && bool_ray_hit == true)
                 {
                     kuttuki_To_kuttuki = true;
                     Quaternion kuttuki_rot;
+                    /*オブジェクトの内側の回転処理*/
                     switch (move_type)
                     {
                         case kuttuki_move_state.move_up: //上に走って、オブジェクトに接触した場合
                             kuttuki_rot = Quaternion.Euler(0, 0, 180);
                             if (player.right != 0 && this.transform.rotation != kuttuki_rot)
                             {
-                                
+
                                 Quaternion rotation = this.transform.localRotation;
                                 Quaternion rot = Quaternion.AngleAxis(90, Vector3.forward);
                                 Quaternion q = this.transform.localRotation;
@@ -568,7 +609,7 @@ public class Kuttuku : Padinput
             /*3月7日追加部分*/
             else if (bool_ray_hit == true) /**/
             {
-                
+
 
                 if (Physics.Raycast(ray, out rayHit, rayDistance) && rayHit.collider.tag == "kuttuku")
                 {
@@ -581,7 +622,7 @@ public class Kuttuku : Padinput
 
                     /*離れてから時間経過が長い場合の処理*/
                     kuttuki_time++;
-                    if(jump == true)
+                    if (jump == true)
                     {
                         if (kuttuki_time > 47) //47はジャンプの滞空時間
                         {
@@ -606,8 +647,8 @@ public class Kuttuku : Padinput
                         }
                     }
 
-                    /*離れてから時間経過が長い場合の処理*/
 
+                    /*オブジェクトの外側の回転処理*/
                     if (player.idle == false && jump == false && kuttuki_time != 0 && kuttuki_To_kuttuki == false)
                     {
                         switch (move_type)
@@ -619,17 +660,17 @@ public class Kuttuku : Padinput
                                 {
                                     Debug.Log("回転するはずのところを通過しました");
                                     Quaternion rotation = this.transform.localRotation;
-                                    Quaternion rot  = Quaternion.AngleAxis(-90, Vector3.forward);
+                                    Quaternion rot = Quaternion.AngleAxis(-90, Vector3.forward);
                                     Quaternion q = this.transform.localRotation;
 
-                                    
+
 
                                     this.transform.localRotation = q * rot;
 
                                     Vector3 position = this.transform.localPosition;
-                                    kuttuki_pos = new Vector3(0, -0.3f, 0); 
+                                    kuttuki_pos = new Vector3(0, -0.3f, 0);
                                     this.transform.localPosition = position + kuttuki_pos;
-                                   
+
                                 }
                                 else if (player.left != 0 && this.transform.rotation != kuttuki_rot)
                                 {
@@ -699,7 +740,7 @@ public class Kuttuku : Padinput
                                     this.transform.localRotation = q * rot;
 
                                     Vector3 position = this.transform.localPosition;
-                                    kuttuki_pos = new Vector3(-0.3f,0 , 0);
+                                    kuttuki_pos = new Vector3(-0.3f, 0, 0);
                                     this.transform.localPosition = position + kuttuki_pos;
                                 }
                                 if (player.left != 0 && this.transform.rotation != kuttuki_rot)
@@ -761,7 +802,7 @@ public class Kuttuku : Padinput
                                 break;
                         }
                     }
-                    
+
                 }
                 /*上下*/
                 /*今迷走してる部分*/
@@ -776,45 +817,39 @@ public class Kuttuku : Padinput
         else /*靴がマグネットシューズ意外になったときに発動*/
         {
             Physics.gravity = new Vector3(0, -9.8f, 0);
-            Transform myTransform;
-            
-            if (kuttuki_down == true)
+            //Transform myTransform;
+
+            if (kuttuki_down == true) /*オブジェクトの下にくっついている状態の時*/
             {
                 Vector3 player_pos = this.transform.position;
-                Vector3 plus_pos = new Vector3(0,-1,0);
+                Vector3 plus_pos = new Vector3(0, -1, 0);
                 this.transform.position = player_pos + plus_pos;
 
                 Quaternion rot = Quaternion.AngleAxis(180f, Vector3.right);
                 Quaternion q = this.transform.localRotation;
                 this.transform.localRotation = q * rot;
 
-                
+
                 kuttuki_down = false;
             }
-            else
+            else　/*本来はいるがPlayerMoveの方でくっつき時以外はQuaternion.Eulerで3軸まとめて変更しているため要らない*/
             {
-                myTransform = this.transform;
+                //myTransform = this.transform;
                 /* ワールド座標を基準に、回転を取得*/
-                Vector3 worldAngle = myTransform.eulerAngles;
-                worldAngle.x = 0.0f; /* ワールド座標を基準に、x軸を軸にした回転を10度に変更*/
-                worldAngle.y = 0.0f; /* ワールド座標を基準に、y軸を軸にした回転を10度に変更*/
-                worldAngle.z = 0.0f; /* ワールド座標を基準に、z軸を軸にした回転を10度に変更*/
-                myTransform.eulerAngles = worldAngle; /* 回転角度を設定*/
+                //Vector3 worldAngle = myTransform.eulerAngles;
+                //worldAngle.x = 0.0f; /* ワールド座標を基準に、x軸を軸にした回転を10度に変更*/
+                //worldAngle.y = 0.0f; /* ワールド座標を基準に、y軸を軸にした回転を10度に変更*/
+                //worldAngle.z = 0.0f; /* ワールド座標を基準に、z軸を軸にした回転を10度に変更*/
+                //myTransform.eulerAngles = worldAngle; /* 回転角度を設定*/
             }
-            
+
 
             /*追加部分*/
             bool_ray_hit = false;
             /*追加部分*/
             move_type = kuttuki_move_state.none;
         }
-
-        
-        // 前フレーム位置を更新
-        _prevPosition = now_position;
-
-    }/*Updateの終了部分*/
-
+    }
     private void OnCollisionEnter(Collision collision)
     {
         jump = false;
@@ -829,72 +864,14 @@ public class Kuttuku : Padinput
     
     private void OnCollisionExit(Collision collision)
     {
-        
-        if(collision.gameObject.tag == "kuttuku"/* && bool_ray_hit == true*/)
+
+        if (collision.gameObject.tag == "kuttuku"/* && bool_ray_hit == true*/)
         {
             Debug.Log("離れました");
             collider_exit = true;
-            //Debug.Log("オブジェクトから離れました");
-            //switch (move_type)
-            //{
-            //    case kuttuki_move_state.move_up: //上に走って、オブジェクトから離れた場合
-                    
-            //        Physics.gravity = new Vector3(0, -9.8f, 0);
-
-            //        bool_ray_hit = false;
-            //        break;
-
-            //    case kuttuki_move_state.move_down: //下に走って、オブジェクトから離れた場合
-            //        Vector3 gravity_up = new Vector3(0, 9.8f, 0);
-            //        Physics.gravity = Vector3.Lerp(now_gravity, gravity_up, Time.deltaTime);
-            //        //Physics.gravity = new Vector3(0, 9.8f, 0);
-                    
-
-            //        bool_ray_hit = false;
-            //        break;
-
-            //    case kuttuki_move_state.move_right: //右に走って、オブジェクトから離れた場合
-            //        Physics.gravity = new Vector3(-9.8f, 0, 0);
-
-            //        bool_ray_hit = false;
-            //        break;
-
-            //    case kuttuki_move_state.move_left: //左に走って、オブジェクトから離れた場合
-            //        Physics.gravity = new Vector3(9.8f, 0, 0);
-
-            //        bool_ray_hit = false;
-            //        break;
-            //}
-
-            //Physics.gravity = new Vector3(0, -9.8f, 0);
-            //Transform myTransform = this.transform;
-
-            ///* ワールド座標を基準に、回転を取得*/
-            //Vector3 worldAngle = myTransform.eulerAngles;
-            //worldAngle.x = 0.0f; /* ワールド座標を基準に、x軸を軸にした回転を10度に変更*/
-            //worldAngle.y = 0.0f; /* ワールド座標を基準に、y軸を軸にした回転を10度に変更*/
-            //worldAngle.z = 0.0f; /* ワールド座標を基準に、z軸を軸にした回転を10度に変更*/
-            //myTransform.eulerAngles = worldAngle; /* 回転角度を設定*/
-
-            /*追加部分*/
-            //bool_ray_hit = false;
-            /*追加部分*/
         }
     }
-    //bool x_pos_different(float now_pos, float old_pos)
-    //{
-    //    if(now_pos != old_pos)
-    //    {
-    //        //値が違う場合trueを返す
-    //        return true;
-    //    }
-    //    else
-    //    {
-    //        //値が一緒の場合falseを返す
-    //        return false;
-    //    }
-
-    //}
+    
     public override void Jump()
     {
         jump = true;

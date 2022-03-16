@@ -73,7 +73,7 @@ public class PlayerMove : Padinput
     Vector3 obj_pos;
     float obj_width;
     GameObject obj;
-    Vector3 player_oldpos;
+    Vector3 player_pos;
     bool hit_wall_right;
     bool hit_wall_left;
 
@@ -155,7 +155,7 @@ public class PlayerMove : Padinput
 
     void Update() /*常に処理する内容*/
     {
-
+        Debug.Log(distance);
         if (state == State.idle)
         {
             idle = true;
@@ -387,9 +387,10 @@ public class PlayerMove : Padinput
             var p_width = transform.lossyScale.x / 2; /*2で割ることにより壁に当たるほうのみの幅を出せる*/
             var p_pos = new Vector3((transform.localPosition.x), transform.localPosition.y, transform.localPosition.z);
             //var p_pos = transform.TransformPoint(transform.localPosition);
-            
-            /*レイが当たっているオブジェクトの位置と幅を取得*/
-            obj_width = rayHit.transform.lossyScale.x/2;
+
+            /*レイが当たっているオブジェクトの位置を取得*/
+            obj_pos = rayHit.transform.position;
+            //obj_width = rayHit.transform.lossyScale.x/2;
             //obj_pos = new Vector3((rayHit.transform.position.x), rayHit.transform.position.y, rayHit.transform.position.z);
             if (right != 0)
             {
@@ -403,7 +404,7 @@ public class PlayerMove : Padinput
                 //obj_pos.x = rayHit.transform.position.x + obj_width;
 
             }
-            obj_pos = rayHit.transform.position;
+            
 
             if (obj_pos.x < p_pos.x) /*プレイヤーがオブジェクトの右側の時*/
             {
@@ -417,21 +418,23 @@ public class PlayerMove : Padinput
             }
 
 
-            Debug.Log(distance);
+            
 
             /*ポジションをめり込まないようにする処理*/
-            if (right != 0 && distance <= 1.3f)
+            if (right != 0 && distance <= 1.2f)
             {
                 Debug.Log("ここ通っていればめり込まないはず");
-                player_oldpos = this.transform.position;
-                transform.position = player_oldpos;
+                //player_oldpos = this.transform.position;
+                player_pos = new Vector3(obj_pos.x - 0.8f,transform.position.y,transform.position.z);
+                transform.position = player_pos;
                 hit_wall_right = true;
             }
-            else if (left != 0 && distance <= 1.3f)
+            else if (left != 0 && distance <= 1.2f)
             {
                 Debug.Log("ここ通っていればめり込まないはず");
-                player_oldpos = this.transform.position;
-                transform.position = player_oldpos;
+                //player_oldpos = this.transform.position;
+                player_pos = new Vector3(obj_pos.x + 0.8f, transform.position.y, transform.position.z);
+                transform.position = player_pos;
                 hit_wall_left = true;
             }
 

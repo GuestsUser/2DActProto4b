@@ -117,6 +117,7 @@ GameObject:
   - component: {fileID: 6346024904048878579}
   - component: {fileID: 6346024904048878576}
   - component: {fileID: 6346024904048878577}
+  - component: {fileID: 8743491813017517459}
   m_Layer: 0
   m_Name: Haruko
   m_TagString: Player
@@ -419,6 +420,24 @@ CapsuleCollider:
   m_Height: 1.31
   m_Direction: 1
   m_Center: {x: 0, y: 0.65, z: 0}
+--- !u!114 &8743491813017517459
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6346024904048878582}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2b90af8b2db22c44f8691b99ae875a52, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  imageLife: {fileID: 0}
+  placeSpace: 18
+  maxLife: 3
+  life: 3
+  maxRemain: 99
+  remain: 4
 --- !u!1 &6346024904113327281
 GameObject:
   m_ObjectHideFlags: 0

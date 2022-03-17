@@ -23,6 +23,7 @@ public class JumpSystem : Padinput
     public Ray ray3;
     public Ray ray4;
     public Ray ray5;
+    public Ray ray6;
     public RaycastHit rayHit;
 
     /*（レイキャスト）可視光線の長さ*/
@@ -46,13 +47,24 @@ public class JumpSystem : Padinput
 
         /*レイキャストの使い方がわからないのでお願いします（プレイやの当たり判定をレイキャストにする）参照元： https://getabakoclub.com/2020/05/11/unity%e3%81%a7%e5%9c%b0%e9%9d%a2%e3%81%ae%e5%bd%93%e3%81%9f%e3%82%8a%e5%88%a4%e5%ae%9a%e3%82%92%e8%b6%b3%e5%85%83%e3%81%a0%e3%81%91%e5%8f%96%e5%be%97%e3%81%99%e3%82%8b%e3%80%903d%e3%80%91/ */
         rayPosition = rb.transform.position;/*レイキャストの位置*/
-        rayPosition.y += 0.5f;
+        //rayPosition = transform.localPosition;/*レイキャストの位置*/
+        /*追加部分*/
+        if(Physics.gravity == new Vector3(0, -9.8f, 0))/*通常時*/
+        {
+            rayPosition.y += 0.5f;
+        }
+        else if(Physics.gravity == new Vector3(0, 9.8f, 0))
+        {
+            rayPosition.y -= 0.5f;
+        }
+        /*追加部分*/
         /*レイキャストの位置,レイキャストの角度*/
         ray = new Ray(rayPosition, transform.up * -1f);
         ray2 = new Ray(rayPosition, new Vector3(0.5f, -1f, 0));
         ray3 = new Ray(rayPosition, new Vector3(0, -1f, 0.5f));
         ray4 = new Ray(rayPosition, new Vector3(-0.5f, -1f, 0));
         ray5 = new Ray(rayPosition, new Vector3(0, -1f, -0.5f));
+        //ray6 = new Ray(rayPosition, new Vector3(transform.localPosition));
         /*デバッグ用の可視光線*/
         Debug.DrawRay(rayPosition, ray.direction * rayDistance, Color.green);
         Debug.DrawRay(rayPosition, ray2.direction * rayDistance, Color.green);
@@ -62,7 +74,7 @@ public class JumpSystem : Padinput
 
         print(jump);/*デバッグログ,ジャンプフラグを出力*/
 
-
+      
 
         /*脳筋式レイキャストの当たり判定処理*/
         if ((Physics.Raycast(ray, out rayHit, rayDistance) || Physics.Raycast(ray2, out rayHit, rayDistance)
@@ -86,7 +98,7 @@ public class JumpSystem : Padinput
             }
             Debug.Log(dubleJump);
             /*追加した部分*/
-            
+
             /*コライダーを持つオブジェクトから、タグを読み取る（地面オブジェクトをgroundに設定）*/
             if (rayHit.collider.tag == "ground" || rayHit.collider.tag == "kuttuku")
             {
@@ -166,4 +178,5 @@ public class JumpSystem : Padinput
         }
 
     }
+
 }

@@ -65,9 +65,10 @@ public class PlayerMove : Padinput
 
 
     /*壁のめり込み対策(しゅんver)*/
-    [SerializeField] public float rayDistance = 5f;
+    [SerializeField] public float rayDistance = 1.2f;
     public Vector3 rayPosition; /*レイキャストの位置*/
     public Ray ray;    /*正面*/
+    public Ray ray_back;
 
     public RaycastHit rayHit;
     Vector3 obj_pos;
@@ -382,7 +383,9 @@ public class PlayerMove : Padinput
             //rayPosition = transform.localPosition;    /*レイキャストの位置*/
             rayPosition = new Vector3(transform.localPosition.x, transform.localPosition.y, transform.localPosition.z);
             ray = new Ray(rayPosition, transform.right * 1f);
+            
             Debug.DrawRay(rayPosition, ray.direction * rayDistance, Color.blue);
+            
             if (Physics.Raycast(ray, out rayHit, rayDistance))
             {
                 /*プレイヤーの位置と幅を取得*/
@@ -454,7 +457,19 @@ public class PlayerMove : Padinput
             hit_wall_right = false;
             hit_wall_left = false;
         }
-
+        if(kuttuku.bool_ray_hit == true && Physics.Raycast(ray_back, out rayHit, rayDistance))
+        {
+            ray_back = new Ray(rayPosition, transform.right * -1f);
+            Debug.DrawRay(rayPosition, ray_back.direction * rayDistance, Color.blue);
+            if (right != 0)
+            {
+                transform.position = new Vector3(rayHit.transform.position.x + 0.8f,transform.position.y, transform.position.z);
+            }
+            else if(left != 0)
+            {
+                transform.position = new Vector3(rayHit.transform.position.x - 0.8f, transform.position.y, transform.position.z);
+            }
+        }
         //if(hit_wall == true)
         //{
         //    transform.position = player_oldpos;

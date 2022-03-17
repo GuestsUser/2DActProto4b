@@ -49,7 +49,7 @@ public class StageClear : MonoBehaviour
             }
         }
         /*現在のシーンがStage2なら*/
-        else if (SceneManager.GetActiveScene().name == "Game5")
+        else if (SceneManager.GetActiveScene().name == "Game2")
         {
             /*触れたオブジェクトのタグがPlayerなら*/
             if (other.gameObject.tag == ("Player"))
@@ -64,7 +64,7 @@ public class StageClear : MonoBehaviour
             }
         }
         /*現在のシーンがStage3なら*/
-        else if (SceneManager.GetActiveScene().name == "Game4")
+        else if (SceneManager.GetActiveScene().name == "KuttukiTestStage")
         {
             /*触れたオブジェクトのタグがPlayerなら*/
             if (other.gameObject.tag == ("Player"))

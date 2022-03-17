@@ -8,6 +8,8 @@ public class JumpSystem : Padinput
     [SerializeField] private ChangeShoes change_shoes;
     /*追加した部分*/
 
+    [SerializeField] Animator animator;
+
     /*ジャンプ用変数*/
     [SerializeField] public float jumpForce = 5.0f; /*ジャンプ力*/
     [SerializeField] public int dubleJump = 0;      /*ジャンプ回数*/
@@ -39,6 +41,7 @@ public class JumpSystem : Padinput
 
         rb = GetComponent<Rigidbody>();
         change_shoes = GetComponent<ChangeShoes>();
+        animator = GetComponent<Animator>();
 
     }
 
@@ -136,7 +139,7 @@ public class JumpSystem : Padinput
                 {
 
                     --dubleJump;
-
+                    animator.SetTrigger("Jump");
                     rb.AddRelativeForce(0, jumpForce, 0, ForceMode.VelocityChange);
                     rb.velocity = Vector3.zero;
                 }
@@ -144,6 +147,8 @@ public class JumpSystem : Padinput
                 {
 
                     --dubleJump;
+
+                    animator.SetTrigger("DoubleJump");
 
                     rb.AddRelativeForce(0, jumpForce, 0, ForceMode.VelocityChange);
                     rb.velocity = Vector3.zero;
@@ -156,7 +161,7 @@ public class JumpSystem : Padinput
                 {
 
                     --dubleJump;
-
+                    animator.SetTrigger("Jump");
                     rb.AddRelativeForce(rb.velocity.x, jumpForce, 0, ForceMode.VelocityChange);
                     rb.velocity = Vector3.zero;
                 }
@@ -169,7 +174,7 @@ public class JumpSystem : Padinput
                 {
 
                     --dubleJump;
-
+                    animator.SetTrigger("Jump");
                     rb.AddRelativeForce(0, jumpForce, 0, ForceMode.VelocityChange);
                     rb.velocity = Vector3.zero;
                 }

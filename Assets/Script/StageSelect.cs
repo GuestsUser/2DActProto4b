@@ -96,7 +96,7 @@ public class StageSelect : MonoBehaviour
 
     private void Start()
     {
-        fade = GetComponent<Fade>();
+        //fade = GetComponent<Fade>();
     }
     private void Update()
     {
@@ -115,13 +115,13 @@ public class StageSelect : MonoBehaviour
         {
             ControlStop();
             /*ステージ2に切り替える*/
-            fade.FadeIn(1.5f, () => SceneManager.LoadScene(8));
+            fade.FadeIn(1.5f, () => SceneManager.LoadScene(9));
         }
         else if (collision.gameObject.name == "Stage3")
         {
             ControlStop();
             /*ステージ3に切り替える*/
-            fade.FadeIn(1.5f, () => SceneManager.LoadScene(4));
+            fade.FadeIn(1.5f, () => SceneManager.LoadScene(3));
         }
 
         void ControlStop() /* 入力を処理するコンポーネント全停止で入力受付終了とする */

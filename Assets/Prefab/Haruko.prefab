@@ -150,7 +150,7 @@ Animator:
   m_GameObject: {fileID: 6346024904048878582}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: e003b35aa1b39b1488f5bd8e5772c94d, type: 3}
-  m_Controller: {fileID: 9100000, guid: 512a4ca60bae6a940bf8db03227a1ee0, type: 2}
+  m_Controller: {fileID: 9100000, guid: 2b86f037e2d74c442bb1a48668319ebf, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
   m_ApplyRootMotion: 1
@@ -306,6 +306,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   change_shoes: {fileID: 0}
+  animator: {fileID: 0}
   jumpForce: 5
   dubleJump: 0
   jump: 0
@@ -328,6 +329,7 @@ MonoBehaviour:
   coolTime: 0
   dashForce: 5
   change_shoes: {fileID: 0}
+  animator: {fileID: 0}
   rayPosition: {x: 0, y: 0, z: 0}
   obj: {fileID: 0}
   rayDistance: 5
@@ -363,6 +365,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a97a8f694c389c4eac720f88d49591a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  collider_exit: 0
   rayPosition: {x: 0, y: 0, z: 0}
   change_shoes: {fileID: 0}
   bool_ray_hit: 0
@@ -381,11 +384,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   kuttuku: {fileID: 6346024904048878578}
+  state: 0
+  idle: 0
   right: 0
   left: 0
   max_move_x: 0
   eas_time: 2
   animator: {fileID: 6346024904048878346}
+  rayDistance: 1.2
+  rayPosition: {x: 0, y: 0, z: 0}
 --- !u!114 &6346024904048878576
 MonoBehaviour:
   m_ObjectHideFlags: 0

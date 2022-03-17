@@ -11,6 +11,10 @@ public class DashSystem : Padinput
     [SerializeField] public float dashForce = 5f;       /*ダッシュの強さ(初期値は５)*/
     [SerializeField] private ChangeShoes change_shoes;  /*能力切り替え用変数_ChangeShoes*/
 
+    [SerializeField]
+    private Animator animator;
+
+
     /*レイキャスト用変数*/
     public Vector3 rayPosition; /*レイキャストの位置*/
 
@@ -29,6 +33,7 @@ public class DashSystem : Padinput
     {
         change_shoes = GetComponent<ChangeShoes>();
         rb = GetComponent<Rigidbody>();
+        animator = GetComponent<Animator>();
         dashFlg = true;
 
     }
@@ -36,9 +41,6 @@ public class DashSystem : Padinput
     // Update is called once per frame
     void FixedUpdate()
     {
-        
-
-        
 
         /*追加部分*/
         if (!dashFlg)
@@ -88,6 +90,7 @@ public class DashSystem : Padinput
                 //if(transform.rotation.y == 0)
                 //{
                     rb.AddRelativeForce(dashForce + rb.velocity.x, rb.velocity.y, 0, ForceMode.VelocityChange);
+                animator.SetTrigger("Attack");
                 //}
                 //else
                 //{

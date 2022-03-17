@@ -96,7 +96,7 @@ public class StageSelect : MonoBehaviour
 
     private void Start()
     {
-
+        fade = GetComponent<Fade>();
     }
     private void Update()
     {

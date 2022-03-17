@@ -602,6 +602,16 @@ public class Kuttuku : Padinput
                             //collider_exit = false;
                             //bool_ray_hit = false;
                             break;
+                        //case kuttuki_move_state.none: //元々の地面がくっつきオブジェクトの場合で壁に向かって走っている時に靴を切り替えた時
+                        //    if(player.right != 0)
+                        //    {
+                        //        move_type = kuttuki_move_state.move_right;
+                        //    }
+                        //    else if (player.left != 0)
+                        //    {
+                        //        move_type = kuttuki_move_state.move_left;
+                        //    }
+                        //    break;
                     }
                 }
             }
@@ -793,7 +803,6 @@ public class Kuttuku : Padinput
                                     Vector3 position = this.transform.localPosition;
                                     kuttuki_pos = new Vector3(0.3f, 0, 0);
                                     this.transform.localPosition = position + kuttuki_pos;
-                                    Debug.Log("ここ通ってる説ある");
                                 }
                                 Physics.gravity = new Vector3(9.8f, 0, 0);
 

@@ -386,7 +386,7 @@ public class PlayerMove : Padinput
             
             Debug.DrawRay(rayPosition, ray.direction * rayDistance, Color.blue);
             
-            if (Physics.Raycast(ray, out rayHit, rayDistance))
+            if (Physics.Raycast(ray, out rayHit, rayDistance) && rayHit.collider.tag == "kuttuku" && rayHit.collider.tag == "ground")
             {
                 /*プレイヤーの位置と幅を取得*/
                 var p_width = transform.lossyScale.x / 2; /*2で割ることにより壁に当たるほうのみの幅を出せる*/

@@ -64,7 +64,7 @@ public class StageClear : MonoBehaviour
             }
         }
         /*現在のシーンがStage3なら*/
-        else if (SceneManager.GetActiveScene().name == "KuttukiTestStage")
+        else if (SceneManager.GetActiveScene().name == "KutuTestStage")
         {
             /*触れたオブジェクトのタグがPlayerなら*/
             if (other.gameObject.tag == ("Player"))

@@ -34,16 +34,6 @@ public class DamageSystem : MonoBehaviour
     private Rect imageRect; /* 画像初期uvRect */
     private float imageWidth; /* 画像横幅 */
     
-
-    private void OnValidate() /* inspectorの値を変更した時呼び出される */
-    {
-        if (imageLife != null)/* imageLifeを更新した時そのサイズを自動代入 */
-        {
-            imageScale = imageLife.rectTransform.localScale; /* 元画像初期拡大率格納 */
-            imageRect = imageLife.uvRect; /* 元画像uvRect格納 */
-            imageWidth = imageLife.rectTransform.rect.width; /* 元画像横幅格納 */
-        }
-    }
     // Start is called before the first frame update
     void Start()
     {
@@ -52,7 +42,12 @@ public class DamageSystem : MonoBehaviour
         maxRemain = PlayerPrefs.GetInt("maxRemain", maxRemain);
         remain = PlayerPrefs.GetInt("remain", remain);
 
+        /* 元画像処理 */
+        imageScale = imageLife.rectTransform.localScale; /* 元画像初期拡大率格納 */
+        imageRect = imageLife.uvRect; /* 元画像uvRect格納 */
+        imageWidth = imageLife.rectTransform.rect.width; /* 元画像横幅格納 */
         imageLife.gameObject.SetActive(false); /* 元画像は使わない */
+
         drawLife = new List<RawImage>();
         drawLife.Capacity = 0;
         AddLife((int)Mathf.Ceil(maxLife)); /* ライフ描写用画像用意用 */

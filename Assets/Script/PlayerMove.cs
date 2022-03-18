@@ -386,64 +386,69 @@ public class PlayerMove : Padinput
             
             Debug.DrawRay(rayPosition, ray.direction * rayDistance, Color.blue);
             
-            if (Physics.Raycast(ray, out rayHit, rayDistance) && rayHit.collider.tag == "kuttuku" && rayHit.collider.tag == "ground")
+            if (Physics.Raycast(ray, out rayHit, rayDistance))
             {
-                /*プレイヤーの位置と幅を取得*/
-                var p_width = transform.lossyScale.x / 2; /*2で割ることにより壁に当たるほうのみの幅を出せる*/
-                var p_pos = new Vector3((transform.localPosition.x), transform.localPosition.y, transform.localPosition.z);
-                //var p_pos = transform.TransformPoint(transform.localPosition);
-
-                /*レイが当たっているオブジェクトの位置を取得*/
-                obj_pos = rayHit.transform.position;
-                //obj_width = rayHit.transform.lossyScale.x/2;
-                //obj_pos = new Vector3((rayHit.transform.position.x), rayHit.transform.position.y, rayHit.transform.position.z);
-                if (right != 0)
+                Debug.Log("れいが当たってる処理は正常です");
+                if(rayHit.collider.tag == "kuttuku" || rayHit.collider.tag == "ground")
                 {
-                    p_pos.x = transform.localPosition.x - p_width;
-                    //obj_pos.x =rayHit.transform.position.x - obj_width;
+                    /*プレイヤーの位置と幅を取得*/
+                    var p_width = transform.lossyScale.x / 2; /*2で割ることにより壁に当たるほうのみの幅を出せる*/
+                    var p_pos = new Vector3((transform.localPosition.x), transform.localPosition.y, transform.localPosition.z);
+                    //var p_pos = transform.TransformPoint(transform.localPosition);
 
+                    /*レイが当たっているオブジェクトの位置を取得*/
+                    obj_pos = rayHit.transform.position;
+                    //obj_width = rayHit.transform.lossyScale.x/2;
+                    //obj_pos = new Vector3((rayHit.transform.position.x), rayHit.transform.position.y, rayHit.transform.position.z);
+                    if (right != 0)
+                    {
+                        p_pos.x = transform.localPosition.x - p_width;
+                        //obj_pos.x =rayHit.transform.position.x - obj_width;
+
+                    }
+                    else if (left != 0)
+                    {
+                        p_pos.x = transform.localPosition.x + p_width;
+                        //obj_pos.x = rayHit.transform.position.x + obj_width;
+
+                    }
+
+
+                    if (obj_pos.x < p_pos.x) /*プレイヤーがオブジェクトの右側の時*/
+                    {
+                        Debug.Log("左側のオブジェクトにレイが当たっています");
+                        distance = (p_pos.x - obj_pos.x);
+                    }
+                    else if (p_pos.x < obj_pos.x) /*プレイヤーがオブジェクトの左側の時*/
+                    {
+                        Debug.Log("右側のオブジェクトにレイが当たっています");
+                        distance = (obj_pos.x - p_pos.x);
+                    }
+
+
+
+
+                    /*ポジションをめり込まないようにする処理*/
+                    if (right != 0 && distance <= 1.2f)
+                    {
+                        Debug.Log("ここ通っていればめり込まないはず");
+                        //player_oldpos = this.transform.position;
+                        player_pos = new Vector3(obj_pos.x - 0.8f, transform.position.y, transform.position.z);
+                        transform.position = player_pos;
+                        hit_wall_right = true;
+                    }
+                    else if (left != 0 && distance <= 1.2f)
+                    {
+                        Debug.Log("ここ通っていればめり込まないはず");
+                        //player_oldpos = this.transform.position;
+                        player_pos = new Vector3(obj_pos.x + 0.8f, transform.position.y, transform.position.z);
+                        transform.position = player_pos;
+                        hit_wall_left = true;
+                    }
+
+                    //hit_wall = true;
                 }
-                else if (left != 0)
-                {
-                    p_pos.x = transform.localPosition.x + p_width;
-                    //obj_pos.x = rayHit.transform.position.x + obj_width;
 
-                }
-
-
-                if (obj_pos.x < p_pos.x) /*プレイヤーがオブジェクトの右側の時*/
-                {
-                    Debug.Log("左側のオブジェクトにレイが当たっています");
-                    distance = (p_pos.x - obj_pos.x);
-                }
-                else if (p_pos.x < obj_pos.x) /*プレイヤーがオブジェクトの左側の時*/
-                {
-                    Debug.Log("右側のオブジェクトにレイが当たっています");
-                    distance = (obj_pos.x - p_pos.x);
-                }
-
-
-
-
-                /*ポジションをめり込まないようにする処理*/
-                if (right != 0 && distance <= 1.2f)
-                {
-                    Debug.Log("ここ通っていればめり込まないはず");
-                    //player_oldpos = this.transform.position;
-                    player_pos = new Vector3(obj_pos.x - 0.8f, transform.position.y, transform.position.z);
-                    transform.position = player_pos;
-                    hit_wall_right = true;
-                }
-                else if (left != 0 && distance <= 1.2f)
-                {
-                    Debug.Log("ここ通っていればめり込まないはず");
-                    //player_oldpos = this.transform.position;
-                    player_pos = new Vector3(obj_pos.x + 0.8f, transform.position.y, transform.position.z);
-                    transform.position = player_pos;
-                    hit_wall_left = true;
-                }
-
-                //hit_wall = true;
             }
             else
             {

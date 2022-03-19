@@ -1893,6 +1893,28 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1b398051e4fdfd044b3b928e875c85b5, type: 3}
+--- !u!1 &1339074154 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6346024904048878582, guid: 1b398051e4fdfd044b3b928e875c85b5,
+    type: 3}
+  m_PrefabInstance: {fileID: 1339074153}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1339074155
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1339074154}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 00cad25d61b236642915778189df9a9e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rayPosition: {x: 0, y: 0, z: 0}
+  rayDistance: 0.1
+  rb: {fileID: 0}
+  upForce: 400
 --- !u!1 &1343155994 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3852623277239812110, guid: d2f2a421ac9ca3d49aa3fc9541b58928,
@@ -2328,6 +2350,7 @@ MonoBehaviour:
   coolTime: 0
   dashForce: 5
   change_shoes: {fileID: 0}
+  animator: {fileID: 0}
   rayPosition: {x: 0, y: 0, z: 0}
   obj: {fileID: 0}
   rayDistance: 5
@@ -2520,7 +2543,7 @@ MonoBehaviour:
     type: 3}
   m_PrefabInstance: {fileID: 1339074153}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 1339074154}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: cb3731bba25b58f4ebca09b49f4b22ae, type: 3}

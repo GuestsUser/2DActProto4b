@@ -450,10 +450,12 @@ public class Kuttuku : Padinput
                     }
                     this.transform.localPosition = position + kuttuki_pos;
                 }
+                /*地面にぶつかったとき*/
                 else if (rayHit.collider.tag != "kuttuku" && bool_ray_hit == true && move_type == kuttuki_move_state.move_down)
                 {
                     bool_ray_hit = false;
                     collider_exit = false;
+                    Physics.gravity = new Vector3(0, - 9.8f, 0);
                 }
                 /*くっつき状態でもう一つのくっつきオブジェクトに接触した場合*/
                 else if (Physics.Raycast(ray2, out rayHit, rayDistance) && rayHit.collider.tag == "kuttuku" && bool_ray_hit == true)
@@ -873,7 +875,7 @@ public class Kuttuku : Padinput
     private void OnCollisionEnter(Collision collision)
     {
         jump = false;
-        if (collision.gameObject.tag == "kuttuku"/* && bool_ray_hit == true && collider_exit == true*/)
+        if (collision.gameObject.tag == "kuttuku" && bool_ray_hit == true && collider_exit == true)
         {
             kuttuki_time = 0;
             collider_exit = false;
@@ -885,7 +887,7 @@ public class Kuttuku : Padinput
     private void OnCollisionExit(Collision collision) /*これから離れた判定を変えないといけない*/
     {
 
-        if (collision.gameObject.tag == "kuttuku"/* && bool_ray_hit == true*/)
+        if (collision.gameObject.tag == "kuttuku" && bool_ray_hit == true)
         {
             Debug.Log("離れました");
             collider_exit = true;

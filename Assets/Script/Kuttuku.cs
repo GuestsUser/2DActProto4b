@@ -297,7 +297,7 @@ public class Kuttuku : Padinput
 
         rayPosition = rb.transform.position;    /*レイキャストの位置*/
 
-        ray = new Ray(rayPosition, transform.up * -4f);     /*足元*/
+        ray = new Ray(rayPosition, transform.up * -1f);     /*足元*/
         ray2 = new Ray(rayPosition, transform.right * 1f);  /*正面*/
         ray3 = new Ray(rayPosition, transform.up * 1.5f);   /*頭*/
 
@@ -376,11 +376,15 @@ public class Kuttuku : Padinput
                 //    collider_exit = false;
                 //}
             }
+            //else if(!Physics.Raycast(ray, out rayHit, rayDistance) && bool_ray_hit == true)
+            //{
+            //    collider_exit = true;
+            //}
             
             if (Physics.Raycast(ray2, out rayHit, rayDistance)) /*プレイヤーの正面から出ているレイが当たっている時*/
             {
-                
-                Debug.Log("通りました");
+
+                //Debug.Log("通りました");
                 /*コライダーを持つオブジェクトから、タグを読み取る（壁をkuttukuに設定）*/
                 if (rayHit.collider.tag == "kuttuku" && bool_ray_hit == false)
                 {
@@ -445,6 +449,11 @@ public class Kuttuku : Padinput
                         Physics.gravity = new Vector3(-9.8f, 0, 0);
                     }
                     this.transform.localPosition = position + kuttuki_pos;
+                }
+                else if (rayHit.collider.tag != "kuttuku" && bool_ray_hit == true && move_type == kuttuki_move_state.move_down)
+                {
+                    bool_ray_hit = false;
+                    collider_exit = false;
                 }
                 /*くっつき状態でもう一つのくっつきオブジェクトに接触した場合*/
                 else if (Physics.Raycast(ray2, out rayHit, rayDistance) && rayHit.collider.tag == "kuttuku" && bool_ray_hit == true)
@@ -659,7 +668,7 @@ public class Kuttuku : Padinput
 
 
                     /*オブジェクトの外側の回転処理*/
-                    if (player.idle == false && jump == false && kuttuki_time != 0 && kuttuki_To_kuttuki == false)
+                    if (/*player.idle == false &&*/ jump == false && kuttuki_time != 0 && kuttuki_To_kuttuki == false)
                     {
                         switch (move_type)
                         {
@@ -728,6 +737,7 @@ public class Kuttuku : Padinput
 
                                     Vector3 position = this.transform.localPosition;
                                     kuttuki_pos = new Vector3(0, 0.3f, 0);
+                                    //Debug.Log("変な浮きの原因はココだ");
                                     this.transform.localPosition = position + kuttuki_pos;
                                 }
                                 Physics.gravity = new Vector3(0, 9.8f, 0);
@@ -823,6 +833,7 @@ public class Kuttuku : Padinput
             /*3月7日追加部分*/
 
         }
+       
         else /*靴がマグネットシューズ意外になったときに発動*/
         {
             Physics.gravity = new Vector3(0, -9.8f, 0);
@@ -870,8 +881,8 @@ public class Kuttuku : Padinput
             Debug.Log("離れた後にくっついた判定");
         }
     }
-    
-    private void OnCollisionExit(Collision collision)
+
+    private void OnCollisionExit(Collision collision) /*これから離れた判定を変えないといけない*/
     {
 
         if (collision.gameObject.tag == "kuttuku"/* && bool_ray_hit == true*/)
@@ -880,7 +891,7 @@ public class Kuttuku : Padinput
             collider_exit = true;
         }
     }
-    
+
     public override void Jump()
     {
         jump = true;

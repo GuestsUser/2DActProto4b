@@ -160,6 +160,7 @@ public class PlayerMove : Padinput
     void Update() /*常に処理する内容*/
     {
         Debug.Log(distance);
+        Debug.Log(idle);
         if (state == State.idle)
         {
             idle = true;
@@ -180,6 +181,11 @@ public class PlayerMove : Padinput
         Turn();
         Run();
         /*壁のめり込み対策(しゅんver)*/
+        rayPosition = new Vector3(transform.localPosition.x, transform.localPosition.y, transform.localPosition.z);
+        rayPosition.y += 1f;
+        ray = new Ray(rayPosition, transform.right * 1f);
+        ray_back = new Ray(rayPosition, transform.right * -1f);
+        Debug.DrawRay(rayPosition, ray_back.direction * rayDistance, Color.red);
         WallHit();
 
         /*友一版*/
@@ -384,9 +390,8 @@ public class PlayerMove : Padinput
         if(kuttuku.bool_ray_hit == false)
         {
             //rayPosition = transform.localPosition;    /*レイキャストの位置*/
-            rayPosition = new Vector3(transform.localPosition.x, transform.localPosition.y, transform.localPosition.z);
-            rayPosition.y += 1f; 
-            ray = new Ray(rayPosition, transform.right * 1f);
+            
+            
             
             Debug.DrawRay(rayPosition, ray.direction * rayDistance, Color.blue);
             
@@ -466,8 +471,7 @@ public class PlayerMove : Padinput
         }
         if(kuttuku.bool_ray_hit == true && Physics.gravity == new Vector3(0,-9.8f,0))
         {
-            ray_back = new Ray(rayPosition, transform.right * -1f);
-            Debug.DrawRay(rayPosition, ray_back.direction * rayDistance, Color.blue);
+            
             if (Physics.Raycast(ray_back, out rayHit, rayDistance))
             {
                 /*プレイヤーの位置と幅を取得*/

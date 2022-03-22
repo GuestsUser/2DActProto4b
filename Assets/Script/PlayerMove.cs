@@ -78,6 +78,8 @@ public class PlayerMove : Padinput
     bool hit_wall_right;
     bool hit_wall_left;
 
+    bool kuttuki_hit_wall;
+
     float distance;
 
     //public float height;
@@ -98,6 +100,7 @@ public class PlayerMove : Padinput
         anim_speed = 0.1f;
 
         right = 1; /*最初何も入力していない状態でくっつきの靴に切り替えると入力と移動する方向が逆になる*/
+        kuttuki_hit_wall = false;
     }
 
     /*オーバーライド関数(自動で呼び出される 呼び出しタイミングはコントローラー割り当てがされているボタン、スティックが入力された時)*/
@@ -382,6 +385,7 @@ public class PlayerMove : Padinput
         {
             //rayPosition = transform.localPosition;    /*レイキャストの位置*/
             rayPosition = new Vector3(transform.localPosition.x, transform.localPosition.y, transform.localPosition.z);
+            rayPosition.y += 1f; 
             ray = new Ray(rayPosition, transform.right * 1f);
             
             Debug.DrawRay(rayPosition, ray.direction * rayDistance, Color.blue);
@@ -394,12 +398,10 @@ public class PlayerMove : Padinput
                     /*プレイヤーの位置と幅を取得*/
                     var p_width = transform.lossyScale.x / 2; /*2で割ることにより壁に当たるほうのみの幅を出せる*/
                     var p_pos = new Vector3((transform.localPosition.x), transform.localPosition.y, transform.localPosition.z);
-                    //var p_pos = transform.TransformPoint(transform.localPosition);
-
+                    
                     /*レイが当たっているオブジェクトの位置を取得*/
                     obj_pos = rayHit.transform.position;
-                    //obj_width = rayHit.transform.lossyScale.x/2;
-                    //obj_pos = new Vector3((rayHit.transform.position.x), rayHit.transform.position.y, rayHit.transform.position.z);
+                    
                     if (right != 0)
                     {
                         p_pos.x = transform.localPosition.x - p_width;
@@ -462,18 +464,77 @@ public class PlayerMove : Padinput
             hit_wall_right = false;
             hit_wall_left = false;
         }
-        if(kuttuku.bool_ray_hit == true && Physics.Raycast(ray_back, out rayHit, rayDistance))
+        if(kuttuku.bool_ray_hit == true && Physics.gravity == new Vector3(0,-9.8f,0))
         {
             ray_back = new Ray(rayPosition, transform.right * -1f);
             Debug.DrawRay(rayPosition, ray_back.direction * rayDistance, Color.blue);
-            if (right != 0)
+            if (Physics.Raycast(ray_back, out rayHit, rayDistance))
             {
-                transform.position = new Vector3(rayHit.transform.position.x + 0.8f,transform.position.y, transform.position.z);
+                /*プレイヤーの位置と幅を取得*/
+                var p_width = transform.lossyScale.x / 2; /*2で割ることにより壁に当たるほうのみの幅を出せる*/
+                var p_pos = new Vector3((transform.localPosition.x), transform.localPosition.y, transform.localPosition.z);
+                
+                /*レイが当たっているオブジェクトの位置を取得*/
+                obj_pos = rayHit.transform.position;
+
+                if (right != 0)
+                {
+                    p_pos.x = transform.localPosition.x - p_width;
+                    //transform.position = new Vector3(rayHit.transform.position.x + 0.8f, transform.position.y, transform.position.z);
+                }
+                else if (left != 0)
+                {
+                    p_pos.x = transform.localPosition.x + p_width;
+                    //transform.position = new Vector3(rayHit.transform.position.x - 0.8f, transform.position.y, transform.position.z);
+                }
+
+                /*プレイヤーとオブジェクトの間の距離を出す*/
+                if (obj_pos.x < p_pos.x) /*プレイヤーがオブジェクトの右側の時*/
+                {
+                    Debug.Log("左側のオブジェクトにレイが当たっています");
+                    distance = (p_pos.x - obj_pos.x);
+                }
+                else if (p_pos.x < obj_pos.x) /*プレイヤーがオブジェクトの左側の時*/
+                {
+                    Debug.Log("右側のオブジェクトにレイが当たっています");
+                    distance = (obj_pos.x - p_pos.x);
+                }
+
+                /*ポジションをめり込まないようにする処理*/
+                if (right != 0 && distance <= 1.2f)
+                {
+                    
+                    if(kuttuki_hit_wall == false)
+                    {
+
+                        Debug.Log("くっつき専用フラグtrue");
+                        kuttuki_hit_wall = true;
+                        player_pos = new Vector3(obj_pos.x + 0.8f, transform.position.y, transform.position.z);
+                        transform.position = player_pos;
+                    }
+                    //player_oldpos = this.transform.position;
+                    
+                }
+                else if (left != 0 && distance <= 1.2f)
+                {
+                    //player_oldpos = this.transform.position;
+                    if(kuttuki_hit_wall == false)
+                    {
+                        Debug.Log("くっつき専用フラグtrue");
+                        kuttuki_hit_wall = true;
+                        player_pos = new Vector3(obj_pos.x - 0.8f, transform.position.y, transform.position.z);
+                        transform.position = player_pos;
+                    }
+                    
+                }
             }
-            else if(left != 0)
+            else
             {
-                transform.position = new Vector3(rayHit.transform.position.x - 0.8f, transform.position.y, transform.position.z);
+                kuttuki_hit_wall = false;
             }
+            
+            
+           
         }
         //if(hit_wall == true)
         //{

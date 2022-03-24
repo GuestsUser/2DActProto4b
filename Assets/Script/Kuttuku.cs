@@ -87,14 +87,14 @@ public class Kuttuku : Padinput
     }
     private void Update()
     {
-        if (change_shoes.type == ShoesType.Magnet_Shoes) /*靴のタイプがマグネットの時*/
-        {
-            animator.applyRootMotion = true;
-        }
-        else
-        {
-            animator.applyRootMotion = false;
-        }
+        //if (change_shoes.type == ShoesType.Magnet_Shoes) /*靴のタイプがマグネットの時*/
+        //{
+        //    animator.applyRootMotion = true;
+        //}
+        //else
+        //{
+        //    animator.applyRootMotion = false;
+        //}
      }
     void FixedUpdate()
     {

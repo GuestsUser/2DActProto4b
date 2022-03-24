@@ -11,9 +11,9 @@ public class DamageSystem : MonoBehaviour
     /* DamageComboの値は必要に応じて増やしてよし */
     public enum DamageCombo
     {
-        neutral=0, /* 平常状態用(ダメージを受けてない状態)、追加する値はこれ以上である必要あり */
-        damage=5, /* 通常ダメージ用 */
-        falldown=9999 /* 落下用、追加する値はこれ以下である必要あり */
+        neutral = 0, /* 平常状態用(ダメージを受けてない状態)、追加する値はこれ以上である必要あり */
+        damage = 5, /* 通常ダメージ用 */
+        falldown = 9999 /* 落下用、追加する値はこれ以下である必要あり */
     }
 
     private static float damage = 0; /* 外部からダメージを受け取るための変数 */
@@ -27,13 +27,17 @@ public class DamageSystem : MonoBehaviour
     [Tooltip("ライフ現在値")] [SerializeField] float life = 3;
     [Tooltip("残機最大値")] [SerializeField] int maxRemain = 99;
     [Tooltip("残機現在値")] [SerializeField] int remain = 4;
-    
+
+    [Header("以下無敵時間とその演出用")]
+    [Tooltip("無敵時間")] [SerializeField] float invincible = 2.5f;
+    [Tooltip("ダメージを受けた瞬間、このマテリアルのalbedoとemissionをこのオブジェクトに設定されてるマテリアルに設定する")] [SerializeField] Material hitColor;
+    [Tooltip("ダメージを受けた後無敵時間が切れるまで、このマテリアルのalbedoとemissionをこのオブジェクトに設定されてるマテリアルに設定する")] [SerializeField] Material invincibleColor;
+
     private List<RawImage> drawLife; /* ライフ画像描写用 */
 
     private Vector3 imageScale; /* 画像の初期拡大率 */
     private Rect imageRect; /* 画像初期uvRect */
     private float imageWidth; /* 画像横幅 */
-    
     // Start is called before the first frame update
     void Start()
     {
@@ -55,13 +59,15 @@ public class DamageSystem : MonoBehaviour
         /* 表示更新*/
         LifeVisibleChange();
         DrawSizeChange();
+
+        StartCoroutine(InvincibleSystem()); /* コンボ値を無敵時間に合わせてリセットしてくれる */
     }
 
     void LateUpdate()
     {
         if (damage != 0  || recover != 0) /* 更新があった場合だけ更新 */
         {
-            float upDataLife = damage + recover;
+            float upDataLife = recover - damage;
             life += upDataLife;
 
             /* 加算したのでリセット */
@@ -79,7 +85,7 @@ public class DamageSystem : MonoBehaviour
 
     public static void Damage(float dmg, DamageCombo dc) /* dmgに入れた値分ダメージを与える */
     {
-        if (combo > dc) /* 現在コンボ超過のダメージのみ加算する */
+        if (combo < dc) /* 現在コンボ超過のダメージのみ加算する */
         {
             damage += dmg;
             combo = dc;
@@ -138,5 +144,100 @@ public class DamageSystem : MonoBehaviour
         /* 変更の代入 */
         drawLife[current].rectTransform.localScale = scale;
         drawLife[current].uvRect = rect;
+    }
+
+
+    private IEnumerator InvincibleSystem() /* 常に実行しておくタイプのやつ */
+    {
+        DamageCombo curenntCombo;
+        float count = 0;
+        StartCoroutine(InvincibleEffect());
+        while (true)
+        {
+            while(combo == DamageCombo.neutral) { yield return StartCoroutine(TimeScaleYield.TimeStop()); } /* 平常から変化があるまで待機 */
+
+            curenntCombo = combo; /* 変化した値にmeshセット */
+            while (count < invincible) /* invincible分だけコンボ値維持 */
+            {
+                count += Time.deltaTime;
+                if (curenntCombo > combo) /* 割り込みがあれば時間リセット */
+                {
+                    curenntCombo = combo;
+                    count = 0;
+                }
+                yield return StartCoroutine(TimeScaleYield.TimeStop());
+            }
+            count = 0;
+            combo = DamageCombo.neutral; /* コンボリセット */
+        }
+
+        IEnumerator InvincibleEffect() /* 無敵時間中演出 */
+        {
+            float hitBlinking = 0.07f; /* 点滅間隔 */
+            float hitTime = invincible / 10; /* hitの演出時間 */
+
+            List<Renderer> render = new List<Renderer>(); /* 編集アクセス用 */
+            List<Material> originMat = new List<Material>(); /* リセット用元色 */
+            List<Material> hitMat = new List<Material>(); /* ダメージを受けた瞬間用 */
+            List<Material> invincibleMat = new List<Material>(); /* 無敵時間中透過用 */
+
+            if (GetComponent<Renderer>() != null) /* GetChildは自身を格納しないので先に入れておく */
+            {
+                render.Add(GetComponent<Renderer>());
+                originMat.Add(GetComponent<Renderer>().material);
+                hitMat.Add(GetComponent<Renderer>().material);
+                invincibleMat.Add(GetComponent<Renderer>().material);
+            }
+            GetChildren(gameObject);
+
+            while (true)
+            {
+                while (combo == DamageCombo.neutral) { yield return StartCoroutine(TimeScaleYield.TimeStop()); } /* 平常から変化があるまで待機 */
+
+                while (count < invincible) /* invincible分だけコンボ値維持 */
+                {
+                    if (count < hitTime)
+                    {
+                        for (int i = 0; i < render.Count; i++)
+                        {
+                            render[i].material = Mathf.FloorToInt(count / hitBlinking) % 2 == 0 ? hitMat[i] : originMat[i];
+                        }
+                    }
+                    else
+                    {
+                        for (int i = 0; i < render.Count; i++) { render[i].material = invincibleMat[i]; }
+                    }
+                    yield return StartCoroutine(TimeScaleYield.TimeStop());
+                }
+                for (int i = 0; i < render.Count; i++) { render[i].material = originMat[i]; }
+                yield return StartCoroutine(TimeScaleYield.TimeStop());
+            }
+
+            void GetChildren(GameObject obj) /* listオブジェクトに格納する為の関数 */
+            {
+                foreach (Transform child in obj.transform)
+                {
+                    if (child.GetComponent<Renderer>() != null)
+                    {
+                        render.Add(child.GetComponent<Renderer>());
+                        originMat.Add(Instantiate(child.GetComponent<Renderer>().material));
+                        hitMat.Add(Instantiate(child.GetComponent<Renderer>().material));
+                        invincibleMat.Add(Instantiate(child.GetComponent<Renderer>().material));
+
+                        int sub = originMat.Count - 1; /* 今回追加された要素の添え字 */
+
+                        hitMat[sub].EnableKeyword("_EMISSION");
+                        hitMat[sub].color = hitColor.color;
+                        hitMat[sub].SetColor("_EmissionColor", hitColor.GetColor("_EmissionColor"));
+
+                        invincibleMat[sub].DisableKeyword("_EMISSION");
+                        invincibleMat[sub].color = invincibleColor.color;
+                    }
+
+                    GetChildren(child.gameObject); /* 再帰式にする事で子から孫まで全てを取得できる */
+                }
+            }
+        }
+
     }
 }

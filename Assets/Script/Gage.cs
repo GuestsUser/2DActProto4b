@@ -33,7 +33,7 @@ public class Gage : MonoBehaviour
             //    fillImg.fillAmount = time / timeAmt;
             //}
 
-            if (Gamepad.current.buttonWest.wasReleasedThisFrame)//追加
+            if (Gamepad.current.buttonWest.wasPressedThisFrame)//追加
             {
                 GaugeFlg = true;
             }

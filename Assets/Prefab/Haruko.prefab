@@ -438,6 +438,9 @@ MonoBehaviour:
   life: 3
   maxRemain: 99
   remain: 4
+  invincible: 2.5
+  hitColor: {fileID: 2100000, guid: bd61b33d0c812b345856071d8ac6de67, type: 2}
+  invincibleColor: {fileID: 2100000, guid: 958d039d0732c26419294df6f5a4b68b, type: 2}
 --- !u!1 &6346024904113327281
 GameObject:
   m_ObjectHideFlags: 0

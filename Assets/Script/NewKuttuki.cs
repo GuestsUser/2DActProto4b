@@ -40,17 +40,8 @@ public class NewKuttuki : Padinput
 
     /*グラビティの方向を変更するのに必要*/
     Newkuttuki_move_state move_type;
-    Newkuttuki_move_state old_move_type;
     PlayerMove player;
     Vector3 now_gravity;
-    
-    /* 【プレイヤーの移動状態の取得】 */
-    private Vector3 _prevPosition;
-    private Vector3 now_position;
-
-    /* 【プレイヤーの回転状態の取得】 */
-    Quaternion now_rot;
-    Quaternion old_rot;
 
     int kuttuki_time; /*くっつきオブジェクトから離れたときの時間*/
     /*くっつき時の浮く問題解決に必要*/
@@ -107,9 +98,6 @@ public class NewKuttuki : Padinput
 
         collider_exit = false;
         move_type = Newkuttuki_move_state.none;
-        // 初期位置を保持
-        now_position = transform.position;
-        _prevPosition = transform.position;
 
         jump = false;
         //kuttuki_left = false;
@@ -120,9 +108,6 @@ public class NewKuttuki : Padinput
         animator = GetComponent<Animator>();
         bool_turn = false;
         bool_init = false;
-
-        now_rot = transform.localRotation;
-        old_rot = now_rot;
 
         bool_kinematic = false;
         bool_on_collision = false;
@@ -233,9 +218,6 @@ public class NewKuttuki : Padinput
             rb.isKinematic = false;
         }
 
-        /* 【プレイヤーの現在の回転状態の取得】 */
-        now_rot = transform.localRotation;
-
         /* 移動状態の取得 */
         MoveState();
 
@@ -260,69 +242,9 @@ public class NewKuttuki : Padinput
             /* 初期化処理 */
             Initialized();
         }
-
-        // 前フレーム位置を更新
-        _prevPosition = now_position;
-        old_rot = now_rot;
-        old_move_type = move_type;
-
     }/*Updateの終了部分*/
     void MoveState() /* 移動状態の判定処理 */
     {
-        /*【パターン１】*/
-        //if (bool_ray_hit == true)
-        //{
-
-        //    // deltaTimeが0の場合は何もしない
-        //    if (Mathf.Approximately(Time.deltaTime, 0))
-        //        return;
-        //    // 現在位置取得
-        //    now_position = transform.position;
-        //    // 現在速度計算
-        //    var velocity = (now_position - _prevPosition) / Time.deltaTime;
-
-        //    /*上下*/
-        //    if (Physics.gravity == new Vector3(9.8f, 0, 0) || Physics.gravity == new Vector3(-9.8f, 0, 0))
-        //    {
-        //        Debug.Log("上下の移動判定がとられるはず");
-        //        if (velocity.y > 0.0f) /*上に進んでいる*/
-        //        {
-        //            move_type = Newkuttuki_move_state.move_up;
-        //        }
-        //        else if (velocity.y < 0.0f)/*下に進んでいる*/
-        //        {
-        //            move_type = Newkuttuki_move_state.move_down;
-        //        }
-        //        /*上下*/
-        //    }
-
-        //    /*左右*/
-        //    if (Physics.gravity == new Vector3(0, 9.8f, 0) || Physics.gravity == new Vector3(0, -9.8f, 0))
-        //    {
-        //        if (velocity.x > 0.0f) /*上に進んでいる*/
-        //        {
-        //            move_type = Newkuttuki_move_state.move_right;
-        //        }
-        //        else if (velocity.x < 0.0f)/*下に進んでいる*/
-        //        {
-        //            move_type = Newkuttuki_move_state.move_left;
-        //        }
-        //    }
-        //    /*左右*/
-
-        //    if (velocity == Vector3.zero)
-        //    {
-        //        move_type = Newkuttuki_move_state.none;
-        //    }
-
-        //    // 現在速度をログ出力
-        //    //print($"velocity = {velocity}");
-
-        //    Debug.Log(move_type);
-        //    Debug.Log(velocity.x);
-        //}
-
-        /* 【パターン2】 */
         if (bool_ray_hit == true)
         {
             /* 【上下の移動状態の取得】 */
@@ -353,10 +275,6 @@ public class NewKuttuki : Padinput
             /*左右*/
             Debug.Log(move_type);
         }
-    }
-    void RotState()
-    {
-        now_rot = transform.localRotation;
     }
     void RaySet()
     {

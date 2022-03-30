@@ -414,7 +414,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a2fcc87cc20d944a9f5704bdc0d75c5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  kuttuku: {fileID: 0}
+  kuttuku: {fileID: 4087852201057528345}
   state: 0
   idle: 0
   right: 0

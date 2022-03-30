@@ -130,15 +130,20 @@ public class NewKuttuki : Padinput
     }
     private void Update()
     {
-        //if (change_shoes.type == ShoesType.Magnet_Shoes) /*靴のタイプがマグネットの時*/
+        /* 【滑ってしまう問題対策１没になった処理】 */
+        //if (change_shoes.type == ShoesType.Magnet_Shoes && bool_ray_hit == true) /*靴のタイプがマグネットの時*/
         //{
         //    animator.applyRootMotion = true;
+        //    if(jump == true)
+        //    {
+        //        animator.applyRootMotion = false;
+        //    }
         //}
         //else
         //{
         //    animator.applyRootMotion = false;
         //}
-        
+
     }
     void FixedUpdate()
     {
@@ -152,7 +157,7 @@ public class NewKuttuki : Padinput
             }
         }
         /* 【内側回転で複数回連続で回転してしまう問題対策】 */
-        if(kuttuki_To_kuttuki == true)
+        if (kuttuki_To_kuttuki == true)
         {
             bool_float = false;
             /* 【比較に使う値】 */
@@ -169,7 +174,7 @@ public class NewKuttuki : Padinput
                     large = Mathf.Floor(transform.position.x);
                     small = Mathf.Floor(p_pos.x);
                 }
-                else if(Mathf.Floor(transform.position.x) < Mathf.Floor(p_pos.x))
+                else if (Mathf.Floor(transform.position.x) < Mathf.Floor(p_pos.x))
                 {
                     large = Mathf.Floor(p_pos.x);
                     small = Mathf.Floor(transform.position.x);
@@ -206,48 +211,30 @@ public class NewKuttuki : Padinput
             bool_float = true;
         }
 
-        //if (bool_ray_hit == true && collider_exit == true)
-        //{
-        //    /*離れてから時間経過が長い場合の処理*/
-        //    kuttuki_time++;
-        //    if (jump == true)
-        //    {
+        /* 【滑ってしまう問題対策２(未完成)】 */
+        /* 変なタイミングで回転したり浮いてしまう問題を確認 */
+        if (bool_ray_hit == true)
+        {
 
-        //        if (kuttuki_time > 47) //47はジャンプの滞空時間
-        //        {
-        //            Debug.Log("ジャンプ後の離れる処理");
-        //            bool_init = false;
-        //        }
-        //    }
-        //    else
-        //    {
-        //        if (kuttuki_time > 5) //回転時に離れた時
-        //        {
-        //            bool_init = false;
-        //        }
-        //    }
-        //}
-            //if (bool_ray_hit == true)
-            //{
-            //    //rb.useGravity = false;
-            //    if (jump == false && bool_kinematic == false && bool_on_collision == true)
-            //    {
-            //        rb.isKinematic = true;
-            //    }
-            //    else if (jump == true )
-            //    {
-            //        rb.isKinematic = false;
-            //    }s
+            if (jump == false && bool_kinematic == false && bool_on_collision == true)
+            {
+                rb.useGravity = false;
+                rb.isKinematic = true;
+            }
+            else if (jump == true)
+            {
+                rb.useGravity = true;
+                rb.isKinematic = false;
+            }
+        }
+        else
+        {
+            rb.useGravity = true;
+            rb.isKinematic = false;
+        }
 
-            //}
-            //else
-            //{
-            //    //rb.useGravity = true;
-            //    rb.isKinematic = false;
-            //}
-
-            /* 【プレイヤーの現在の回転状態の取得】 */
-            now_rot = transform.localRotation;
+        /* 【プレイヤーの現在の回転状態の取得】 */
+        now_rot = transform.localRotation;
 
         /* 移動状態の取得 */
         MoveState();
@@ -375,16 +362,6 @@ public class NewKuttuki : Padinput
     {
         rayPosition = transform.position;    /*レイキャストの位置*/
 
-        //if (Physics.gravity == gravity_left)
-        //{
-        //    foot_ray = new Ray(rayPosition, transform.right * -1f);     /*足元*/
-        //    front_ray = new Ray(rayPosition, transform.up * 1f);  /*正面*/
-        //}
-        //else if (Physics.gravity == gravity_down)
-        //{
-        //    foot_ray = new Ray(rayPosition, transform.up * -1f);     /*足元*/
-        //    front_ray = new Ray(rayPosition, transform.right * 1f);  /*正面*/
-        //}
         foot_ray = new Ray(rayPosition, transform.up * -1f);     /*足元*/
         front_ray = new Ray(rayPosition, transform.right * 1f);  /*正面*/
 
@@ -444,17 +421,6 @@ public class NewKuttuki : Padinput
                     Physics.gravity = gravity_left;
                 }
 
-                /* 【回転パターン１】 */
-                ///* 【回転させる準備】 */
-                //Quaternion rot = this.transform.localRotation; /* 現在のRotation値を取得 */
-                //Vector3 rotationAngles = rot.eulerAngles; /* Quaternion → Euler に変換 */
-                //rotationAngles.z = 90f; /* 回転する軸と値を指定 */
-                //rot = Quaternion.Euler(rotationAngles); /* rotの値をz軸変更後のものに変更する */
-
-                ///* 【実際に回転させる】 */
-                //this.transform.localRotation = rot; /* 90度回転させる */
-
-                /* 【回転パターン2】 */
                 /* 【回転させる準備】 */
                 Quaternion rot = Quaternion.AngleAxis(90, Vector3.forward);
                 Quaternion q = this.transform.localRotation;
@@ -472,7 +438,6 @@ public class NewKuttuki : Padinput
             else if (rayHit.collider.tag == "ground" && bool_ray_hit == true && move_type == Newkuttuki_move_state.move_down)
             {
                 /* 【フラグ判定切り替え】 */
-                //bool_ray_hit = false;
                 bool_init = true;
             }
             /* 【くっつき状態でもう一つのくっつきオブジェクトに接触した場合】 */
@@ -549,27 +514,27 @@ public class NewKuttuki : Padinput
 
                                 /* *****【重要】↓の処理を入れると上に浮いてしまう***** */
 
-                                //if(bool_float == false)
-                                //{
-                                //    /* 【外側回転処理に入ってしまう問題対策】 */
-                                //    Vector3 position = this.transform.position;
-                                //    kuttuki_pos = new Vector3(0, -0.3f, 0);
+                                if (bool_float == false)
+                                {
+                                    /* 【外側回転処理に入ってしまう問題対策】 */
+                                    Vector3 position = this.transform.position;
+                                    kuttuki_pos = new Vector3(0, -0.3f, 0);
 
-                                //    /* 【実際に移動させる】 */
-                                //    this.transform.position = position + kuttuki_pos;
-                                //}
-                                //else
-                                //{
+                                    /* 【実際に移動させる】 */
+                                    this.transform.position = position + kuttuki_pos;
+                                }
+                                else
+                                {
 
-                                //    /* 【外側回転処理に入ってしまう問題対策】 */
-                                //    Vector3 position = this.transform.position;
-                                //    kuttuki_pos = this.transform.position;
-                                //    kuttuki_pos.y = kuttuki_pos.y - 0.3f;
+                                    /* 【外側回転処理に入ってしまう問題対策】 */
+                                    Vector3 position = this.transform.position;
+                                    kuttuki_pos = this.transform.position;
+                                    kuttuki_pos.y = kuttuki_pos.y - 0.3f;
 
-                                //    /* 【実際に移動させる】 */
-                                //    this.transform.position = /*position + */kuttuki_pos;
-                                //}
-                                
+                                    /* 【実際に移動させる】 */
+                                    this.transform.position = /*position + */kuttuki_pos;
+                                }
+
 
                                 /* *****【重要】↑の処理を入れると上に浮いてしまう***** */
 
@@ -668,7 +633,6 @@ public class NewKuttuki : Padinput
                             break;
                     }
                 }
-                
             }
         }
     }
@@ -691,7 +655,6 @@ public class NewKuttuki : Padinput
                 if (kuttuki_down == true) /* オブジェクトの下にくっついている状態の時 */
                 {
                     /* 【フラグ判定切り替え】 */
-                    //bool_ray_hit = false; /* くっつき判定解除 */
                     bool_init = true; /* 初期化可能状態に変更 */
 
                     /* 【床貫通対策の準備】 */
@@ -704,7 +667,6 @@ public class NewKuttuki : Padinput
                 else
                 {
                     /* 【フラグ判定切り替え】 */
-                    //bool_ray_hit = false; /* くっつき判定解除 */
                     bool_init = true; /* 初期化可能状態に変更 */
                 }
             }
@@ -719,32 +681,18 @@ public class NewKuttuki : Padinput
 
                 if (kuttuki_time > 47) //47はジャンプの滞空時間
                 {
+                    /* 【フラグ判定切り替え】 */
                     bool_exit = true;
-                    Debug.Log("ジャンプ後の離れる処理");
-
                     bool_init = true;
-
-                    //collider_exit = false;
-                    //bool_ray_hit = false;
-                    //kuttuki_time = 0;
-                    //kuttuki_rot = Quaternion.Euler(0, 0, 0);
-                    //this.transform.localRotation = kuttuki_rot;
-                    //Physics.gravity = new Vector3(0, -9.8f, 0);
                 }
             }
             else if(jump == false)
             {
                 if (kuttuki_time > 5) //回転時に離れた時
                 {
+                    /* 【フラグ判定切り替え】 */
                     bool_exit = true;
                     bool_init = true;
-
-                    //collider_exit = false;
-                    //bool_ray_hit = false;
-                    //kuttuki_time = 0;
-                    //kuttuki_rot = Quaternion.Euler(0, 0, 0);
-                    //this.transform.localRotation = kuttuki_rot;
-                    //Physics.gravity = new Vector3(0, -9.8f, 0);
                 }
 
                 /* 【外側回転処理】 */
@@ -879,9 +827,6 @@ public class NewKuttuki : Padinput
                     }
                 }
             }
-
-            
-
         }
     }
     void Change_shoes()
@@ -913,7 +858,6 @@ public class NewKuttuki : Padinput
         {
             Debug.Log("くっつかない原因かも");
             bool_init = true; /* 初期化可能状態に変更 */
-            //bool_ray_hit = false; /* くっつき判定解除 */
         }
     }
 
@@ -933,6 +877,7 @@ public class NewKuttuki : Padinput
             kuttuki_down = false; /* 下にくっついていたという判定解除 */
             //kuttuki_To_kuttuki = false; /* くっつきからくっつきに移動した判定解除 */
             collider_exit = false; /* くっつき状態でのオブジェクトから離れた判定解除 */
+            bool_exit = false;
 
             /* 【くっつきobjから離れた後の時間の初期化】 */
             kuttuki_time = 0;
@@ -962,12 +907,8 @@ public class NewKuttuki : Padinput
     }
     private void OnCollisionStay(Collision collision)
     {
-        //if (collision.gameObject.tag == "kuttuku" && bool_ray_hit == true && collider_exit == true)
-        //{
         kuttuki_time = 0;
         collider_exit = false; /* 離れた時のフラグをfalseに */
-        //kuttuki_To_kuttuki = false;
-        //}
     }
     private void FootRayExit()
     {
@@ -978,15 +919,6 @@ public class NewKuttuki : Padinput
             collider_exit = true;
         }
     }
-    //private void OnCollisionExit(Collision collision) /*これから離れた判定を変えないといけない*/
-    //{
-
-    //    if (collision.gameObject.tag == "kuttuku" && bool_ray_hit == true)
-    //    {
-    //        Debug.Log("離れました");
-    //        collider_exit = true;
-    //    }
-    //}
     public override void Jump()
     {
         bool_kinematic = true;

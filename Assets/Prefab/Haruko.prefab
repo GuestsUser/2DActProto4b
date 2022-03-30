@@ -114,6 +114,7 @@ GameObject:
   - component: {fileID: 6346024904048878348}
   - component: {fileID: 6346024904048878349}
   - component: {fileID: 6346024904048878578}
+  - component: {fileID: 4087852201057528345}
   - component: {fileID: 6346024904048878579}
   - component: {fileID: 6346024904048878576}
   - component: {fileID: 6346024904048878577}
@@ -306,14 +307,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 04ee5617f535b25479798af6e6d94425, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  change_shoes: {fileID: 0}
-  animator: {fileID: 0}
   jumpForce: 5
-  dubleJump: 0
-  jump: 0
+  doubleJump: 0
+  isGrounded: 0
+  jumping: 0
+  fall: 0
+  landing: 0
   rayPosition: {x: 0, y: 0, z: 0}
   rayDistance: 0.5591
-  rb: {fileID: 0}
 --- !u!114 &6346024904048878348
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -361,7 +362,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6346024904048878582}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9a97a8f694c389c4eac720f88d49591a, type: 3}
   m_Name: 
@@ -371,6 +372,35 @@ MonoBehaviour:
   change_shoes: {fileID: 0}
   bool_ray_hit: 0
   rayDistance: 0.5591
+  rb: {fileID: 0}
+--- !u!114 &4087852201057528345
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6346024904048878582}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d2d2b23a46e61194ba99627a18dcd5dd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  p_pos: {x: 0, y: 0, z: 0}
+  obj_pos: {x: 0, y: 0, z: 0}
+  collider_exit: 0
+  bool_ray_hit: 0
+  kuttuki_To_kuttuki: 0
+  kuttuki_down: 0
+  jump: 0
+  bool_turn: 0
+  bool_init: 0
+  bool_kinematic: 0
+  bool_on_collision: 0
+  bool_float: 0
+  bool_exit: 0
+  rayPosition: {x: 0, y: 0, z: 0}
+  change_shoes: {fileID: 0}
+  rayDistance: 0.5
   rb: {fileID: 0}
 --- !u!114 &6346024904048878579
 MonoBehaviour:
@@ -384,7 +414,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a2fcc87cc20d944a9f5704bdc0d75c5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  kuttuku: {fileID: 6346024904048878578}
+  kuttuku: {fileID: 0}
   state: 0
   idle: 0
   right: 0

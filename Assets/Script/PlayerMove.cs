@@ -19,7 +19,9 @@ public class PlayerMove : Padinput
     //[SerializeField] public float rayDistance = 1f; //←これはあってるかわからん
     /*友一版*/
 
-    [SerializeField] Kuttuku kuttuku;
+    Vector3 player_pos2;
+
+    [SerializeField] NewKuttuki kuttuku;
     /*プレイヤーの移動状態*/
     public State state;
     public bool idle;
@@ -154,13 +156,14 @@ public class PlayerMove : Padinput
 
         /*歩きアニメーションに戻すための処理*/
         anim_speed = 0.1f;
+        player_pos2 = transform.position;
     }
     /*オーバーライド関数*/
 
     void Update() /*常に処理する内容*/
     {
-        Debug.Log(distance);
-        Debug.Log(idle);
+        //Debug.Log(distance);
+        //Debug.Log(idle);
         if (state == State.idle)
         {
             idle = true;
@@ -177,7 +180,7 @@ public class PlayerMove : Padinput
     }
     private void FixedUpdate()
     {
-        Debug.Log(transform.localRotation);
+        //Debug.Log(transform.localRotation);
         Turn();
         Run();
         /*壁のめり込み対策(しゅんver)*/
@@ -185,8 +188,10 @@ public class PlayerMove : Padinput
         rayPosition.y += 1f;
         ray = new Ray(rayPosition, transform.right * 1f);
         ray_back = new Ray(rayPosition, transform.right * -1f);
-        Debug.DrawRay(rayPosition, ray_back.direction * rayDistance, Color.red);
+        //Debug.DrawRay(rayPosition, ray_back.direction * rayDistance, Color.red);
+        //Debug.DrawRay(rayPosition, ray.direction * rayDistance, Color.blue);
         WallHit();
+        //DontMove();
 
         /*友一版*/
         //rayPosition = transform.localPosition;
@@ -387,17 +392,13 @@ public class PlayerMove : Padinput
     /*壁にめり込まないようにする処理(自分版)*/
     private void WallHit()
     {
+        /* くっつき状態ではない時 */
         if(kuttuku.bool_ray_hit == false)
         {
-            //rayPosition = transform.localPosition;    /*レイキャストの位置*/
-            
-            
-            
-            Debug.DrawRay(rayPosition, ray.direction * rayDistance, Color.blue);
-            
+            /* 正面から出ているレイが当たったら */
             if (Physics.Raycast(ray, out rayHit, rayDistance))
             {
-                Debug.Log("れいが当たってる処理は正常です");
+                //Debug.Log("れいが当たってる処理は正常です");
                 if(rayHit.collider.tag == "kuttuku" || rayHit.collider.tag == "ground")
                 {
                     /*プレイヤーの位置と幅を取得*/
@@ -407,17 +408,15 @@ public class PlayerMove : Padinput
                     /*レイが当たっているオブジェクトの位置を取得*/
                     obj_pos = rayHit.transform.position;
                     
+                    /* 右に入力されている時 */
                     if (right != 0)
                     {
                         p_pos.x = transform.localPosition.x - p_width;
-                        //obj_pos.x =rayHit.transform.position.x - obj_width;
-
                     }
+                    /* 左に入力されている時 */
                     else if (left != 0)
                     {
                         p_pos.x = transform.localPosition.x + p_width;
-                        //obj_pos.x = rayHit.transform.position.x + obj_width;
-
                     }
 
 
@@ -471,80 +470,82 @@ public class PlayerMove : Padinput
         }
         if(kuttuku.bool_ray_hit == true && Physics.gravity == new Vector3(0,-9.8f,0))
         {
-            
             if (Physics.Raycast(ray_back, out rayHit, rayDistance))
             {
-                /*プレイヤーの位置と幅を取得*/
-                var p_width = transform.lossyScale.x / 2; /*2で割ることにより壁に当たるほうのみの幅を出せる*/
-                var p_pos = new Vector3((transform.localPosition.x), transform.localPosition.y, transform.localPosition.z);
-                
-                /*レイが当たっているオブジェクトの位置を取得*/
-                obj_pos = rayHit.transform.position;
+                if (rayHit.collider.tag == "kuttuku" || rayHit.collider.tag == "ground")
+                {
+                    /*プレイヤーの位置と幅を取得*/
+                    var p_width = transform.lossyScale.x / 2; /*2で割ることにより壁に当たるほうのみの幅を出せる*/
+                    var p_pos = new Vector3((transform.localPosition.x), transform.localPosition.y, transform.localPosition.z);
 
-                if (right != 0)
-                {
-                    p_pos.x = transform.localPosition.x - p_width;
-                    //transform.position = new Vector3(rayHit.transform.position.x + 0.8f, transform.position.y, transform.position.z);
-                }
-                else if (left != 0)
-                {
-                    p_pos.x = transform.localPosition.x + p_width;
-                    //transform.position = new Vector3(rayHit.transform.position.x - 0.8f, transform.position.y, transform.position.z);
-                }
+                    /*レイが当たっているオブジェクトの位置を取得*/
+                    obj_pos = rayHit.transform.position;
 
-                /*プレイヤーとオブジェクトの間の距離を出す*/
-                if (obj_pos.x < p_pos.x) /*プレイヤーがオブジェクトの右側の時*/
-                {
-                    Debug.Log("左側のオブジェクトにレイが当たっています");
-                    distance = (p_pos.x - obj_pos.x);
-                }
-                else if (p_pos.x < obj_pos.x) /*プレイヤーがオブジェクトの左側の時*/
-                {
-                    Debug.Log("右側のオブジェクトにレイが当たっています");
-                    distance = (obj_pos.x - p_pos.x);
-                }
+                    if (right != 0)
+                    {
+                        p_pos.x = transform.localPosition.x - p_width;
+                        //transform.position = new Vector3(rayHit.transform.position.x + 0.8f, transform.position.y, transform.position.z);
+                    }
+                    else if (left != 0)
+                    {
+                        p_pos.x = transform.localPosition.x + p_width;
+                        //transform.position = new Vector3(rayHit.transform.position.x - 0.8f, transform.position.y, transform.position.z);
+                    }
 
-                /*ポジションをめり込まないようにする処理*/
-                if (right != 0 && distance <= 1.2f)
-                {
-                    
-                    if(kuttuki_hit_wall == false)
+                    /*プレイヤーとオブジェクトの間の距離を出す*/
+                    if (obj_pos.x < p_pos.x) /*プレイヤーがオブジェクトの右側の時*/
+                    {
+                        Debug.Log("左側のオブジェクトにレイが当たっています");
+                        distance = (p_pos.x - obj_pos.x);
+                    }
+                    else if (p_pos.x < obj_pos.x) /*プレイヤーがオブジェクトの左側の時*/
+                    {
+                        Debug.Log("右側のオブジェクトにレイが当たっています");
+                        distance = (obj_pos.x - p_pos.x);
+                    }
+
+                    /*ポジションをめり込まないようにする処理*/
+                    if (right != 0 && distance <= 1.2f)
                     {
 
-                        Debug.Log("くっつき専用フラグtrue");
-                        kuttuki_hit_wall = true;
-                        player_pos = new Vector3(obj_pos.x + 0.8f, transform.position.y, transform.position.z);
-                        transform.position = player_pos;
+                        if (kuttuki_hit_wall == false)
+                        {
+
+                            Debug.Log("くっつき専用フラグtrue");
+                            kuttuki_hit_wall = true;
+                            player_pos = new Vector3(obj_pos.x + 0.8f, transform.position.y, transform.position.z);
+                            transform.position = player_pos;
+                        }
+                        //player_oldpos = this.transform.position;
+
                     }
-                    //player_oldpos = this.transform.position;
-                    
-                }
-                else if (left != 0 && distance <= 1.2f)
-                {
-                    //player_oldpos = this.transform.position;
-                    if(kuttuki_hit_wall == false)
+                    else if (left != 0 && distance <= 1.2f)
                     {
-                        Debug.Log("くっつき専用フラグtrue");
-                        kuttuki_hit_wall = true;
-                        player_pos = new Vector3(obj_pos.x - 0.8f, transform.position.y, transform.position.z);
-                        transform.position = player_pos;
+                        //player_oldpos = this.transform.position;
+                        if (kuttuki_hit_wall == false)
+                        {
+                            Debug.Log("くっつき専用フラグtrue");
+                            kuttuki_hit_wall = true;
+                            player_pos = new Vector3(obj_pos.x - 0.8f, transform.position.y, transform.position.z);
+                            transform.position = player_pos;
+                        }
+
                     }
-                    
                 }
             }
             else
             {
                 kuttuki_hit_wall = false;
             }
-            
-            
-           
         }
-        //if(hit_wall == true)
-        //{
-        //    transform.position = player_oldpos;
-        //}
     }
     /*壁にめり込まないようにする処理(自分版)*/
-
+    private void DontMove() /* 操作していない時勝手に動かないようにする処理 */
+    {
+        if(kuttuku.bool_ray_hit == true && idle == true)
+        {
+            Debug.Log("勝手に動かない処理");
+            transform.position = player_pos2;
+        }
+    }
 }

@@ -191,31 +191,29 @@ public class JumpSystem : Padinput
     /*3月24日ビルド用*/
     private ChangeShoes change_shoes;
     private Animator animator;
-    private Rigidbody rb;    /*みんな大好きリジッドボディー*/
-    private float y;
+    private Rigidbody rb;
+    private float ySpeed;
 
 
     [SerializeField] private float jumpForce = 5.0f;/*ジャンプ力*/
     [SerializeField] private int doubleJump = 0;     /*ジャンプ回数*/
-
     [SerializeField] private bool isGrounded;       /* 地面と接触しているかどうか*/
     [SerializeField] private bool jumping;          /*Jumpingアニメーションしているかどうか*/
     [SerializeField] private bool fall;             /*Fallアニメーションしているかどうか*/
     [SerializeField] private bool landing;          /*Landingアニメーションしているかどうか*/
 
     /*脳筋式レイキャスト変数*/
-    public Ray ray;
-    public Ray ray2;
-    public Ray ray3;
-    public Ray ray4;
-    public Ray ray5;
-    public Ray ray6;
-    public RaycastHit rayHit;
-
-    public Vector3 rayPosition; /*レイキャストの位置*/
+    private Ray ray;
+    private Ray ray2;
+    private Ray ray3;
+    private Ray ray4;
+    private Ray ray5;
+    private Ray ray6;
+    private RaycastHit rayHit;
+    private Vector3 rayPosition; /*レイキャストの位置*/
 
     /*（レイキャスト）可視光線の長さ*/
-    [SerializeField] public float rayDistance = 0.5591f;
+    [SerializeField] private float rayDistance = 0.5591f;
 
     void Start()
     {
@@ -227,10 +225,14 @@ public class JumpSystem : Padinput
     void FixedUpdate()
     {
         var velocity_y = rb.velocity.y;
+        ySpeed = velocity_y;
+        Ray();
+        Animation();
+    }
 
-        y = velocity_y;
-        //Debug.Log(y);
 
+    private void Ray()
+    {
 
         /*レイキャストの使い方がわからないのでお願いします（プレイやの当たり判定をレイキャストにする）参照元： https://getabakoclub.com/2020/05/11/unity%e3%81%a7%e5%9c%b0%e9%9d%a2%e3%81%ae%e5%bd%93%e3%81%9f%e3%82%8a%e5%88%a4%e5%ae%9a%e3%82%92%e8%b6%b3%e5%85%83%e3%81%a0%e3%81%91%e5%8f%96%e5%be%97%e3%81%99%e3%82%8b%e3%80%903d%e3%80%91/ */
         rayPosition = rb.transform.position;/*レイキャストの位置*/
@@ -243,14 +245,14 @@ public class JumpSystem : Padinput
         {
             rayPosition.y -= 0.5f;
         }
-        /*追加部分*/
+
         /*レイキャストの位置,レイキャストの角度*/
         ray = new Ray(rayPosition, transform.up * -1f);
         ray2 = new Ray(rayPosition, new Vector3(0.5f, -1f, 0));
         ray3 = new Ray(rayPosition, new Vector3(0, -1f, 0.5f));
         ray4 = new Ray(rayPosition, new Vector3(-0.5f, -1f, 0));
         ray5 = new Ray(rayPosition, new Vector3(0, -1f, -0.5f));
-        //ray6 = new Ray(rayPosition, new Vector3(transform.localPosition));
+
         /*デバッグ用の可視光線*/
         Debug.DrawRay(rayPosition, ray.direction * rayDistance, Color.green);
         Debug.DrawRay(rayPosition, ray2.direction * rayDistance, Color.green);
@@ -292,26 +294,24 @@ public class JumpSystem : Padinput
             animator.SetBool("IsGrounded", false);
             isGrounded = false;
         }
-        Animation();
     }
-
 
     private void Animation()
     {
-        /*地面と接触していてAボタンが押されたら（ジャンプモーション）*/
+        /*ジャンプ上昇時*/
         if (isGrounded && Gamepad.current.buttonSouth.wasPressedThisFrame)
         {
             animator.SetBool("Jumping", true);
         }
-        /*ジャンプ上昇中でキャラクターのｙ方向の速度がマイナスになったら（Fallモーション）*/
-        else if (jumping && y < 0)
+        /*ジャンプ下降時*/
+        else if (jumping && ySpeed < 0)
         {
             fall = true;
             jumping = false;
             animator.SetBool("Fall", true);
             animator.SetBool("Jumping", false);
         }
-        /*落下中で地面と接触したら（Landingモーション）*/
+        /*ジャンプ着地時*/
         else if (fall && isGrounded)
         {
             landing = true;
@@ -319,12 +319,13 @@ public class JumpSystem : Padinput
             animator.SetBool("Landing", true);
             animator.SetBool("Fall", false);
         }
-        else if (!isGrounded && y < 0 && !jumping)
+        /*地面から下降時*/
+        else if (!isGrounded && ySpeed < 0 && !jumping)
         {
             fall = true;
             animator.SetBool("Fall", true);
         }
-        /*Landingモーションをしたら*/
+        /*着地したら*/
         else if (landing)
         {
             landing = false;

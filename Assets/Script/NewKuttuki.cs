@@ -146,7 +146,7 @@ public class NewKuttuki : Padinput
             collision_time = 0;
 
             rb.useGravity = true;
-            //rb.isKinematic = false;
+            rb.isKinematic = false;
         }
 
         /* 【移動状態の取得】 */
@@ -279,7 +279,7 @@ public class NewKuttuki : Padinput
                     else
                     {
                         move_type = Newkuttuki_move_state.none;
-                        bool_turn = true;
+                        //bool_turn = true;
                     }
                 }
 
@@ -313,7 +313,7 @@ public class NewKuttuki : Padinput
                     else
                     {
                         move_type = Newkuttuki_move_state.none;
-                        bool_turn = true;
+                        //bool_turn = true;
                     }
                 }
 
@@ -667,7 +667,7 @@ public class NewKuttuki : Padinput
                 kuttuki_time = 0;
 
                 /* 【外側回転処理】 */
-                if (bool_exit == false && bool_on_collision == true && bool_turn == false && kuttuki_To_kuttuki == false)
+                if (jump == false && bool_exit == false && bool_on_collision == true && bool_turn == false && kuttuki_To_kuttuki == false)
                 {
                     Debug.Log("外側回転処理入りました");
                     /* 【外側回転処理】 */

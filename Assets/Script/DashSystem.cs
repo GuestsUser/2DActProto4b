@@ -7,6 +7,9 @@ public class DashSystem : Padinput
 {
 
     public bool dashFlg = true;                         /*ダッシュアビリティ用フラグ(trueで発動)*/
+    public bool moveFlg = true;
+
+    public float coolTimeMove = 0;
     public float coolTime = 0;                          /*クールタイム(初期値は5秒)*/
     [SerializeField] public float dashForce = 5f;       /*ダッシュの強さ(初期値は５)*/
     [SerializeField] private ChangeShoes change_shoes;  /*能力切り替え用変数_ChangeShoes*/
@@ -35,6 +38,7 @@ public class DashSystem : Padinput
         rb = GetComponent<Rigidbody>();
         animator = GetComponent<Animator>();
         dashFlg = true;
+        moveFlg = true;
 
     }
 
@@ -57,6 +61,19 @@ public class DashSystem : Padinput
                 coolTime = 0;   /*リセット*/
                 dashFlg = true;/*フラグをtrueに*/
 
+            }
+        }
+
+        if (!moveFlg)
+        {
+            if (coolTimeMove < 3f)
+            {
+                coolTimeMove += Time.deltaTime;
+            }
+            else
+            {
+                coolTimeMove = 0;
+                moveFlg = true;
             }
         }
         /*追加部分*/
@@ -109,6 +126,7 @@ public class DashSystem : Padinput
                 }
                 rb.velocity = Vector3.zero;
                 dashFlg = false;
+                moveFlg = false;
                 break;
 
         }

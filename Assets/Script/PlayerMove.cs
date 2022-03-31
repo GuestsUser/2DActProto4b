@@ -249,7 +249,7 @@ public class PlayerMove : Padinput
         }
         //transform.localPosition += ((move / 10) * speed * Time.deltaTime);
 
-        if(dash.dashFlg == true)
+        if(dash.moveFlg == true)
         {
             transform.Translate((move / 10) * speed * Time.deltaTime);
         }

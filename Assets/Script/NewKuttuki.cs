@@ -216,6 +216,7 @@ public class NewKuttuki : Padinput
                 if (large - small > Comparison)
                 {
                     kuttuki_To_kuttuki = false;
+                    Debug.Log("kuttuki_To_kuttukiを無効化にしてます");
                 }
             }
             else if (Mathf.Abs(Physics.gravity.x) == 9.8f)
@@ -233,6 +234,7 @@ public class NewKuttuki : Padinput
                 if (large - small > Comparison)
                 {
                     kuttuki_To_kuttuki = false;
+                    Debug.Log("kuttuki_To_kuttukiを無効化にしてます");
                 }
             }
 
@@ -297,7 +299,7 @@ public class NewKuttuki : Padinput
                         move_type = Newkuttuki_move_state.move_left;
                     }
                 }
-                else
+                else if(kuttuki_To_kuttuki == false)
                 {
                     if (this.transform.position.x > obj_pos.x + (obj_scale.x / 2))
                     {
@@ -410,194 +412,193 @@ public class NewKuttuki : Padinput
                 /* 【フラグ判定切り替え】 */
                 kuttuki_To_kuttuki = true;
                 bool_turn = false;
-                if (kuttuki_To_kuttuki == true)
+
+                /* 【プレイヤーポジション取得】 */
+                p_pos = transform.position;
+
+                /* 【内側回転処理】 */
+                switch (move_type)
                 {
-                    /* 【内側回転処理】 */
-                    switch (move_type)
-                    {
-                        case Newkuttuki_move_state.move_up:
-                            if (this.transform.rotation.z != 180f)
+                    case Newkuttuki_move_state.move_up:
+                        if (this.transform.rotation.z != 180f)
+                        {
+                            /* 【回転前準備】 */
+                            Quaternion rotation = this.transform.localRotation;
+                            Quaternion rot = Quaternion.AngleAxis(90, Vector3.forward);
+                            Quaternion q = this.transform.localRotation;
+
+                            /* 【実際に回転させる】 */
+                            this.transform.localRotation = q * rot;
+
+                            /* 【念のため用にした処理】 */
+                            //if (player.right != 0)
+                            //{
+
+                            //}
+                            //else if (player.right != 0)
+                            //{
+
+                            //}
+
+                            /* 【外側回転処理に入ってしまう問題対策】 */
+                            Vector3 position = this.transform.localPosition;
+                            kuttuki_pos = new Vector3(0, 0.3f, 0);
+
+                            /* 【実際に移動させる】 */
+                            this.transform.localPosition = position + kuttuki_pos;
+
+                            /* 【重力の向きを変更】 */
+                            Physics.gravity = gravity_up;
+
+                            /* 【フラグ判定切り替え】 */
+                            bool_turn = true;
+                            kuttuki_down = true;
+                            //collider_exit = false;
+                        }
+                        break;
+
+                    case Newkuttuki_move_state.move_down:
+                        if (this.transform.rotation.z != 0f)
+                        {
+                            /* 【回転前準備】 */
+                            Quaternion rotation = this.transform.localRotation;
+                            Quaternion rot = Quaternion.AngleAxis(90, Vector3.forward);
+                            Quaternion q = this.transform.localRotation;
+
+                            /* 【実際に回転させる】 */
+                            this.transform.localRotation = q * rot;
+
+                            /* 【念のため用にした処理】 */
+                            //if (player.right != 0)
+                            //{
+
+                            //}
+                            //else if (player.right != 0)
+                            //{
+
+                            //}
+
+                            /* *****【重要】↓の処理を入れると上に浮いてしまう（問題解決済み）***** */
+
+                            if (bool_float == false)
                             {
-                                /* 【回転前準備】 */
-                                Quaternion rotation = this.transform.localRotation;
-                                Quaternion rot = Quaternion.AngleAxis(90, Vector3.forward);
-                                Quaternion q = this.transform.localRotation;
-
-                                /* 【実際に回転させる】 */
-                                this.transform.localRotation = q * rot;
-
-                                /* 【念のため用にした処理】 */
-                                //if (player.right != 0)
-                                //{
-
-                                //}
-                                //else if (player.right != 0)
-                                //{
-
-                                //}
-
                                 /* 【外側回転処理に入ってしまう問題対策】 */
-                                Vector3 position = this.transform.localPosition;
-                                kuttuki_pos = new Vector3(0, 0.3f, 0);
+                                Vector3 position = this.transform.position;
+                                kuttuki_pos = new Vector3(0, -0.3f, 0);
 
                                 /* 【実際に移動させる】 */
-                                this.transform.localPosition = position + kuttuki_pos;
-
-                                /* 【重力の向きを変更】 */
-                                Physics.gravity = gravity_up;
-
-                                /* 【プレイヤーポジション取得】 */
-                                p_pos = transform.position;
-
-                                /* 【フラグ判定切り替え】 */
-                                bool_turn = true;
-                                kuttuki_down = true;
-                                //collider_exit = false;
+                                this.transform.position = position + kuttuki_pos;
                             }
-                            break;
-
-                        case Newkuttuki_move_state.move_down:
-                            if (this.transform.rotation.z != 0f)
+                            else
                             {
-                                /* 【回転前準備】 */
-                                Quaternion rotation = this.transform.localRotation;
-                                Quaternion rot = Quaternion.AngleAxis(90, Vector3.forward);
-                                Quaternion q = this.transform.localRotation;
-
-                                /* 【実際に回転させる】 */
-                                this.transform.localRotation = q * rot;
-
-                                /* 【念のため用にした処理】 */
-                                //if (player.right != 0)
-                                //{
-
-                                //}
-                                //else if (player.right != 0)
-                                //{
-
-                                //}
-
-                                /* *****【重要】↓の処理を入れると上に浮いてしまう（問題解決済み）***** */
-
-                                if (bool_float == false)
-                                {
-                                    /* 【外側回転処理に入ってしまう問題対策】 */
-                                    Vector3 position = this.transform.position;
-                                    kuttuki_pos = new Vector3(0, -0.3f, 0);
-
-                                    /* 【実際に移動させる】 */
-                                    this.transform.position = position + kuttuki_pos;
-                                }
-                                else
-                                {
-
-                                    /* 【外側回転処理に入ってしまう問題対策】 */
-                                    Vector3 position = this.transform.position;
-                                    kuttuki_pos = this.transform.position;
-                                    kuttuki_pos.y = kuttuki_pos.y - 0.3f;
-
-                                    /* 【実際に移動させる】 */
-                                    this.transform.position = /*position + */kuttuki_pos;
-                                }
-
-
-                                /* *****【重要】↑の処理を入れると上に浮いてしまう（問題解決済み）***** */
-
-                                /* 【プレイヤーポジション取得】 */
-                                p_pos = transform.position;
-
-                                /* 【重力の向きを変更】 */
-                                Physics.gravity = gravity_down;
-
-                                /* 【フラグ判定切り替え】 */
-                                bool_turn = true;
-                                collider_exit = false;
-                            }
-                            break;
-
-                        case Newkuttuki_move_state.move_right:
-                            if (Mathf.Abs(transform.rotation.z) != 90 && bool_turn == false)
-                            {
-                                /* 【回転前準備】 */
-                                Quaternion rotation = this.transform.localRotation;
-                                Quaternion rot = Quaternion.AngleAxis(90, Vector3.forward);
-                                Quaternion q = this.transform.localRotation;
-
-                                /* 【実際に回転させる】 */
-                                this.transform.localRotation = q * rot;
-
-                                /* 【念のため用にした処理】 */
-                                //if (player.right != 0)
-                                //{
-
-                                //}
-                                //else if (player.right != 0)
-                                //{
-
-                                //}
 
                                 /* 【外側回転処理に入ってしまう問題対策】 */
-                                Vector3 position = this.transform.localPosition;
-                                kuttuki_pos = new Vector3(0.3f, 0, 0);
+                                Vector3 position = this.transform.position;
+                                kuttuki_pos = this.transform.position;
+                                kuttuki_pos.y = kuttuki_pos.y - 0.3f;
 
                                 /* 【実際に移動させる】 */
-                                this.transform.localPosition = position + kuttuki_pos;
-
-                                /* 【プレイヤーポジション取得】 */
-                                p_pos = transform.position;
-
-                                /* 【重力の向きを変更】 */
-                                Physics.gravity = gravity_right;
-
-                                /* 【フラグ判定切り替え】 */
-                                bool_turn = true;
-                                kuttuki_down = false;
-                                collider_exit = false;
+                                this.transform.position = /*position + */kuttuki_pos;
                             }
-                            break;
 
-                        case Newkuttuki_move_state.move_left:
-                            if (Mathf.Abs(transform.rotation.z) != 90)
-                            {
-                                /* 【回転前準備】 */
-                                Quaternion rotation = this.transform.localRotation;
-                                Quaternion rot = Quaternion.AngleAxis(90, Vector3.forward);
-                                Quaternion q = this.transform.localRotation;
 
-                                /* 【実際に回転させる】 */
-                                this.transform.localRotation = q * rot;
+                            /* *****【重要】↑の処理を入れると上に浮いてしまう（問題解決済み）***** */
 
-                                /* 【念のため用にした処理】 */
-                                //if (player.right != 0)
-                                //{
+                            /* 【プレイヤーポジション取得】 */
+                            //p_pos = transform.position;
 
-                                //}
-                                //else if (player.right != 0)
-                                //{
+                            /* 【重力の向きを変更】 */
+                            Physics.gravity = gravity_down;
 
-                                //}
+                            /* 【フラグ判定切り替え】 */
+                            bool_turn = true;
+                            collider_exit = false;
+                        }
+                        break;
 
-                                /* 【外側回転処理に入ってしまう問題対策】 */
-                                Vector3 position = this.transform.localPosition;
-                                kuttuki_pos = new Vector3(-0.3f, 0, 0);
+                    case Newkuttuki_move_state.move_right:
+                        if (Mathf.Abs(transform.rotation.z) != 90 && bool_turn == false)
+                        {
+                            /* 【回転前準備】 */
+                            Quaternion rotation = this.transform.localRotation;
+                            Quaternion rot = Quaternion.AngleAxis(90, Vector3.forward);
+                            Quaternion q = this.transform.localRotation;
 
-                                /* 【実際に移動させる】 */
-                                this.transform.localPosition = position + kuttuki_pos;
+                            /* 【実際に回転させる】 */
+                            this.transform.localRotation = q * rot;
 
-                                /* 【プレイヤーポジション取得】 */
-                                p_pos = transform.position;
+                            /* 【念のため用にした処理】 */
+                            //if (player.right != 0)
+                            //{
 
-                                /* 【重力の向きを変更】 */
-                                Physics.gravity = gravity_left;
+                            //}
+                            //else if (player.right != 0)
+                            //{
 
-                                /* 【フラグ判定切り替え】 */
-                                bool_turn = true;
-                                kuttuki_down = false;
-                                collider_exit = false;
-                            }
-                            break;
-                    }
+                            //}
+
+                            /* 【外側回転処理に入ってしまう問題対策】 */
+                            Vector3 position = this.transform.localPosition;
+                            kuttuki_pos = new Vector3(0.3f, 0, 0);
+
+                            /* 【実際に移動させる】 */
+                            this.transform.localPosition = position + kuttuki_pos;
+
+                            /* 【プレイヤーポジション取得】 */
+                            //p_pos = transform.position;
+
+                            /* 【重力の向きを変更】 */
+                            Physics.gravity = gravity_right;
+
+                            /* 【フラグ判定切り替え】 */
+                            bool_turn = true;
+                            kuttuki_down = false;
+                            collider_exit = false;
+                        }
+                        break;
+
+                    case Newkuttuki_move_state.move_left:
+                        if (Mathf.Abs(transform.rotation.z) != 90)
+                        {
+                            /* 【回転前準備】 */
+                            Quaternion rotation = this.transform.localRotation;
+                            Quaternion rot = Quaternion.AngleAxis(90, Vector3.forward);
+                            Quaternion q = this.transform.localRotation;
+
+                            /* 【実際に回転させる】 */
+                            this.transform.localRotation = q * rot;
+
+                            /* 【念のため用にした処理】 */
+                            //if (player.right != 0)
+                            //{
+
+                            //}
+                            //else if (player.right != 0)
+                            //{
+
+                            //}
+
+                            /* 【外側回転処理に入ってしまう問題対策】 */
+                            Vector3 position = this.transform.localPosition;
+                            kuttuki_pos = new Vector3(-0.3f, 0, 0);
+
+                            /* 【実際に移動させる】 */
+                            this.transform.localPosition = position + kuttuki_pos;
+
+                            /* 【プレイヤーポジション取得】 */
+                            //p_pos = transform.position;
+
+                            /* 【重力の向きを変更】 */
+                            Physics.gravity = gravity_left;
+
+                            /* 【フラグ判定切り替え】 */
+                            bool_turn = true;
+                            kuttuki_down = false;
+                            collider_exit = false;
+                        }
+                        break;
                 }
+                
             }
         }
     }

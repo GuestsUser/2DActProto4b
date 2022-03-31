@@ -56,7 +56,7 @@ public class Padinput : MonoBehaviour
     public void OnMove(InputAction.CallbackContext context)
     {
         
-            if (GetComponent<DashSystem>().dashFlg != false)
+            if (GetComponent<DashSystem>().moveFlg != false)
             {
                 if (stage_flg == false)
                 {

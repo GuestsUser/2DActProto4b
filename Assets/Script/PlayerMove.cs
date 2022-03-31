@@ -24,6 +24,7 @@ public class PlayerMove : Padinput
     Vector3 player_pos2;
 
     [SerializeField] NewKuttuki kuttuku;
+    [SerializeField] DashSystem dash;
     /*プレイヤーの移動状態*/
     public State state;
     public bool idle;
@@ -105,6 +106,7 @@ public class PlayerMove : Padinput
 
         right = 1; /*最初何も入力していない状態でくっつきの靴に切り替えると入力と移動する方向が逆になる*/
         kuttuki_hit_wall = false;
+        dash = GetComponent<DashSystem>();
     }
 
     /*オーバーライド関数(自動で呼び出される 呼び出しタイミングはコントローラー割り当てがされているボタン、スティックが入力された時)*/
@@ -246,7 +248,12 @@ public class PlayerMove : Padinput
             move = Vector3.zero;
         }
         //transform.localPosition += ((move / 10) * speed * Time.deltaTime);
-        transform.Translate((move / 10) * speed * Time.deltaTime);
+
+        if(dash.dashFlg == true)
+        {
+            transform.Translate((move / 10) * speed * Time.deltaTime);
+        }
+        
 
     }
     private void Turn() /*振り向き処理*/

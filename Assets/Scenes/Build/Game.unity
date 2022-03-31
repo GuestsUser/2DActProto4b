@@ -1073,6 +1073,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dashFlg: 1
+  moveFlg: 1
+  coolTimeMove: 0
   coolTime: 0
   dashForce: 5
   change_shoes: {fileID: 0}
@@ -1332,11 +1334,23 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 502666674}
   m_PrefabAsset: {fileID: 0}
+--- !u!4 &1193017445 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6346024905541084826, guid: 1b398051e4fdfd044b3b928e875c85b5,
+    type: 3}
+  m_PrefabInstance: {fileID: 1734879851}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1346767539 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 826922264770035628, guid: 7fb9e456aa0cc05479236c44f2ee9f0b,
     type: 3}
   m_PrefabInstance: {fileID: 502666674}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &1381724147 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6346024905637064565, guid: 1b398051e4fdfd044b3b928e875c85b5,
+    type: 3}
+  m_PrefabInstance: {fileID: 1734879851}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &1473607847 stripped
 GameObject:
@@ -1397,7 +1411,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.9560118, y: 1}
+    m_SensorSize: {x: 1.4867924, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -1856,6 +1870,36 @@ PrefabInstance:
       propertyPath: rayDistance
       value: 0.53
       objectReference: {fileID: 0}
+    - target: {fileID: 6346024904048878351, guid: 1b398051e4fdfd044b3b928e875c85b5,
+        type: 3}
+      propertyPath: legtrans
+      value: 
+      objectReference: {fileID: 1193017445}
+    - target: {fileID: 6346024904048878351, guid: 1b398051e4fdfd044b3b928e875c85b5,
+        type: 3}
+      propertyPath: legtrans2
+      value: 
+      objectReference: {fileID: 1193017445}
+    - target: {fileID: 6346024904048878351, guid: 1b398051e4fdfd044b3b928e875c85b5,
+        type: 3}
+      propertyPath: legtrans3
+      value: 
+      objectReference: {fileID: 1193017445}
+    - target: {fileID: 6346024904048878351, guid: 1b398051e4fdfd044b3b928e875c85b5,
+        type: 3}
+      propertyPath: legtrans4
+      value: 
+      objectReference: {fileID: 1381724147}
+    - target: {fileID: 6346024904048878351, guid: 1b398051e4fdfd044b3b928e875c85b5,
+        type: 3}
+      propertyPath: legtrans5
+      value: 
+      objectReference: {fileID: 1381724147}
+    - target: {fileID: 6346024904048878351, guid: 1b398051e4fdfd044b3b928e875c85b5,
+        type: 3}
+      propertyPath: legtrans6
+      value: 
+      objectReference: {fileID: 1381724147}
     - target: {fileID: 6346024904048878576, guid: 1b398051e4fdfd044b3b928e875c85b5,
         type: 3}
       propertyPath: m_Enabled

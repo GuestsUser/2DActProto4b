@@ -20,6 +20,8 @@ public class DamageSystem : MonoBehaviour
     private static float recover = 0; /* 外部から回復値を受け取るための変数 */
     private static DamageCombo combo = DamageCombo.neutral; /* static化したくなかった…… */
 
+    public static DamageCombo playerConbo { get { return combo; } } //comboの取得用
+
     [Header("ライフと残機のシステム")]
     [Tooltip("ライフ画像、ヒエラルキーに配置済みの画像を入れる事でその位置を基準にライフを生成")] [SerializeField] RawImage imageLife;
     [Tooltip("ライフ横配置間隔")] [SerializeField] int placeSpace;
@@ -149,20 +151,20 @@ public class DamageSystem : MonoBehaviour
 
     private IEnumerator InvincibleSystem() /* 常に実行しておくタイプのやつ */
     {
-        DamageCombo curenntCombo;
+        DamageCombo currentCombo;
         float count = 0;
         StartCoroutine(InvincibleEffect());
         while (true)
         {
             while(combo == DamageCombo.neutral) { yield return StartCoroutine(TimeScaleYield.TimeStop()); } /* 平常から変化があるまで待機 */
 
-            curenntCombo = combo; /* 変化した値にmeshセット */
+            currentCombo = combo; /* 変化した値にmeshセット */
             while (count < invincible) /* invincible分だけコンボ値維持 */
             {
                 count += Time.deltaTime;
-                if (curenntCombo > combo) /* 割り込みがあれば時間リセット */
+                if (currentCombo > combo) /* 割り込みがあれば時間リセット */
                 {
-                    curenntCombo = combo;
+                    currentCombo = combo;
                     count = 0;
                 }
                 yield return StartCoroutine(TimeScaleYield.TimeStop());

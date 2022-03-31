@@ -13,105 +13,85 @@ enum Newkuttuki_move_state
 }
 public class NewKuttuki : Padinput
 {
-    /* プレイヤー */
-    [SerializeField] private Vector3 p_pos;
+    /* 【ポジション変数】 */
+    private Vector3 kuttuki_pos;       　　　　　　　　 /* くっつき時、瞬時にくっつくためのポジション移動に使用 */
 
-    /* くっついてるオブジェクト */
-    [SerializeField] private Vector3 obj_pos;
+    [SerializeField] private Vector3 p_pos;             /* プレイヤー位置 */
+    [SerializeField] private Vector3 obj_pos;           /* くっつきオブジェクト位置 */
 
-    /* グラビティ4方向 */
-    Vector3 gravity_up = new Vector3(0, 9.8f, 0);
-    Vector3 gravity_down = new Vector3(0, -9.8f, 0);
-    Vector3 gravity_right = new Vector3(9.8f, 0, 0);
-    Vector3 gravity_left = new Vector3(-9.8f, 0, 0);
 
-    /* フラグ */
-    public bool collider_exit;                          /* true:オブジェクトから離れました false:くっついている、または、ある程度時間が経過した*/
+    /* 【グラビティ4方向】 */
+    Vector3 gravity_up = new Vector3(0, 9.8f, 0);       /* 上方向 */
+    Vector3 gravity_down = new Vector3(0, -9.8f, 0);    /* 下方向 */
+    Vector3 gravity_right = new Vector3(9.8f, 0, 0);    /* 右方向 */
+    Vector3 gravity_left = new Vector3(-9.8f, 0, 0);    /* 左方向 */
+
+    /* 【フラグ】 */
     public bool bool_ray_hit;                           /* true:くっつき状態 false:未くっつき状態 */
-    [SerializeField] private bool kuttuki_To_kuttuki;   /* true:くっついている状態から別のくっつきに移った false:移っていない */
-    [SerializeField] private bool kuttuki_down;         /* true:オブジェクトの下にくっついている false:オブジェクトの下にくっついていない 靴切り替え時の床貫通対策時に追加 */
+    public bool collider_exit;                          /* true:オブジェクトから離れました false:くっついている、または、ある程度時間が経過した*/
+    
     [SerializeField] private bool jump;                 /* true:ジャンプ中です false:ジャンプしていません */
     [SerializeField] private bool bool_turn;            /* true:これ以上回転出来ません false:回転できます */
     [SerializeField] private bool bool_init;            /* true:初期化出来ます false:初期化できません */
-    [SerializeField] private bool bool_kinematic;
-    [SerializeField] private bool bool_on_collision;
-    [SerializeField] private bool bool_float;
-    [SerializeField] private bool bool_exit;
+    [SerializeField] private bool bool_exit;            /* true:くっつきオブジェクトから離れて一定時間たって強制的に初期化されました  false:何も起きません */
+    [SerializeField] private bool bool_float;           /* true:プレイヤーが浮いてしまう可能性があります(対策済み) false:可能性ゼロ */
+    [SerializeField] private bool kuttuki_down;         /* true:オブジェクトの下にくっついている false:オブジェクトの下にくっついていない 靴切り替え時の床貫通対策時に追加 */
+    [SerializeField] private bool bool_kinematic;       /* true:Rididbodyのキネマティックをオンにします false:オフにします */
+    [SerializeField] private bool bool_on_collision;    /* true:今オブジェクトにくっついています false:くっついていません */
+    [SerializeField] private bool kuttuki_To_kuttuki;   /* true:くっついている状態から別のくっつきに移った false:移っていない */
 
-    /*グラビティの方向を変更するのに必要*/
-    Newkuttuki_move_state move_type;
-    PlayerMove player;
-    Vector3 now_gravity;
+    /* 【enum(列挙変数)】 */
+    [SerializeField] Newkuttuki_move_state move_type; 　/* くっつきobjからみたプレイヤーの移動状態 */ 
 
-    int kuttuki_time; /*くっつきオブジェクトから離れたときの時間*/
-    /*くっつき時の浮く問題解決に必要*/
-    float move_x = 0.5f;
+    /* 【他スクリプトの取得】 */
+    [SerializeField] private PlayerMove player;         /* 左スティックの入力状態の取得に使用 */
+    [SerializeField] private ChangeShoes change_shoes;  /* 現在装着している靴の能力の取得に使用 */
 
-    //bool kuttuki_
+    /* 【int型変数】 */
+    int kuttuki_time;                                   /* くっつきオブジェクトから離れたときの時間 */
+    int collision_time;                         
 
-    /*ジャンプ移動の不具合修正に必要*/
+    /* 【float型変数】 */
+    float move_x = 0.5f; 　　　　　　　　　　　　　　　 /* 最初のくっつき時の浮く問題を強制的にポジションに代入させて解決 */
+
+    /* 【レイキャスト変数まとめ】 */
+    Ray foot_ray;                                       /* 足元に向けるレイ */
+    Ray front_ray;                                      /* 正面に向けるレイ */
+
+    RaycastHit rayHit;                                  /* レイ当たり判定を保持する変数 */
     
+    Vector3 rayPosition;                                /* レイキャストの位置 */
+    float rayDistance = 0.5f;　　　　                   /*（レイキャスト）可視光線の長さ */
 
-    /*レイキャスト用変数*/
-    public Vector3 rayPosition; /*レイキャストの位置*/
-
-    [SerializeField] private ChangeShoes change_shoes;  /*能力切り替え用変数_ChangeShoes*/
-
-    /*脳筋式レイキャスト変数*/
-    public Ray foot_ray;     /*足元*/
-    public Ray front_ray;    /*正面*/
-
-    public RaycastHit rayHit;
-
-    /*追加部分*/
-    
-    //bool kuttuki_left; /*true:左入力をしている状態でくっつきオブジェクトにくっつく*/
-    /*追加部分*/
-
-    /*（レイキャスト）可視光線の長さ*/
-    [SerializeField] public float rayDistance = 0.5f;
-
-
-    /*レイキャスト用変数*/
-
-    public Rigidbody rb;    /*みんな大好きリジッドボデー*/
-
-    /*くっついた時の浮き状態を改善するためのもの*/
-    Vector3 kuttuki_pos;
-
-    /* 滑る問題解決 */
-    Animator animator;
-
-
-    /* 既にくっついてる時の回転に必要 */
-    Quaternion kuttuki_rot;
+    /* プレイヤーにアタッチされているコンポネント変数 */
+    Animator animator;　　　　　　　　　　　　　　　　　/* 滑らない処理に使用 */
+    public Rigidbody rb;    　　　　　　　　　　　　　　/* 滑らない処理に使用 */
 
     void Start()
     {
+        /* 【コンポネントの取得】 */
+        rb = GetComponent<Rigidbody>();
+        player = GetComponent<PlayerMove>();
+        animator = GetComponent<Animator>();
         change_shoes = GetComponent<ChangeShoes>();
 
-        player = GetComponent<PlayerMove>();
-
-        rb = GetComponent<Rigidbody>(); /*リジッドボデー*/
-
-        bool_ray_hit = false;
-
-        collider_exit = false;
-        move_type = Newkuttuki_move_state.none;
-
+        /* 【フラグの初期化】 */
         jump = false;
-        //kuttuki_left = false;
-        move_x = 0.5f;
-        kuttuki_To_kuttuki = false;
-        kuttuki_down = false;
-
-        animator = GetComponent<Animator>();
         bool_turn = false;
         bool_init = false;
-
+        bool_float = false;
+        bool_ray_hit = false;
+        kuttuki_down = false;
+        collider_exit = false;
         bool_kinematic = false;
         bool_on_collision = false;
-        bool_float = false;
+        kuttuki_To_kuttuki = false;
+
+        /* 【移動状態の初期化】 */
+        move_type = Newkuttuki_move_state.none;
+
+        /* 【くっつき時間の初期化】 */
+        collision_time = 0;
     }
     private void Update()
     {
@@ -132,10 +112,77 @@ public class NewKuttuki : Padinput
     }
     void FixedUpdate()
     {
-        /* 【外側回転で複数回連続で回転してしまう問題対策】 */
-        if(bool_ray_hit == true )
+        /* 【回転の制御処理】 */
+        TurnControll();
+
+        /* 【滑ってしまう問題対策２(未完成)】 */
+        /* 変なタイミングで回転したり浮いてしまう問題を確認 */
+        if (bool_ray_hit == true)
         {
-            if (Physics.Raycast(foot_ray,out rayHit, rayDistance)) 
+            if (jump == false && bool_kinematic == false && bool_on_collision == true)
+            {
+                collision_time++;
+                if(collision_time < 10)
+                {
+                    rb.useGravity = false;
+                    //rb.isKinematic = true;
+                }
+                else
+                {
+                    //rb.useGravity = true;
+                    //rb.isKinematic = false;
+                }
+            }
+            else if (jump == true)
+            {
+                collision_time = 0;
+
+                rb.useGravity = true;
+                //rb.isKinematic = false;
+            }
+        }
+        else /* 未くっつき状態の時 */
+        {
+            collision_time = 0;
+
+            rb.useGravity = true;
+            //rb.isKinematic = false;
+        }
+
+        /* 【移動状態の取得】 */
+        MoveState();
+
+        /* 【レイの設定】 */
+        RaySet();
+
+        if(bool_init == false) /* 初期化フラグがfalseの時 */
+        {
+            /* 【靴がマグネットの時の処理】 */
+            if (change_shoes.type == ShoesType.Magnet_Shoes)
+            {
+                /* 【くっつきの処理】 */
+                Kuttuki();
+            }
+            /* 【それ以外の靴に切り替わったとき】 */
+            else
+            {
+                /* 【靴を切り替えたときの処理】 */
+                Change_shoes();
+            }
+        }
+        else if(bool_init == true) /* 初期化フラグがtrueの時 */
+        {
+            /* 【初期化処理】 */
+            Initialized();
+        }
+    }/* Updateの終了部分 */
+
+    void TurnControll () /* 【回転の制御処理】 */
+    {
+        /* 【外側回転で複数回連続で回転してしまう問題対策】 */
+        if (bool_ray_hit == true)
+        {
+            if (Physics.Raycast(foot_ray, out rayHit, rayDistance))
             {
                 Debug.Log("回転を可能にする");
                 bool_turn = false;
@@ -195,54 +242,8 @@ public class NewKuttuki : Padinput
             ぶつかったときに浮いてしまう対策用フラグ */
             bool_float = true;
         }
+    }
 
-        /* 【滑ってしまう問題対策２(未完成)】 */
-        /* 変なタイミングで回転したり浮いてしまう問題を確認 */
-        if (bool_ray_hit == true)
-        {
-
-            if (jump == false && bool_kinematic == false && bool_on_collision == true)
-            {
-                rb.useGravity = false;
-                rb.isKinematic = true;
-            }
-            else if (jump == true)
-            {
-                rb.useGravity = true;
-                rb.isKinematic = false;
-            }
-        }
-        else
-        {
-            rb.useGravity = true;
-            rb.isKinematic = false;
-        }
-
-        /* 移動状態の取得 */
-        MoveState();
-
-        /* レイの設定 */
-        RaySet();
-
-        if(bool_init == false) /* 初期化フラグがfalseの時 */
-        {
-            /* 靴がマグネットの時の処理 */
-            if (change_shoes.type == ShoesType.Magnet_Shoes)
-            {
-                Kuttuki();
-            }
-            /* それ以外の靴に切り替わったとき */
-            else
-            {
-                Change_shoes();
-            }
-        }
-        else if(bool_init == true) /* 初期化フラグがtrueの時 */
-        {
-            /* 初期化処理 */
-            Initialized();
-        }
-    }/*Updateの終了部分*/
     void MoveState() /* 移動状態の判定処理 */
     {
         if (bool_ray_hit == true)
@@ -250,14 +251,14 @@ public class NewKuttuki : Padinput
             /* 【上下の移動状態の取得】 */
             if (Mathf.Abs(Physics.gravity.x) == 9.8f) /* 重力は左右のどちらかの時 */
             {
-               if(this.transform.position.y > obj_pos.y)
-               {
+                if (this.transform.position.y > obj_pos.y)
+                {
                     move_type = Newkuttuki_move_state.move_up;
-               }
-               else if(this.transform.position.y < obj_pos.y)
-               {
+                }
+                else if (this.transform.position.y < obj_pos.y)
+                {
                     move_type = Newkuttuki_move_state.move_down;
-               }
+                }
             }
 
             /* 【左右の移動状態の取得】 */
@@ -267,7 +268,7 @@ public class NewKuttuki : Padinput
                 {
                     move_type = Newkuttuki_move_state.move_right;
                 }
-                else if(this.transform.position.x < obj_pos.x)
+                else if (this.transform.position.x < obj_pos.x)
                 {
                     move_type = Newkuttuki_move_state.move_left;
                 }
@@ -276,7 +277,7 @@ public class NewKuttuki : Padinput
             Debug.Log(move_type);
         }
     }
-    void RaySet()
+    void RaySet() /* 【レイキャストの設定】 */
     {
         rayPosition = transform.position;    /*レイキャストの位置*/
 
@@ -287,21 +288,21 @@ public class NewKuttuki : Padinput
         Debug.DrawRay(rayPosition, foot_ray.direction * rayDistance, Color.yellow);
         Debug.DrawRay(rayPosition, front_ray.direction * rayDistance, Color.yellow);
     }
-    void Kuttuki()
+    void Kuttuki() /* 【くっつきの処理】 */
     {
-        Debug.Log("くっつき処理に入っています");
+        //Debug.Log("くっつき処理に入っています");
 
-        /* 離れたときのフラグ変更処理 */
+        /* 【離れたときのフラグ変更処理】 */
         FootRayExit();
 
-        /* 正面のレイが当たったとき */
+        /* 【正面のレイの処理】 */
         Front_Ray();
 
-        /* 足元のレイが当たったとき */
+        /* 【足元のレイの処理】 */
         Foot_Ray();
 
     }
-    void Front_Ray()
+    void Front_Ray() /* 【プレイヤーの正面に出ているレイの処理】 */
     {
         /* 【正面のレイが当たっている時】*/
         if(Physics.Raycast(front_ray,out rayHit, rayDistance))
@@ -326,7 +327,7 @@ public class NewKuttuki : Padinput
                 }
 
                 /* 【プレイヤーの浮き対策】 */
-                Vector3 kuttuki_pos = new Vector3(move_x, 0, 0); /* これでくっつきと同時に壁の方向に近づき直ぐくっつける */
+                kuttuki_pos = new Vector3(move_x, 0, 0); /* これでくっつきと同時に壁の方向に近づき直ぐくっつける */
                 this.transform.position = position + kuttuki_pos;
 
                 /* 【重力を変更する】 */
@@ -554,7 +555,7 @@ public class NewKuttuki : Padinput
             }
         }
     }
-    void Foot_Ray()
+    void Foot_Ray() /* 【プレイヤーの足元に出ているレイの処理】 */
     {
         /* 【足元のレイが当たっている時】 */
         if (Physics.Raycast(foot_ray, out rayHit, rayDistance))
@@ -566,6 +567,7 @@ public class NewKuttuki : Padinput
                 bool_ray_hit = true; /* くっつき状態にする */
                 obj_pos = rayHit.transform.position;
             }
+
             /* 下の処理はくっつき状態でそのまま移動していて足元がくっつきオブジェクトから別のオブジェクトに変わったときの処理 */
             else if (bool_ray_hit == true && rayHit.collider.tag != "kuttuku" && !Physics.Raycast(front_ray, out rayHit, rayDistance)) /* この処理は上りでは使えない、回転 → 戻る → 落ちる → くっつくのループ */
             {
@@ -606,12 +608,13 @@ public class NewKuttuki : Padinput
             }
             else if(jump == false)
             {
-                if (kuttuki_time > 5) //回転時に離れた時
-                {
-                    /* 【フラグ判定切り替え】 */
-                    bool_exit = true;
-                    bool_init = true;
-                }
+                //if (kuttuki_time > 5) //回転時に離れた時
+                //{
+                //    /* 【フラグ判定切り替え】 */
+                //    bool_exit = true;
+                //    bool_init = true;
+                //}
+                kuttuki_time = 0;
 
                 /* 【外側回転処理】 */
                 if (bool_exit == false && bool_on_collision == true && bool_turn == false && kuttuki_To_kuttuki == false)
@@ -747,7 +750,7 @@ public class NewKuttuki : Padinput
             }
         }
     }
-    void Change_shoes()
+    void Change_shoes() /* 【靴を切り替えたときの処理】 */
     {
         Physics.gravity = gravity_down;
 
@@ -793,7 +796,7 @@ public class NewKuttuki : Padinput
             bool_ray_hit = false; /* 未くっつき状態にする */
             bool_on_collision = false; /* くっついたことのない状態にする */
             kuttuki_down = false; /* 下にくっついていたという判定解除 */
-            //kuttuki_To_kuttuki = false; /* くっつきからくっつきに移動した判定解除 */
+            kuttuki_To_kuttuki = false; /* くっつきからくっつきに移動した判定解除 */
             collider_exit = false; /* くっつき状態でのオブジェクトから離れた判定解除 */
             bool_exit = false;
 
@@ -807,16 +810,14 @@ public class NewKuttuki : Padinput
 
     private void OnCollisionEnter(Collision collision)
     {
-        jump = false;
+        
         /* まだくっつき判定で一度離れて再びオブジェクトにくっついた時 */
         if (collision.gameObject.tag == "kuttuku" && bool_ray_hit == true && collider_exit == true)
         {
             bool_on_collision = true;
             kuttuki_time = 0;
             collider_exit = false; /* 離れた時のフラグをfalseに */
-            //kuttuki_To_kuttuki = false;
             bool_kinematic = false;
-            Debug.Log("離れた後にくっついた判定");
         }
         else if (collision.gameObject.tag == "kuttuku" && bool_ray_hit == true)
         {
@@ -826,6 +827,7 @@ public class NewKuttuki : Padinput
     private void OnCollisionStay(Collision collision)
     {
         kuttuki_time = 0;
+        jump = false;
         collider_exit = false; /* 離れた時のフラグをfalseに */
     }
     private void FootRayExit()

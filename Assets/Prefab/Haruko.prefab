@@ -119,6 +119,7 @@ GameObject:
   - component: {fileID: 6346024904048878576}
   - component: {fileID: 6346024904048878577}
   - component: {fileID: 8743491813017517459}
+  - component: {fileID: 3141178713863076342}
   m_Layer: 0
   m_Name: Haruko
   m_TagString: Player
@@ -387,20 +388,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   p_pos: {x: 0, y: 0, z: 0}
   obj_pos: {x: 0, y: 0, z: 0}
-  collider_exit: 0
   bool_ray_hit: 0
-  kuttuki_To_kuttuki: 0
-  kuttuki_down: 0
+  collider_exit: 0
   jump: 0
   bool_turn: 0
   bool_init: 0
+  bool_exit: 0
+  bool_float: 0
+  kuttuki_down: 0
   bool_kinematic: 0
   bool_on_collision: 0
-  bool_float: 0
-  bool_exit: 0
-  rayPosition: {x: 0, y: 0, z: 0}
+  kuttuki_To_kuttuki: 0
+  move_type: 0
+  player: {fileID: 0}
   change_shoes: {fileID: 0}
-  rayDistance: 0.5
   rb: {fileID: 0}
 --- !u!114 &6346024904048878579
 MonoBehaviour:
@@ -471,6 +472,20 @@ MonoBehaviour:
   invincible: 2.5
   hitColor: {fileID: 2100000, guid: bd61b33d0c812b345856071d8ac6de67, type: 2}
   invincibleColor: {fileID: 2100000, guid: 958d039d0732c26419294df6f5a4b68b, type: 2}
+--- !u!114 &3141178713863076342
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6346024904048878582}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ad57d08a373c9cf489c5ce0cfa7a6664, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  force: 0.1
+  time: 0.4
 --- !u!1 &6346024904113327281
 GameObject:
   m_ObjectHideFlags: 0

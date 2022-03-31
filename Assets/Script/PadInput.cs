@@ -9,14 +9,14 @@ public class Padinput : MonoBehaviour
     PlayerInput input;
 
     bool stage_flg; /*ステージセレクトでステージを決定した時用*/
-    
-    public PlayerInput _input { get{ return input; } }
+
+    public PlayerInput _input { get { return input; } }
 
     void Awake()
     {
         TryGetComponent(out input);
     }
-    
+
     void OnEnable() /*オブジェクトがアクティブになったとき*/
     {
         /*[]中は『Actions名』を入れる*/
@@ -45,7 +45,7 @@ public class Padinput : MonoBehaviour
 
     public void OnJump(InputAction.CallbackContext context)
     {
-        Jump(); 
+        Jump();
         Debug.Log("Aボタン入力しました");
     }
     public void OnSkill(InputAction.CallbackContext context)
@@ -55,13 +55,18 @@ public class Padinput : MonoBehaviour
     }
     public void OnMove(InputAction.CallbackContext context)
     {
-        if (stage_flg == false)
-        {
+        
+            if (GetComponent<DashSystem>().dashFlg != false)
+            {
+                if (stage_flg == false)
+                {
 
-            Move();
-        }
+                    Move();
+                }
+            }
+        
         //Debug.Log("通ってます");
-        /*↓これで右入力か左入力かをとれるよ(右入力:1.0,0.0 左入力:-1.0,0.0)*/　
+        /*↓これで右入力か左入力かをとれるよ(右入力:1.0,0.0 左入力:-1.0,0.0)*/
         //var value = context.ReadValue<Vector2>();
         //Debug.Log(value);
     }

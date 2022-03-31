@@ -9,6 +9,8 @@ public enum State /*プレイヤーの移動状態*/
     walk,
     run,
 }
+//[SerializeField]private DashSystem dashsystem;
+
 
 public class PlayerMove : Padinput
 {
@@ -22,6 +24,7 @@ public class PlayerMove : Padinput
     Vector3 player_pos2;
 
     [SerializeField] NewKuttuki kuttuku;
+    [SerializeField] DashSystem dash;
     /*プレイヤーの移動状態*/
     public State state;
     public bool idle;
@@ -103,6 +106,7 @@ public class PlayerMove : Padinput
 
         right = 1; /*最初何も入力していない状態でくっつきの靴に切り替えると入力と移動する方向が逆になる*/
         kuttuki_hit_wall = false;
+        dash = GetComponent<DashSystem>();
     }
 
     /*オーバーライド関数(自動で呼び出される 呼び出しタイミングはコントローラー割り当てがされているボタン、スティックが入力された時)*/
@@ -113,14 +117,14 @@ public class PlayerMove : Padinput
             right = Gamepad.current.leftStick.x.ReadValue();
             left = 0;
         }
-        
+
 
         if (Gamepad.current.leftStick.x.ReadValue() < 0)
         {
             left = Gamepad.current.leftStick.x.ReadValue();
             right = 0;
         }
-        
+
 
 
         if (input_abs <= 0.5f)
@@ -174,14 +178,18 @@ public class PlayerMove : Padinput
         }
 
         ApplyAnimator();
-        
+
         //transform.Translate((move / 10) * speed * Time.deltaTime); /*Update内だと壁にめり込む*/
 
     }
     private void FixedUpdate()
     {
         //Debug.Log(transform.localRotation);
-        Turn();
+
+        //if (GetComponent<DashSystem>().dashFlg = treu)
+        //{
+            Turn();
+        //}
         Run();
         /*壁のめり込み対策(しゅんver)*/
         rayPosition = new Vector3(transform.localPosition.x, transform.localPosition.y, transform.localPosition.z);
@@ -227,7 +235,7 @@ public class PlayerMove : Padinput
         {
             move = Vector3.zero;
         }
-        else if(hit_wall_left == false && hit_wall_right == false)
+        else if (hit_wall_left == false && hit_wall_right == false)
         {
             move = new Vector3(move_x, 0, 0);
         }
@@ -240,7 +248,12 @@ public class PlayerMove : Padinput
             move = Vector3.zero;
         }
         //transform.localPosition += ((move / 10) * speed * Time.deltaTime);
-        transform.Translate((move / 10) * speed * Time.deltaTime);
+
+        if(dash.dashFlg == true)
+        {
+            transform.Translate((move / 10) * speed * Time.deltaTime);
+        }
+        
 
     }
     private void Turn() /*振り向き処理*/
@@ -273,16 +286,16 @@ public class PlayerMove : Padinput
             }
             else if (left != 0)/*左スティックが左に入力されているとき*/
             {
-                
+
                 /*プレイヤーの向きを左に向いている状態にする処理*/
-                if(transform.localRotation != Quaternion.Euler(0, 180, 0))
+                if (transform.localRotation != Quaternion.Euler(0, 180, 0))
                 {
                     Debug.Log("左向くはず");
                     player_direction = Quaternion.Euler(0, 180, 0); /*Quaternion.Eulerで向きを3軸(xyz)まとめて値を指定したものをプレイヤーの向きを入れる変数に代入*/
                     transform.localRotation = player_direction; /*プレイヤーの向きをlocalRotationに代入して回転させる*/
                 }
-                
-                
+
+
                 /*ここにくっつきと同じやり方の回転を入れる*/
                 //if (this.transform.localRotation.y != 270f) /*もし、localRotation.yの値が-90fじゃない時*/
                 //{
@@ -327,7 +340,7 @@ public class PlayerMove : Padinput
                         /*【回転させる準備】 rotには回転させたい値と軸を指定したものを、qには現在のlocalRotationの値を代入*/
                         Quaternion rot = Quaternion.AngleAxis(180, Vector3.up); /*y軸で180°回転するように指定*/
                         Quaternion q = this.transform.localRotation; /*現在の値を保持*/
-                        
+
                         /*localRotationに値を代入し、実際に回転させる*/
                         this.transform.localRotation = q * rot; /*【q * rot】にすることで現在の値から〇°回転という処理が出来る*/
                         bool_left_direction = true;/*プレイヤーが左に向いているときのフラグをtrueに*/
@@ -339,7 +352,7 @@ public class PlayerMove : Padinput
             }
         }
 
-        
+
 
     }
 
@@ -393,21 +406,21 @@ public class PlayerMove : Padinput
     private void WallHit()
     {
         /* くっつき状態ではない時 */
-        if(kuttuku.bool_ray_hit == false)
+        if (kuttuku.bool_ray_hit == false)
         {
             /* 正面から出ているレイが当たったら */
             if (Physics.Raycast(ray, out rayHit, rayDistance))
             {
                 //Debug.Log("れいが当たってる処理は正常です");
-                if(rayHit.collider.tag == "kuttuku" || rayHit.collider.tag == "ground")
+                if (rayHit.collider.tag == "kuttuku" || rayHit.collider.tag == "ground")
                 {
                     /*プレイヤーの位置と幅を取得*/
                     var p_width = transform.lossyScale.x / 2; /*2で割ることにより壁に当たるほうのみの幅を出せる*/
                     var p_pos = new Vector3((transform.localPosition.x), transform.localPosition.y, transform.localPosition.z);
-                    
+
                     /*レイが当たっているオブジェクトの位置を取得*/
                     obj_pos = rayHit.transform.position;
-                    
+
                     /* 右に入力されている時 */
                     if (right != 0)
                     {
@@ -468,7 +481,7 @@ public class PlayerMove : Padinput
             hit_wall_right = false;
             hit_wall_left = false;
         }
-        if(kuttuku.bool_ray_hit == true && Physics.gravity == new Vector3(0,-9.8f,0))
+        if (kuttuku.bool_ray_hit == true && Physics.gravity == new Vector3(0, -9.8f, 0))
         {
             if (Physics.Raycast(ray_back, out rayHit, rayDistance))
             {
@@ -542,7 +555,7 @@ public class PlayerMove : Padinput
     /*壁にめり込まないようにする処理(自分版)*/
     private void DontMove() /* 操作していない時勝手に動かないようにする処理 */
     {
-        if(kuttuku.bool_ray_hit == true && idle == true)
+        if (kuttuku.bool_ray_hit == true && idle == true)
         {
             Debug.Log("勝手に動かない処理");
             transform.position = player_pos2;

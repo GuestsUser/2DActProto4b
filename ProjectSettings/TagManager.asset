@@ -8,6 +8,7 @@ TagManager:
   - SavePoint
   - kuttuku
   - Enemy
+  - Item
   layers:
   - Default
   - TransparentFX

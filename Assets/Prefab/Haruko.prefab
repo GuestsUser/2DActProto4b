@@ -121,7 +121,6 @@ GameObject:
   - component: {fileID: 8743491813017517459}
   - component: {fileID: 3141178713863076342}
   - component: {fileID: 1734879854}
-  - component: {fileID: 973494160426079202}
   m_Layer: 0
   m_Name: Haruko
   m_TagString: Player
@@ -418,9 +417,13 @@ MonoBehaviour:
   bool_kinematic: 0
   bool_on_collision: 0
   kuttuki_To_kuttuki: 0
+  bool_oncollision_down: 0
   move_type: 0
   player: {fileID: 0}
   change_shoes: {fileID: 0}
+  kuttuki_time: 0
+  collision_time: 0
+  rayDistance: 0.28
   rb: {fileID: 0}
 --- !u!114 &6346024904048878579
 MonoBehaviour:
@@ -522,19 +525,6 @@ MonoBehaviour:
   rayDistance: 0.1
   rb: {fileID: 0}
   upForce: 400
---- !u!114 &973494160426079202
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6346024904048878582}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 912c21c7b3ea43645bc31cfd23537c3c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  itemCountText: {fileID: 0}
 --- !u!1 &6346024904113327281
 GameObject:
   m_ObjectHideFlags: 0

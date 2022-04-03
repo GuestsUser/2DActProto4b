@@ -9,6 +9,7 @@ TagManager:
   - kuttuku
   - Enemy
   - kuttuku_down
+  - Item
   layers:
   - Default
   - TransparentFX

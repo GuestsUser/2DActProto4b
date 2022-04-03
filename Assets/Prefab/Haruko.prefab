@@ -330,7 +330,7 @@ MonoBehaviour:
   legposition4: {x: 0, y: 0, z: 0}
   legposition5: {x: 0, y: 0, z: 0}
   legposition6: {x: 0, y: 0, z: 0}
-  rayDistance: 0.53
+  rayDistance: 0.05
 --- !u!114 &6346024904048878348
 MonoBehaviour:
   m_ObjectHideFlags: 0

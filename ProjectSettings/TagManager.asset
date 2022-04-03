@@ -8,6 +8,7 @@ TagManager:
   - SavePoint
   - kuttuku
   - Enemy
+  - kuttuku_down
   - Item
   layers:
   - Default

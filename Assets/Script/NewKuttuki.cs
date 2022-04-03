@@ -747,7 +747,7 @@ public class NewKuttuki : Padinput
             if (jump == true)
             {
 
-                if (kuttuki_time > 50) //47はジャンプの滞空時間
+                if (kuttuki_time > 53) //47はジャンプの滞空時間
                 {
                     /* 【フラグ判定切り替え】 */
                     bool_exit = true;

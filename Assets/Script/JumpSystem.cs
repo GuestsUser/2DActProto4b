@@ -214,7 +214,7 @@ public class JumpSystem : Padinput
 
     public Vector3 rayPosition; /*レイキャストの位置*/
 
-    /*3/29テスト用*/
+    /*レイキャスト修正版*/
     public Transform legtrans;
     public Transform legtrans2;
     public Transform legtrans3;
@@ -228,7 +228,7 @@ public class JumpSystem : Padinput
     public Vector3 legposition4;
     public Vector3 legposition5;
     public Vector3 legposition6;
-    /*3/29テスト用*/
+    /*レイキャスト修正版*/
 
     /*（レイキャスト）可視光線の長さ*/
     [SerializeField] public float rayDistance = 0.5591f;
@@ -251,14 +251,14 @@ public class JumpSystem : Padinput
         /*レイキャストの使い方がわからないのでお願いします（プレイやの当たり判定をレイキャストにする）参照元： https://getabakoclub.com/2020/05/11/unity%e3%81%a7%e5%9c%b0%e9%9d%a2%e3%81%ae%e5%bd%93%e3%81%9f%e3%82%8a%e5%88%a4%e5%ae%9a%e3%82%92%e8%b6%b3%e5%85%83%e3%81%a0%e3%81%91%e5%8f%96%e5%be%97%e3%81%99%e3%82%8b%e3%80%903d%e3%80%91/ */
         //rayPosition = rb.transform.position;/*レイキャストの位置*/
 
-        /*3/29テスト用*/
+        /*レイキャスト修正版*/
         legposition = legtrans.position;
         legposition2 = legtrans2.position;
         legposition3 = legtrans3.position;
         legposition4 = legtrans4.position;
         legposition5 = legtrans5.position;
         legposition6 = legtrans6.position;
-        /*3/29テスト用*/
+        /*レイキャスト修正版*/
 
         //if (Physics.gravity == new Vector3(0, -9.8f, 0))/*通常時*/
         //{
@@ -269,7 +269,7 @@ public class JumpSystem : Padinput
         //    rayPosition.y -= 0.5f;
         //}
 
-        /*3/29テスト用*/
+        /*レイキャスト修正版*/
         if (Physics.gravity == new Vector3(0, -9.8f, 0))/*通常時*/
         {
             legposition2.x += 0.05f;
@@ -284,20 +284,16 @@ public class JumpSystem : Padinput
             legposition4.z += 0.05f;
             legposition6.z -= 0.05f;
         }
-        /*3/29テスト用*/
+        /*レイキャスト修正版*/
 
-        /*3/29テスト用*/
+        /*レイキャスト修正版*/
         /*レイキャストの位置,レイキャストの角度*/
         ray = new Ray(legposition, -legtrans.up);
         ray2 = new Ray(legposition2, -legtrans2.up);
-        //legposition2.x += 0.05f;
         ray3 = new Ray(legposition3, -legtrans3.up);
-        //legposition3.x -= 0.05f;
         ray4 = new Ray(legposition4, -legtrans4.up);
         ray5 = new Ray(legposition5, -legtrans5.up);
-        //legposition4.x += 0.05f;
         ray6 = new Ray(legposition6, -legtrans6.up);
-        //legposition6.x -= 0.05f;
 
         /*デバッグ用の可視光線*/
         Debug.DrawRay(legposition, ray.direction * rayDistance, Color.green);
@@ -306,7 +302,7 @@ public class JumpSystem : Padinput
         Debug.DrawRay(legposition4, ray4.direction * rayDistance, Color.green);
         Debug.DrawRay(legposition5, ray5.direction * rayDistance, Color.green);
         Debug.DrawRay(legposition6, ray6.direction * rayDistance, Color.green);
-        /*3/29テスト用*/
+        /*レイキャスト修正版*/
 
         /*追加部分*/
         ///*レイキャストの位置,レイキャストの角度*/

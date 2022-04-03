@@ -5,25 +5,27 @@ using UnityEngine.UI;
 
 public class PlayerManager : MonoBehaviour
 {
-    private int count;
-    private int zanki;
-    public Text itemCountText;
+    private int itemCount;      /*アイテム取得数保持変数*/
+    private int zanki;          /*（仮）残機*/
+    public Text itemCountText;  /*アイテム取得数表示用テキスト*/
 
     private void Start()
     {
-        count = 0;
+        itemCount = 0;
     }
 
     private void Update()
     {
         /*アイテム獲得数表示更新*/
-        itemCountText.text = "コイン数：" + count.ToString() + " / 100";
+        itemCountText.text = "コイン数：" + itemCount.ToString() + " / 100";
 
-        if(count >= 2)
+        /*アイテム取得数が指定された数になったら*/
+        if(itemCount >= 2)
         {
+            /*残機+1*/
             zanki++;
-            Debug.Log(zanki);
-            count = 0;
+            /*アイテム取得数を初期化する*/
+            itemCount = 0;
         }
     }
 
@@ -34,8 +36,8 @@ public class PlayerManager : MonoBehaviour
         {
             /*Itemタグが付いているオブジェクトを消す*/
             other.gameObject.GetComponent<ItemManager>().GetItem();
-            /*カウント+1*/
-            count++;
+            /*アイテムカウント+1*/
+            itemCount++;
         }
     }
 }

@@ -2000,6 +2000,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6346024904048878345, guid: 1b398051e4fdfd044b3b928e875c85b5,
         type: 3}
+      propertyPath: fallPoint.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6346024904048878345, guid: 1b398051e4fdfd044b3b928e875c85b5,
+        type: 3}
       propertyPath: fallPoint.Array.data[0]
       value: 
       objectReference: {fileID: 1885292523558873254}
@@ -6467,6 +6472,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dashFlg: 1
+  moveFlg: 1
+  coolTimeMove: 0
   coolTime: 0
   dashForce: 5
   change_shoes: {fileID: 0}
@@ -8659,7 +8666,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.9560118, y: 1}
+    m_SensorSize: {x: 1.7777778, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0

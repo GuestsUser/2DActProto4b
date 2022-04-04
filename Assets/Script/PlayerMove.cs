@@ -89,6 +89,9 @@ public class PlayerMove : Padinput
 
     //public float height;
 
+    [HideInInspector] public bool movePermit = true; /* キー入力による操作許可 */
+    [HideInInspector] public bool rotatePermit = true; /* 方向転換許可 */
+
     private void Start() /*初期化*/
     {
         this.transform.localRotation = Quaternion.Euler(0, 0, 0);
@@ -249,7 +252,9 @@ public class PlayerMove : Padinput
         }
         //transform.localPosition += ((move / 10) * speed * Time.deltaTime);
 
-        if(dash.moveFlg == true)
+        /* movePermitがfalseなら実行しない事で入力があっても移動させない */
+        /* この処理だと止めているのに入力に応じてアニメする可能性大 */
+        if (movePermit)
         {
             transform.Translate((move / 10) * speed * Time.deltaTime);
         }
@@ -258,7 +263,7 @@ public class PlayerMove : Padinput
     }
     private void Turn() /*振り向き処理*/
     {
-        if (kuttuku.bool_ray_hit == false) /*くっつき状態ではない場合*/
+        if (kuttuku.bool_ray_hit == false && rotatePermit) /*くっつき状態ではない場合*/
         {
             /*下の処理の効果：くっついた際にプレイヤーが下を向いてしまう問題を改善*/
             bool_left_direction = true;

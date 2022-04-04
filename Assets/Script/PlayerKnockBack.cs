@@ -47,10 +47,13 @@ public class PlayerKnockBack : MonoBehaviour
                 if (runOrder) { Reset(); } /* 割り込みがあればリセット */
 
                 /* 自身の位置を直接弄ってる訳ではないので壁を貫通してしまう問題の解決から */
+                /* 直接弄ると操作が可能なので普通に移動できてしまう問題が…… */
 
                 float rate = 90 / time * count * Mathf.Deg2Rad; /* countがtimeと同値になった時90*deg2radになる式 */
-                editPos.x += force * Mathf.Cos(angle) * Mathf.Cos(rate); /* force*angleで方向決定、*rateで移動量決定 */
-                editPos.y += force * Mathf.Sin(angle) * Mathf.Cos(rate); /* yは方向決定にSinを用いる */
+                //editPos.x += force * Mathf.Cos(angle) * Mathf.Cos(rate); /* force*angleで方向決定、*rateで移動量決定 */
+                //editPos.y += force * Mathf.Sin(angle) * Mathf.Cos(rate); /* yは方向決定にSinを用いる */
+                editPos.x = transform.position.x + force * Mathf.Cos(angle) * Mathf.Cos(rate); /* force*angleで方向決定、*rateで移動量決定 */
+                editPos.y = transform.position.y + force * Mathf.Sin(angle) * Mathf.Cos(rate); /* yは方向決定にSinを用いる */
                 transform.position = editPos;
 
                 yield return StartCoroutine(TimeScaleYield.TimeStop());

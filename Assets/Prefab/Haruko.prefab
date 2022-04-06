@@ -649,7 +649,7 @@ MonoBehaviour:
   legposition4: {x: 0, y: 0, z: 0}
   legposition5: {x: 0, y: 0, z: 0}
   legposition6: {x: 0, y: 0, z: 0}
-  rayDistance: 0.5
+  rayDistance: 0.1
 --- !u!114 &6346024904048878348
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3074,7 +3074,7 @@ CapsuleCollider:
   m_Radius: 0.21
   m_Height: 1.31
   m_Direction: 1
-  m_Center: {x: 0, y: 0.24, z: 0}
+  m_Center: {x: 0, y: 0.276, z: 0}
 --- !u!1 &6346024905836478985
 GameObject:
   m_ObjectHideFlags: 0

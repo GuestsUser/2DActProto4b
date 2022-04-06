@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GManager : MonoBehaviour
 {
@@ -50,7 +51,7 @@ public class GManager : MonoBehaviour
         else
         {
             isGameOver = true;
-            Debug.Log("ゲームオーバー");
+            SceneManager.LoadScene("GameOver");
         }
     }
 }

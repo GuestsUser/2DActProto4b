@@ -7,6 +7,7 @@ public class Padinput : MonoBehaviour
 {
     /*PlayerInput型の変数を用意。入力をとれる*/
     PlayerInput input;
+    PauseMenu pause;
 
     bool stage_flg; /*ステージセレクトでステージを決定した時用*/
 
@@ -15,6 +16,7 @@ public class Padinput : MonoBehaviour
     void Awake()
     {
         TryGetComponent(out input);
+        //pause = GetComponent<>
     }
 
     void OnEnable() /*オブジェクトがアクティブになったとき*/
@@ -25,6 +27,7 @@ public class Padinput : MonoBehaviour
         input.actions["Move"].performed += OnMove;
         input.actions["Move"].canceled += OnMoveStop;
         input.actions["Change"].started += OnChange;
+        input.actions["Pause"].started += OnPause;
     }
     void OnDisable()
     {
@@ -34,6 +37,7 @@ public class Padinput : MonoBehaviour
         input.actions["Move"].performed -= OnMove;
         input.actions["Move"].canceled -= OnMoveStop;
         input.actions["Change"].started -= OnChange;
+        input.actions["Pause"].started -= OnPause;
     }
 
     /*継承先でoverrideして動作を設定*/
@@ -42,28 +46,34 @@ public class Padinput : MonoBehaviour
     public virtual void Move() {; }
     public virtual void MoveStop() {; }
     public virtual void Change() {; } /*選択しているくつの切り替え用*/
+    public virtual void Pause() {; }
 
     public void OnJump(InputAction.CallbackContext context)
     {
-        Jump();
-        Debug.Log("Aボタン入力しました");
+        if (Time.timeScale == 1)
+        {
+            Jump();
+        }
+        //Debug.Log("Aボタン入力しました");
     }
     public void OnSkill(InputAction.CallbackContext context)
     {
-        Skill();
-        Debug.Log("Xボタン入力しました");
+        if (Time.timeScale == 1)
+        {
+            Skill();
+        }
+        //Debug.Log("Xボタン入力しました");
     }
     public void OnMove(InputAction.CallbackContext context)
     {
-        
-            if (GetComponent<DashSystem>().moveFlg != false)
+        if (GetComponent<DashSystem>().moveFlg != false)
+        {
+        if (stage_flg == false && Time.timeScale == 1)
             {
-                if (stage_flg == false)
-                {
 
-                    Move();
-                }
+                Move();
             }
+        }
         
         //Debug.Log("通ってます");
         /*↓これで右入力か左入力かをとれるよ(右入力:1.0,0.0 左入力:-1.0,0.0)*/
@@ -78,5 +88,10 @@ public class Padinput : MonoBehaviour
     public void OnChange(InputAction.CallbackContext context)
     {
         Change();
+    }
+    public void OnPause(InputAction.CallbackContext context)
+    {
+        Debug.Log("Startボタンが押されました");
+        Pause();
     }
 }

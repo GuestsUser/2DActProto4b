@@ -14,7 +14,7 @@ public class ItemText : MonoBehaviour
 
         if (GManager.instance != null)
         {
-            itemText.text = "コイン要素：" + GManager.instance.itemNum + " / 99";
+            itemText.text = "コイン要素：" + GManager.instance.itemNum + " / 2";
         }
         else
         {
@@ -29,7 +29,7 @@ public class ItemText : MonoBehaviour
         /*アイテム数が変わった時だけ更新*/
         if (oldItemNum != GManager.instance.itemNum)
         {
-            itemText.text = "コイン要素：" + GManager.instance.itemNum + " / 99";
+            itemText.text = "コイン要素：" + GManager.instance.itemNum + " / 2";
             oldItemNum = GManager.instance.itemNum;
         }
     }

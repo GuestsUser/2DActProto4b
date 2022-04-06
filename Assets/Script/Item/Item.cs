@@ -8,13 +8,23 @@ public class Item : MonoBehaviour
 
     private void Update()
     {
+        /*チェックがついていたら*/
         if (playerCheck.isOn)
         {
+            /*ゲームマネージャーがあるかどうか（あった場合）*/
             if(GManager.instance != null)
             {
+                /*コイン要素取得数に1プラス*/
                 ++GManager.instance.itemNum;
+                /*そのオブジェクトを消す*/
                 Destroy(this.gameObject);
             }
+        }
+
+        if(GManager.instance.itemNum >= 2)
+        {
+            GManager.instance.AddZankiNum();
+            GManager.instance.itemNum = 0;
         }
     }
 }

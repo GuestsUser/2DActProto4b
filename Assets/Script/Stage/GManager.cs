@@ -44,7 +44,7 @@ public class GManager : MonoBehaviour
     public void SubZankiNum()
     {
         /*残機が0より多かったら*/
-        if (zankiNum > 0)
+        if (zankiNum > 1)
         {
             --zankiNum;
         }

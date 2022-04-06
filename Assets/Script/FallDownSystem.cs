@@ -34,6 +34,7 @@ public class FallDownSystem : MonoBehaviour
         if(transform.position.y <= fallPoint[useSub].transform.position.y) /* プレイヤー位置が落下死ポイントのy座標以下の場合即死判定 */
         {
             rty.Retry();
+            GManager.instance.SubZankiNum();
         }
     }
 }

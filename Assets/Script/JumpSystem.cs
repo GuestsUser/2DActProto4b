@@ -270,20 +270,20 @@ public class JumpSystem : Padinput
         //}
 
         /*レイキャスト修正版*/
-        if (Physics.gravity == new Vector3(0, -9.8f, 0))/*通常時*/
-        {
-            legposition2.x += 0.05f;
-            legposition3.x -= 0.05f;
-            legposition4.x += 0.05f;
-            legposition6.x -= 0.05f;
-        }
-        else if (Physics.gravity == new Vector3(0, 9.8f, 0))
-        {
-            legposition2.z += 0.05f;
-            legposition3.z -= 0.05f;
-            legposition4.z += 0.05f;
-            legposition6.z -= 0.05f;
-        }
+        //if (Physics.gravity == new Vector3(0, -9.8f, 0))/*通常時*/
+        //{
+        //    legposition2.x += 0.05f;
+        //    legposition3.x -= 0.05f;
+        //    legposition4.x += 0.05f;
+        //    legposition6.x -= 0.05f;
+        //}
+        //else if (Physics.gravity == new Vector3(0, 9.8f, 0))
+        //{
+        //    legposition2.z += 0.05f;
+        //    legposition3.z -= 0.05f;
+        //    legposition4.z += 0.05f;
+        //    legposition6.z -= 0.05f;
+        //}
         /*レイキャスト修正版*/
 
         /*レイキャスト修正版*/

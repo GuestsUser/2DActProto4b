@@ -10,6 +10,7 @@ TagManager:
   - Enemy
   - kuttuku_down
   - Item
+  - DeadArea
   layers:
   - Default
   - TransparentFX

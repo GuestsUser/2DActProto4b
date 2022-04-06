@@ -216,7 +216,7 @@ public class PlayerMove : Padinput
     }
     private void Run()/*走る処理*/
     {
-        Debug.Log(state);/*プレイヤーの状態*/
+        //Debug.Log(state);/*プレイヤーの状態*/
 
         switch (state)
         {
@@ -295,7 +295,7 @@ public class PlayerMove : Padinput
                 /*プレイヤーの向きを左に向いている状態にする処理*/
                 if (transform.localRotation != Quaternion.Euler(0, 180, 0))
                 {
-                    Debug.Log("左向くはず");
+                    //Debug.Log("左向くはず");
                     player_direction = Quaternion.Euler(0, 180, 0); /*Quaternion.Eulerで向きを3軸(xyz)まとめて値を指定したものをプレイヤーの向きを入れる変数に代入*/
                     transform.localRotation = player_direction; /*プレイヤーの向きをlocalRotationに代入して回転させる*/
                 }

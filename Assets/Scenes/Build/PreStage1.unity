@@ -2079,6 +2079,16 @@ PrefabInstance:
       propertyPath: rayDistance
       value: 0.5
       objectReference: {fileID: 0}
+    - target: {fileID: 6346024904048878577, guid: 1b398051e4fdfd044b3b928e875c85b5,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6346024904048878577, guid: 1b398051e4fdfd044b3b928e875c85b5,
+        type: 3}
+      propertyPath: m_IsTrigger
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6346024904048878582, guid: 1b398051e4fdfd044b3b928e875c85b5,
         type: 3}
       propertyPath: m_Name

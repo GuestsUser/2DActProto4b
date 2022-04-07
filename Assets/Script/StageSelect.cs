@@ -115,13 +115,13 @@ public class StageSelect : MonoBehaviour
         {
             ControlStop();
             /*ステージ2に切り替える*/
-            fade.FadeIn(1.5f, () => SceneManager.LoadScene(9));
+            fade.FadeIn(1.5f, () => SceneManager.LoadScene(3));
         }
         else if (collision.gameObject.name == "Stage3")
         {
             ControlStop();
             /*ステージ3に切り替える*/
-            fade.FadeIn(1.5f, () => SceneManager.LoadScene(3));
+            fade.FadeIn(1.5f, () => SceneManager.LoadScene(9));
         }
 
         void ControlStop() /* 入力を処理するコンポーネント全停止で入力受付終了とする */

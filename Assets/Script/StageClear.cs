@@ -27,7 +27,7 @@ public class StageClear : MonoBehaviour
         if (isStage1Clear || isStage2Clear || isStage3Clear)
         {
             /*シーンをステージクリア画面に切り替える*/
-            SceneManager.LoadScene(5);
+            SceneManager.LoadScene("Clear");
         }
     }
 

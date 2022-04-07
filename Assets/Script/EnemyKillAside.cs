@@ -34,7 +34,6 @@ public class EnemyKillAside : MonoBehaviour
 
         /*デバッグ用の可視光線*/
         Debug.DrawRay(rayPosition, ray.direction * rayDistance, Color.yellow);
-        print($"velocity = {rb.velocity}");
         /*レイキャスト当たり判定処理*/
 
         if (Physics.Raycast(ray,out rayHit, rayDistance)){

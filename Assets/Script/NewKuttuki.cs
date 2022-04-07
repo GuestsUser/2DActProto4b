@@ -364,7 +364,7 @@ public class NewKuttuki : Padinput
     }
     void Kuttuki() /* 【くっつきの処理】 */
     {
-        Debug.Log("くっつき処理に入っています");
+        //Debug.Log("くっつき処理に入っています");
 
         /* 【離れたときのフラグ変更処理】 */
         FootRayExit();

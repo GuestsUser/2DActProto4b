@@ -663,6 +663,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 20d1e733fd801a743b57d0408bfd9596, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gameOver: {fileID: 0}
 --- !u!4 &2060995609
 Transform:
   m_ObjectHideFlags: 0
@@ -700,7 +701,7 @@ MonoBehaviour:
   push_scene: 0
   menu_number: 0
   count: 0
-  interval: 50
+  interval: 70
 --- !u!114 &2060995611
 MonoBehaviour:
   m_ObjectHideFlags: 0

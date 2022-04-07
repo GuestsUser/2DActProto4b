@@ -69,6 +69,11 @@ public class PauseMenu : Padinput
 
                 Cursor_Move();
                 Decision();
+
+                //if (Gamepad.current.buttonEast.isPressed)
+                //{
+                //    show_menu = false;
+                //}
             }
             else
             {
@@ -98,7 +103,7 @@ public class PauseMenu : Padinput
         {
             show_menu = true;
         }
-        else
+        else if(show_menu == true && show_ope == false)
         {
             show_menu = false;
         }
@@ -171,7 +176,7 @@ public class PauseMenu : Padinput
     }
     void Decision()
     {
-        if (Gamepad.current.buttonSouth.isPressed && press_a == false)
+        if (Gamepad.current.buttonSouth.isPressed && press_a == false && show_ope == false)
         {
             press_a = true;
             switch (menu_number)
@@ -194,6 +199,10 @@ public class PauseMenu : Padinput
             }
         }
         
+    }
+    private void Initialize()
+    {
+       
     }
     private IEnumerator BacktoStageSelect() //シーンチェンジ用
     {

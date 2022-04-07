@@ -16,7 +16,7 @@ public class EnemyKillAside : MonoBehaviour
     public Rigidbody rb;
 
     /*AddForce*/
-    public float upForce = 400f;    /*上方向に向ける力*/
+    public float upForce = 300f;    /*上方向に向ける力*/
 
     void Start()
     {
@@ -34,14 +34,15 @@ public class EnemyKillAside : MonoBehaviour
 
         /*デバッグ用の可視光線*/
         Debug.DrawRay(rayPosition, ray.direction * rayDistance, Color.yellow);
-
+        print($"velocity = {rb.velocity}");
         /*レイキャスト当たり判定処理*/
 
-        if(Physics.Raycast(ray,out rayHit, rayDistance)){
+        if (Physics.Raycast(ray,out rayHit, rayDistance)){
             if(rayHit.collider.tag == "Enemy")
             {
                 rayHit.collider.gameObject.SetActive(false);/*エネミーを非アクティブ状態にする*/
 
+                rb.velocity = new Vector3(0,0,0);
                 rb.AddForce(new Vector3(0, upForce, 0));    /*敵を踏んだら上にジャンプ*/
 
             }

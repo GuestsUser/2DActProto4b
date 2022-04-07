@@ -17,6 +17,7 @@ public class PauseMenu : Padinput
     [SerializeField] private GameObject pause_menu;
     [SerializeField] private GameObject[] _item_obj;
     [SerializeField] private GameObject _selector_obj;
+    [SerializeField] private GameObject operation;
 
     /* 【フラグ】 */
     [SerializeField] private bool show_menu;         /* true:表示 false:非表示 */
@@ -24,6 +25,7 @@ public class PauseMenu : Padinput
     [SerializeField] private bool push;              /* true:左スティックを押しています false:押していません */
     [SerializeField] private bool press_a;
     [SerializeField] private bool push_scene;
+    [SerializeField] private bool show_ope;
 
     /* int型 */
     [SerializeField] int menu_number;
@@ -38,8 +40,10 @@ public class PauseMenu : Padinput
         /* 【オブジェクトの取得】 */
         pause_menu = GameObject.Find("PauseMenu");
         _selector_obj = GameObject.Find("Cursor");
+        operation = GameObject.Find("Operation");
 
         pause_menu.SetActive(false);
+        operation.SetActive(false);
 
         /* 【選択番号の初期化】 */
         menu_number = 0;
@@ -49,6 +53,7 @@ public class PauseMenu : Padinput
         show_menu = false;
         push_scene = false;
         push = false;
+        show_ope = false;
     }
 
     // Update is called once per frame
@@ -57,10 +62,27 @@ public class PauseMenu : Padinput
         if (show_menu)
         {
             Time.timeScale = 0;
-            pause_menu.SetActive(true);
+            if(show_ope == false)
+            {
+                pause_menu.SetActive(true);
+                press_a = false;
 
-            Cursor_Move();
-            Decision();
+                Cursor_Move();
+                Decision();
+            }
+            else
+            {
+                pause_menu.SetActive(false);
+            }
+
+            
+
+            if (show_ope == true && Gamepad.current.buttonEast.isPressed)
+            {
+                show_ope = false;
+                operation.SetActive(false);
+            }
+
             _selector_obj.transform.position = _item_obj[menu_number].transform.position;
         }
         else
@@ -162,7 +184,8 @@ public class PauseMenu : Padinput
                     break;
 
                 case 1: /* 操作説明 */
-
+                    operation.SetActive(true);
+                    show_ope = true;
                     break;
 
                 case 2: /* ステージ選択に戻る */

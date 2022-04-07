@@ -166,46 +166,77 @@ public class JumpSystem : Padinput
     /*ジャンプするだけ（質量無視の同じジャンプ力）*/
     override public void Jump()
     {
-        switch (change_shoes.type)
-        {
+        //switch (change_shoes.type)
+        //{
+        //    /*ジャンプシューズ*/
+        //    case ShoesType.Jump_Shoes:
+        //        if (doubleJump == 2 && isGrounded)
+        //        {
+        //            jumping = true;
+        //            --doubleJump;
+        //            rb.AddRelativeForce(0, jumpForce, 0, ForceMode.VelocityChange);
+        //            rb.velocity = Vector3.zero;
+        //        }
+        //        else if (doubleJump >= 1 && !isGrounded)
+        //        {
+        //            --doubleJump;
+        //            rb.AddRelativeForce(0, jumpForce, 0, ForceMode.VelocityChange);
+        //            rb.velocity = Vector3.zero;
+        //        }
+        //        break;
+
+        //    /*ダッシュシューズ*/
+        //    case ShoesType.Speed_Shoes:
+        //        if (doubleJump == 1 && isGrounded)
+        //        {
+        //            jumping = true;
+        //            --doubleJump;
+        //            rb.AddRelativeForce(rb.velocity.x, jumpForce, 0, ForceMode.VelocityChange);
+        //            rb.velocity = Vector3.zero;
+        //        }
+        //        break;
+
+        //    /*マグネットシューズ*/
+        //    case ShoesType.Magnet_Shoes:
+        //        if (doubleJump == 1 && isGrounded)
+        //        {
+        //            jumping = true;
+        //            --doubleJump;
+        //            rb.AddRelativeForce(0, jumpForce, 0, ForceMode.VelocityChange);
+        //            rb.velocity = Vector3.zero;
+        //        }
+        //        break;
+        //}        
             /*ジャンプシューズ*/
-            case ShoesType.Jump_Shoes:
-                if (doubleJump == 2 && isGrounded)
-                {
-                    jumping = true;
-                    --doubleJump;
-                    rb.AddRelativeForce(0, jumpForce, 0, ForceMode.VelocityChange);
-                    rb.velocity = Vector3.zero;
-                }
-                else if (doubleJump >= 1 && !isGrounded)
-                {
-                    --doubleJump;
-                    rb.AddRelativeForce(0, jumpForce, 0, ForceMode.VelocityChange);
-                    rb.velocity = Vector3.zero;
-                }
-                break;
+            if (doubleJump == 2 && isGrounded)
+            {
+                jumping = true;
+                --doubleJump;
+                rb.AddRelativeForce(0, jumpForce, 0, ForceMode.VelocityChange);
+                rb.velocity = Vector3.zero;
+            }
+            else if (doubleJump >= 1 && !isGrounded)
+            {
+                --doubleJump;
+                rb.AddRelativeForce(0, jumpForce, 0, ForceMode.VelocityChange);
+                rb.velocity = Vector3.zero;
+            }
 
-            /*ダッシュシューズ*/
-            case ShoesType.Speed_Shoes:
-                if (doubleJump == 1 && isGrounded)
-                {
-                    jumping = true;
-                    --doubleJump;
-                    rb.AddRelativeForce(rb.velocity.x, jumpForce, 0, ForceMode.VelocityChange);
-                    rb.velocity = Vector3.zero;
-                }
-                break;
+            if (doubleJump == 1 && isGrounded)
+            {
+                jumping = true;
+                --doubleJump;
+                rb.AddRelativeForce(rb.velocity.x, jumpForce, 0, ForceMode.VelocityChange);
+                rb.velocity = Vector3.zero;
+            }
 
-            /*マグネットシューズ*/
-            case ShoesType.Magnet_Shoes:
-                if (doubleJump == 1 && isGrounded)
-                {
-                    jumping = true;
-                    --doubleJump;
-                    rb.AddRelativeForce(0, jumpForce, 0, ForceMode.VelocityChange);
-                    rb.velocity = Vector3.zero;
-                }
-                break;
-        }
+            if (doubleJump == 1 && isGrounded)
+            {
+                jumping = true;
+                --doubleJump;
+                rb.AddRelativeForce(0, jumpForce, 0, ForceMode.VelocityChange);
+                rb.velocity = Vector3.zero;
+            }
+        
     }
 }

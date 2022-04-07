@@ -50,6 +50,10 @@ public class JumpSystem : Padinput
     /*（レイキャスト）可視光線の長さ*/
     [SerializeField] public float rayDistance = 0.5591f;
 
+    /*靴のテストフラグ（ステージ攻略で靴を切り替える）*/
+    public bool jumpFlg_Test = false;   /*二弾ジャンプにさせたい場合このフラグにtrueを入れる*/
+    /*靴のテストフラグ（ステージ攻略で靴を切り替える）*/
+
     void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -95,19 +99,16 @@ public class JumpSystem : Padinput
             || Physics.Raycast(ray5, out rayHit, rayDistance)) && (rayHit.collider.tag == "ground" || rayHit.collider.tag == "kuttuku"))
         {
 
-            switch (change_shoes.type)
+            switch (jumpFlg_Test)
             {
-                case ShoesType.Jump_Shoes:
+                case true:
                     doubleJump = 2;
                     break;
 
-                case ShoesType.Speed_Shoes:
+                case false:
                     doubleJump = 1;
                     break;
 
-                case ShoesType.Magnet_Shoes:
-                    doubleJump = 1;
-                    break;
             }
 
             /*コライダーを持つオブジェクトから、タグを読み取る（地面オブジェクトをgroundに設定）*/
@@ -207,21 +208,9 @@ public class JumpSystem : Padinput
         //        }
         //        break;
         //}        
-            /*ジャンプシューズ*/
-            if (doubleJump == 2 && isGrounded)
-            {
-                jumping = true;
-                --doubleJump;
-                rb.AddRelativeForce(0, jumpForce, 0, ForceMode.VelocityChange);
-                rb.velocity = Vector3.zero;
-            }
-            else if (doubleJump >= 1 && !isGrounded)
-            {
-                --doubleJump;
-                rb.AddRelativeForce(0, jumpForce, 0, ForceMode.VelocityChange);
-                rb.velocity = Vector3.zero;
-            }
-
+        /*ジャンプシューズ_Test*/
+        if (!jumpFlg_Test)
+        {
             if (doubleJump == 1 && isGrounded)
             {
                 jumping = true;
@@ -230,13 +219,47 @@ public class JumpSystem : Padinput
                 rb.velocity = Vector3.zero;
             }
 
-            if (doubleJump == 1 && isGrounded)
-            {
-                jumping = true;
-                --doubleJump;
-                rb.AddRelativeForce(0, jumpForce, 0, ForceMode.VelocityChange);
-                rb.velocity = Vector3.zero;
-            }
-        
+        }
+        else
+        {
+
+        if (doubleJump == 2 && isGrounded)
+        {
+            jumping = true;
+            --doubleJump;
+            rb.AddRelativeForce(0, jumpForce, 0, ForceMode.VelocityChange);
+            rb.velocity = Vector3.zero;
+        }
+        else if (doubleJump >= 1 && !isGrounded)
+        {
+            --doubleJump;
+            rb.AddRelativeForce(0, jumpForce, 0, ForceMode.VelocityChange);
+            rb.velocity = Vector3.zero;
+        }
+
+        }
+        //if (doubleJump == 2 && isGrounded)
+        //{
+        //    jumping = true;
+        //    --doubleJump;
+        //    rb.AddRelativeForce(0, jumpForce, 0, ForceMode.VelocityChange);
+        //    rb.velocity = Vector3.zero;
+        //}
+        //else if (doubleJump >= 1 && !isGrounded)
+        //{
+        //    --doubleJump;
+        //    rb.AddRelativeForce(0, jumpForce, 0, ForceMode.VelocityChange);
+        //    rb.velocity = Vector3.zero;
+        //}
+
+        //if (doubleJump == 1 && isGrounded)
+        //{
+        //    jumping = true;
+        //    --doubleJump;
+        //    rb.AddRelativeForce(rb.velocity.x, jumpForce, 0, ForceMode.VelocityChange);
+        //    rb.velocity = Vector3.zero;
+        //}
+        /*ジャンプシューズ_Test*/
+
     }
 }

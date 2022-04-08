@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 enum cursor_move_type
 {
@@ -33,6 +34,10 @@ public class PauseMenu : Padinput
     [SerializeField] int interval;
     int WaitTime = 3;
 
+    /* 画像切り替え用 */
+    //[SerializeField] private Image[] item_image;
+    public RawImage Cursor; 
+
 
     // Start is called before the first frame update
     void Start()
@@ -44,6 +49,9 @@ public class PauseMenu : Padinput
 
         pause_menu.SetActive(false);
         operation.SetActive(false);
+
+        /* 【カーソルの取得】 */
+        Cursor = _selector_obj.GetComponent<RawImage>();
 
         /* 【選択番号の初期化】 */
         menu_number = 0;
@@ -68,6 +76,7 @@ public class PauseMenu : Padinput
                 press_a = false;
 
                 Cursor_Move();
+                ChangeCursor();
                 Decision();
 
                 //if (Gamepad.current.buttonEast.isPressed)
@@ -203,6 +212,48 @@ public class PauseMenu : Padinput
     private void Initialize()
     {
        
+    }
+    void ChangeCursor()
+    {
+        switch(menu_number)
+        {
+            case 0: /* 【itemの表示切替と画像切り替え】 */
+
+                /* 【選択されているitemの文字を非表示に】 */
+                _item_obj[menu_number].SetActive(false);
+
+                /* 【選択されているitem以外の文字を表示する処理】 */
+                _item_obj[1].SetActive(true);
+                _item_obj[2].SetActive(true);
+
+                /* 【カーソルの画像切り替え】 */
+                Cursor.texture = Resources.Load<Texture2D>("Cursor1");
+                break;
+
+            case 1:
+                /* 【選択されているitemの文字を非表示に】 */
+                _item_obj[menu_number].SetActive(false);
+
+                /* 【選択されているitem以外の文字を表示する処理】 */
+                _item_obj[0].SetActive(true);
+                _item_obj[2].SetActive(true);
+
+                /* 【カーソルの画像切り替え】 */
+                Cursor.texture = Resources.Load<Texture2D>("Cursor2");
+                break;
+
+            case 2:
+                /* 【選択されているitemの文字を非表示に】 */
+                _item_obj[menu_number].SetActive(false);
+
+                /* 【選択されているitem以外の文字を表示する処理】 */
+                _item_obj[0].SetActive(true);
+                _item_obj[1].SetActive(true);
+
+                /* 【カーソルの画像切り替え】 */
+                Cursor.texture = Resources.Load<Texture2D>("Cursor3");
+                break;
+        }
     }
     private IEnumerator BacktoStageSelect() //シーンチェンジ用
     {

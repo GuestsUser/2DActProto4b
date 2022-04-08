@@ -10366,6 +10366,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1735575875}
     m_Modifications:
+    - target: {fileID: 7533014358201421900, guid: b0aa245dd4e1e65498873d1f7cf86b7a,
+        type: 3}
+      propertyPath: m_Texture
+      value: 
+      objectReference: {fileID: 2800000, guid: 95923bb17a805ae4fa74638887c5a277, type: 3}
     - target: {fileID: 7533014358201421938, guid: b0aa245dd4e1e65498873d1f7cf86b7a,
         type: 3}
       propertyPath: m_Name
@@ -10559,7 +10564,7 @@ PrefabInstance:
     - target: {fileID: 7533014359311279402, guid: b0aa245dd4e1e65498873d1f7cf86b7a,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -186.21
+      value: -200
       objectReference: {fileID: 0}
     - target: {fileID: 7533014359311279403, guid: b0aa245dd4e1e65498873d1f7cf86b7a,
         type: 3}

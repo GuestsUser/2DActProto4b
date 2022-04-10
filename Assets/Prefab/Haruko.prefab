@@ -429,8 +429,6 @@ GameObject:
   - component: {fileID: 6346024904048878351}
   - component: {fileID: 6346024904048878348}
   - component: {fileID: 6346024904048878349}
-  - component: {fileID: 6346024904048878578}
-  - component: {fileID: 4087852201057528345}
   - component: {fileID: 6346024904048878579}
   - component: {fileID: 6346024904048878576}
   - component: {fileID: 6346024904048878577}
@@ -693,59 +691,6 @@ MonoBehaviour:
   - {fileID: 0}
   _selector_obj: {fileID: 0}
   Shoes: 000000000100000002000000
---- !u!114 &6346024904048878578
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6346024904048878582}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9a97a8f694c389c4eac720f88d49591a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  collider_exit: 0
-  rayPosition: {x: 0, y: 0, z: 0}
-  change_shoes: {fileID: 0}
-  bool_ray_hit: 0
-  rayDistance: 0.5
-  rb: {fileID: 0}
---- !u!114 &4087852201057528345
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6346024904048878582}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d2d2b23a46e61194ba99627a18dcd5dd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  p_pos: {x: 0, y: 0, z: 0}
-  obj_pos: {x: 0, y: 0, z: 0}
-  obj_scale: {x: 0, y: 0, z: 0}
-  bool_ray_hit: 0
-  collider_exit: 0
-  jump: 0
-  bool_turn: 0
-  bool_init: 0
-  bool_exit: 0
-  bool_float: 0
-  kuttuki_down: 0
-  bool_kinematic: 0
-  bool_on_collision: 0
-  kuttuki_To_kuttuki: 0
-  bool_oncollision_down: 0
-  move_type: 0
-  player: {fileID: 0}
-  change_shoes: {fileID: 0}
-  kuttuki_time: 0
-  collision_time: 0
-  rayDistance: 0.28
-  rb: {fileID: 0}
-  obj_tag: 
 --- !u!114 &6346024904048878579
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -758,7 +703,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a2fcc87cc20d944a9f5704bdc0d75c5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  kuttuku: {fileID: 4087852201057528345}
   dash: {fileID: 0}
   state: 0
   idle: 0
@@ -882,13 +826,16 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   _selector_obj: {fileID: 0}
+  operation: {fileID: 0}
   show_menu: 0
   push: 0
   press_a: 0
   push_scene: 0
+  show_ope: 0
   menu_number: 0
   count: 0
   interval: 0
+  Cursor: {fileID: 0}
 --- !u!114 &4629836387720665810
 MonoBehaviour:
   m_ObjectHideFlags: 0

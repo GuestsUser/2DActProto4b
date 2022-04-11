@@ -35,7 +35,7 @@ public class DashSystemN : Padinput
     public override void Skill()
     {
         /*アビリティ発動ボタンが押されたら*/
-        if (timerDashPermit && Gamepad.current.buttonWest.wasPressedThisFrame && change_shoes.type== ShoesType.Speed_Shoes)
+        if (timerDashPermit && Gamepad.current.buttonWest.wasPressedThisFrame)
         {
             StartCoroutine(Dush());
             StartCoroutine(ReCharge());

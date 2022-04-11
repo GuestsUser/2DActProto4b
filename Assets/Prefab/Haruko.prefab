@@ -428,7 +428,6 @@ GameObject:
   - component: {fileID: 6346024904048878350}
   - component: {fileID: 6346024904048878351}
   - component: {fileID: 6346024904048878348}
-  - component: {fileID: 6346024904048878349}
   - component: {fileID: 6346024904048878579}
   - component: {fileID: 6346024904048878576}
   - component: {fileID: 6346024904048878577}
@@ -673,25 +672,6 @@ MonoBehaviour:
   obj: {fileID: 0}
   rayDistance: 10
   rb: {fileID: 0}
---- !u!114 &6346024904048878349
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6346024904048878582}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cb3731bba25b58f4ebca09b49f4b22ae, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  parent: {fileID: 0}
-  _item_obj:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  _selector_obj: {fileID: 0}
-  Shoes: 000000000100000002000000
 --- !u!114 &6346024904048878579
 MonoBehaviour:
   m_ObjectHideFlags: 0

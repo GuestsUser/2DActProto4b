@@ -54,6 +54,9 @@ public class JumpSystem : Padinput
     public bool jumpFlg_Test = false;   /*二弾ジャンプにさせたい場合このフラグにtrueを入れる*/
     /*靴のテストフラグ（ステージ攻略で靴を切り替える）*/
 
+    /* 4/11 - 仲里により追加 */
+    public bool completion { set; get; } /* ジャンプが成立した瞬間trueにする、滑り床からジャンプで離れた瞬間を得る為必要になった、このスクリプトからtrueにした後、最後に別スクリプトからfalse化される */
+
     void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -217,25 +220,28 @@ public class JumpSystem : Padinput
                 --doubleJump;
                 rb.AddRelativeForce(rb.velocity.x, jumpForce, 0, ForceMode.VelocityChange);
                 rb.velocity = Vector3.zero;
+                completion = true; /* 成立したらtrue */
             }
 
         }
         else
         {
 
-        if (doubleJump == 2 && isGrounded)
-        {
-            jumping = true;
-            --doubleJump;
-            rb.AddRelativeForce(0, jumpForce, 0, ForceMode.VelocityChange);
-            rb.velocity = Vector3.zero;
-        }
-        else if (doubleJump >= 1 && !isGrounded)
-        {
-            --doubleJump;
-            rb.AddRelativeForce(0, jumpForce, 0, ForceMode.VelocityChange);
-            rb.velocity = Vector3.zero;
-        }
+            if (doubleJump == 2 && isGrounded)
+            {
+                jumping = true;
+                --doubleJump;
+                rb.AddRelativeForce(0, jumpForce, 0, ForceMode.VelocityChange);
+                rb.velocity = Vector3.zero;
+                completion = true; /* 成立したらtrue */
+            }
+            else if (doubleJump >= 1 && !isGrounded)
+            {
+                --doubleJump;
+                rb.AddRelativeForce(0, jumpForce, 0, ForceMode.VelocityChange);
+                rb.velocity = Vector3.zero;
+                completion = true; /* 成立したらtrue */
+            }
 
         }
         //if (doubleJump == 2 && isGrounded)

@@ -37,6 +37,7 @@ public class SlopeFloor : MonoBehaviour
             Vector3 root = other.gameObject.transform.position;
             root.y += 0.5f; /* 完全に足元配置だと床が始点判定で列挙されない、なんて事が起きそうなので始点を上げておく */
 
+            /* 当たり判定の形にあったrayに取り替える */
             if( Physics.Raycast(root, Vector3.down,out getInfo) && getInfo.transform.gameObject==gameObject) /* 下向きに飛ばしたrayが一番最初に接触したオブジェクトが自身なら接地 */
             {
                 //Debug.Log("rayhit");

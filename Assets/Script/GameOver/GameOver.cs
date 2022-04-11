@@ -6,13 +6,15 @@ using UnityEngine.UI;
 public class GameOver : MonoBehaviour
 {
     private GameOverMenu Gom;
-    public GameObject gameOver;
+    private GameObject gameOver;
 
     void Start()
     {
         Gom = GetComponent<GameOverMenu>();
         gameOver = GameObject.Find("GameOver");
+        /*アイテム数の初期化*/
         GManager.instance.itemNum = 0;
+        /*残機数の初期化*/
         GManager.instance.zankiNum = 3;
     }
 

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 public class JumpSystem : Padinput
 {
@@ -54,6 +55,15 @@ public class JumpSystem : Padinput
     public bool jumpFlg_Test = false;   /*二弾ジャンプにさせたい場合このフラグにtrueを入れる*/
     /*靴のテストフラグ（ステージ攻略で靴を切り替える）*/
 
+    /*テストフラグをシーン上に表示させる変数*/
+    public Text JumpFlg;
+    public GameObject gb;
+    /*テストフラグをシーン上に表示させる変数*/
+
+    /*アイテムを取得すると二弾ジャンプに変化する変数*/
+    public GameObject doublejump;
+    /*アイテムを取得すると二弾ジャンプに変化する変数*/
+
     /* 4/11 - 仲里により追加 */
     public bool completion { set; get; } /* ジャンプが成立した瞬間trueにする、滑り床からジャンプで離れた瞬間を得る為必要になった、このスクリプトからtrueにした後、最後に別スクリプトからfalse化される */
 
@@ -63,9 +73,63 @@ public class JumpSystem : Padinput
         change_shoes = GetComponent<ChangeShoes>();
         animator = GetComponent<Animator>();
 
+        JumpFlg = gb.GetComponent<Text>();
+
     }
+    private void Update()
+    {
+
+        /*ジャンプフラグをテキストで表示*/
+        JumpFlg.text = "JumpFlg : " + jumpFlg_Test.ToString();
+        /*ジャンプフラグをテキストで表示*/
+
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+
+        if (collision.collider.name == "Test_DoubleJump")
+        {
+
+            if (!jumpFlg_Test)
+            {
+
+                jumpFlg_Test = true;
+
+            }
+            else
+            {
+
+                jumpFlg_Test = false;
+
+            }
+            //GameObject.Find("Test_DoubleJump").SetActive(false);
+
+        }
+
+    }
+
+    public void OnClickButton()
+    {
+
+        if (!jumpFlg_Test)
+        {
+
+            jumpFlg_Test = true;
+
+        }
+        else
+        {
+
+            jumpFlg_Test = false;
+
+        }
+    }
+
     void FixedUpdate()
     {
+
+
         var velocity_y = rb.velocity.y;
 
         y = velocity_y;

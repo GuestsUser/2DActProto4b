@@ -648,7 +648,10 @@ MonoBehaviour:
   legposition5: {x: 0, y: 0, z: 0}
   legposition6: {x: 0, y: 0, z: 0}
   rayDistance: 0.1
-  jumpFlg_Test: 1
+  jumpFlg_Test: 0
+  JumpFlg: {fileID: 0}
+  gb: {fileID: 0}
+  doublejump: {fileID: 0}
 --- !u!114 &6346024904048878348
 MonoBehaviour:
   m_ObjectHideFlags: 0

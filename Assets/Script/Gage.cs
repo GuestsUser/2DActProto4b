@@ -32,16 +32,12 @@ public class Gage : MonoBehaviour
             }
 
           
-        if ((GaugeFlg) /*&& time > 0*/)
+        if (GaugeFlg)
         {
+            fillImg.fillAmount = 0.0f;
             time -= Time.deltaTime;
             fillImg.fillAmount = time / timeAmt;
         }
-
-        //if (Gamepad.current.buttonWest.wasReleasedThisFrame)//追加
-        //{
-        //    GaugeFlg = true;
-        //}
 
         if (fillImg.fillAmount == 0f)
         {

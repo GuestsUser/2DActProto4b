@@ -133,8 +133,6 @@ public class StageSelect : MonoBehaviour
             GetComponent<PlayerMove>().enabled = false;
             GetComponent<JumpSystem>().enabled = false;
             GetComponent<DashSystem>().enabled = false;
-            GetComponent<Kuttuku>().enabled = false;
-            GetComponent<ChangeShoes>().enabled = false;
         }
         void ObjAllInVisible(GameObject obj) /* objに入れたオブジェクトの子から孫まで全てを不可視化する関数 */
         {

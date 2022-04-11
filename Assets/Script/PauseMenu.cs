@@ -31,12 +31,21 @@ public class PauseMenu : Padinput
     /* int型 */
     [SerializeField] int menu_number;
     [SerializeField] int count;
-    [SerializeField] int interval;
-    int WaitTime = 3;
+    [SerializeField] int interval;　　　   /* 入力長押し時のカーソルの動く速さが変わる(値が大きいほど遅くなる) */
+    int WaitTime = 3;                      /* シーン遷移前の待機時間 */
+
+    /* float型 */
+    [SerializeField] float opacity;                           /* 透明度 */
+    float max_opacity = 100f;                       /* 透明度のMAX値 */
+    float min_opacity = 0;
 
     /* 画像切り替え用 */
     //[SerializeField] private Image[] item_image;
-    public RawImage Cursor; 
+    public RawImage Cursor;
+
+    /* ゲーム画面を暗くする用 */
+    [SerializeField] Image fade_panel;
+
 
 
     // Start is called before the first frame update
@@ -46,7 +55,9 @@ public class PauseMenu : Padinput
         pause_menu = GameObject.Find("PauseMenu");
         _selector_obj = GameObject.Find("Cursor");
         operation = GameObject.Find("Operation");
+        fade_panel = GameObject.Find("FadePanel").GetComponent<Image>();
 
+        /* 【オブジェクトの非表示化】 */
         pause_menu.SetActive(false);
         operation.SetActive(false);
 
@@ -56,6 +67,7 @@ public class PauseMenu : Padinput
         /* 【選択番号の初期化】 */
         menu_number = 0;
         interval = 10;
+        opacity = 0;
 
         /* 【フラグの初期化】 */
         show_menu = false;
@@ -67,10 +79,12 @@ public class PauseMenu : Padinput
     // Update is called once per frame
     void Update()
     {
+
+        FadeIN();
         if (show_menu)
         {
             Time.timeScale = 0;
-            if(show_ope == false)
+            if (show_ope == false)
             {
                 pause_menu.SetActive(true);
                 press_a = false;
@@ -255,6 +269,27 @@ public class PauseMenu : Padinput
                 break;
         }
     }
+    void FadeIN()
+    {
+        fade_panel.color = new Color(0, 0, 0, opacity / 100f);
+        //Debug.Log("Fadeの処理通っています");
+        //++opacity;
+        if (show_menu)
+        {
+            if (++opacity > max_opacity/4)
+            {
+                opacity = max_opacity/4;
+            }
+        }
+        else
+        {
+            if (--opacity < min_opacity)
+            {
+                opacity = min_opacity;
+            }
+        }
+    }
+
     private IEnumerator BacktoStageSelect() //シーンチェンジ用
     {
         push_scene = true;

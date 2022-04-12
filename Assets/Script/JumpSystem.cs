@@ -97,14 +97,13 @@ public class JumpSystem : Padinput
             {
 
                 jumpFlg_Test = true;
-                GameObject.Find("Test_DoubleJump").SetActive(false);
+                doublejump.SetActive(false);
 
             }
             else
             {
 
                 jumpFlg_Test = false;
-                GameObject.Find("Test_DoubleJump").SetActive(true);
 
             }
 
@@ -119,14 +118,14 @@ public class JumpSystem : Padinput
         {
 
             jumpFlg_Test = true;
-            GameObject.Find("Test_DoubleJump").SetActive(false);
+            doublejump.SetActive(false);
 
         }
         else
         {
 
             jumpFlg_Test = false;
-            GameObject.Find("Test_DoubleJump").SetActive(true);
+            doublejump.SetActive(true);
 
         }
     }

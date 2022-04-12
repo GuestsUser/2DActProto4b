@@ -24,9 +24,11 @@ public class PauseMenu : Padinput
     [SerializeField] private bool show_menu;         /* true:表示 false:非表示 */
     public bool _show_menu {get { return show_menu; } }
     [SerializeField] private bool push;              /* true:左スティックを押しています false:押していません */
-    [SerializeField] private bool press_a;
+    [SerializeField] private bool press_a;           /**/
     [SerializeField] private bool push_scene;
     [SerializeField] private bool show_ope;
+    private bool fade_in;
+    private bool fade_out;
 
     /* int型 */
     [SerializeField] int menu_number;
@@ -35,10 +37,13 @@ public class PauseMenu : Padinput
     int WaitTime = 3;                      /* シーン遷移前の待機時間 */
 
     /* float型 */
+    [SerializeField] float fade_intime;                       /* fadeの進行時間 */
+    [SerializeField] float fade_outtime;
+    [SerializeField] float eas_time;                        /* イージングにかける時間 */
     [SerializeField] float opacity;                           /* 透明度 */
     float max_opacity = 100f;                       /* 透明度のMAX値 */
-    float min_opacity = 0;
-
+    float min_opacity = 0;　　　　　　　　 /* 透明度の最低値 */
+    
     /* 画像切り替え用 */
     //[SerializeField] private Image[] item_image;
     public RawImage Cursor;
@@ -74,93 +79,105 @@ public class PauseMenu : Padinput
         push_scene = false;
         push = false;
         show_ope = false;
+        fade_in = false;
+        fade_out = false;
+
+        /* 【時間系の初期化】 */
+        eas_time = 7f;
+        fade_intime = 0;
+        fade_outtime = 0;
     }
 
     // Update is called once per frame
     void Update()
     {
+        /* 【FadePanelの透明度を変更する処理】 */
+        Fade();
 
-        FadeIN();
-        if (show_menu)
+        /* 【メイン処理】 */
+        if (show_menu) /* 表示判定がtrueの時 */
         {
-            Time.timeScale = 0;
-            if (show_ope == false)
+            Time.timeScale = 0; /* unity内の時間を止める */
+            if (show_ope == false) /* 操作説明が非表示の状態なら */
             {
-                pause_menu.SetActive(true);
-                press_a = false;
+                pause_menu.SetActive(true); /* ポーズメニューを表示させる */
+                press_a = false; /* aボタンを押せるように初期化 */
 
-                Cursor_Move();
-                ChangeCursor();
+                /* 【カーソル処理】 */
+                Cursor_Move(); /* カーソルを動かす処理 */
+                ChangeCursor(); /* カーソルの画像を切り替える処理 */
+
+                /* 【決定が押された時の処理】 */
                 Decision();
-
-                //if (Gamepad.current.buttonEast.isPressed)
-                //{
-                //    show_menu = false;
-                //}
             }
             else
             {
-                pause_menu.SetActive(false);
+                pause_menu.SetActive(false); /* ポーズメニューの非表示化 */
             }
 
-            
-
+            /* 【操作説明が表示状態でBボタンが押された時】 */
             if (show_ope == true && Gamepad.current.buttonEast.isPressed)
             {
-                show_ope = false;
-                operation.SetActive(false);
+                /* 【フラグ判定切り替え】 */
+                show_ope = false; 
+                operation.SetActive(false); /* 操作説明パネル非表示化 */
             }
 
+            /* 【カーソル位置を移動する為の処理】 */
             _selector_obj.transform.position = _item_obj[menu_number].transform.position;
         }
-        else
+        else　/* 【表示判定がfalseの時】 */
         {
-            Time.timeScale = 1;
-            pause_menu.SetActive(false);
+            Time.timeScale = 1; /* unityの時間を進める */
+            pause_menu.SetActive(false); /* ポーズメニュー非表示化 */
         }
     }
     public override void Pause() /* スタートボタンが押された時に処理に入ります */
     {
         /* 【フラグ判定切り替え】 */
-        if(show_menu == false)
+        if(show_menu == false) /* ポーズメニューの表示判定がfalseなら */
         {
-            show_menu = true;
+            show_menu = true; /* trueに変更 */
         }
-        else if(show_menu == true && show_ope == false)
+        else if(show_menu == true && show_ope == false) /* ポーズメニューが表示状態かつ操作説明が非表示状態なら */
         {
-            show_menu = false;
+            show_menu = false; /* falseに変更 */
         }
     }
     void Cursor_Move()
     {
-        if(push_scene == false)
+        if(push_scene == false) /* シーン遷移を伴う決定がされていない間 */
         {
-            if (Gamepad.current.leftStick.y.ReadValue() > 0)
+            if (Gamepad.current.leftStick.y.ReadValue() > 0) /*Lスティック入力　↑方向時*/
             {
-                move_type = cursor_move_type.up;
+                move_type = cursor_move_type.up; /* move_type を up に設定 */
             }
-            else if (Gamepad.current.leftStick.y.ReadValue() < 0)
+            else if (Gamepad.current.leftStick.y.ReadValue() < 0) /*Lスティック入力　↓方向時*/
             {
-                move_type = cursor_move_type.down;
+                move_type = cursor_move_type.down; /* move_type を down に設定 */
             }
-            else
+            else /* スティック入力がされていないとき */
             {
-                move_type = cursor_move_type.none;
+                move_type = cursor_move_type.none; /* move_type を none に設定 */
             }
         }
-        else
+        else /* シーン遷移されるとき */
         {
-            move_type = cursor_move_type.none;
+            move_type = cursor_move_type.none; /* move_type を none に設定 */
         }
         
 
         switch (move_type)
         {
-            case cursor_move_type.up:
+            case cursor_move_type.up: /* move_typeがupの時 */
+
                 /* 【スティックがニュートラルから押された時】 */
                 if (push == false) 
                 {
+                    /* 【フラグ判定切り替え】 */
                     push = true;
+
+                    /* 【メニューナンバーを引く処理】(引くことによりカーソルが上に移動する 理由:127行目でtransformの代入でitem[menu_number]を使用している) */
                     if (--menu_number < 0) menu_number = _item_obj.Length - 1;
                 }
                 else
@@ -168,14 +185,15 @@ public class PauseMenu : Padinput
                     count--;
                     if (Mathf.Abs(count) % interval == 0)
                     {
+                        /* 【メニューナンバーを引く処理】(引くことによりカーソルが上に移動する 理由:127行目でtransformの代入でitem[menu_number]を使用している) */
                         if (--menu_number < 0) menu_number = _item_obj.Length - 1;
                     }
                 }
                 
                 break;
 
-            case cursor_move_type.down:
-                if(push == false)
+            case cursor_move_type.down: /* move_typeがdownの時 */
+                        if (push == false)
                 {
                     push = true;
                     if (++menu_number > _item_obj.Length - 1) menu_number = 0;
@@ -190,7 +208,7 @@ public class PauseMenu : Padinput
                 }
                 break;
 
-            case cursor_move_type.none:
+            case cursor_move_type.none: /* move_typeがnoneの時 */
                 count = 0;
                 push = false;
                 break;
@@ -269,21 +287,36 @@ public class PauseMenu : Padinput
                 break;
         }
     }
-    void FadeIN()
+    void Fade()
     {
-        fade_panel.color = new Color(0, 0, 0, opacity / 100f);
-        //Debug.Log("Fadeの処理通っています");
-        //++opacity;
-        if (show_menu)
+        fade_panel.color = new Color(0, 0, 0, opacity / max_opacity);
+        if (show_menu && opacity < max_opacity /4)
         {
-            if (++opacity > max_opacity/4)
+
+            fade_outtime = 0;
+            fade_intime += 0.3333333f; /* フェード時間を進める */
+            if(fade_intime < eas_time)
             {
-                opacity = max_opacity/4;
+                Debug.Log("フェードイン");
+                opacity = ExpOut(fade_intime, eas_time, min_opacity, max_opacity / 4);
+            }
+            else
+            {
+                opacity = max_opacity / 4;
             }
         }
-        else
+        else if(show_menu == false && opacity > min_opacity)
         {
-            if (--opacity < min_opacity)
+
+            fade_intime = 0;
+            fade_outtime += 0.3333333f; /* フェード時間を進める */
+            if (fade_outtime < eas_time)
+            {
+
+                Debug.Log("フェードアウト");
+                opacity = ExpOut(fade_outtime, eas_time, max_opacity / 4, min_opacity);
+            }
+            else
             {
                 opacity = min_opacity;
             }
@@ -298,5 +331,10 @@ public class PauseMenu : Padinput
         SceneManager.LoadScene("StageSelect"); //おそらくタイトルに戻る実装する場合 Scene名はTitleなのでここはそのままにしてあります
         menu_number = 0; //メニュー番号を初期化。
         Time.timeScale = 1; //タイムスケールを初期化
+    }
+    public static float ExpOut(float t, float totaltime, float min, float max) /*加速処理に使う関数*/
+    {
+        max -= min;
+        return t == totaltime ? max + min : max * (-Mathf.Pow(2, -10 * t / totaltime) + 1) + min;
     }
 }

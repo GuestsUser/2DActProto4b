@@ -73,7 +73,9 @@ public class JumpSystem : Padinput
         change_shoes = GetComponent<ChangeShoes>();
         animator = GetComponent<Animator>();
 
+        gb = GameObject.Find("JumpFlg");
         JumpFlg = gb.GetComponent<Text>();
+        doublejump = GameObject.Find("Test_DoubleJump");
 
     }
     private void Update()
@@ -95,15 +97,16 @@ public class JumpSystem : Padinput
             {
 
                 jumpFlg_Test = true;
+                GameObject.Find("Test_DoubleJump").SetActive(false);
 
             }
             else
             {
 
                 jumpFlg_Test = false;
+                GameObject.Find("Test_DoubleJump").SetActive(true);
 
             }
-            //GameObject.Find("Test_DoubleJump").SetActive(false);
 
         }
 
@@ -116,12 +119,14 @@ public class JumpSystem : Padinput
         {
 
             jumpFlg_Test = true;
+            GameObject.Find("Test_DoubleJump").SetActive(false);
 
         }
         else
         {
 
             jumpFlg_Test = false;
+            GameObject.Find("Test_DoubleJump").SetActive(true);
 
         }
     }

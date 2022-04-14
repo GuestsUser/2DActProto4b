@@ -10,6 +10,7 @@ public class DashSystemN : Padinput
     [Tooltip("ダッシュしてから再発動可能になるまでの時間")] [SerializeField] float coolTime = 5f;
     [Tooltip("ダッシュの力")] [SerializeField] float dashForce = 5f;
     [Tooltip("移動方向に伸びる敵削除rayの長さ")] [SerializeField] public float rayDistance = 0.5f;
+    
     private ChangeShoes change_shoes;  /*能力切り替え用変数_ChangeShoes*/
 
     private Animator animator;

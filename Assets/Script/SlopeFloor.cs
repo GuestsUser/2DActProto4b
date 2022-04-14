@@ -14,6 +14,7 @@ public class SlopeFloor : MonoBehaviour
     private static GameObject player; /* プレイヤーを保持する変数 */
     private static JumpSystem jump; /* ジャンプシステム保持 */
     private static Rigidbody pb; /* プレイヤーリジットボディ保持 */
+    private static SlopeFriction friction; /* 吹っ飛び防止コンポーネント保持 */
     private static float rad = 0; /* スフィア半径 */
 
     // Start is called before the first frame update
@@ -41,13 +42,24 @@ public class SlopeFloor : MonoBehaviour
             root.y += 0.5f; /* 完全に足元配置だと床が始点判定で列挙されない、なんて事が起きそうなので始点を上げておく */
 
             /* 現在SphereColliderなのでSphereCastにしたがBoxColliderならBoxCastと判定にあった形にする必要あり */
-            if ( Physics.SphereCast(root, rad, Vector3.down, out getInfo) && getInfo.transform.gameObject==gameObject) /* 下向きに飛ばしたrayが一番最初に接触したオブジェクトが自身なら接地 */
+            
+            foreach(RaycastHit hit in Physics.SphereCastAll(root, rad, Vector3.down))
             {
-                //Debug.Log("rayhit");
-                other.gameObject.GetComponent<DashSystemN>().standSlopeObj = gameObject;
-                StartCoroutine(SlopeForce());
+                if (hit.transform.gameObject == gameObject)
+                {
+                    other.gameObject.GetComponent<DashSystemN>().standSlopeObj = gameObject;
+                    StartCoroutine(SlopeForce());
+                    break;
+                }
             }
             
+            //if ( Physics.SphereCast(root, rad, Vector3.down, out getInfo) && getInfo.transform.gameObject==gameObject) /* 下向きに飛ばしたrayが一番最初に接触したオブジェクトが自身なら接地 */
+            //{
+            //    //Debug.Log("rayhit");
+            //    other.gameObject.GetComponent<DashSystemN>().standSlopeObj = gameObject;
+            //    StartCoroutine(SlopeForce());
+            //}
+            //Debug.Log(getInfo.transform.gameObject);
         }
     }
     private static void GetPlayer(GameObject obj) /* プレイヤー系情報をstatic変数に格納 */
@@ -55,6 +67,7 @@ public class SlopeFloor : MonoBehaviour
         player = obj; /* playerに関するアクションはEnterから始まるのでインスペクターからplayerを受け取らずともok */
         jump = player.GetComponent<JumpSystem>(); /* ジャンプシステムを受け取る */
         pb = player.GetComponent<Rigidbody>(); /* リジットボディ格納 */
+        friction = player.GetComponent<SlopeFriction>(); /* 吹っ飛び防止格納 */
         rad = player.GetComponent<CapsuleCollider>().radius;
     }
 
@@ -70,15 +83,18 @@ public class SlopeFloor : MonoBehaviour
     {
         StartCoroutine(JumpSystem.Restriction()); /* ジャンプ禁止化 */
 
+        Debug.Log("kkkkkk");
+
         Vector3 moveVol = Vector3.zero; /* フレーム間の各軸移動量を取得 */
         Vector3 oldPos = player.transform.position; /* 前回位置 */
+        Vector3 angle = Vector3.zero;
         while (true)
         {
             float px = player.transform.position.x;
             if (px < minMax[0] || px > minMax[1]) { break; } /* 床部分を過ぎると終了 */
             //if (jump.completion) { break; } /* ジャンプ成立で終了 */
 
-            Vector3 angle = transform.rotation.eulerAngles; /* 毎回角度を取得する事で床を回したりもできそう */
+            angle = transform.rotation.eulerAngles; /* 毎回角度を取得する事で床を回したりもできそう */
             pb.AddForce(force * Mathf.Cos(angle.z * Mathf.Deg2Rad), force * Mathf.Sin(angle.z * Mathf.Deg2Rad), 0, ForceMode.Acceleration);
 
             moveVol = player.transform.position - oldPos;
@@ -86,42 +102,11 @@ public class SlopeFloor : MonoBehaviour
             yield return StartCoroutine(TimeScaleYield.TimeStop());
         }
         /* 出た瞬間のvelocityを減らせば凄まじい力で吹っ飛ばされなくなる */
+        angle = transform.rotation.eulerAngles;
 
-        JumpSystem.RestrictionRelease(); /* ジャンプ禁止化解除(仮導入) */
+        //JumpSystem.RestrictionRelease(); /* ジャンプ禁止化解除(仮導入) */
         ObjLeave();
-        //StartCoroutine(CourseOutFriction(moveVol));
-    }
-
-    /* 床が消えると困るのでこのコルーチンは別の場所に移すべきかも */
-    IEnumerator CourseOutFriction(Vector3 move) /* 床を抜けると凄まじい力が掛かるのでオリジナル摩擦 */
-    {
-        /* ジャンプで抜けた場合について */
-        /* 逆方向に小さな座標しか動いてない状況でジャンプすると再着地される恐れあり */
-        /* 再着地されると滑る力を無力化して進めてしまう */
-        /* 今のジャンプスクリプトによるとジャンプによりx加速度初期化が入ってないのでジャンプで抜けない方がいいかもしれない */
-        /* ジャンプ中滑る力一時停止的な処理にできるといいかも */
-        pb.velocity = Vector3.zero;
-        Vector3 angle = transform.rotation.eulerAngles;
-
-        /* 各軸の摩擦コルーチン実行状況 */
-        bool x_run = false;
-        bool y_run = false;
-
-        /* 各軸に掛かっていた力 */
-        float x_force = force * Mathf.Cos(angle.z * Mathf.Deg2Rad);
-        float y_force = force * Mathf.Sin(angle.z * Mathf.Deg2Rad);
-
-        /* 滑る力を掛けられていた方向と同じ方向に動いていた(押し戻された若しくは駆け下りていた)場合摩擦コルーチンを開始(力が掛かっていなかった場合開始しない) */
-        if (x_force != 0 && (move.x > 0) == (x_force > 0)) { }
-        if (y_force != 0 && (move.y > 0) == (y_force > 0)) { }
-
-        /* 終了条件は他にもプレイヤーのダッシュやノックバック、死亡、他の移動床に乗った場合 */
-        while (x_run && y_run)
-        {
-            yield return StartCoroutine(TimeScaleYield.TimeStop());
-        }
-
-        JumpSystem.RestrictionRelease(); /* ジャンプ禁止化解除 */
+        StartCoroutine(friction.CourseOutFriction(force * Mathf.Cos(angle.z * Mathf.Deg2Rad), force * Mathf.Sin(angle.z * Mathf.Deg2Rad), moveVol));
     }
 
     void OnDisable() /* このオブジェクトが無効化、削除される瞬間に実行 */

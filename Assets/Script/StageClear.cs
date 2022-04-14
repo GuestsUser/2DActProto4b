@@ -24,72 +24,17 @@ public class StageClear : MonoBehaviour
     void Update()
     {
         /*ステージ1またはステージ2がクリアしていたら*/
-        if (isStage1Clear || isStage2Clear)
+        if (isStage1Clear || isStage2Clear || isStage3Clear)
         {
             /*シーンをステージクリア画面に切り替える*/
             SceneManager.LoadScene("Clear");
-        }
-        /*すべてのステージをクリアしていたら*/
-        else if(isStage1Clear && isStage2Clear && isStage3Clear)
-        {
-            /*シーンをオールステージクリア画面に切り替える*/
-            SceneManager.LoadScene("AllClear");
         }
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        ///*現在のシーンがStage1なら*/
-        //if (SceneManager.GetActiveScene().name == "PreStage1")
-        //{
-        //    /*触れたオブジェクトのタグがPlayerなら*/
-        //    if (other.gameObject.tag == ("Player"))
-        //    {
-        //        /*isStage1Clearがfalseなら*/
-        //        if (!isStage1Clear)
-        //        {
-        //            /*ステージ１をクリアにする*/
-        //            isStage1Clear = true;
-        //            Debug.Log("ステージ1クリア" + isStage1Clear);
-        //        }
-        //    }
-        //}
-        ///*現在のシーンがStage2なら*/
-        //else if (SceneManager.GetActiveScene().name == "Game2")
-        //{
-        //    /*触れたオブジェクトのタグがPlayerなら*/
-        //    if (other.gameObject.tag == ("Player"))
-        //    {
-        //        /*isStage2Clearがfalseなら*/
-        //        if (!isStage2Clear)
-        //        {
-        //            /*ステージ2をクリアにする*/
-        //            isStage2Clear = true;
-        //            Debug.Log("ステージ2クリア" + isStage2Clear);
-        //        }
-        //    }
-        //}
-        ///*現在のシーンがStage3なら*/
-        //else if (SceneManager.GetActiveScene().name == "KutuTestStage")
-        //{
-        //    /*触れたオブジェクトのタグがPlayerなら*/
-        //    if (other.gameObject.tag == ("Player"))
-        //    {
-        //        /*isStage2Clearがfalseなら*/
-        //        if (!isStage3Clear)
-        //        {
-        //            /*ステージ2をクリアにする*/
-        //            isStage3Clear = true;
-        //            Debug.Log("ステージ2クリア" + isStage3Clear);
-        //        }
-        //    }
-        //}
-
-
-
-        /*4月14日ビルド用*/
         /*現在のシーンがStage1なら*/
-        if (SceneManager.GetActiveScene().name == "Stage1")
+        if (SceneManager.GetActiveScene().name == "PreStage1")
         {
             /*触れたオブジェクトのタグがPlayerなら*/
             if (other.gameObject.tag == ("Player"))
@@ -104,7 +49,7 @@ public class StageClear : MonoBehaviour
             }
         }
         /*現在のシーンがStage2なら*/
-        else if (SceneManager.GetActiveScene().name == "Stage2")
+        else if (SceneManager.GetActiveScene().name == "Game2")
         {
             /*触れたオブジェクトのタグがPlayerなら*/
             if (other.gameObject.tag == ("Player"))
@@ -119,7 +64,7 @@ public class StageClear : MonoBehaviour
             }
         }
         /*現在のシーンがStage3なら*/
-        else if (SceneManager.GetActiveScene().name == "Stage3")
+        else if (SceneManager.GetActiveScene().name == "KutuTestStage")
         {
             /*触れたオブジェクトのタグがPlayerなら*/
             if (other.gameObject.tag == ("Player"))
@@ -127,9 +72,9 @@ public class StageClear : MonoBehaviour
                 /*isStage2Clearがfalseなら*/
                 if (!isStage3Clear)
                 {
-                    /*ステージ3をクリアにする*/
+                    /*ステージ2をクリアにする*/
                     isStage3Clear = true;
-                    Debug.Log("ステージ3クリア" + isStage3Clear);
+                    Debug.Log("ステージ2クリア" + isStage3Clear);
                 }
             }
         }

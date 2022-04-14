@@ -29,6 +29,7 @@ public class PauseMenu : Padinput
     [SerializeField] private bool show_ope;
     private bool fade_in;
     private bool fade_out;
+    [SerializeField] private bool check_scene; /* ポーズメニューのみ必要 true:ステージセレクトシーン false:ゲームシーン */
 
     /* int型 */
     [SerializeField] int menu_number;
@@ -61,9 +62,6 @@ public class PauseMenu : Padinput
         _selector_obj = GameObject.Find("Cursor");
         operation = GameObject.Find("Operation");
         fade_panel = GameObject.Find("FadePanel").GetComponent<Image>();
-        _item_obj[0] = GameObject.Find("Continue_the_game");
-        _item_obj[1] = GameObject.Find("Operation_explanation");
-        _item_obj[2] = GameObject.Find("Return_to_StageSelect");
 
         /* 【オブジェクトの非表示化】 */
         pause_menu.SetActive(false);
@@ -94,6 +92,20 @@ public class PauseMenu : Padinput
     // Update is called once per frame
     void Update()
     {
+        if(SceneManager.GetActiveScene().name == "StageSelect")
+        {
+            check_scene = true;
+        }
+        if (check_scene)
+        {
+            Text item2 = _item_obj[2].GetComponent<Text>();
+            item2.text = "タイトルにもどる";
+        }
+        else
+        {
+            Text item2 = _item_obj[2].GetComponent<Text>();
+            item2.text = "ステージセレクトにもどる";
+        }
         /* 【FadePanelの透明度を変更する処理】 */
         Fade();
 
@@ -238,7 +250,14 @@ public class PauseMenu : Padinput
                     break;
 
                 case 2: /* ステージ選択に戻る */
-                    StartCoroutine("BacktoStageSelect");
+                    if (check_scene)
+                    {
+                        StartCoroutine("BacktoTitle");
+                    }
+                    else
+                    {
+                        StartCoroutine("BacktoStageSelect");
+                    }
                     break;
             }
         }
@@ -275,6 +294,7 @@ public class PauseMenu : Padinput
 
                 /* 【カーソルの画像切り替え】 */
                 Cursor.texture = Resources.Load<Texture2D>("Cursor2");
+                
                 break;
 
             case 2:
@@ -286,7 +306,15 @@ public class PauseMenu : Padinput
                 _item_obj[1].SetActive(true);
 
                 /* 【カーソルの画像切り替え】 */
-                Cursor.texture = Resources.Load<Texture2D>("Cursor3");
+                if (check_scene)
+                {
+                    Debug.Log("タイトル画像になるはず");
+                    Cursor.texture = Resources.Load<Texture2D>("BacktoTitle");
+                }
+                else if (check_scene == false)
+                {
+                    Cursor.texture = Resources.Load<Texture2D>("Cursor3");
+                }
                 break;
         }
     }
@@ -332,6 +360,15 @@ public class PauseMenu : Padinput
         yield return new WaitForSecondsRealtime(WaitTime);  //処理を待機
 
         SceneManager.LoadScene("StageSelect"); //おそらくタイトルに戻る実装する場合 Scene名はTitleなのでここはそのままにしてあります
+        menu_number = 0; //メニュー番号を初期化。
+        Time.timeScale = 1; //タイムスケールを初期化
+    }
+    private IEnumerator BacktoTitle() //シーンチェンジ用
+    {
+        push_scene = true;
+        yield return new WaitForSecondsRealtime(WaitTime);  //処理を待機
+
+        SceneManager.LoadScene("Title"); //おそらくタイトルに戻る実装する場合 Scene名はTitleなのでここはそのままにしてあります
         menu_number = 0; //メニュー番号を初期化。
         Time.timeScale = 1; //タイムスケールを初期化
     }

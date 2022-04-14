@@ -49,7 +49,7 @@ public class JumpSystem : Padinput
     /*レイキャスト修正版*/
 
     /*（レイキャスト）可視光線の長さ*/
-    [SerializeField] public float rayDistance = 0.05f;
+    [SerializeField] public float rayDistance = 0.1f;
 
     /*靴のテストフラグ（ステージ攻略で靴を切り替える）*/
     public bool jumpFlg_Test = false;   /*二弾ジャンプにさせたい場合このフラグにtrueを入れる*/
@@ -66,9 +66,6 @@ public class JumpSystem : Padinput
 
     /* 4/11 - 仲里により追加 */
     public bool completion { set; get; } /* ジャンプが成立した瞬間trueにする、滑り床からジャンプで離れた瞬間を得る為必要になった、このスクリプトからtrueにした後、最後に別スクリプトからfalse化される */
-    private static bool permit = true; /* trueでジャンプ使用可能 */
-    private static int banTaskCount = 0; /* ジャンプ禁止化コルーチン実行数 */
-    /* 仲里追加以上 */
 
     void Start()
     {
@@ -85,7 +82,7 @@ public class JumpSystem : Padinput
     {
 
         /*ジャンプフラグをテキストで表示*/
-        JumpFlg.text = "JumpFlg : " + jumpFlg_Test.ToString() + "\nジャンプ可能回数"+doubleJump.ToString();
+        JumpFlg.text = "JumpFlg : " + jumpFlg_Test.ToString();
         /*ジャンプフラグをテキストで表示*/
 
     }
@@ -182,7 +179,6 @@ public class JumpSystem : Padinput
                 case false:
                     doubleJump = 1;
                     break;
-
 
             }
 
@@ -284,14 +280,9 @@ public class JumpSystem : Padinput
         //        break;
         //}        
         /*ジャンプシューズ_Test*/
-
-        /* 4/14 仲里追加 */
-        if (!permit) { return; } /* falseなら実行しない */
-        /* 仲里追加以上 */
-
         if (!jumpFlg_Test)
         {
-            if (doubleJump >= 1 && isGrounded)
+            if (doubleJump == 1 && isGrounded)
             {
                 jumping = true;
                 --doubleJump;
@@ -345,23 +336,4 @@ public class JumpSystem : Padinput
         /*ジャンプシューズ_Test*/
 
     }
-
-    /* 4/14 仲里追加 */
-    public static IEnumerator Restriction() /* ジャンプ禁止化コルーチン */
-    {
-        /* 禁止化フラグをそのまま公開するスタイルだと複数箇所から禁止化された時、本来止めていたい状況で片方からジャンプ許可が降りる事があり、ジャンプできてしまう恐れがある */
-        /* なのでこのコルーチンを通し実行数で管理する */
-        banTaskCount++; /* コルーチン実行数増加 */
-        if (!permit) { yield break; } /* コルーチンを複数起動させないため既に禁止状態なら抜ける */
-        permit = false; /* 禁止化 */
-        while (banTaskCount>0) { yield return null; } /* 実行数が0になるまで待機 */
-        permit = true; /* 制限解除 */
-        
-    }
-    public static void RestrictionRelease() /* 禁止化解除 */
-    {
-        if (banTaskCount<=0) { return; } /* 禁止化コルーチンを実行せず実行されると */
-        banTaskCount--; /* 実行数削減 */
-    }
-    /* 仲里追加以上 */
 }

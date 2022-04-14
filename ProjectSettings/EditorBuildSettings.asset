@@ -12,24 +12,33 @@ EditorBuildSettings:
     path: Assets/Scenes/Build/StageSelect.unity
     guid: 40e4e8b6033386e4eb55e84dafde04d2
   - enabled: 0
+    path: Assets/Scenes/Build/Game.unity
+    guid: b7382938c06ec714587c46ce264a659a
+  - enabled: 1
     path: Assets/Scenes/Build/PreStage1.unity
     guid: 97cf1dac0b751d447ad5b18c441b3f00
   - enabled: 1
-    path: Assets/Scenes/Build/Stage1.unity
-    guid: b165910e63b67b74f9c696a00795f0fc
-  - enabled: 1
-    path: Assets/Scenes/Build/Stage2.unity
-    guid: 9252f7ff4f264f54d8d54946bbae0a29
-  - enabled: 1
-    path: Assets/Scenes/Build/Stage3.unity
-    guid: f68b16a77d3cca442a56e59e60c79061
-  - enabled: 1
-    path: Assets/Scenes/Build/GameOver.unity
-    guid: fbe0560aa1c30e94293a68599638c57b
+    path: Assets/Scenes/Build/Game2.unity
+    guid: c114de2fd5342b4418061b8b747d57b0
+  - enabled: 0
+    path: Assets/Scenes/Build/NewKuttukiTestStage.unity
+    guid: f704a5dec22df1546891617b4df5774f
+  - enabled: 0
+    path: Assets/Scenes/Build/Game4.unity
+    guid: 83ea53faf3cdaa04c9c6049fe544fb0e
   - enabled: 1
     path: Assets/Scenes/Build/Clear.unity
     guid: b601be2fad8245e49a45675bbd8f832e
   - enabled: 1
+    path: Assets/Scenes/Build/GameOver.unity
+    guid: fbe0560aa1c30e94293a68599638c57b
+  - enabled: 0
     path: Assets/Scenes/Build/AllClear.unity
     guid: 57b953a1eebce2149808a2010a86fe0c
+  - enabled: 0
+    path: Assets/Scenes/Build/Game5.unity
+    guid: 9ce4e36cd5d3a1b4b8b606dddb49852d
+  - enabled: 0
+    path: Assets/Scenes/Build/TestStage.unity
+    guid: d6b44e10417488e4c80424ef45ccc1ff
   m_configObjects: {}

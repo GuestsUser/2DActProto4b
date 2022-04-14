@@ -109,19 +109,19 @@ public class StageSelect : MonoBehaviour
         {
             ControlStop(); /* 入力受付終了 */
             /*ステージ1に切り替える*/
-            fade.FadeIn(1.5f, () => SceneManager.LoadScene(2));
+            fade.FadeIn(1.5f, () => SceneManager.LoadScene("Stage1"));
         }
         else if (collision.gameObject.name == "Stage2")
         {
             ControlStop();
             /*ステージ2に切り替える*/
-            fade.FadeIn(1.5f, () => SceneManager.LoadScene(3));
+            fade.FadeIn(1.5f, () => SceneManager.LoadScene("Stage2"));
         }
         else if (collision.gameObject.name == "Stage3")
         {
             ControlStop();
             /*ステージ3に切り替える*/
-            fade.FadeIn(1.5f, () => SceneManager.LoadScene(9));
+            fade.FadeIn(1.5f, () => SceneManager.LoadScene("Stage3"));
         }
 
         void ControlStop() /* 入力を処理するコンポーネント全停止で入力受付終了とする */

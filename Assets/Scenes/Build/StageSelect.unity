@@ -134,7 +134,7 @@ GameObject:
   - component: {fileID: 7256992}
   - component: {fileID: 7256991}
   m_Layer: 0
-  m_Name: Stage1
+  m_Name: Stage2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -152,7 +152,7 @@ Transform:
   m_LocalScale: {x: 0.3, y: 1, z: 0.5}
   m_Children: []
   m_Father: {fileID: 1156745621}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &7256991
 BoxCollider:
@@ -557,7 +557,7 @@ GameObject:
   - component: {fileID: 401554808}
   - component: {fileID: 401554807}
   m_Layer: 0
-  m_Name: Stage2
+  m_Name: Stage3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -575,7 +575,7 @@ Transform:
   m_LocalScale: {x: 0.3, y: 1, z: 0.5}
   m_Children: []
   m_Father: {fileID: 1156745621}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &401554807
 BoxCollider:
@@ -1031,12 +1031,12 @@ GameObject:
   - component: {fileID: 584609266}
   - component: {fileID: 584609265}
   m_Layer: 0
-  m_Name: Stage3
+  m_Name: Stage1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &584609264
 Transform:
   m_ObjectHideFlags: 0
@@ -1049,7 +1049,7 @@ Transform:
   m_LocalScale: {x: 0.3, y: 1, z: 0.5}
   m_Children: []
   m_Father: {fileID: 1156745621}
-  m_RootOrder: 2
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!65 &584609265
 BoxCollider:
@@ -2340,9 +2340,9 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
+  - {fileID: 584609264}
   - {fileID: 7256990}
   - {fileID: 401554806}
-  - {fileID: 584609264}
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

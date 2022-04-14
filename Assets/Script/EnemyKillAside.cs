@@ -63,7 +63,7 @@ public class EnemyKillAside : MonoBehaviour
             {
                 rayHit.collider.gameObject.SetActive(false);/*エネミーを非アクティブ状態にする*/
 
-                rb.velocity = new Vector3(0, 0, 0);
+                rb.velocity = new Vector3(0, 0, 0); /*一瞬プレイヤーの動きを止める*/
                 rb.AddForce(new Vector3(0, upForce, 0));    /*敵を踏んだら上にジャンプ*/
 
             }

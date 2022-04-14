@@ -291,7 +291,7 @@ public class JumpSystem : Padinput
 
         if (!jumpFlg_Test)
         {
-            if (doubleJump == 1 && isGrounded)
+            if (doubleJump >= 1 && isGrounded)
             {
                 jumping = true;
                 --doubleJump;

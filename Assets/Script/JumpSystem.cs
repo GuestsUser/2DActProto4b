@@ -66,7 +66,7 @@ public class JumpSystem : Padinput
 
     /* 4/11 - 仲里により追加 */
     public bool completion { set; get; } /* ジャンプが成立した瞬間trueにする、滑り床からジャンプで離れた瞬間を得る為必要になった、このスクリプトからtrueにした後、最後に別スクリプトからfalse化される */
-    private static bool permit = false; /* trueでジャンプ使用可能 */
+    private static bool permit = true; /* trueでジャンプ使用可能 */
     private static int banTaskCount = 0; /* ジャンプ禁止化コルーチン実行数 */
     /* 仲里追加以上 */
 

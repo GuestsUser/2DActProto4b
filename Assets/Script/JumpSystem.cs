@@ -183,6 +183,7 @@ public class JumpSystem : Padinput
                     doubleJump = 1;
                     break;
 
+
             }
 
             /*コライダーを持つオブジェクトから、タグを読み取る（地面オブジェクトをgroundに設定）*/

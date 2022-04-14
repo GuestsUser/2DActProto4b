@@ -13,11 +13,11 @@ public class StageClear : MonoBehaviour
     void Start()
     {
         /*ステージ1が始まったらクリアしてない状態になるから、どうにかしないといけない*/
-        //isStage1Clear = false;
+        isStage1Clear = false;
         /*ステージ2が始まったらクリアしてない状態になるから、どうにかしないといけない*/
-        //isStage2Clear = false;
+        isStage2Clear = false;
         /*ステージ3が始まったらクリアしてない状態になるから、どうにかしないといけない*/
-        //isStage3Clear = false;
+        isStage3Clear = false;
     }
 
 

@@ -73,19 +73,18 @@ public class DashSystemN : Padinput
 
         ForceReSet();
 
-        /* プログラム実行順を滑る床→ダッシュ→ジャンプとすると滑る床から離れられるか? */
         void ForceSet() /* 毎フレームこれを実行する事によるダッシュ中の方向転換、それによる滑る床上でのvelocity.y固定化によるジャンプ無効問題の解決から */
         {
             float dashVector = dashForce * Mathf.Cos(transform.rotation.eulerAngles.y * Mathf.Deg2Rad); /* 力と方向(x軸用)を持った数学的な意味のベクトル */
             if (standSlopeObj == null) /* 滑る床以外でのダッシュ */
             {
-                Debug.Log("normal");
+                //Debug.Log("normal");
                 force.x = dashVector;
                 force.y = rb.velocity.y;
             }
             else /* 床角度に合わせたダッシュ、滑る床以外もこれを使えば滑らないけど傾斜のある床をスムーズにダッシュできるかも */
             {
-                Debug.Log("slope");
+                //Debug.Log("slope");
                 float floorZRad = standSlopeObj.transform.rotation.eulerAngles.z * Mathf.Deg2Rad; /* 床のz傾き(ラジアン) */
                 force = new Vector3(dashVector * Mathf.Abs(Mathf.Cos(floorZRad)), dashVector * Mathf.Abs(Mathf.Sin(floorZRad))); /* ダッシュベクトルを床の傾きに合わせて加工する */
             }

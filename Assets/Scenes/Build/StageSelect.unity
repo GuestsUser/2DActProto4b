@@ -2222,22 +2222,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fade: {fileID: 1150843144}
   vcam: {fileID: 1418567089}
---- !u!114 &1027865236
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1027865234}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 00cad25d61b236642915778189df9a9e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  rayPosition: {x: 0, y: 0, z: 0}
-  rayDistance: 0.1
-  rb: {fileID: 0}
-  upForce: 400
 --- !u!114 &1027865249 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6346024904048878351, guid: 1b398051e4fdfd044b3b928e875c85b5,

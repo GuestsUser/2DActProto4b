@@ -24,7 +24,7 @@ public class StageClear : MonoBehaviour
     void Update()
     {
         /*ステージ1またはステージ2がクリアしていたら*/
-        if (isStage1Clear || isStage2Clear)
+        if (isStage1Clear || isStage2Clear || isStage3Clear) /* 確認用で3を入れた */
         {
             /*シーンをステージクリア画面に切り替える*/
             SceneManager.LoadScene("Clear");
@@ -39,6 +39,7 @@ public class StageClear : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        Debug.Log("aa");
         ///*現在のシーンがStage1なら*/
         //if (SceneManager.GetActiveScene().name == "PreStage1")
         //{

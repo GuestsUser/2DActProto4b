@@ -154,7 +154,7 @@ public class GameOverMenu : MonoBehaviour
                 item_obj[0].SetActive(true);
 
                 /* 【カーソルの画像切り替え】 */
-                Cursor.texture = Resources.Load<Texture2D>("EndGameCursor");
+                Cursor.texture = Resources.Load<Texture2D>("BacktoTitle");
                 break;
         }
     }

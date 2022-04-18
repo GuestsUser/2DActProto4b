@@ -2087,7 +2087,8 @@ PrefabInstance:
         type: 3}
       propertyPath: doublejump
       value: 
-      objectReference: {fileID: 766587032}
+      objectReference: {fileID: 6584657071964395690, guid: 34972a2fc62773647a777ab11b5960a3,
+        type: 3}
     - target: {fileID: 6346024904048878351, guid: 1b398051e4fdfd044b3b928e875c85b5,
         type: 3}
       propertyPath: rayDistance
@@ -4110,12 +4111,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 094923b744d05cf46ae1534307a0a660, type: 3}
---- !u!1 &766587032 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6584657071964395690, guid: 34972a2fc62773647a777ab11b5960a3,
-    type: 3}
-  m_PrefabInstance: {fileID: 174358104}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &773602774
 PrefabInstance:
   m_ObjectHideFlags: 0

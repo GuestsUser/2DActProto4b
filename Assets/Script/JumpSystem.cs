@@ -52,7 +52,7 @@ public class JumpSystem : Padinput
     [SerializeField] public float rayDistance = 0.05f;
 
     /*靴のテストフラグ（ステージ攻略で靴を切り替える）*/
-    public bool jumpFlg_Test = false;   /*二弾ジャンプにさせたい場合このフラグにtrueを入れる*/
+    public static bool jumpFlg_Test = false;   /*二弾ジャンプにさせたい場合このフラグにtrueを入れる*/
     /*靴のテストフラグ（ステージ攻略で靴を切り替える）*/
 
     /*テストフラグをシーン上に表示させる変数*/
@@ -135,6 +135,20 @@ public class JumpSystem : Padinput
 
     void FixedUpdate()
     {
+
+
+        if (jumpFlg_Test)
+        {
+
+            doublejump.SetActive(false);
+
+        }
+        else if (!jumpFlg_Test)
+        {
+
+            doublejump.SetActive(true);
+
+        }
 
 
         var velocity_y = rb.velocity.y;

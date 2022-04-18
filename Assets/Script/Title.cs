@@ -26,7 +26,8 @@ public class Title : MonoBehaviour
 
     /*画像切り替え用*/
     public RawImage Cursor;
-
+    Color yellow = new Color(1,1,0);
+    Color white = new Color(1,1,1);
     void Start()
     {
         /*【オブジェクトの取得】*/
@@ -41,11 +42,19 @@ public class Title : MonoBehaviour
         push_scene = false;
         press_a = false;
 
+        /* 【カーソルの色を白に初期化】 */
+        Cursor.color = white;
     }
 
     // Update is called once per frame
     void Update()
     {
+        /* 【シーン遷移を伴う決定がされていない間】 */
+        if (push_scene == false)
+        {
+            /* 【カーソルの色を白に初期化】 */
+            Cursor.color = white;
+        }
         Cursor_Move();
         ChangeCursor();
         Decision();
@@ -153,6 +162,7 @@ public class Title : MonoBehaviour
         if (Gamepad.current.buttonSouth.isPressed && press_a == false)
         {
             press_a = true;
+            Cursor.color = yellow; /* カーソルの色を黄色に変更 */
             switch (menu_number)
             {
                 case 0:     /*ステージセレクト画面へ*/

@@ -49,7 +49,11 @@ public class PauseMenu : Padinput
     /* 画像切り替え用 */
     //[SerializeField] private Image[] item_image;
     public RawImage Cursor;
-
+    Image color;
+    //Vector3 yellow = new Vector3(1,1,0);
+    //Vector3 white = new Vector3(1, 1, 1);
+    Color yellow = new Color(1, 1, 0);
+    Color white = new Color(1, 1, 1);
     /* ゲーム画面を暗くする用 */
     [SerializeField] Image fade_panel;
 
@@ -73,6 +77,7 @@ public class PauseMenu : Padinput
 
         /* 【カーソルの取得】 */
         Cursor = _selector_obj.GetComponent<RawImage>();
+        Cursor.color = white;
 
         /* 【選択番号の初期化】 */
         menu_number = 0;
@@ -116,11 +121,20 @@ public class PauseMenu : Padinput
         /* 【メイン処理】 */
         if (show_menu) /* 表示判定がtrueの時 */
         {
+            if (press_a == false)
+            {
+                Cursor.color = white;
+            }
+
             Time.timeScale = 0; /* unity内の時間を止める */
             if (show_ope == false) /* 操作説明が非表示の状態なら */
             {
                 pause_menu.SetActive(true); /* ポーズメニューを表示させる */
-                press_a = false; /* aボタンを押せるように初期化 */
+
+                if(push_scene == false) /* シーン遷移を伴う決定が押されていなければ */
+                {
+                    press_a = false; /* aボタンを押せるように初期化 */
+                }
 
                 /* 【カーソル処理】 */
                 Cursor_Move(); /* カーソルを動かす処理 */
@@ -254,6 +268,8 @@ public class PauseMenu : Padinput
         if (Gamepad.current.buttonSouth.isPressed && press_a == false && show_ope == false)
         {
             press_a = true;
+            //_selector_obj.GetComponent<Image>().color = new Color(1,1,0);
+            Cursor.color = yellow; 
             switch (menu_number)
             {
                 case 0: /* ゲームを続ける */

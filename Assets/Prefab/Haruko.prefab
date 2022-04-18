@@ -868,7 +868,7 @@ MonoBehaviour:
   legposition4: {x: 0, y: 0, z: 0}
   legposition5: {x: 0, y: 0, z: 0}
   legposition6: {x: 0, y: 0, z: 0}
-  rayDistance: 0.1
+  rayDistance: 0.07
   JumpFlg: {fileID: 6872543496779070822, guid: 283c3f143a6e1b8428b2582fe27f01a7, type: 3}
   gb: {fileID: 6872543496779070820, guid: 283c3f143a6e1b8428b2582fe27f01a7, type: 3}
   doublejump: {fileID: 6584657071964395690, guid: 34972a2fc62773647a777ab11b5960a3,
@@ -1042,6 +1042,7 @@ MonoBehaviour:
   push_scene: 0
   show_ope: 0
   check_scene: 0
+  full_screen: 0
   menu_number: 0
   count: 0
   interval: 0

@@ -49,7 +49,7 @@ public class JumpSystem : Padinput
     /*レイキャスト修正版*/
 
     /*（レイキャスト）可視光線の長さ*/
-    [SerializeField] public float rayDistance = 0.05f;
+    public float rayDistance = 0.08f;
 
     /*靴のテストフラグ（ステージ攻略で靴を切り替える）*/
     public static bool jumpFlg_Test = false;   /*二弾ジャンプにさせたい場合このフラグにtrueを入れる*/

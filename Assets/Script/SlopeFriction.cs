@@ -25,7 +25,7 @@ public class SlopeFriction : MonoBehaviour
     /* 床が消えると困るのでこのコルーチンは別の場所に移すべきかも */
     public IEnumerator CourseOutFriction(float x_force, float y_force, Vector3 move) /* 床を抜けると凄まじい力が掛かるのでオリジナル摩擦 */
     {
-        pm.movePermit = false;
+        StartCoroutine(PlayerMove.MoveRestriction());
         rb.velocity = Vector3.zero;
         float count = 0; /* 実行された時、1瞬プレイヤーの動きが止まるようなら初期値にTime.deltaTimeを設定し動かしてみる */
 
@@ -60,7 +60,7 @@ public class SlopeFriction : MonoBehaviour
         void EndProcess()
         {
             JumpSystem.RestrictionRelease(); /* ジャンプ禁止化解除 */
-            pm.movePermit = true;
+            PlayerMove.MoveRestrictionRelease();
         }
     }
 }

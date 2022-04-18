@@ -83,7 +83,7 @@ public class SlopeFloor : MonoBehaviour
     {
         StartCoroutine(JumpSystem.Restriction()); /* ジャンプ禁止化 */
 
-        Debug.Log("kkkkkk");
+        //Debug.Log("kkkkkk");
 
         Vector3 moveVol = Vector3.zero; /* フレーム間の各軸移動量を取得 */
         Vector3 oldPos = player.transform.position; /* 前回位置 */

@@ -83,8 +83,14 @@ public class PlayerMove : Padinput
 
     //public float height;
 
-    [HideInInspector] public bool movePermit = true; /* キー入力による操作許可 */
-    [HideInInspector] public bool rotatePermit = true; /* 方向転換許可 */
+    private static bool movePermit = true; /* キー入力による操作許可 */
+    private static bool rotatePermit = true; /* 方向転換許可 */
+
+    /* 4/18 仲里追加 */
+    private static int banTaskCountMove = 0; /* 移動禁止コルーチン起動数 */
+    private static int banTaskCountRotate = 0; /* 方向転換禁止コルーチン起動数 */
+
+    /* 仲里追加以上 */
 
     private void Start() /*初期化*/
     {
@@ -523,14 +529,44 @@ public class PlayerMove : Padinput
             //    }
             //}
         }
-        ///*壁にめり込まないようにする処理(自分版)*/
-        //private void DontMove() /* 操作していない時勝手に動かないようにする処理 */
-        //{
-        //    if (kuttuku.bool_ray_hit == true && idle == true)
-        //    {
-        //        Debug.Log("勝手に動かない処理");
-        //        transform.position = player_pos2;
-        //    }
-        //}
+    ///*壁にめり込まないようにする処理(自分版)*/
+    //private void DontMove() /* 操作していない時勝手に動かないようにする処理 */
+    //{
+    //    if (kuttuku.bool_ray_hit == true && idle == true)
+    //    {
+    //        Debug.Log("勝手に動かない処理");
+    //        transform.position = player_pos2;
+    //    }
+    //}
+
+    /* 4/18 仲里追加 */
+    public static IEnumerator MoveRestriction() /* 移動禁止化コルーチン */
+    {
+        banTaskCountMove++; /* コルーチン実行数増加 */
+        if (!movePermit) { yield break; } /* コルーチンを複数起動させないため既に禁止状態なら抜ける */
+        movePermit = false; /* 禁止化 */
+        while (banTaskCountMove > 0) { yield return null; } /* 実行数が0になるまで待機 */
+        movePermit = true; /* 制限解除 */
+    }
+    public static IEnumerator RotateRestriction() /* 方向転換禁止化コルーチン */
+    {
+        banTaskCountRotate++; /* コルーチン実行数増加 */
+        if (!rotatePermit) { yield break; } /* コルーチンを複数起動させないため既に禁止状態なら抜ける */
+        rotatePermit = false; /* 禁止化 */
+        while (banTaskCountRotate > 0) { yield return null; } /* 実行数が0になるまで待機 */
+        rotatePermit = true; /* 制限解除 */
+
+    }
+    public static void MoveRestrictionRelease() /* 禁止化解除 */
+    {
+        if (banTaskCountMove <= 0) { return; } /* 禁止化コルーチンを実行せず実行されると */
+        banTaskCountMove--; /* 実行数削減 */
+    }
     
+    public static void RotateRestrictionRelease() /* 禁止化解除 */
+    {
+        if (banTaskCountRotate <= 0) { return; } /* 禁止化コルーチンを実行せず実行されると */
+        banTaskCountRotate--; /* 実行数削減 */
+    }
+    /* 仲里追加以上 */
 }

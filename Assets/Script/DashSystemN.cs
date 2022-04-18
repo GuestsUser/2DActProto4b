@@ -46,8 +46,8 @@ public class DashSystemN : Padinput
     IEnumerator Dush()
     {
         /* 移動禁止とアニメ設定 */
-        control.movePermit = false;
-        //control.rotatePermit = false;
+        StartCoroutine(PlayerMove.MoveRestriction());
+        StartCoroutine(PlayerMove.RotateRestriction());
         animator.SetTrigger("Attack");
 
         float count = 0f;
@@ -69,8 +69,8 @@ public class DashSystemN : Padinput
             yield return StartCoroutine(TimeScaleYield.TimeStop());
         }
 
-        control.movePermit = true;
-        //control.rotatePermit = true;
+        PlayerMove.MoveRestrictionRelease();
+        PlayerMove.RotateRestrictionRelease();
 
         ForceReSet();
 

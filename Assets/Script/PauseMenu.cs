@@ -30,6 +30,7 @@ public class PauseMenu : Padinput
     private bool fade_in;
     private bool fade_out;
     [SerializeField] private bool check_scene; /* ポーズメニューのみ必要 true:ステージセレクトシーン false:ゲームシーン */
+    [SerializeField] private bool full_screen; /* true:フルスクリーン false:ウィンドウモード */
 
     /* int型 */
     [SerializeField] int menu_number;
@@ -75,7 +76,7 @@ public class PauseMenu : Padinput
 
         /* 【選択番号の初期化】 */
         menu_number = 0;
-        interval = 10;
+        interval = 15;
         opacity = 0;
 
         /* 【フラグの初期化】 */
@@ -127,6 +128,21 @@ public class PauseMenu : Padinput
 
                 /* 【決定が押された時の処理】 */
                 Decision();
+
+                /* スクリーンモードの切り替え */
+                if (Gamepad.current.rightShoulder.wasPressedThisFrame)
+                {
+                    if (full_screen == false)
+                    {
+                        full_screen = true;
+                        Screen.SetResolution(1920, 1080, true);
+                    }
+                    else
+                    {
+                        full_screen = false;
+                        Screen.SetResolution(1920, 1080, false);
+                    }
+                }
             }
             else
             {

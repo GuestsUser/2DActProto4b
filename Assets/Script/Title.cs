@@ -34,7 +34,7 @@ public class Title : MonoBehaviour
 
         /*【選択番号の初期化】*/
         menu_number = 0;
-        interval = 20;
+        interval = 15;
 
         /*【フラグの初期化】*/
         push = false;

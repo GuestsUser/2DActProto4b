@@ -35,7 +35,7 @@ public class GameOverMenu : MonoBehaviour
 
         /* 【選択番号の初期化】 */
         menu_number = 0;
-        interval = 50;
+        interval = 15;
 
         /* 【フラグの初期化】 */
         show_menu = false;

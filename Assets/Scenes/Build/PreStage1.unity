@@ -2018,6 +2018,22 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1105246981, guid: 1b398051e4fdfd044b3b928e875c85b5, type: 3}
+      propertyPath: m_Name
+      value: tumasakiR
+      objectReference: {fileID: 0}
+    - target: {fileID: 1176785690, guid: 1b398051e4fdfd044b3b928e875c85b5, type: 3}
+      propertyPath: m_Name
+      value: kakatoR
+      objectReference: {fileID: 0}
+    - target: {fileID: 1804974837, guid: 1b398051e4fdfd044b3b928e875c85b5, type: 3}
+      propertyPath: m_Name
+      value: kakatoL
+      objectReference: {fileID: 0}
+    - target: {fileID: 1812558112, guid: 1b398051e4fdfd044b3b928e875c85b5, type: 3}
+      propertyPath: m_Name
+      value: tumasakiL
+      objectReference: {fileID: 0}
     - target: {fileID: 6346024904048878341, guid: 1b398051e4fdfd044b3b928e875c85b5,
         type: 3}
       propertyPath: m_LocalPosition.x

@@ -656,6 +656,8 @@ GameObject:
   - component: {fileID: 3219713706785432899}
   - component: {fileID: 4629836387720665810}
   - component: {fileID: 2397871166523164794}
+  - component: {fileID: 8405841928844101743}
+  - component: {fileID: 4368973400264170058}
   m_Layer: 0
   m_Name: Haruko
   m_TagString: Player
@@ -1015,7 +1017,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   runTime: 2
   coolTime: 5
-  dashForce: 5
+  dashForce: 6
   rayDistance: 0.5
 --- !u!114 &3219713706785432899
 MonoBehaviour:
@@ -1076,6 +1078,33 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93fa362afdfa61d4391567702ab0937b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &8405841928844101743
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6346024904048878582}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2b372db1cfd2efa4e8668a8f3c9c4743, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  adjust: 0.3
+  distance: 0.1
+--- !u!114 &4368973400264170058
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6346024904048878582}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 56fda214003b3704d88155712e596860, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  frictionTime: 0.1
 --- !u!1 &6346024904113327281
 GameObject:
   m_ObjectHideFlags: 0

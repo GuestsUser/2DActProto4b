@@ -5,7 +5,7 @@ using UnityEngine;
 public class SlopeFriction : MonoBehaviour
 {
     [Header("滑る床から落とされた時の力を抑えるスクリプト")]
-    [Tooltip("滑る床から落とされた時、吹っ飛びの力が消えるまでの時間(正確には吹っ飛びにvelocityは使用してないが……)")] [SerializeField] float frictionTime = 0.2f;
+    [Tooltip("滑る床から落とされた時、吹っ飛びの力が消えるまでの時間(正確には吹っ飛びにvelocityは使用してないが……)")] [SerializeField] float frictionTime = 0.1f;
     private Rigidbody rb; /* リジットボディ保持 */
     private PlayerMove pm; /* 移動用コンポーネント保持 */
 
@@ -59,8 +59,10 @@ public class SlopeFriction : MonoBehaviour
 
         void EndProcess()
         {
+            rb.velocity /= 5; /* 斜めにぶつかったりした場合の跳ね返りの軽減 */
             JumpSystem.RestrictionRelease(); /* ジャンプ禁止化解除 */
             PlayerMove.MoveRestrictionRelease();
+            //PlayerMove.RotateRestrictionRelease();
         }
     }
 }

@@ -15,13 +15,12 @@ public class DashSystemN : Padinput
 
     private Animator animator;
     private bool timerDashPermit = true; /* 時間経過で管理するダッシュ使用可否 */
-    private bool isGround = true; /* ノックバックと接地判定によるダッシュ使用可否 */
 
     private Vector3 adjust; /* 基準位置を中心に持ってくる為の変数 */
 
     private Rigidbody rb;
     private PlayerMove control;
-    private float rad = 0; /* スフィア半径 */
+    private GroundFooter footer;
 
     [System.NonSerialized] public GameObject standSlopeObj; /*現在乗ってる滑る床オブジェクト*/
     void Start()
@@ -30,20 +29,17 @@ public class DashSystemN : Padinput
         rb = GetComponent<Rigidbody>();
         animator = GetComponent<Animator>();
         control = GetComponent<PlayerMove>();
-        rad = GetComponent<CapsuleCollider>().radius;
+        footer = GetComponent<GroundFooter>();
 
         adjust = new Vector3(0, transform.localScale.y / 2, 0);
     }
 
-    private void LateUpdate()
-    {
-        isGround = false; /* 最後にfalse化する */
-    }
+    
 
     public override void Skill()
     {
         /*アビリティ発動ボタンが押されたら*/
-        if (timerDashPermit && Gamepad.current.buttonWest.wasPressedThisFrame && (!PlayerKnockBack.runState) && isGround)
+        if (timerDashPermit && Gamepad.current.buttonWest.wasPressedThisFrame && (!PlayerKnockBack.runState) && footer.isGround)
         {
             StartCoroutine(Dush());
             StartCoroutine(ReCharge());
@@ -64,7 +60,6 @@ public class DashSystemN : Padinput
         //ForceSet();
         while (!PlayerKnockBack.runState) /* ノックバック実行で終了する */
         {
-            Debug.Log(isGround);
             if (Physics.BoxCast(transform.position + adjust, transform.localScale / 2, transform.right, out rayHit, new Quaternion(), rayDistance))
             {
                 if (rayHit.collider.tag == "Enemy") { rayHit.collider.gameObject.SetActive(false); } /* レイキャストに触れたenemyタグを持つオブジェクトは消えることになる */
@@ -72,7 +67,7 @@ public class DashSystemN : Padinput
             ForceSet();
             rb.velocity = force;
 
-            if (count> runTime && isGround) { break; } /* ダッシュジャンプで急失速を防ぐためとりあえずダッシュ時間を超えても接地してないと抜けないようにした、急失速してもいいかどうかは要相談 */
+            if (count> runTime && footer.isGround) { break; } /* ダッシュジャンプで急失速を防ぐためとりあえずダッシュ時間を超えても接地してないと抜けないようにした、急失速してもいいかどうかは要相談 */
             count += Time.deltaTime;
             yield return StartCoroutine(TimeScaleYield.TimeStop());
         }
@@ -128,27 +123,7 @@ public class DashSystemN : Padinput
         timerDashPermit = true;
     }
 
-    private void OnCollisionStay(Collision other) /* 他オブジェクトとの接触がある時だけ判定 */
-    {
-        if (other.gameObject.tag == "ground")
-        {
-            //Debug.Log("ooooooook");
-            RaycastHit getInfo;
-            Vector3 root = transform.position;
-            root.y += 0.5f; /* 完全に足元配置だと床が始点判定で列挙されない、なんて事が起きそうなので始点を上げておく */
-
-            /* 現在SphereColliderなのでSphereCastにしたがBoxColliderならBoxCastと判定にあった形にする必要あり */
-
-            foreach (RaycastHit hit in Physics.SphereCastAll(root, rad, Vector3.down, 0.6f))
-            {
-                if (hit.transform.gameObject.tag == "ground")
-                {
-                    isGround = true;
-                    return;
-                }
-            }
-        }
-    }
+    
 
     void OnDrawGizmos()
     {

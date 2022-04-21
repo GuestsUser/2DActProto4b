@@ -6,7 +6,7 @@ using UnityEngine;
 public class SlopeFloor : MonoBehaviour
 {
     [Header("乗ると滑る床")]
-    [Tooltip("乗っている間加え続けられる力")] [SerializeField] float force = 0.5f;
+    [Tooltip("乗っている間加え続けられる力")] [SerializeField] float force = -10f;
 
     private float[] minMax = { 0, 0 }; /* この床のx座標最小値と最大値 */
     private float calculatRad = 0; /* 最後に計算に使ったスフィア半径サイズ記録、これとradが違った場合ヒット判定の再計算を必要とする */

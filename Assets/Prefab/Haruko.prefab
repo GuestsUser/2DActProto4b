@@ -658,6 +658,8 @@ GameObject:
   - component: {fileID: 2397871166523164794}
   - component: {fileID: 8405841928844101743}
   - component: {fileID: 4368973400264170058}
+  - component: {fileID: 3790172905300769814}
+  - component: {fileID: 4143116439833659347}
   m_Layer: 0
   m_Name: Haruko
   m_TagString: Player
@@ -852,11 +854,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   jumpForce: 5
-  doubleJump: 0
+  jumpCount: 0
   isGrounded: 0
   jumping: 0
   fall: 0
-  landing: 0
+  groundFall: 0
   rayPosition: {x: 0, y: 0, z: 0}
   legtrans: {fileID: 8900136756548173130}
   legtrans2: {fileID: 1812558113}
@@ -871,6 +873,7 @@ MonoBehaviour:
   legposition5: {x: 0, y: 0, z: 0}
   legposition6: {x: 0, y: 0, z: 0}
   rayDistance: 0.07
+  jumpFlg_Test: 0
   JumpFlg: {fileID: 6872543496779070822, guid: 283c3f143a6e1b8428b2582fe27f01a7, type: 3}
   gb: {fileID: 6872543496779070820, guid: 283c3f143a6e1b8428b2582fe27f01a7, type: 3}
   doublejump: {fileID: 6584657071964395690, guid: 34972a2fc62773647a777ab11b5960a3,
@@ -918,6 +921,7 @@ MonoBehaviour:
   max_move_x: 0
   eas_time: 2
   animator: {fileID: 6346024904048878346}
+  anim_speed: 0
   rayDistance: 0.5
   rayPosition: {x: 0, y: 0, z: 0}
 --- !u!114 &6346024904048878576
@@ -1054,6 +1058,7 @@ MonoBehaviour:
   opacity: 0
   Cursor: {fileID: 0}
   fade_panel: {fileID: 0}
+  menuSE: {fileID: 0}
 --- !u!114 &4629836387720665810
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1105,6 +1110,119 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   frictionTime: 0.1
+--- !u!82 &3790172905300769814
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6346024904048878582}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+--- !u!114 &4143116439833659347
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6346024904048878582}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c6d3fb6ccc53326488872190f8fcd819, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  decision: {fileID: 8300000, guid: 6c37ca5a368642742a2642532b398557, type: 3}
+  cancel: {fileID: 0}
+  move: {fileID: 8300000, guid: 8547d660131dcfe4bb22184473a5ba62, type: 3}
+  open_menu: {fileID: 0}
+  close_menu: {fileID: 0}
 --- !u!1 &6346024904113327281
 GameObject:
   m_ObjectHideFlags: 0

@@ -37,13 +37,14 @@ public class SlopeFloor : MonoBehaviour
             if (player == null) { GetPlayer(other.gameObject); } /* playerに何も入ってなければ入れておく */
             if (calculatRad != rad) { HitAreaCalculat(); } /* 判定の最小、最大値の計算 */
 
-            RaycastHit getInfo;
+
+            //RaycastHit getInfo;
             Vector3 root = other.gameObject.transform.position;
             root.y += 0.5f; /* 完全に足元配置だと床が始点判定で列挙されない、なんて事が起きそうなので始点を上げておく */
 
             /* 現在SphereColliderなのでSphereCastにしたがBoxColliderならBoxCastと判定にあった形にする必要あり */
-            
-            foreach(RaycastHit hit in Physics.SphereCastAll(root, rad, Vector3.down))
+
+            foreach (RaycastHit hit in Physics.SphereCastAll(root, rad, Vector3.down))
             {
                 if (hit.transform.gameObject == gameObject)
                 {
@@ -52,7 +53,7 @@ public class SlopeFloor : MonoBehaviour
                     break;
                 }
             }
-            
+
             //if ( Physics.SphereCast(root, rad, Vector3.down, out getInfo) && getInfo.transform.gameObject==gameObject) /* 下向きに飛ばしたrayが一番最初に接触したオブジェクトが自身なら接地 */
             //{
             //    //Debug.Log("rayhit");
@@ -82,6 +83,7 @@ public class SlopeFloor : MonoBehaviour
     IEnumerator SlopeForce()
     {
         StartCoroutine(JumpSystem.Restriction()); /* ジャンプ禁止化 */
+        //StartCoroutine(PlayerMove.RotateRestriction());
 
         //Debug.Log("kkkkkk");
 
@@ -104,7 +106,6 @@ public class SlopeFloor : MonoBehaviour
         /* 出た瞬間のvelocityを減らせば凄まじい力で吹っ飛ばされなくなる */
         angle = transform.rotation.eulerAngles;
 
-        //JumpSystem.RestrictionRelease(); /* ジャンプ禁止化解除(仮導入) */
         ObjLeave();
         StartCoroutine(friction.CourseOutFriction(force * Mathf.Cos(angle.z * Mathf.Deg2Rad), force * Mathf.Sin(angle.z * Mathf.Deg2Rad), moveVol));
     }

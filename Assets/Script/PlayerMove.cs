@@ -55,7 +55,7 @@ public class PlayerMove : Padinput
 
     //アニメーション用
     [SerializeField] Animator animator;
-    float anim_speed;
+    [SerializeField] float anim_speed;
 
     /*Kuttukuで使うプレイヤーポジション*/
     //[SerializeField] GameObject player;
@@ -132,7 +132,14 @@ public class PlayerMove : Padinput
 
         if (input_abs <= 0.5f)
         {
+            
+            var max_input = 0.5f; /* 歩き時の入力の最大値 */
+
             state = State.walk; /*歩き*/
+
+            /* 【走り→歩きのアニメーション遷移】 */
+            //アニメーションの1～0.1の値をinput値で操作する
+            anim_speed = input_abs / max_input;
 
             /*壁のめり込み対策(しゅんver)*/
             if (hit_wall_right == false && hit_wall_left == false)
@@ -170,7 +177,7 @@ public class PlayerMove : Padinput
     void Update() /*常に処理する内容*/
     {
         //Debug.Log(distance);
-        //Debug.Log(idle);
+        Debug.Log(input_abs);
         if (state == State.idle)
         {
             idle = true;
@@ -352,7 +359,7 @@ public class PlayerMove : Padinput
             move_x = ExpOut(run_time, eas_time, 2f, max_move_x); /*move_xに2f～max_move_xの値を入れる処理(加速)*/
 
             /*↓プレイヤーの加速処理とアニメーションを合わせる為に追加した処理*/
-            anim_speed = ExpOut(run_time, eas_time, 0.1f, 1f); /*ブレンドツリーに代入するスピードの値を0.1f～１fで加速させる処理*/
+            anim_speed = ExpOut(run_time, eas_time, anim_speed, 1f); /*ブレンドツリーに代入するスピードの値を0.1f～１fで加速させる処理*/
         }
         else /*緩急をつける時間を越えたら*/
         {

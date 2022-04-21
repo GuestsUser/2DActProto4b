@@ -1058,7 +1058,7 @@ MonoBehaviour:
   opacity: 0
   Cursor: {fileID: 0}
   fade_panel: {fileID: 0}
-  menuSE: {fileID: 0}
+  menuSE: {fileID: 4143116439833659347}
 --- !u!114 &4629836387720665810
 MonoBehaviour:
   m_ObjectHideFlags: 0

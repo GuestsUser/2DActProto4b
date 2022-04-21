@@ -506,6 +506,21 @@ public class JumpSystem : Padinput
 
     void FixedUpdate()
     {
+
+        if (jumpFlg_Test)
+        {
+
+            doublejump.SetActive(false);
+
+        }
+        else if (!jumpFlg_Test)
+        {
+
+            doublejump.SetActive(true);
+
+        }
+
+
         var velocity_y = rb.velocity.y;
         ySpeed = velocity_y;
 

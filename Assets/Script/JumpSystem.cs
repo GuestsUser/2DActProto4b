@@ -136,7 +136,6 @@ public class JumpSystem : Padinput
     void FixedUpdate()
     {
 
-
         if (jumpFlg_Test)
         {
 

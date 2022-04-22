@@ -14,12 +14,12 @@ public class DashSystemN : Padinput
 
     private Animator animator;
     private bool timerDashPermit = true; /* 時間経過で管理するダッシュ使用可否 */
-    private bool otherDushPermit = true; /* ノックバックと接地判定によるダッシュ使用可否 */
 
     private Vector3 adjust; /* 基準位置を中心に持ってくる為の変数 */
 
     private Rigidbody rb;
     private PlayerMove control;
+    private GroundFooter footer;
 
     [System.NonSerialized] public GameObject standSlopeObj; /*現在乗ってる滑る床オブジェクト*/
     void Start()
@@ -28,14 +28,17 @@ public class DashSystemN : Padinput
         rb = GetComponent<Rigidbody>();
         animator = GetComponent<Animator>();
         control = GetComponent<PlayerMove>();
+        footer = GetComponent<GroundFooter>();
 
         adjust = new Vector3(0, transform.localScale.y / 2, 0);
     }
 
+    
+
     public override void Skill()
     {
         /*アビリティ発動ボタンが押されたら*/
-        if (timerDashPermit && Gamepad.current.buttonWest.wasPressedThisFrame)
+        if (timerDashPermit && Gamepad.current.buttonWest.wasPressedThisFrame && (!PlayerKnockBack.runState) && footer.isGround)
         {
             StartCoroutine(Dush());
             StartCoroutine(ReCharge());
@@ -45,8 +48,8 @@ public class DashSystemN : Padinput
     IEnumerator Dush()
     {
         /* 移動禁止とアニメ設定 */
-        control.movePermit = false;
-        //control.rotatePermit = false;
+        StartCoroutine(PlayerMove.MoveRestriction());
+        StartCoroutine(PlayerMove.RotateRestriction());
         animator.SetTrigger("Attack");
 
         float count = 0f;
@@ -54,7 +57,7 @@ public class DashSystemN : Padinput
         RaycastHit rayHit;
 
         //ForceSet();
-        while (true)
+        while (!PlayerKnockBack.runState) /* ノックバック実行で終了する */
         {
             if (Physics.BoxCast(transform.position + adjust, transform.localScale / 2, transform.right, out rayHit, new Quaternion(), rayDistance))
             {
@@ -63,13 +66,13 @@ public class DashSystemN : Padinput
             ForceSet();
             rb.velocity = force;
 
-            if (count> runTime) { break; }
+            if (count> runTime && footer.isGround) { break; } /* ダッシュジャンプで急失速を防ぐためとりあえずダッシュ時間を超えても接地してないと抜けないようにした、急失速してもいいかどうかは要相談 */
             count += Time.deltaTime;
             yield return StartCoroutine(TimeScaleYield.TimeStop());
         }
 
-        control.movePermit = true;
-        //control.rotatePermit = true;
+        PlayerMove.MoveRestrictionRelease();
+        PlayerMove.RotateRestrictionRelease();
 
         ForceReSet();
 
@@ -119,6 +122,8 @@ public class DashSystemN : Padinput
         }
         timerDashPermit = true;
     }
+
+    
 
     void OnDrawGizmos()
     {

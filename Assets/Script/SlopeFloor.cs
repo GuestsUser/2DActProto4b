@@ -6,7 +6,7 @@ using UnityEngine;
 public class SlopeFloor : MonoBehaviour
 {
     [Header("乗ると滑る床")]
-    [Tooltip("乗っている間加え続けられる力")] [SerializeField] float force = 0.5f;
+    [Tooltip("乗っている間加え続けられる力")] [SerializeField] float force = -10f;
 
     private float[] minMax = { 0, 0 }; /* この床のx座標最小値と最大値 */
     private GameObject player; /* プレイヤーを保持する変数 */
@@ -33,22 +33,51 @@ public class SlopeFloor : MonoBehaviour
             player = other.gameObject; /* playerに関するアクションはEnterから始まるのでインスペクターからplayerを受け取らずともok */
             jump = player.GetComponent<JumpSystem>(); /* ジャンプシステムを受け取る */
 
-            RaycastHit getInfo;
+
+            //RaycastHit getInfo;
             Vector3 root = other.gameObject.transform.position;
             root.y += 0.5f; /* 完全に足元配置だと床が始点判定で列挙されない、なんて事が起きそうなので始点を上げておく */
 
+<<<<<<< HEAD
             /* 当たり判定の形にあったrayに取り替える */
             if( Physics.Raycast(root, Vector3.down,out getInfo) && getInfo.transform.gameObject==gameObject) /* 下向きに飛ばしたrayが一番最初に接触したオブジェクトが自身なら接地 */
+=======
+            /* 現在SphereColliderなのでSphereCastにしたがBoxColliderならBoxCastと判定にあった形にする必要あり */
+
+            foreach (RaycastHit hit in Physics.SphereCastAll(root, rad, Vector3.down))
+>>>>>>> 6683019d42d56f55a7a235e192f231f72e94940d
             {
                 //Debug.Log("rayhit");
                 other.gameObject.GetComponent<DashSystemN>().standSlopeObj = gameObject;
                 StartCoroutine(SlopeForce());
             }
+<<<<<<< HEAD
             
+=======
+
+            //if ( Physics.SphereCast(root, rad, Vector3.down, out getInfo) && getInfo.transform.gameObject==gameObject) /* 下向きに飛ばしたrayが一番最初に接触したオブジェクトが自身なら接地 */
+            //{
+            //    //Debug.Log("rayhit");
+            //    other.gameObject.GetComponent<DashSystemN>().standSlopeObj = gameObject;
+            //    StartCoroutine(SlopeForce());
+            //}
+            //Debug.Log(getInfo.transform.gameObject);
+>>>>>>> 6683019d42d56f55a7a235e192f231f72e94940d
         }
     }
     IEnumerator SlopeForce()
     {
+<<<<<<< HEAD
+=======
+        StartCoroutine(JumpSystem.Restriction()); /* ジャンプ禁止化 */
+        //StartCoroutine(PlayerMove.RotateRestriction());
+
+        //Debug.Log("kkkkkk");
+
+        Vector3 moveVol = Vector3.zero; /* フレーム間の各軸移動量を取得 */
+        Vector3 oldPos = player.transform.position; /* 前回位置 */
+        Vector3 angle = Vector3.zero;
+>>>>>>> 6683019d42d56f55a7a235e192f231f72e94940d
         while (true)
         {
             float px = player.transform.position.x;
@@ -62,7 +91,10 @@ public class SlopeFloor : MonoBehaviour
         }
         /* 出た瞬間のvelocityを減らせば凄まじい力で吹っ飛ばされなくなる */
 
+<<<<<<< HEAD
         
+=======
+>>>>>>> 6683019d42d56f55a7a235e192f231f72e94940d
         ObjLeave();
     }
 

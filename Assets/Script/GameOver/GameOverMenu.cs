@@ -28,6 +28,8 @@ public class GameOverMenu : MonoBehaviour
 
     /*画像切り替え用*/
     [SerializeField] private RawImage Cursor;
+    Color yellow = new Color(1, 1, 0);
+    Color white = new Color(1, 1, 1);
 
     void Start()
     {
@@ -35,13 +37,16 @@ public class GameOverMenu : MonoBehaviour
 
         /* 【選択番号の初期化】 */
         menu_number = 0;
-        interval = 50;
+        interval = 15;
 
         /* 【フラグの初期化】 */
         show_menu = false;
         push = false;
         push_scene = false;
         push = false;
+
+        /* 【カーソルの色を白に初期化】 */
+        Cursor.color = white;
     }
 
     // Update is called once per frame
@@ -154,7 +159,7 @@ public class GameOverMenu : MonoBehaviour
                 item_obj[0].SetActive(true);
 
                 /* 【カーソルの画像切り替え】 */
-                Cursor.texture = Resources.Load<Texture2D>("EndGameCursor");
+                Cursor.texture = Resources.Load<Texture2D>("BacktoTitle");
                 break;
         }
     }
@@ -165,6 +170,7 @@ public class GameOverMenu : MonoBehaviour
         if (Gamepad.current.buttonSouth.isPressed && press_a == false)
         {
             press_a = true;
+            Cursor.color = yellow; /* カーソルの色を黄色に変更 */
             switch (menu_number)
             {
                 case 0: /* ゲームを続ける */

@@ -13,6 +13,9 @@ enum cursor_move_type
 }
 public class PauseMenu : Padinput
 {
+
+    
+
     cursor_move_type move_type;
     /* 【PauseMenuのオブジェクト格納用変数】 */
     [SerializeField] private GameObject pause_menu;
@@ -30,6 +33,7 @@ public class PauseMenu : Padinput
     private bool fade_in;
     private bool fade_out;
     [SerializeField] private bool check_scene; /* ポーズメニューのみ必要 true:ステージセレクトシーン false:ゲームシーン */
+    [SerializeField] private bool full_screen; /* true:フルスクリーン false:ウィンドウモード */
 
     /* int型 */
     [SerializeField] int menu_number;
@@ -48,12 +52,21 @@ public class PauseMenu : Padinput
     /* 画像切り替え用 */
     //[SerializeField] private Image[] item_image;
     public RawImage Cursor;
-
+    Image color;
+    //Vector3 yellow = new Vector3(1,1,0);
+    //Vector3 white = new Vector3(1, 1, 1);
+    Color yellow = new Color(1, 1, 0);
+    Color white = new Color(1, 1, 1);
     /* ゲーム画面を暗くする用 */
     [SerializeField] Image fade_panel;
 
+    /* 【SE関連】 */
+    public MenuSE menuSE; /* SEを扱うためのコンポネント */
+    //public MenuSE _menuSE { get { return menuSE; } }
 
-
+    bool se_flg; /* true:既にならした false:ならせます */
+    
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -69,10 +82,11 @@ public class PauseMenu : Padinput
 
         /* 【カーソルの取得】 */
         Cursor = _selector_obj.GetComponent<RawImage>();
+        Cursor.color = white;
 
         /* 【選択番号の初期化】 */
         menu_number = 0;
-        interval = 10;
+        interval = 15;
         opacity = 0;
 
         /* 【フラグの初期化】 */
@@ -87,6 +101,9 @@ public class PauseMenu : Padinput
         eas_time = 7f;
         fade_intime = 0;
         fade_outtime = 0;
+
+        /* 【SE関連】 */
+        se_flg = false;
     }
 
     // Update is called once per frame
@@ -112,11 +129,20 @@ public class PauseMenu : Padinput
         /* 【メイン処理】 */
         if (show_menu) /* 表示判定がtrueの時 */
         {
+            if (press_a == false)
+            {
+                Cursor.color = white;
+            }
+
             Time.timeScale = 0; /* unity内の時間を止める */
             if (show_ope == false) /* 操作説明が非表示の状態なら */
             {
                 pause_menu.SetActive(true); /* ポーズメニューを表示させる */
-                press_a = false; /* aボタンを押せるように初期化 */
+
+                if(push_scene == false) /* シーン遷移を伴う決定が押されていなければ */
+                {
+                    press_a = false; /* aボタンを押せるように初期化 */
+                }
 
                 /* 【カーソル処理】 */
                 Cursor_Move(); /* カーソルを動かす処理 */
@@ -124,6 +150,21 @@ public class PauseMenu : Padinput
 
                 /* 【決定が押された時の処理】 */
                 Decision();
+
+                /* スクリーンモードの切り替え */
+                if (Gamepad.current.rightShoulder.wasPressedThisFrame)
+                {
+                    if (full_screen == false)
+                    {
+                        full_screen = true;
+                        Screen.SetResolution(1920, 1080, true);
+                    }
+                    else
+                    {
+                        full_screen = false;
+                        Screen.SetResolution(1920, 1080, false);
+                    }
+                }
             }
             else
             {
@@ -153,10 +194,12 @@ public class PauseMenu : Padinput
         if(show_menu == false) /* ポーズメニューの表示判定がfalseなら */
         {
             show_menu = true; /* trueに変更 */
+            //menuSE.audio_source.PlayOneShot(menuSE.open_menu); /* メニューを表示する音 */
         }
         else if(show_menu == true && show_ope == false) /* ポーズメニューが表示状態かつ操作説明が非表示状態なら */
         {
             show_menu = false; /* falseに変更 */
+            //menuSE.audio_source.PlayOneShot(menuSE.close_menu); /* メニューを閉じる音 */
         }
     }
     void Cursor_Move()
@@ -194,6 +237,8 @@ public class PauseMenu : Padinput
 
                     /* 【メニューナンバーを引く処理】(引くことによりカーソルが上に移動する 理由:127行目でtransformの代入でitem[menu_number]を使用している) */
                     if (--menu_number < 0) menu_number = _item_obj.Length - 1;
+                    menuSE.audio_source.clip = menuSE.move;
+                    menuSE.audio_source.PlayOneShot(menuSE.move); /* カーソルが動く音 */
                 }
                 else
                 {
@@ -202,16 +247,19 @@ public class PauseMenu : Padinput
                     {
                         /* 【メニューナンバーを引く処理】(引くことによりカーソルが上に移動する 理由:127行目でtransformの代入でitem[menu_number]を使用している) */
                         if (--menu_number < 0) menu_number = _item_obj.Length - 1;
+                        menuSE.audio_source.clip = menuSE.move;
+                        menuSE.audio_source.PlayOneShot(menuSE.move); /* カーソルが動く音 */
                     }
                 }
                 
                 break;
 
             case cursor_move_type.down: /* move_typeがdownの時 */
-                        if (push == false)
+                if (push == false)
                 {
                     push = true;
                     if (++menu_number > _item_obj.Length - 1) menu_number = 0;
+                    menuSE.audio_source.PlayOneShot(menuSE.move); /* カーソルが動く音 */
                 }
                 else
                 {
@@ -219,6 +267,7 @@ public class PauseMenu : Padinput
                     if (Mathf.Abs(count) % interval == 0)
                     {
                         if (++menu_number > _item_obj.Length - 1) menu_number = 0;
+                        menuSE.audio_source.PlayOneShot(menuSE.move); /* カーソルが動く音 */
                     }
                 }
                 break;
@@ -235,6 +284,11 @@ public class PauseMenu : Padinput
         if (Gamepad.current.buttonSouth.isPressed && press_a == false && show_ope == false)
         {
             press_a = true;
+            menuSE.audio_source.clip = menuSE.decision;
+            menuSE.audio_source.PlayOneShot(menuSE.decision);
+
+            //_selector_obj.GetComponent<Image>().color = new Color(1,1,0);
+            Cursor.color = yellow; 
             switch (menu_number)
             {
                 case 0: /* ゲームを続ける */

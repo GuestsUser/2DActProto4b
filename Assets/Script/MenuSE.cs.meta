@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: c6d3fb6ccc53326488872190f8fcd819
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - decision: {fileID: 8300000, guid: 6c37ca5a368642742a2642532b398557, type: 3}
+  - cancel: {instanceID: 0}
+  - move: {fileID: 8300000, guid: 8547d660131dcfe4bb22184473a5ba62, type: 3}
+  - open_menu: {instanceID: 0}
+  - close_menu: {instanceID: 0}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

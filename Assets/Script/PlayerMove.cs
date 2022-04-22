@@ -55,7 +55,7 @@ public class PlayerMove : Padinput
 
     //アニメーション用
     [SerializeField] Animator animator;
-    float anim_speed;
+    [SerializeField] float anim_speed;
 
     /*Kuttukuで使うプレイヤーポジション*/
     //[SerializeField] GameObject player;
@@ -83,8 +83,14 @@ public class PlayerMove : Padinput
 
     //public float height;
 
-    [HideInInspector] public bool movePermit = true; /* キー入力による操作許可 */
-    [HideInInspector] public bool rotatePermit = true; /* 方向転換許可 */
+    private static bool movePermit = true; /* キー入力による操作許可 */
+    private static bool rotatePermit = true; /* 方向転換許可 */
+
+    /* 4/18 仲里追加 */
+    private static int banTaskCountMove = 0; /* 移動禁止コルーチン起動数 */
+    private static int banTaskCountRotate = 0; /* 方向転換禁止コルーチン起動数 */
+
+    /* 仲里追加以上 */
 
     private void Start() /*初期化*/
     {
@@ -126,7 +132,14 @@ public class PlayerMove : Padinput
 
         if (input_abs <= 0.5f)
         {
+            
+            var max_input = 0.5f; /* 歩き時の入力の最大値 */
+
             state = State.walk; /*歩き*/
+
+            /* 【走り→歩きのアニメーション遷移】 */
+            //アニメーションの1～0.1の値をinput値で操作する
+            anim_speed = input_abs / max_input;
 
             /*壁のめり込み対策(しゅんver)*/
             if (hit_wall_right == false && hit_wall_left == false)
@@ -164,7 +177,7 @@ public class PlayerMove : Padinput
     void Update() /*常に処理する内容*/
     {
         //Debug.Log(distance);
-        //Debug.Log(idle);
+        Debug.Log(input_abs);
         if (state == State.idle)
         {
             idle = true;
@@ -346,7 +359,7 @@ public class PlayerMove : Padinput
             move_x = ExpOut(run_time, eas_time, 2f, max_move_x); /*move_xに2f～max_move_xの値を入れる処理(加速)*/
 
             /*↓プレイヤーの加速処理とアニメーションを合わせる為に追加した処理*/
-            anim_speed = ExpOut(run_time, eas_time, 0.1f, 1f); /*ブレンドツリーに代入するスピードの値を0.1f～１fで加速させる処理*/
+            anim_speed = ExpOut(run_time, eas_time, anim_speed, 1f); /*ブレンドツリーに代入するスピードの値を0.1f～１fで加速させる処理*/
         }
         else /*緩急をつける時間を越えたら*/
         {
@@ -523,14 +536,44 @@ public class PlayerMove : Padinput
             //    }
             //}
         }
-        ///*壁にめり込まないようにする処理(自分版)*/
-        //private void DontMove() /* 操作していない時勝手に動かないようにする処理 */
-        //{
-        //    if (kuttuku.bool_ray_hit == true && idle == true)
-        //    {
-        //        Debug.Log("勝手に動かない処理");
-        //        transform.position = player_pos2;
-        //    }
-        //}
+    ///*壁にめり込まないようにする処理(自分版)*/
+    //private void DontMove() /* 操作していない時勝手に動かないようにする処理 */
+    //{
+    //    if (kuttuku.bool_ray_hit == true && idle == true)
+    //    {
+    //        Debug.Log("勝手に動かない処理");
+    //        transform.position = player_pos2;
+    //    }
+    //}
+
+    /* 4/18 仲里追加 */
+    public static IEnumerator MoveRestriction() /* 移動禁止化コルーチン */
+    {
+        banTaskCountMove++; /* コルーチン実行数増加 */
+        if (!movePermit) { yield break; } /* コルーチンを複数起動させないため既に禁止状態なら抜ける */
+        movePermit = false; /* 禁止化 */
+        while (banTaskCountMove > 0) { yield return null; } /* 実行数が0になるまで待機 */
+        movePermit = true; /* 制限解除 */
+    }
+    public static IEnumerator RotateRestriction() /* 方向転換禁止化コルーチン */
+    {
+        banTaskCountRotate++; /* コルーチン実行数増加 */
+        if (!rotatePermit) { yield break; } /* コルーチンを複数起動させないため既に禁止状態なら抜ける */
+        rotatePermit = false; /* 禁止化 */
+        while (banTaskCountRotate > 0) { yield return null; } /* 実行数が0になるまで待機 */
+        rotatePermit = true; /* 制限解除 */
+
+    }
+    public static void MoveRestrictionRelease() /* 禁止化解除 */
+    {
+        if (banTaskCountMove <= 0) { return; } /* 禁止化コルーチンを実行せず実行されると */
+        banTaskCountMove--; /* 実行数削減 */
+    }
     
+    public static void RotateRestrictionRelease() /* 禁止化解除 */
+    {
+        if (banTaskCountRotate <= 0) { return; } /* 禁止化コルーチンを実行せず実行されると */
+        banTaskCountRotate--; /* 実行数削減 */
+    }
+    /* 仲里追加以上 */
 }

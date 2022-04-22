@@ -26,7 +26,14 @@ public class Title : MonoBehaviour
 
     /*画像切り替え用*/
     public RawImage Cursor;
+    Color yellow = new Color(1,1,0);
+    Color white = new Color(1,1,1);
 
+    /* 【SE関連】 */
+    public MenuSE menuSE; /* SEを扱うためのコンポネント */
+    //public MenuSE _menuSE { get { return menuSE; } }
+
+    bool se_flg; /* true:既にならした false:ならせます */
     void Start()
     {
         /*【オブジェクトの取得】*/
@@ -34,18 +41,26 @@ public class Title : MonoBehaviour
 
         /*【選択番号の初期化】*/
         menu_number = 0;
-        interval = 50;
+        interval = 15;
 
         /*【フラグの初期化】*/
         push = false;
         push_scene = false;
         press_a = false;
 
+        /* 【カーソルの色を白に初期化】 */
+        Cursor.color = white;
     }
 
     // Update is called once per frame
     void Update()
     {
+        /* 【シーン遷移を伴う決定がされていない間】 */
+        if (push_scene == false)
+        {
+            /* 【カーソルの色を白に初期化】 */
+            Cursor.color = white;
+        }
         Cursor_Move();
         ChangeCursor();
         Decision();
@@ -84,6 +99,8 @@ public class Title : MonoBehaviour
                 {
                     push = true;
                     if (--menu_number < 0) menu_number = item_obj.Length - 1;
+                    menuSE.audio_source.clip = menuSE.move;
+                    menuSE.audio_source.PlayOneShot(menuSE.move); /* カーソルが動く音 */
                 }
                 else
                 {
@@ -91,6 +108,8 @@ public class Title : MonoBehaviour
                     if (Mathf.Abs(count) % interval == 0)
                     {
                         if (--menu_number < 0) menu_number = item_obj.Length - 1;
+                        menuSE.audio_source.clip = menuSE.move;
+                        menuSE.audio_source.PlayOneShot(menuSE.move); /* カーソルが動く音 */
                     }
                 }
                 break;
@@ -100,6 +119,8 @@ public class Title : MonoBehaviour
                 {
                     push = true;
                     if (++menu_number > item_obj.Length - 1) menu_number = 0;
+                    menuSE.audio_source.clip = menuSE.move;
+                    menuSE.audio_source.PlayOneShot(menuSE.move); /* カーソルが動く音 */
                 }
                 else
                 {
@@ -107,6 +128,8 @@ public class Title : MonoBehaviour
                     if (Mathf.Abs(count) % interval == 0)
                     {
                         if (++menu_number > item_obj.Length - 1) menu_number = 0;
+                        menuSE.audio_source.clip = menuSE.move;
+                        menuSE.audio_source.PlayOneShot(menuSE.move); /* カーソルが動く音 */
                     }
                 }
                 break;
@@ -153,6 +176,9 @@ public class Title : MonoBehaviour
         if (Gamepad.current.buttonSouth.isPressed && press_a == false)
         {
             press_a = true;
+            Cursor.color = yellow; /* カーソルの色を黄色に変更 */
+            menuSE.audio_source.clip = menuSE.decision;
+            menuSE.audio_source.PlayOneShot(menuSE.decision); /* カーソルが動く音 */
             switch (menu_number)
             {
                 case 0:     /*ステージセレクト画面へ*/

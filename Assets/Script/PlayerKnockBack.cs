@@ -11,7 +11,10 @@ public class PlayerKnockBack : MonoBehaviour
     private static float angle; /* 吹っ飛ばす方向 */
     private static bool runOrder; /* trueのコルーチンの実行を更新 */
     private Rigidbody rb; /* リジットボディ記憶用 */
-    
+
+    private static bool _runState = false; /* ノックバック実行状況 */
+    public static bool runState { get { return _runState; } } /* 上記のプロパティ */
+
     // Start is called before the first frame update
     void Start()
     {
@@ -58,15 +61,21 @@ public class PlayerKnockBack : MonoBehaviour
 
                 yield return StartCoroutine(TimeScaleYield.TimeStop());
             }
+            PlayerMove.MoveRestrictionRelease();
+            PlayerMove.RotateRestrictionRelease();
 
-            while(DamageSystem.playerConbo == memo && !runOrder) { yield return StartCoroutine(TimeScaleYield.TimeStop()); } /* 無敵時間終了か上書きまで待機 */
+            while (DamageSystem.playerConbo == memo && !runOrder) { yield return StartCoroutine(TimeScaleYield.TimeStop()); } /* 無敵時間終了か上書きまで待機 */
+            _runState = false;
         }
 
         void Reset()
         {
+            StartCoroutine(PlayerMove.MoveRestriction());
+            StartCoroutine(PlayerMove.RotateRestriction());
             editPos = transform.position; /* 変化があった瞬間の座標記録 */
             memo = DamageSystem.playerConbo;
             count = 0;
+            _runState = true;
             runOrder = false; /* 更新したので更新命令を更新 */
         }
     }

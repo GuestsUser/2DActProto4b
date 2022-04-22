@@ -75,9 +75,6 @@ public class PauseMenu : Padinput
         _selector_obj = GameObject.Find("Cursor");
         operation = GameObject.Find("Operation");
         fade_panel = GameObject.Find("FadePanel").GetComponent<Image>();
-        _item_obj[0] = GameObject.Find("Continue_the_game");
-        _item_obj[1] = GameObject.Find("Operation_explanation");
-        _item_obj[2] = GameObject.Find("Return_to_StageSelect");
 
         /* 【オブジェクトの非表示化】 */
         pause_menu.SetActive(false);

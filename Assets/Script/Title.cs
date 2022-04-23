@@ -34,6 +34,7 @@ public class Title : MonoBehaviour
     //public MenuSE _menuSE { get { return menuSE; } }
 
     bool se_flg; /* true:既にならした false:ならせます */
+
     void Start()
     {
         /*【オブジェクトの取得】*/
@@ -52,7 +53,6 @@ public class Title : MonoBehaviour
         Cursor.color = white;
     }
 
-    // Update is called once per frame
     void Update()
     {
         /* 【シーン遷移を伴う決定がされていない間】 */
@@ -196,7 +196,7 @@ public class Title : MonoBehaviour
     private IEnumerator StageSelectCoroutine() //シーンチェンジ用
     {
         push_scene = true;
-        yield return new WaitForSecondsRealtime(3.0f);  //処理を待機
+        yield return new WaitForSecondsRealtime(1.5f);  //処理を待機
         SceneManager.LoadScene("StageSelect"); //おそらくタイトルに戻る実装する場合 Scene名はTitleなのでここはそのままにしてあります
         menu_number = 0; //メニュー番号を初期化
     }

@@ -31,6 +31,9 @@ public class GameOverMenu : MonoBehaviour
     Color yellow = new Color(1, 1, 0);
     Color white = new Color(1, 1, 1);
 
+    /* 【SE関連】 */
+    public MenuSE menuSE; /* SEを扱うためのコンポネント */
+
     void Start()
     {
         gameover_menu.SetActive(false); /*ゲームオーバーメニューは最初表示しない*/
@@ -100,6 +103,8 @@ public class GameOverMenu : MonoBehaviour
                 {
                     push = true;
                     if (--menu_number < 0) menu_number = item_obj.Length - 1;
+                    menuSE.audio_source.clip = menuSE.move;
+                    menuSE.audio_source.PlayOneShot(menuSE.move); /* カーソルが動く音 */
                 }
                 else
                 {
@@ -107,6 +112,8 @@ public class GameOverMenu : MonoBehaviour
                     if (Mathf.Abs(count) % interval == 0)
                     {
                         if (--menu_number < 0) menu_number = item_obj.Length - 1;
+                        menuSE.audio_source.clip = menuSE.move;
+                        menuSE.audio_source.PlayOneShot(menuSE.move); /* カーソルが動く音 */
                     }
                 }
 
@@ -117,6 +124,8 @@ public class GameOverMenu : MonoBehaviour
                 {
                     push = true;
                     if (++menu_number > item_obj.Length - 1) menu_number = 0;
+                    menuSE.audio_source.clip = menuSE.move;
+                    menuSE.audio_source.PlayOneShot(menuSE.move); /* カーソルが動く音 */
                 }
                 else
                 {
@@ -124,6 +133,8 @@ public class GameOverMenu : MonoBehaviour
                     if (Mathf.Abs(count) % interval == 0)
                     {
                         if (++menu_number > item_obj.Length - 1) menu_number = 0;
+                        menuSE.audio_source.clip = menuSE.move;
+                        menuSE.audio_source.PlayOneShot(menuSE.move); /* カーソルが動く音 */
                     }
                 }
                 break;
@@ -171,6 +182,8 @@ public class GameOverMenu : MonoBehaviour
         {
             press_a = true;
             Cursor.color = yellow; /* カーソルの色を黄色に変更 */
+            menuSE.audio_source.clip = menuSE.decision;
+            menuSE.audio_source.PlayOneShot(menuSE.decision); /* カーソルが動く音 */
             switch (menu_number)
             {
                 case 0: /* ゲームを続ける */

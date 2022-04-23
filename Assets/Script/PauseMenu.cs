@@ -11,10 +11,9 @@ enum cursor_move_type
     down,
     none
 }
-public class PauseMenu : Padinput
+public class PauseMenu : MonoBehaviour
 {
-
-    
+    [SerializeField] private ShowPause show_pause_script;
 
     cursor_move_type move_type;
     /* 【PauseMenuのオブジェクト格納用変数】 */
@@ -24,12 +23,13 @@ public class PauseMenu : Padinput
     [SerializeField] private GameObject operation;
 
     /* 【フラグ】 */
-    [SerializeField] private bool show_menu;         /* true:表示 false:非表示 */
-    public bool _show_menu {get { return show_menu; } }
+    //[SerializeField] private bool show_menu;         /* true:表示 false:非表示 */
+    //public bool _show_menu {get { return show_menu; } }
     [SerializeField] private bool push;              /* true:左スティックを押しています false:押していません */
     [SerializeField] private bool press_a;           /**/
     [SerializeField] private bool push_scene;
     [SerializeField] private bool show_ope;
+    public bool _show_ope {get { return show_ope; } }
     private bool fade_in;
     private bool fade_out;
     [SerializeField] private bool check_scene; /* ポーズメニューのみ必要 true:ステージセレクトシーン false:ゲームシーン */
@@ -65,12 +65,11 @@ public class PauseMenu : Padinput
     //public MenuSE _menuSE { get { return menuSE; } }
 
     bool se_flg; /* true:既にならした false:ならせます */
-    
-    
+
+
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
-        /* 【オブジェクトの取得】 */
         pause_menu = GameObject.Find("PauseMenu");
         _selector_obj = GameObject.Find("Cursor");
         operation = GameObject.Find("Operation");
@@ -78,9 +77,16 @@ public class PauseMenu : Padinput
         _item_obj[0] = GameObject.Find("Continue_the_game");
         _item_obj[1] = GameObject.Find("Operation_explanation");
         _item_obj[2] = GameObject.Find("Return_to_StageSelect");
+    }
+    void Start()
+    {
+        show_pause_script = GameObject.Find("Haruko").GetComponent<ShowPause>();
+        menuSE = GetComponent<MenuSE>();
+
+        /* 【オブジェクトの取得】 */
 
         /* 【オブジェクトの非表示化】 */
-        pause_menu.SetActive(false);
+        //pause_menu.SetActive(false);
         operation.SetActive(false);
 
         /* 【カーソルの取得】 */
@@ -93,7 +99,6 @@ public class PauseMenu : Padinput
         opacity = 0;
 
         /* 【フラグの初期化】 */
-        show_menu = false;
         push_scene = false;
         push = false;
         show_ope = false;
@@ -130,7 +135,7 @@ public class PauseMenu : Padinput
         Fade();
 
         /* 【メイン処理】 */
-        if (show_menu) /* 表示判定がtrueの時 */
+        if (show_pause_script.show_menu) /* 表示判定がtrueの時 */
         {
             if (press_a == false)
             {
@@ -191,20 +196,20 @@ public class PauseMenu : Padinput
             pause_menu.SetActive(false); /* ポーズメニュー非表示化 */
         }
     }
-    public override void Pause() /* スタートボタンが押された時に処理に入ります */
-    {
-        /* 【フラグ判定切り替え】 */
-        if(show_menu == false) /* ポーズメニューの表示判定がfalseなら */
-        {
-            show_menu = true; /* trueに変更 */
-            //menuSE.audio_source.PlayOneShot(menuSE.open_menu); /* メニューを表示する音 */
-        }
-        else if(show_menu == true && show_ope == false) /* ポーズメニューが表示状態かつ操作説明が非表示状態なら */
-        {
-            show_menu = false; /* falseに変更 */
-            //menuSE.audio_source.PlayOneShot(menuSE.close_menu); /* メニューを閉じる音 */
-        }
-    }
+    //public override void Pause() /* スタートボタンが押された時に処理に入ります */
+    //{
+    //    /* 【フラグ判定切り替え】 */
+    //    if(show_pause_script.show_menu == false) /* ポーズメニューの表示判定がfalseなら */
+    //    {
+    //        show_pause_script.show_menu = true; /* trueに変更 */
+    //        //menuSE.audio_source.PlayOneShot(menuSE.open_menu); /* メニューを表示する音 */
+    //    }
+    //    else if(show_pause_script.show_menu == true && show_ope == false) /* ポーズメニューが表示状態かつ操作説明が非表示状態なら */
+    //    {
+    //        show_pause_script.show_menu = false; /* falseに変更 */
+    //        //menuSE.audio_source.PlayOneShot(menuSE.close_menu); /* メニューを閉じる音 */
+    //    }
+    //}
     void Cursor_Move()
     {
         if(push_scene == false) /* シーン遷移を伴う決定がされていない間 */
@@ -297,7 +302,7 @@ public class PauseMenu : Padinput
                 case 0: /* ゲームを続ける */
 
                     press_a = false;
-                    show_menu = false;
+                    show_pause_script.show_menu = false;
 
                     break;
 
@@ -320,10 +325,7 @@ public class PauseMenu : Padinput
         }
         
     }
-    private void Initialize()
-    {
-       
-    }
+    
     void ChangeCursor()
     {
         switch(menu_number)
@@ -378,7 +380,7 @@ public class PauseMenu : Padinput
     void Fade()
     {
         fade_panel.color = new Color(0, 0, 0, opacity / max_opacity);
-        if (show_menu && opacity < max_opacity /4)
+        if (show_pause_script.show_menu && opacity < max_opacity /4)
         {
 
             fade_outtime = 0;
@@ -393,7 +395,7 @@ public class PauseMenu : Padinput
                 opacity = max_opacity / 4;
             }
         }
-        else if(show_menu == false && opacity > min_opacity)
+        else if(show_pause_script.show_menu == false && opacity > min_opacity)
         {
 
             fade_intime = 0;

@@ -653,13 +653,12 @@ GameObject:
   - component: {fileID: 3141178713863076342}
   - component: {fileID: 1734879854}
   - component: {fileID: 1574921774913152430}
-  - component: {fileID: 3219713706785432899}
   - component: {fileID: 4629836387720665810}
   - component: {fileID: 2397871166523164794}
   - component: {fileID: 8405841928844101743}
   - component: {fileID: 4368973400264170058}
   - component: {fileID: 3790172905300769814}
-  - component: {fileID: 4143116439833659347}
+  - component: {fileID: 5834029954122103087}
   m_Layer: 0
   m_Name: Haruko
   m_TagString: Player
@@ -1023,42 +1022,6 @@ MonoBehaviour:
   coolTime: 5
   dashForce: 6
   rayDistance: 0.5
---- !u!114 &3219713706785432899
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6346024904048878582}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 72e7798948b3ecf4c8ff9cc067979399, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  pause_menu: {fileID: 0}
-  _item_obj:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  _selector_obj: {fileID: 0}
-  operation: {fileID: 0}
-  show_menu: 0
-  push: 0
-  press_a: 0
-  push_scene: 0
-  show_ope: 0
-  check_scene: 0
-  full_screen: 0
-  menu_number: 0
-  count: 0
-  interval: 0
-  fade_intime: 0
-  fade_outtime: 0
-  eas_time: 0
-  opacity: 0
-  Cursor: {fileID: 0}
-  fade_panel: {fileID: 0}
-  menuSE: {fileID: 4143116439833659347}
 --- !u!114 &4629836387720665810
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1206,7 +1169,7 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &4143116439833659347
+--- !u!114 &5834029954122103087
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1215,14 +1178,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 6346024904048878582}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c6d3fb6ccc53326488872190f8fcd819, type: 3}
+  m_Script: {fileID: 11500000, guid: 45d2cd511aaadba449e2896d27f83b05, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  decision: {fileID: 8300000, guid: 6c37ca5a368642742a2642532b398557, type: 3}
-  cancel: {fileID: 0}
-  move: {fileID: 8300000, guid: 8547d660131dcfe4bb22184473a5ba62, type: 3}
-  open_menu: {fileID: 0}
-  close_menu: {fileID: 0}
+  pause_script: {fileID: 0}
+  pause_menu: {fileID: 0}
+  show_menu: 0
 --- !u!1 &6346024904113327281
 GameObject:
   m_ObjectHideFlags: 0

@@ -656,6 +656,18 @@ MonoBehaviour:
   rayDistance: 0.1
   rb: {fileID: 0}
   upForce: 300
+--- !u!114 &354491265 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1574921774913152430, guid: 1b398051e4fdfd044b3b928e875c85b5,
+    type: 3}
+  m_PrefabInstance: {fileID: 354491262}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 354491263}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 99859c8865b1915479b09f36c29c84ab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &354491278 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6346024904048878351, guid: 1b398051e4fdfd044b3b928e875c85b5,
@@ -1685,8 +1697,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -456.97998, y: 298.59998}
-  m_SizeDelta: {x: 185.16, y: 127.96}
+  m_AnchoredPosition: {x: -800, y: 400}
+  m_SizeDelta: {x: 300, y: 300}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1155057292
 MonoBehaviour:
@@ -1697,10 +1709,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1155057290}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e0ef89f3819f0c4419c4778436688e0b, type: 3}
+  m_Script: {fileID: 11500000, guid: f4c8807e68278e147b54999dd4281eea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  change_shoes: {fileID: 0}
+  dashsystem: {fileID: 354491265}
   GaugeFlg: 0
 --- !u!114 &1155057293
 MonoBehaviour:
@@ -1743,7 +1755,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 4d33ebd3ad47f82449111247ebc1b6d5, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 379b50b98f7b9d944932f019ba901c9b, type: 3}
   m_Type: 3
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -2094,7 +2106,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.7769517, y: 1}
+    m_SensorSize: {x: 1.888563, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0

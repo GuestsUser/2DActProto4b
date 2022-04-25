@@ -22,6 +22,8 @@ public class DashSystemN : Padinput
     private PlayerMove control;
     private GroundFooter footer;
 
+    public bool CoolTimeFlg;
+
     [System.NonSerialized] public GameObject standSlopeObj; /*現在乗ってる滑る床オブジェクト*/
     void Start()
     {
@@ -32,6 +34,8 @@ public class DashSystemN : Padinput
         footer = GetComponent<GroundFooter>();
 
         adjust = new Vector3(0, transform.localScale.y / 2, 0);
+
+        CoolTimeFlg = false;
     }
 
     
@@ -43,6 +47,7 @@ public class DashSystemN : Padinput
         {
             StartCoroutine(Dush());
             StartCoroutine(ReCharge());
+            CoolTimeFlg = true;
         }
     }
 
@@ -121,6 +126,7 @@ public class DashSystemN : Padinput
             yield return StartCoroutine(TimeScaleYield.TimeStop());
         }
         timerDashPermit = true;
+        CoolTimeFlg = false;
     }
 
     

@@ -30,6 +30,7 @@ public class PauseMenu : MonoBehaviour
     [SerializeField] private bool push_scene;
     [SerializeField] private bool show_ope;
     public bool _show_ope {get { return show_ope; } }
+    public bool _push_scene { get { return push_scene; } }
     private bool fade_in;
     private bool fade_out;
     [SerializeField] private bool check_scene; /* ポーズメニューのみ必要 true:ステージセレクトシーン false:ゲームシーン */
@@ -150,6 +151,18 @@ public class PauseMenu : MonoBehaviour
                 if(push_scene == false) /* シーン遷移を伴う決定が押されていなければ */
                 {
                     press_a = false; /* aボタンを押せるように初期化 */
+
+                    /* 【Bボタンが押された時】 */
+                    if (Gamepad.current.buttonEast.wasPressedThisFrame)
+                    {
+                        /* 【フラグ判定切り替え】 */
+                        show_pause_script.show_menu = false;
+
+
+                        /* 【キャンセル音を鳴らす】 */
+                        menuSE.audio_source.clip = menuSE.cancel;
+                        menuSE.audio_source.PlayOneShot(menuSE.cancel); /* カーソルが動く音 */
+                    }
                 }
 
                 /* 【カーソル処理】 */
@@ -173,6 +186,7 @@ public class PauseMenu : MonoBehaviour
                         Screen.SetResolution(1920, 1080, false);
                     }
                 }
+                
             }
             else
             {
@@ -180,11 +194,15 @@ public class PauseMenu : MonoBehaviour
             }
 
             /* 【操作説明が表示状態でBボタンが押された時】 */
-            if (show_ope == true && Gamepad.current.buttonEast.isPressed)
+            if (show_ope == true && Gamepad.current.buttonEast.wasPressedThisFrame)
             {
                 /* 【フラグ判定切り替え】 */
                 show_ope = false; 
                 operation.SetActive(false); /* 操作説明パネル非表示化 */
+
+                /* 【キャンセル音を鳴らす】 */
+                menuSE.audio_source.clip = menuSE.cancel;
+                menuSE.audio_source.PlayOneShot(menuSE.cancel); /* カーソルが動く音 */
             }
 
             /* 【カーソル位置を移動する為の処理】 */
@@ -192,8 +210,8 @@ public class PauseMenu : MonoBehaviour
         }
         else　/* 【表示判定がfalseの時】 */
         {
-            Time.timeScale = 1; /* unityの時間を進める */
-            pause_menu.SetActive(false); /* ポーズメニュー非表示化 */
+            Initialize();
+            
         }
     }
     //public override void Pause() /* スタートボタンが押された時に処理に入ります */
@@ -289,7 +307,7 @@ public class PauseMenu : MonoBehaviour
     }
     void Decision()
     {
-        if (Gamepad.current.buttonSouth.isPressed && press_a == false && show_ope == false)
+        if (Gamepad.current.buttonSouth.wasPressedThisFrame && press_a == false && show_ope == false)
         {
             press_a = true;
             menuSE.audio_source.clip = menuSE.decision;
@@ -413,14 +431,23 @@ public class PauseMenu : MonoBehaviour
         }
     }
 
+    private void Initialize()
+    {
+        Time.timeScale = 1; /* unityの時間を進める */
+        menu_number = 0; /* 選択項目の初期化 */
+        if (show_pause_script.show_menu == false)
+        {
+            pause_menu.SetActive(false); /* ポーズメニュー非表示化 */
+        }
+    }
+
     private IEnumerator BacktoStageSelect() //シーンチェンジ用
     {
         push_scene = true;
         yield return new WaitForSecondsRealtime(WaitTime);  //処理を待機
 
         SceneManager.LoadScene("StageSelect"); //おそらくタイトルに戻る実装する場合 Scene名はTitleなのでここはそのままにしてあります
-        menu_number = 0; //メニュー番号を初期化。
-        Time.timeScale = 1; //タイムスケールを初期化
+        Initialize();
     }
     private IEnumerator BacktoTitle() //シーンチェンジ用
     {
@@ -428,8 +455,7 @@ public class PauseMenu : MonoBehaviour
         yield return new WaitForSecondsRealtime(WaitTime);  //処理を待機
 
         SceneManager.LoadScene("Title"); //おそらくタイトルに戻る実装する場合 Scene名はTitleなのでここはそのままにしてあります
-        menu_number = 0; //メニュー番号を初期化。
-        Time.timeScale = 1; //タイムスケールを初期化
+        Initialize();
     }
     public static float ExpOut(float t, float totaltime, float min, float max) /*加速処理に使う関数*/
     {

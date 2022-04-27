@@ -443,7 +443,7 @@ public class JumpSystem : Padinput
     /*テストフラグをシーン上に表示させる変数*/
 
     /*アイテムを取得すると二弾ジャンプに変化する変数*/
-    public GameObject doublejump;
+    //public GameObject doublejump;
     /*アイテムを取得すると二弾ジャンプに変化する変数*/
 
     /* 4/11 - 仲里により追加 */
@@ -476,7 +476,7 @@ public class JumpSystem : Padinput
             if (!jumpFlg_Test)
             {
                 jumpFlg_Test = true;
-                doublejump.SetActive(false);
+                //doublejump.SetActive(false);
             }
             //else
             //{
@@ -493,14 +493,14 @@ public class JumpSystem : Padinput
         {
             /*二段ジャンプフラグをtrueにし、テスト用二段ジャンプオブジェクトを非表示にする*/
             jumpFlg_Test = true;
-            doublejump.SetActive(false);
+            //doublejump.SetActive(false);
         }
         /*二段ジャンプフラグがtrueなら*/
         else
         {
             /*二段ジャンプフラグをfalseにし、テスト用二段ジャンプオブジェクトを表示する*/
             jumpFlg_Test = false;
-            doublejump.SetActive(true);
+            //doublejump.SetActive(true);
         }
     }
 
@@ -510,13 +510,13 @@ public class JumpSystem : Padinput
         if (jumpFlg_Test)
         {
 
-            doublejump.SetActive(false);
+            //doublejump.SetActive(false);
 
         }
         else if (!jumpFlg_Test)
         {
 
-            doublejump.SetActive(true);
+            //doublejump.SetActive(true);
 
         }
 

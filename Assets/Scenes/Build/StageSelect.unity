@@ -1504,6 +1504,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Test_DoubleJump
       objectReference: {fileID: 0}
+    - target: {fileID: 6584657071964395690, guid: 34972a2fc62773647a777ab11b5960a3,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 34972a2fc62773647a777ab11b5960a3, type: 3}
 --- !u!1 &752045194 stripped
@@ -2531,7 +2536,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 2.1257484, y: 1}
+    m_SensorSize: {x: 1.7777778, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0

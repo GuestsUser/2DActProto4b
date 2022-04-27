@@ -8,7 +8,10 @@ public class BoxCastEnemyDestroy : MonoBehaviour
 	public Rigidbody rb;	
 	public float upForce = 300f;	/*上に上がる力*/
 
-	private Vector3 size = new Vector3(1, -1f, 1);	/*boxcastのサイズ*/
+	private Vector3 size = new Vector3(1, -1f, 1);  /*boxcastのサイズ*/
+
+	/*敵倒した判定　龍用*/
+	public bool isDead = false;
 
 
 	void Start()
@@ -27,7 +30,8 @@ public class BoxCastEnemyDestroy : MonoBehaviour
 			{
 				Debug.Log("あたった");
 
-				 hit.collider.gameObject.SetActive(false);/*エネミーを非アクティブ状態にする*/
+				isDead = true;
+				//hit.collider.gameObject.SetActive(false);/*エネミーを非アクティブ状態にする*/
 
 				rb.velocity = new Vector3(0, 0, 0); /*一瞬プレイヤーの動きを止める*/
 				rb.AddForce(new Vector3(0, upForce, 0));    /*敵を踏んだら上にジャンプ*/

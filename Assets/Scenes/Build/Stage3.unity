@@ -656,6 +656,7 @@ MonoBehaviour:
   rayDistance: 0.1
   rb: {fileID: 0}
   upForce: 300
+  isDead: 0
 --- !u!114 &354491265 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1574921774913152430, guid: 1b398051e4fdfd044b3b928e875c85b5,
@@ -1021,6 +1022,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Test_DoubleJump
+      objectReference: {fileID: 0}
+    - target: {fileID: 6584657071964395690, guid: 34972a2fc62773647a777ab11b5960a3,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 34972a2fc62773647a777ab11b5960a3, type: 3}
@@ -2106,7 +2112,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.7929293, y: 1}
+    m_SensorSize: {x: 1.7777778, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0

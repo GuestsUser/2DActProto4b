@@ -31,9 +31,9 @@ public class EnemyManager : MonoBehaviour
     {
         if (enemyDestroy.isDead)
         {
-            animator.SetTrigger("Die");
+            //animator.SetTrigger("Die");
             speed = 0;
-            Destroy(this.gameObject, 1f);
+            Destroy(gameObject, 1f);
             enemyDestroy.isDead = false;
         }
     }

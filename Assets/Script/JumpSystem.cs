@@ -459,7 +459,7 @@ public class JumpSystem : Padinput
 
         gb = GameObject.Find("JumpFlg");
         JumpFlg = gb.GetComponent<Text>();
-        doublejump = GameObject.Find("Test_DoubleJump");
+        //doublejump = GameObject.Find("Test_DoubleJump");
 
     }
     private void Update()

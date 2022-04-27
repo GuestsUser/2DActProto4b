@@ -688,7 +688,6 @@ GameObject:
   - component: {fileID: 6346024904048878577}
   - component: {fileID: 8743491813017517459}
   - component: {fileID: 3141178713863076342}
-  - component: {fileID: 1734879854}
   - component: {fileID: 1574921774913152430}
   - component: {fileID: 4629836387720665810}
   - component: {fileID: 2397871166523164794}
@@ -696,7 +695,6 @@ GameObject:
   - component: {fileID: 4368973400264170058}
   - component: {fileID: 3790172905300769814}
   - component: {fileID: 5834029954122103087}
-  - component: {fileID: 7523221757791905854}
   - component: {fileID: 1103888265}
   m_Layer: 0
   m_Name: Haruko
@@ -757,7 +755,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 1
-  m_Constraints: 112
+  m_Constraints: 120
   m_CollisionDetection: 2
 --- !u!114 &6346024904048878344
 MonoBehaviour:
@@ -1034,28 +1032,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   force: 0.1
   time: 0.4
---- !u!114 &1734879854
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6346024904048878582}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 00cad25d61b236642915778189df9a9e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  rayPosition: {x: 0, y: 0, z: 0}
-  legtransform1: {fileID: 1385435775788147854}
-  legtransform2: {fileID: 8244270656062928175}
-  legtransform3: {fileID: 2865753466683468645}
-  legposition1: {x: 0, y: 0, z: 0}
-  legposition2: {x: 0, y: 0, z: 0}
-  legposition3: {x: 0, y: 0, z: 0}
-  rayDistance: 0.1
-  rb: {fileID: 0}
-  upForce: 400
 --- !u!114 &1574921774913152430
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1236,18 +1212,6 @@ MonoBehaviour:
   pause_menu: {fileID: 0}
   show_menu: 0
   menuSE: {fileID: 0}
---- !u!114 &7523221757791905854
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6346024904048878582}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7429bbcb762e3384fa555ddb4ed72714, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1103888265
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1260,9 +1224,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63eebbf1c5af6ce42952f091bb655a53, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rayDistance: 0.1
+  rayDistance: 0.25
   rb: {fileID: 0}
   upForce: 300
+  isDead: 0
 --- !u!1 &6346024904113327281
 GameObject:
   m_ObjectHideFlags: 0

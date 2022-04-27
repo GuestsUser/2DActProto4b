@@ -634,7 +634,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1cb7473d1cd39534aae671b0854a1881, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 0
+  speed: 1
   nonVisible: 0
   checkCollision: {fileID: 7168170032066725900}
   enemyDestroy: {fileID: 0}

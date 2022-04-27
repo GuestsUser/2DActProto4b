@@ -376,7 +376,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2144271343146636222}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.088, y: 0, z: 0}
+  m_LocalPosition: {x: 0.01, y: -0.008, z: 0.02}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 6346024904048878341}
@@ -564,7 +564,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5146590203945256756}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -0.124, y: -0.004, z: 0.02}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 6346024904048878341}
@@ -684,6 +684,7 @@ GameObject:
   - component: {fileID: 6346024904048878348}
   - component: {fileID: 6346024904048878579}
   - component: {fileID: 6346024904048878576}
+  - component: {fileID: 8049694311519597840}
   - component: {fileID: 6346024904048878577}
   - component: {fileID: 8743491813017517459}
   - component: {fileID: 3141178713863076342}
@@ -696,6 +697,7 @@ GameObject:
   - component: {fileID: 3790172905300769814}
   - component: {fileID: 5834029954122103087}
   - component: {fileID: 7523221757791905854}
+  - component: {fileID: 1103888265}
   m_Layer: 0
   m_Name: Haruko
   m_TagString: Player
@@ -862,8 +864,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fallPoint:
   - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
 --- !u!114 &6346024904048878350
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -971,6 +971,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8f268c6982455eb46b390e5d0c93b12a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!136 &8049694311519597840
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6346024904048878582}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.21
+  m_Height: 1.31
+  m_Direction: 1
+  m_Center: {x: 0, y: 0.65, z: 0}
 --- !u!136 &6346024904048878577
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -981,10 +995,10 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_Enabled: 1
-  m_Radius: 0.21
+  m_Radius: 0.35129923
   m_Height: 1.31
   m_Direction: 1
-  m_Center: {x: 0, y: 0.65, z: 0}
+  m_Center: {x: 0, y: 0.65, z: -0.14129925}
 --- !u!114 &8743491813017517459
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1234,6 +1248,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7429bbcb762e3384fa555ddb4ed72714, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1103888265
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6346024904048878582}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 63eebbf1c5af6ce42952f091bb655a53, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rayDistance: 0.1
+  rb: {fileID: 0}
+  upForce: 300
 --- !u!1 &6346024904113327281
 GameObject:
   m_ObjectHideFlags: 0
@@ -3662,7 +3691,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9207255197404479175}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.081, y: 0, z: 0}
+  m_LocalPosition: {x: 0.14, y: 0.011, z: 0.039}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 6346024904048878341}

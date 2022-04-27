@@ -11,6 +11,7 @@ TagManager:
   - kuttuku_down
   - Item
   - DeadArea
+  - Stage1Clear
   layers:
   - Default
   - TransparentFX

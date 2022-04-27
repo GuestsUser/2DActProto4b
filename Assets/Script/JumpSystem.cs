@@ -435,7 +435,7 @@ public class JumpSystem : Padinput
     [SerializeField] public float rayDistance = 0.05f;
 
     /*靴のテストフラグ（ステージ攻略で靴を切り替える）*/
-    public bool jumpFlg_Test = false;   /*二弾ジャンプにさせたい場合このフラグにtrueを入れる*/
+    static public bool jumpFlg_Test = false;   /*二弾ジャンプにさせたい場合このフラグにtrueを入れる*/
 
     /*テストフラグをシーン上に表示させる変数*/
     public Text JumpFlg;
@@ -467,21 +467,21 @@ public class JumpSystem : Padinput
         /*ジャンプフラグをテキストで表示*/
         JumpFlg.text = "JumpFlg : " + jumpFlg_Test.ToString() + "\nジャンプ可能回数" + jumpCount.ToString();
     }
-
-    private void OnCollisionEnter(Collision collision)
+   
+    private void OnTriggerEnter(Collider other)
     {
 
-        if (collision.collider.name == "Test_DoubleJump")
+        if (other.tag == "Stage1Clear") /* 04/27糸数変更点(条件のみ変更) */
         {
             if (!jumpFlg_Test)
             {
                 jumpFlg_Test = true;
                 doublejump.SetActive(false);
             }
-            else
-            {
-                jumpFlg_Test = false;
-            }
+            //else
+            //{
+            //    jumpFlg_Test = false;
+            //}
         }
     }
 

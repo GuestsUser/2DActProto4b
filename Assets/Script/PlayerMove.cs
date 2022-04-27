@@ -110,7 +110,13 @@ public class PlayerMove : Padinput
         right = 1; /*最初何も入力していない状態でくっつきの靴に切り替えると入力と移動する方向が逆になる*/
         kuttuki_hit_wall = false;
         dash = GetComponent<DashSystem>();
-    }
+
+        /* シーンの頭に来る度staticフラグをtrueにする */
+        movePermit = true;
+        rotatePermit = true;
+        banTaskCountMove = 0;
+        banTaskCountRotate = 0;
+}
 
     /*オーバーライド関数(自動で呼び出される 呼び出しタイミングはコントローラー割り当てがされているボタン、スティックが入力された時)*/
     public override void Move() /*動かす時の左スティック入力状態をここで取得*/

@@ -830,6 +830,11 @@ PrefabInstance:
       propertyPath: retryPoint
       value: 
       objectReference: {fileID: 1227869845}
+    - target: {fileID: 6346024904048878577, guid: 1b398051e4fdfd044b3b928e875c85b5,
+        type: 3}
+      propertyPath: m_IsTrigger
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6346024904048878582, guid: 1b398051e4fdfd044b3b928e875c85b5,
         type: 3}
       propertyPath: m_Name
@@ -939,7 +944,7 @@ PrefabInstance:
     - target: {fileID: 5021305185537066078, guid: 6fb72f925eef91446a83475df645207f,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 230
+      value: 300
       objectReference: {fileID: 0}
     - target: {fileID: 5021305185537066078, guid: 6fb72f925eef91446a83475df645207f,
         type: 3}
@@ -3239,7 +3244,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.7772278, y: 1}
+    m_SensorSize: {x: 1.7777778, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -3366,7 +3371,12 @@ PrefabInstance:
     - target: {fileID: 5361950379830602449, guid: 11f4cd94535888142889b442320454b4,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -245
+      value: -715
+      objectReference: {fileID: 0}
+    - target: {fileID: 5361950379830602449, guid: 11f4cd94535888142889b442320454b4,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -12
       objectReference: {fileID: 0}
     - target: {fileID: 5361950380764143275, guid: 11f4cd94535888142889b442320454b4,
         type: 3}
@@ -4724,7 +4734,7 @@ PrefabInstance:
     - target: {fileID: 3408532001333962347, guid: 039726cdb6fa652438a344c8ef1c757c,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: 130
       objectReference: {fileID: 0}
     - target: {fileID: 3408532001333962347, guid: 039726cdb6fa652438a344c8ef1c757c,
         type: 3}
@@ -4864,7 +4874,7 @@ GameObject:
   - component: {fileID: 2085377687}
   m_Layer: 0
   m_Name: ClearPoint
-  m_TagString: Untagged
+  m_TagString: Stage1Clear
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

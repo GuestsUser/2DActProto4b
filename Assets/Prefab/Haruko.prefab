@@ -3369,7 +3369,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6346024905814599291}
-  - component: {fileID: 1991463635}
   m_Layer: 0
   m_Name: CH_Spine
   m_TagString: Untagged
@@ -3392,20 +3391,6 @@ Transform:
   m_Father: {fileID: 6346024905089775995}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!136 &1991463635
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6346024905814599288}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  m_Radius: 0.21
-  m_Height: 1.308506
-  m_Direction: 1
-  m_Center: {x: 0, y: 0.276, z: 0}
 --- !u!1 &6346024905836478985
 GameObject:
   m_ObjectHideFlags: 0

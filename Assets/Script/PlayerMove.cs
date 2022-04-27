@@ -114,7 +114,9 @@ public class PlayerMove : Padinput
         /* シーンの頭に来る度staticフラグをtrueにする */
         movePermit = true;
         rotatePermit = true;
-    }
+        banTaskCountMove = 0;
+        banTaskCountRotate = 0;
+}
 
     /*オーバーライド関数(自動で呼び出される 呼び出しタイミングはコントローラー割り当てがされているボタン、スティックが入力された時)*/
     public override void Move() /*動かす時の左スティック入力状態をここで取得*/

@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.EventSystems;
 
 public enum moveType { LR, UD }
 
@@ -27,7 +26,7 @@ public class LocalSavePara : MonoBehaviour
     [HideInInspector] public int[,] nav; /* 選択肢オブジェクトの繋がり、謂わばナビゲーション、choicesの添え字で記録、添え字ならchoices作成ループが1回で済むメリットを優先 */
     /* nav[ 選択肢添え字 = i , 0～4の数値(順番に上、下、左、右に対応) = num ]で出てきた整数=nextとして  choices[i]からnum方向に移動した先のオブジェクトをchoices[next]で取得可能 */
 
-    //[SerializeField] private EventSystem es=GameObject.Find("EventSystem").GetComponent<EventSystem>();
+    
 
     /* 以下シリアライズ化された変数のプロパティ集 */
     public GameObject _choicesPrefab { get { return choicesPrefab; } }
@@ -85,8 +84,5 @@ public class LocalSavePara : MonoBehaviour
         systemReset = "match"; /* 新しく生産したのでmatch */
     }
 
-    void OnDrawGizmos()
-    {
-
-    }
+    
 }

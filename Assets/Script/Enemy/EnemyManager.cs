@@ -18,6 +18,7 @@ public class EnemyManager : MonoBehaviour
 
     /*trueのとき右に進むfalseのとき左に進む*/
     private bool RightToLeft = false;
+    private bool Dead = false;
 
     private void Start()
     {
@@ -31,10 +32,11 @@ public class EnemyManager : MonoBehaviour
     {
         if (enemyDestroy.isDead)
         {
-            //animator.SetTrigger("Die");
-            //speed = 0;
-            //Destroy(gameObject, 1f);
+            animator.SetTrigger("Die");
+            speed = 0;
+            Destroy(gameObject, 0.7f);
             enemyDestroy.isDead = false;
+            Dead = true;
         }
     }
 
@@ -66,6 +68,12 @@ public class EnemyManager : MonoBehaviour
             //RigidBodyを停止させる（勝手に起きる）
             rb.Sleep();
             animator.SetBool("Walk", false);
+        }
+
+        if (Dead)
+        {
+            col.enabled = false;
+            Dead = false;
         }
     }
 }

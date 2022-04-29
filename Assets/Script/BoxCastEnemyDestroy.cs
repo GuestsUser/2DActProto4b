@@ -26,12 +26,12 @@ public class BoxCastEnemyDestroy : MonoBehaviour
 					/*boxCastの判定(箱の起点, 箱の大きさ * 調整用のscale, 判定をboxの下の面にする, hit , 箱の角度 , rayの長さ)*/
 		if (isHit)
 		{
-			if (hit.collider.tag == "Enemy")
+			if (hit.collider.tag == "Enemy" && !isDead)
 			{
 				Debug.Log("あたった");
 
 				isDead = true;
-				hit.collider.gameObject.SetActive(false);/*エネミーを非アクティブ状態にする*/
+				//hit.collider.gameObject.SetActive(false);/*エネミーを非アクティブ状態にする*/
 
 				rb.velocity = new Vector3(0, 0, 0); /*一瞬プレイヤーの動きを止める*/
 				rb.AddForce(new Vector3(0, upForce, 0));    /*敵を踏んだら上にジャンプ*/

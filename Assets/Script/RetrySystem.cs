@@ -11,8 +11,10 @@ public class RetrySystem : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Retry();
+        StartUp();
     }
+
+    private void StartUp() { gameObject.transform.position = retryPoint.transform.position; }
 
     public void Retry()/* リトライさせたいタイミングで呼び出してほしい */
     {

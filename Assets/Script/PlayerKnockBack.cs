@@ -62,9 +62,9 @@ public class PlayerKnockBack : MonoBehaviour
             }
             PlayerMove.MoveRestrictionRelease();
             PlayerMove.RotateRestrictionRelease();
+            _runState = false;
 
             while (DamageSystem.playerConbo == memo && !runOrder) { yield return StartCoroutine(TimeScaleYield.TimeStop()); } /* 無敵時間終了か上書きまで待機 */
-            _runState = false;
         }
 
         void Reset()

@@ -30,7 +30,6 @@ public class PlayerKnockBack : MonoBehaviour
             runOrder = true;
         }
     }
-    /* プログラム実行順序によりノックバック中も動けたりすると思うのでそこから */
     private IEnumerator KnockBackSystem() /* 常に実行しておくタイプのやつ */
     {
         float count = 0;

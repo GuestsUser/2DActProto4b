@@ -52,6 +52,7 @@ public class DamageSystem : MonoBehaviour
         maxRemain = PlayerPrefs.GetInt("maxRemain", maxRemain);
         remain = PlayerPrefs.GetInt("remain", remain);
 
+
         /* static変数の初期化 */
         damage = 0;
         recover = 0;
@@ -74,6 +75,7 @@ public class DamageSystem : MonoBehaviour
         DrawSizeChange();
 
         StartCoroutine(InvincibleSystem()); /* コンボ値を無敵時間に合わせてリセットしてくれる */
+        
     }
 
     void LateUpdate()

@@ -483,8 +483,9 @@ GameObject:
   - component: {fileID: 2266871136809551807}
   - component: {fileID: 2266871136809551800}
   - component: {fileID: 2266168566936366212}
-  - component: {fileID: 2266871136809551806}
   - component: {fileID: 2438486564271467165}
+  - component: {fileID: 3207186811997384740}
+  - component: {fileID: 2266871136809551806}
   m_Layer: 0
   m_Name: TurtleShell
   m_TagString: Enemy
@@ -572,6 +573,39 @@ MonoBehaviour:
   damage: 1
   type: 5
   radius: 0.5
+--- !u!114 &2438486564271467165
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2266168566936366213}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1cb7473d1cd39534aae671b0854a1881, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moveDirection: 1
+  speed: 3
+  nonVisible: 0
+  checkCollision: {fileID: 7168170032066725900}
+  enemyDestroy: {fileID: 0}
+  stageLayer:
+    serializedVersion: 2
+    m_Bits: 256
+--- !u!114 &3207186811997384740
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2266168566936366213}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0e490a7575faf5f4d87eb12a335d2fe2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerSteoOn: 0
 --- !u!212 &2266871136809551806
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -622,22 +656,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &2438486564271467165
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2266168566936366213}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1cb7473d1cd39534aae671b0854a1881, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 1
-  nonVisible: 0
-  checkCollision: {fileID: 7168170032066725900}
-  enemyDestroy: {fileID: 0}
 --- !u!1 &2266232383629160961
 GameObject:
   m_ObjectHideFlags: 0
@@ -692,13 +710,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2266258726769726789}
-  m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0, y: -0.012334714, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2262165980509767359}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: -90.00001, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!137 &2202951354557054083
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 0

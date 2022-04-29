@@ -4,9 +4,11 @@ using System.Collections;
 public class BoxCastEnemyDestroy : MonoBehaviour
 {
 	RaycastHit hit;
-	[SerializeField] public float rayDistance = 0.1f;	/*rayの長さ*/
-	public Rigidbody rb;	
-	public float upForce = 300f;	/*上に上がる力*/
+	[SerializeField] public float rayDistance = 0.1f;   /*rayの長さ*/
+
+	private Rigidbody rb;
+
+	public float upForce = 300f;    /*上に上がる力*/
 
 	private Vector3 size = new Vector3(1, -1f, 1);  /*boxcastのサイズ*/
 
@@ -15,15 +17,15 @@ public class BoxCastEnemyDestroy : MonoBehaviour
 
 
 	void Start()
-    {
-		rb = GetComponent<Rigidbody>(); /*リジッドボデー*/
+	{
+		rb = GetComponent<Rigidbody>();
 	}
 
 	void FixedUpdate()
 	{
-		var scale = transform.lossyScale.x * 0.2f;	
-		var isHit = Physics.BoxCast(transform.position, size * scale, transform.up * -1, out hit, transform.rotation, rayDistance);		
-					/*boxCastの判定(箱の起点, 箱の大きさ * 調整用のscale, 判定をboxの下の面にする, hit , 箱の角度 , rayの長さ)*/
+		var scale = transform.lossyScale.x * 0.2f;
+		var isHit = Physics.BoxCast(transform.position, size * scale, transform.up * -1, out hit, transform.rotation, rayDistance);
+		/*boxCastの判定(箱の起点, 箱の大きさ * 調整用のscale, 判定をboxの下の面にする, hit , 箱の角度 , rayの長さ)*/
 		if (isHit)
 		{
 			if (hit.collider.tag == "Enemy" && !isDead)
@@ -31,8 +33,11 @@ public class BoxCastEnemyDestroy : MonoBehaviour
 				Debug.Log("あたった");
 
 				isDead = true;
-				//hit.collider.gameObject.SetActive(false);/*エネミーを非アクティブ状態にする*/
-
+				EnemyObjectCollision eCollision = hit.collider.GetComponent<EnemyObjectCollision>();
+				if(eCollision != null)
+                {
+					eCollision.playerSteoOn = true;
+                }
 				rb.velocity = new Vector3(0, 0, 0); /*一瞬プレイヤーの動きを止める*/
 				rb.AddForce(new Vector3(0, upForce, 0));    /*敵を踏んだら上にジャンプ*/
 			}

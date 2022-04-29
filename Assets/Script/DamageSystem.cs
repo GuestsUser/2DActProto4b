@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+[RequireComponent(typeof(RetrySystem))] /* リトライ必須化 */
 /* ダメージを無効化したり食らう予定のダメージ値を取得したり等の機能が必要な場合仲里に相談を */
 public class DamageSystem : MonoBehaviour
 {
@@ -40,6 +41,9 @@ public class DamageSystem : MonoBehaviour
     private Vector3 imageScale; /* 画像の初期拡大率 */
     private Rect imageRect; /* 画像初期uvRect */
     private float imageWidth; /* 画像横幅 */
+
+    private RetrySystem rty; /* リトライシステム */
+
     // Start is called before the first frame update
     void Start()
     {
@@ -47,6 +51,13 @@ public class DamageSystem : MonoBehaviour
         life = PlayerPrefs.GetFloat("life", life);
         maxRemain = PlayerPrefs.GetInt("maxRemain", maxRemain);
         remain = PlayerPrefs.GetInt("remain", remain);
+
+        /* static変数の初期化 */
+        damage = 0;
+        recover = 0;
+        combo = DamageCombo.neutral;
+
+        rty = gameObject.GetComponent<RetrySystem>(); /* リトライスクリプトを挿入 */
 
         /* 元画像処理 */
         imageScale = imageLife.rectTransform.localScale; /* 元画像初期拡大率格納 */
@@ -79,6 +90,12 @@ public class DamageSystem : MonoBehaviour
             if (life < 0) { life = 0; } /* 最低値を下回らないように */
             if (life > maxLife) { life = maxLife; } /* 最大値に丸める */
 
+            if (life <= 0) /* 体力が最低値に達した場合残機消費と体力を最大値に更新する */
+            {
+                rty.Retry();
+                life = maxLife;
+            }
+
             /* 表示更新*/
             LifeVisibleChange();
             DrawSizeChange();
@@ -87,7 +104,7 @@ public class DamageSystem : MonoBehaviour
 
     public static void Damage(float dmg, DamageCombo dc) /* dmgに入れた値分ダメージを与える */
     {
-        if (combo < dc) /* 現在コンボ超過のダメージのみ加算する */
+        if (combo < dc || dc==DamageCombo.falldown) /* 現在コンボ超過のダメージのみ加算する、落下死はコンボ値に関わらず受け取る */
         {
             damage += dmg;
             combo = dc;

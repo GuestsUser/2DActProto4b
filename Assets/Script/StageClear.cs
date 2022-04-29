@@ -6,10 +6,13 @@ using UnityEngine.SceneManagement;
 public class StageClear : MonoBehaviour
 {
 
-    static public bool isStage1Clear;   /*ステージ1をクリアしたかどうか*/
-    static public bool isStage2Clear;   /*ステージ2をクリアしたかどうか*/
-    static public bool isStage3Clear;   /*ステージ3をクリアしたかどうか*/
+    public bool isStage1Clear;   /*ステージ1をクリアしたかどうか*/
+    public bool isStage2Clear;   /*ステージ2をクリアしたかどうか*/
+    public bool isStage3Clear;   /*ステージ3をクリアしたかどうか*/
 
+    static private bool _isStage1Clear;
+    static private bool _isStage2Clear;
+    static private bool _isStage3Clear; 
     void Start()
     {
         /*ステージ1が始まったらクリアしてない状態になるから、どうにかしないといけない*/
@@ -23,18 +26,58 @@ public class StageClear : MonoBehaviour
 
     void Update()
     {
+        if (isStage1Clear)
+        {
+            _isStage1Clear = true;
+        }
+
+        if (isStage2Clear)
+        {
+            _isStage2Clear = true;
+        }
+
+        if (isStage3Clear)
+        {
+            _isStage3Clear = true;
+        }
+
+        switch (SceneManager.GetActiveScene().name)
+        {
+            case "Stage1":
+                /*ステージ1またはステージ2がクリアしていたら*/
+                if (isStage1Clear) /* 確認用で3を入れた */
+                {
+                    /*シーンをステージクリア画面に切り替える*/
+                    SceneManager.LoadScene("Clear");
+                }
+                break;
+
+            case "Stage2":
+                /*ステージ1またはステージ2がクリアしていたら*/
+                if (isStage2Clear) /* 確認用で3を入れた */
+                {
+                    /*シーンをステージクリア画面に切り替える*/
+                    SceneManager.LoadScene("Clear");
+                }
+                break;
+
+            case "Stage3":
+                /*すべてのステージをクリアしていたら*/
+                if (_isStage1Clear && _isStage2Clear && _isStage3Clear)
+                {
+                    /*シーンをオールステージクリア画面に切り替える*/
+                    SceneManager.LoadScene("AllClear");
+                }
+                break;
+        }
+
         /*ステージ1またはステージ2がクリアしていたら*/
-        if (isStage1Clear || isStage2Clear || isStage3Clear) /* 確認用で3を入れた */
-        {
-            /*シーンをステージクリア画面に切り替える*/
-            SceneManager.LoadScene("Clear");
-        }
-        /*すべてのステージをクリアしていたら*/
-        else if(isStage1Clear && isStage2Clear && isStage3Clear)
-        {
-            /*シーンをオールステージクリア画面に切り替える*/
-            SceneManager.LoadScene("AllClear");
-        }
+        //if (isStage1Clear || isStage2Clear ) /* 確認用で3を入れた */
+        //{
+        //    /*シーンをステージクリア画面に切り替える*/
+        //    SceneManager.LoadScene("Clear");
+        //}
+        
     }
 
     private void OnTriggerEnter(Collider other)

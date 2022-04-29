@@ -5,7 +5,7 @@ using UnityEngine;
 public class RamAttack : MonoBehaviour
 {
     [Header("自機接触でダメージを与える(仮)")]
-    [Tooltip("接触時ダメージ")] [SerializeField] float damage = 0.5f;
+    [Tooltip("接触時ダメージ")] [SerializeField] float damage = 1.0f;
     [Tooltip("ダメージの種類")] [SerializeField] DamageSystem.DamageCombo type = DamageSystem.DamageCombo.damage;
 
     [Tooltip("中心座標を足元に持ってくる為にyスケールの半分を持つ変数、元々足元にあったり中心座標がオブジェクトの中心以外にある時は自力で計算するか0にする")] [SerializeField] private float radius;

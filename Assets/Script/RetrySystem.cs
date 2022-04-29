@@ -17,6 +17,7 @@ public class RetrySystem : MonoBehaviour
     public void Retry()/* リトライさせたいタイミングで呼び出してほしい */
     {
         gameObject.transform.position = retryPoint.transform.position; /* 位置をリトライオブジェクトに揃える */
+        GManager.instance.SubZankiNum();
     }
 
     public void RetrayAreaUpdate(GameObject newRetryPoint)/* newRetryPointに新しいリトライ位置のゲームオブジェクトを入れる事でリトライ位置を更新する */

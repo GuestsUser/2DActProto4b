@@ -7,11 +7,10 @@ public class FallDownSystem : MonoBehaviour
 {
     [Header("落下死ステージのプレイヤーに付ける")]
     [Tooltip("落下死地点集、x座標の整数部が重ならないようお願いしたい")] [SerializeField] private List<GameObject> fallPoint;
-    private RetrySystem rty;
+    
     // Start is called before the first frame update
     void Start()
     {
-        rty = gameObject.GetComponent<RetrySystem>(); /* リトライスクリプトを挿入 */
         fallPoint.Sort((a, b) => (int)((a.transform.position.x - b.transform.position.x) * 1000)); /* 1000掛ける事で第3位までの小数点を整数部に持ってくる */
     }
 
@@ -33,8 +32,7 @@ public class FallDownSystem : MonoBehaviour
         }
         if(transform.position.y <= fallPoint[useSub].transform.position.y) /* プレイヤー位置が落下死ポイントのy座標以下の場合即死判定 */
         {
-            rty.Retry();
-            GManager.instance.SubZankiNum();
+            DamageSystem.Damage(9999, DamageSystem.DamageCombo.falldown);
         }
     }
 }

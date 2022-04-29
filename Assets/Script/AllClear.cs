@@ -18,7 +18,7 @@ public class AllClear : MonoBehaviour
     void Update()
     {
         
-        /*ゲームパッドのBボタンが押されたら*/
+        /*ゲームパッドのAボタンが押されたら*/
         if (Gamepad.current.buttonSouth.wasPressedThisFrame)
         {
             StartCoroutine("BacktoTitle");

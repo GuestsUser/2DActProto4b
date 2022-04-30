@@ -429,7 +429,7 @@ public class PlayerMove : Padinput
         /* 正面から出ているレイが当たったら */
         if (Physics.Raycast(ray, out rayHit, rayDistance) || Physics.Raycast(ray2, out rayHit, rayDistance) || Physics.Raycast(ray3, out rayHit, rayDistance))
         {
-            if (rayHit.collider.tag != "Slope" && rayHit.collider.tag != "StageObj" && rayHit.collider.tag != "SavePoint" && rayHit.collider.tag != "Stage1Clear" && rayHit.collider.tag != "Stage2Clear" && rayHit.collider.tag != "Stage3Clear" && rayHit.collider.tag != "enemy")
+            if (rayHit.collider.tag != "Slope" && rayHit.collider.tag != "StageObj" && rayHit.collider.tag != "SavePoint" && rayHit.collider.tag != "Stage1Clear" && rayHit.collider.tag != "Stage2Clear" && rayHit.collider.tag != "Stage3Clear" && rayHit.collider.tag != "Enemy")
             {
                 rayHit_wall = true;
                 rayHit_Slope = false;

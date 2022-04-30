@@ -183,7 +183,7 @@ public class PlayerMove : Padinput
     void Update() /*常に処理する内容*/
     {
         //Debug.Log(distance);
-        Debug.Log(input_abs);
+        //Debug.Log(input_abs);
         if (state == State.idle)
         {
             idle = true;

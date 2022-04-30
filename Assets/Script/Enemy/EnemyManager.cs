@@ -161,17 +161,6 @@ public class EnemyManager : MonoBehaviour
         eoc = GetComponent<EnemyObjectCollision>();
     }
 
-    private void Update()
-    {
-        //if (enemyDestroy.isDead) {
-        //    //animator.SetTrigger("Die");
-        //    moveDirection = MOVE_DIRECTION.STOP;
-
-        //    Destroy(this.gameObject, 0.7f);
-        //    enemyDestroy.isDead = false;
-        //}
-    }
-
     private void FixedUpdate()
     {
         if (!eoc.playerSteoOn)
@@ -179,6 +168,7 @@ public class EnemyManager : MonoBehaviour
             /*画面内に映っていたら*/
             if (targetRenderer.isVisible || nonVisible)
             {
+                Debug.Log("画面内にいる");
                 /*歩きアニメーションをする*/
                 animator.SetBool("Walk", true);
 

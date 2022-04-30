@@ -32,8 +32,8 @@ public class SkyEnemyMove : MonoBehaviour
         col = GetComponent<BoxCollider>();
         eoc = GetComponent<EnemyObjectCollision>();
 
-        //iniPos = transform.position;
-        //iniAngle = 0;
+        iniPos = transform.position;
+        iniAngle = 0;
 
         //if (!inverse)
         //{
@@ -47,16 +47,28 @@ public class SkyEnemyMove : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (eoc.playerSteoOn)
-        {   
+        if (!eoc.playerSteoOn)
+        {
             /*画面内に映っていたら*/
-            if (targetRenderer.isVisible)
+            if (targetRenderer.isVisible || nonVisible)
             {
-                Debug.Log("画面内にいる");
-                
+                if (!isCheck)
+                {
+                    isCheck = true;
+                    Debug.Log("画面内にいる");
+
+                    if (!inverse)
+                    {
+                        move /= 2; /* 移動量を半分に */
+                        iniPos += move; /* 記録上の初期位置に移動量の半分を加算 */
+                        iniAngle = -90; /* 初期移動状態を-1とすることで現在位置から始めることができる */
+                    }
+                    StartCoroutine(Repeat(iniAngle));
+                }
             }
             else
             {
+                isCheck = false;
                 Debug.Log("画面外にいる");
             }
         }
@@ -68,6 +80,7 @@ public class SkyEnemyMove : MonoBehaviour
                 isDead = true;
                 enemyDestroy.isDead = false;
                 col.enabled = false;
+                move = Vector3.zero;
                 Destroy(gameObject, 0.8f);
             }
         }

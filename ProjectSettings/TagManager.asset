@@ -12,6 +12,8 @@ TagManager:
   - Item
   - DeadArea
   - Stage1Clear
+  - Slope
+  - StageObj
   layers:
   - Default
   - TransparentFX

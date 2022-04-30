@@ -316,7 +316,7 @@ PrefabInstance:
     - target: {fileID: 877551567200108648, guid: 894b2442fd2ade54ea6758eb83b2b3d7,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.16
+      value: 1.164
       objectReference: {fileID: 0}
     - target: {fileID: 877551567200108648, guid: 894b2442fd2ade54ea6758eb83b2b3d7,
         type: 3}
@@ -2195,6 +2195,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: ground2(JumpDistance)
       objectReference: {fileID: 0}
+    - target: {fileID: 8682279715648254212, guid: eb8dba4436be6f94aad5b4831f0fd4ed,
+        type: 3}
+      propertyPath: m_TagString
+      value: ground
+      objectReference: {fileID: 0}
     - target: {fileID: 8682279715648254213, guid: eb8dba4436be6f94aad5b4831f0fd4ed,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -3421,7 +3426,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.78, y: 1}
+    m_SensorSize: {x: 1.7779851, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0

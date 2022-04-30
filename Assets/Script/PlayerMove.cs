@@ -43,7 +43,7 @@ public class PlayerMove : Padinput
     //float max_speed = 50f;
 
     /*動きのベクトル*/
-    Vector3 move;
+    [SerializeField] Vector3 move;
 
     Quaternion player_direction; //プレイヤーの方向
     bool bool_left_direction; //true:左に向いています
@@ -66,20 +66,29 @@ public class PlayerMove : Padinput
     /*壁のめり込み対策(しゅんver)*/
     [SerializeField] public float rayDistance = 1.2f;
     public Vector3 rayPosition; /*レイキャストの位置*/
+    public Vector3 rayPosition2; /*レイキャストの位置*/
+    public Vector3 rayPosition3; /*レイキャストの位置*/
     public Ray ray;    /*正面*/
-    public Ray ray_back;
+    public Ray ray2;
+    public Ray ray3;
+
+    public Ray foot_ray; /* 足元(必須) */
 
     public RaycastHit rayHit;
-    Vector3 obj_pos;
+    [SerializeField] private Vector3 obj_pos;
     float obj_width;
     GameObject obj;
     Vector3 player_pos;
     bool hit_wall_right;
     bool hit_wall_left;
+    bool rayHit_wall;
+    [SerializeField] bool rayHit_Slope;
+    [SerializeField] private bool hit_wall;
 
-    bool kuttuki_hit_wall;
+    [SerializeField] private float distance;
 
-    float distance;
+    [SerializeField] private DashSystemN _dash;
+    
 
     //public float height;
 
@@ -94,6 +103,7 @@ public class PlayerMove : Padinput
 
     private void Start() /*初期化*/
     {
+        _dash = GetComponent<DashSystemN>();
         this.transform.localRotation = Quaternion.Euler(0, 0, 0);
         max_move_x = 13f;
 
@@ -108,7 +118,9 @@ public class PlayerMove : Padinput
         anim_speed = 0.1f;
 
         right = 1; /*最初何も入力していない状態でくっつきの靴に切り替えると入力と移動する方向が逆になる*/
-        kuttuki_hit_wall = false;
+        hit_wall = false;
+        rayHit_wall = false;
+        rayHit_Slope = false;
         dash = GetComponent<DashSystem>();
 
         /* シーンの頭に来る度staticフラグをtrueにする */
@@ -203,10 +215,6 @@ public class PlayerMove : Padinput
         Turn();
         Run();
         /*壁のめり込み対策(しゅんver)*/
-        rayPosition = new Vector3(transform.localPosition.x, transform.localPosition.y, transform.localPosition.z);
-        rayPosition.y += 1f;
-        ray = new Ray(rayPosition, transform.right * 1f);
-        ray_back = new Ray(rayPosition, transform.right * -1f);
         WallHit();
     }
     private void Run()/*走る処理*/
@@ -229,14 +237,15 @@ public class PlayerMove : Padinput
                 break;
         }
         /*壁にめり込まないようにする処理(自分版)*/
-        if (hit_wall_left == true || hit_wall_right == true)
+        if (hit_wall)
         {
             move = Vector3.zero;
         }
-        else if (hit_wall_left == false && hit_wall_right == false)
+        else
         {
             move = new Vector3(move_x, 0, 0);
         }
+        
         /*壁にめり込まないようにする処理(自分版)*/
         /*↓めり込まないようにする処理を使う場合下はコメントアウト*/
         //move = new Vector3(move_x, 0, 0);
@@ -405,153 +414,72 @@ public class PlayerMove : Padinput
     /*壁にめり込まないようにする処理(自分版)*/
     private void WallHit()
     {
+
+        rayPosition = new Vector3(transform.localPosition.x, transform.localPosition.y, transform.localPosition.z);
+        rayPosition2 = new Vector3(transform.localPosition.x, transform.localPosition.y, transform.localPosition.z);
+        rayPosition3 = new Vector3(transform.localPosition.x, transform.localPosition.y, transform.localPosition.z);
+        rayPosition.y += 0.5f;
+        rayPosition3.y += 1f;
+
+        /* BOXCASTにすれば3つもいらない */
+        ray = new Ray(rayPosition, transform.right * 1f); /*  プレイヤーの真ん中あたりから正面方向のレイ */
+        ray2 = new Ray(rayPosition2, transform.right * 1f); /*  プレイヤーの足元あたりから正面方向のレイ */
+        ray3 = new Ray(rayPosition3, transform.right * 1f); /*  プレイヤーの頭あたりから正面方向のレイ */
+
         /* 正面から出ているレイが当たったら */
-        if (Physics.Raycast(ray, out rayHit, rayDistance))
+        if (Physics.Raycast(ray, out rayHit, rayDistance) || Physics.Raycast(ray2, out rayHit, rayDistance) || Physics.Raycast(ray3, out rayHit, rayDistance))
         {
-            //Debug.Log("れいが当たってる処理は正常です");
-            if (rayHit.collider.tag == "kuttuku" || rayHit.collider.tag == "ground")
+            if (rayHit.collider.tag != "Slope" && rayHit.collider.tag != "StageObj" && rayHit.collider.tag != "SavePoint" && rayHit.collider.tag != "Stage1Clear" && rayHit.collider.tag != "Stage2Clear" && rayHit.collider.tag != "Stage3Clear" && rayHit.collider.tag != "Enemy")
             {
-                /*プレイヤーの位置と幅を取得*/
-                var p_width = transform.lossyScale.x / 2; /*2で割ることにより壁に当たるほうのみの幅を出せる*/
-                var p_pos = new Vector3((transform.localPosition.x), transform.localPosition.y, transform.localPosition.z);
-
-                /*レイが当たっているオブジェクトの位置を取得*/
-                obj_pos = rayHit.transform.position;
-
-                /* 右に入力されている時 */
-                if (right != 0)
-                {
-                    p_pos.x = transform.localPosition.x - p_width;
-                }
-                /* 左に入力されている時 */
-                else if (left != 0)
-                {
-                    p_pos.x = transform.localPosition.x + p_width;
-                }
-
-
-                if (obj_pos.x < p_pos.x) /*プレイヤーがオブジェクトの右側の時*/
-                {
-                    Debug.Log("左側のオブジェクトにレイが当たっています");
-                    distance = (p_pos.x - obj_pos.x);
-                }
-                else if (p_pos.x < obj_pos.x) /*プレイヤーがオブジェクトの左側の時*/
-                {
-                    Debug.Log("右側のオブジェクトにレイが当たっています");
-                    distance = (obj_pos.x - p_pos.x);
-                }
-
-
-
-
-                /*ポジションをめり込まないようにする処理*/
-                if (right != 0 && distance <= 1.2f)
-                {
-                    Debug.Log("ここ通っていればめり込まないはず");
-                    //player_oldpos = this.transform.position;
-                    player_pos = new Vector3(obj_pos.x - 0.8f, transform.position.y, transform.position.z);
-                    transform.position = player_pos;
-                    hit_wall_right = true;
-                }
-                else if (left != 0 && distance <= 1.2f)
-                {
-                    Debug.Log("ここ通っていればめり込まないはず");
-                    //player_oldpos = this.transform.position;
-                    player_pos = new Vector3(obj_pos.x + 0.8f, transform.position.y, transform.position.z);
-                    transform.position = player_pos;
-                    hit_wall_left = true;
-                }
-
-                //hit_wall = true;
+                rayHit_wall = true;
+                rayHit_Slope = false;
+            }
+            else
+            {
+                rayHit_Slope = true;
             }
 
+            /*プレイヤーの位置と幅を取得*/
+            //var p_pos = new Vector3((transform.localPosition.x), transform.localPosition.y, transform.localPosition.z);
+            
+            
+            //hit_wall = true;
+            Debug.Log("れいが壁に当たっています");
         }
         else
         {
-            hit_wall_right = false;
-            hit_wall_left = false;
+            distance = 0;
+            rayHit_wall = false;
+            hit_wall = false;
         }
-            //if (kuttuku.bool_ray_hit == true && Physics.gravity == new Vector3(0, -9.8f, 0))
-            //{
-            //    if (Physics.Raycast(ray_back, out rayHit, rayDistance))
-            //    {
-            //        if (rayHit.collider.tag == "kuttuku" || rayHit.collider.tag == "ground")
-            //        {
-            //            /*プレイヤーの位置と幅を取得*/
-            //            var p_width = transform.lossyScale.x / 2; /*2で割ることにより壁に当たるほうのみの幅を出せる*/
-            //            var p_pos = new Vector3((transform.localPosition.x), transform.localPosition.y, transform.localPosition.z);
+    }
 
-            //            /*レイが当たっているオブジェクトの位置を取得*/
-            //            obj_pos = rayHit.transform.position;
-
-            //            if (right != 0)
-            //            {
-            //                p_pos.x = transform.localPosition.x - p_width;
-            //                //transform.position = new Vector3(rayHit.transform.position.x + 0.8f, transform.position.y, transform.position.z);
-            //            }
-            //            else if (left != 0)
-            //            {
-            //                p_pos.x = transform.localPosition.x + p_width;
-            //                //transform.position = new Vector3(rayHit.transform.position.x - 0.8f, transform.position.y, transform.position.z);
-            //            }
-
-            //            /*プレイヤーとオブジェクトの間の距離を出す*/
-            //            if (obj_pos.x < p_pos.x) /*プレイヤーがオブジェクトの右側の時*/
-            //            {
-            //                Debug.Log("左側のオブジェクトにレイが当たっています");
-            //                distance = (p_pos.x - obj_pos.x);
-            //            }
-            //            else if (p_pos.x < obj_pos.x) /*プレイヤーがオブジェクトの左側の時*/
-            //            {
-            //                Debug.Log("右側のオブジェクトにレイが当たっています");
-            //                distance = (obj_pos.x - p_pos.x);
-            //            }
-
-            //            /*ポジションをめり込まないようにする処理*/
-            //            if (right != 0 && distance <= 1.2f)
-            //            {
-
-            //                if (kuttuki_hit_wall == false)
-            //                {
-
-            //                    Debug.Log("くっつき専用フラグtrue");
-            //                    kuttuki_hit_wall = true;
-            //                    player_pos = new Vector3(obj_pos.x + 0.8f, transform.position.y, transform.position.z);
-            //                    transform.position = player_pos;
-            //                }
-            //                //player_oldpos = this.transform.position;
-
-            //            }
-            //            else if (left != 0 && distance <= 1.2f)
-            //            {
-            //                //player_oldpos = this.transform.position;
-            //                if (kuttuki_hit_wall == false)
-            //                {
-            //                    Debug.Log("くっつき専用フラグtrue");
-            //                    kuttuki_hit_wall = true;
-            //                    player_pos = new Vector3(obj_pos.x - 0.8f, transform.position.y, transform.position.z);
-            //                    transform.position = player_pos;
-            //                }
-
-            //            }
-            //        }
-            //    }
-            //    else
-            //    {
-            //        kuttuki_hit_wall = false;
-            //    }
-            //}
+    private void OnCollisionStay(Collision collision)
+    {
+        if (collision.collider.tag == "Slope")
+        {
+            hit_wall = false;
         }
-    ///*壁にめり込まないようにする処理(自分版)*/
-    //private void DontMove() /* 操作していない時勝手に動かないようにする処理 */
-    //{
-    //    if (kuttuku.bool_ray_hit == true && idle == true)
-    //    {
-    //        Debug.Log("勝手に動かない処理");
-    //        transform.position = player_pos2;
-    //    }
-    //}
+        else if(rayHit_Slope == false)
+        {
+            var p_width = new Vector3(0, transform.localScale.y / 2, 0); /*2で割ることにより壁に当たるほうのみの幅を出せる*/
+            if (rayHit_wall == true)
+            {
+                hit_wall = true;
+                Debug.Log("めり込み対処");
+                var p_pos = new Vector3((transform.localPosition.x), transform.localPosition.y, transform.localPosition.z);
+                //move.x = 0;
+                transform.position = p_pos;
 
+
+                //transform.position = p_pos;
+            }
+        }
+        //Debug.Log("何かに当たっています");
+        
+
+        
+    }
     /* 4/18 仲里追加 */
     public static IEnumerator MoveRestriction() /* 移動禁止化コルーチン */
     {

@@ -84,6 +84,7 @@ public class PlayerMove : Padinput
 
     [SerializeField] private float distance;
 
+    [SerializeField] private DashSystemN _dash;
     
 
     //public float height;
@@ -99,6 +100,7 @@ public class PlayerMove : Padinput
 
     private void Start() /*初期化*/
     {
+        _dash = GetComponent<DashSystemN>();
         this.transform.localRotation = Quaternion.Euler(0, 0, 0);
         max_move_x = 13f;
 

@@ -2195,6 +2195,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: ground2(JumpDistance)
       objectReference: {fileID: 0}
+    - target: {fileID: 8682279715648254212, guid: eb8dba4436be6f94aad5b4831f0fd4ed,
+        type: 3}
+      propertyPath: m_TagString
+      value: ground
+      objectReference: {fileID: 0}
     - target: {fileID: 8682279715648254213, guid: eb8dba4436be6f94aad5b4831f0fd4ed,
         type: 3}
       propertyPath: m_LocalPosition.x

@@ -3421,7 +3421,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.3333334, y: 1}
+    m_SensorSize: {x: 1.78, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -4481,6 +4481,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1783295901}
     m_Modifications:
+    - target: {fileID: 877551566510529592, guid: 894b2442fd2ade54ea6758eb83b2b3d7,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 877551566707494499, guid: 894b2442fd2ade54ea6758eb83b2b3d7,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 877551567200108648, guid: 894b2442fd2ade54ea6758eb83b2b3d7,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -4540,6 +4550,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: ground1 (13)
+      objectReference: {fileID: 0}
+    - target: {fileID: 877551567296467142, guid: 894b2442fd2ade54ea6758eb83b2b3d7,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 894b2442fd2ade54ea6758eb83b2b3d7, type: 3}
@@ -5064,6 +5079,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 26f29e361a1739b41b56aa001554dffd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isStage1Clear: 0
+  isStage2Clear: 0
+  isStage3Clear: 0
 --- !u!65 &2085377688
 BoxCollider:
   m_ObjectHideFlags: 0

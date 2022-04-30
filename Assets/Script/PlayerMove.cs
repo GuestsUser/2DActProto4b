@@ -72,6 +72,8 @@ public class PlayerMove : Padinput
     public Ray ray2;
     public Ray ray3;
 
+    public Ray foot_ray; /* 足元(必須) */
+
     public RaycastHit rayHit;
     [SerializeField] private Vector3 obj_pos;
     float obj_width;
@@ -80,6 +82,7 @@ public class PlayerMove : Padinput
     bool hit_wall_right;
     bool hit_wall_left;
     bool rayHit_wall;
+    [SerializeField] bool rayHit_Slope;
     [SerializeField] private bool hit_wall;
 
     [SerializeField] private float distance;
@@ -117,6 +120,7 @@ public class PlayerMove : Padinput
         right = 1; /*最初何も入力していない状態でくっつきの靴に切り替えると入力と移動する方向が逆になる*/
         hit_wall = false;
         rayHit_wall = false;
+        rayHit_Slope = false;
         dash = GetComponent<DashSystem>();
 
         /* シーンの頭に来る度staticフラグをtrueにする */
@@ -416,17 +420,29 @@ public class PlayerMove : Padinput
         rayPosition3 = new Vector3(transform.localPosition.x, transform.localPosition.y, transform.localPosition.z);
         rayPosition.y += 0.5f;
         rayPosition3.y += 1f;
-        ray = new Ray(rayPosition, transform.right * 1f);
-        ray2 = new Ray(rayPosition2, transform.right * 1f);
-        ray3 = new Ray(rayPosition3, transform.right * 1f);
 
-        //var p_width = new Vector3(0, transform.localScale.y / 2, 0); /*2で割ることにより壁に当たるほうのみの幅を出せる*/
+        /* BOXCASTにすれば3つもいらない */
+        ray = new Ray(rayPosition, transform.right * 1f); /*  プレイヤーの真ん中あたりから正面方向のレイ */
+        ray2 = new Ray(rayPosition2, transform.right * 1f); /*  プレイヤーの足元あたりから正面方向のレイ */
+        ray3 = new Ray(rayPosition3, transform.right * 1f); /*  プレイヤーの頭あたりから正面方向のレイ */
+
         /* 正面から出ているレイが当たったら */
         if (Physics.Raycast(ray, out rayHit, rayDistance) || Physics.Raycast(ray2, out rayHit, rayDistance) || Physics.Raycast(ray3, out rayHit, rayDistance))
         {
+            if (rayHit.collider.tag != "Slope" && rayHit.collider.tag != "StageObj" && rayHit.collider.tag != "SavePoint" && rayHit.collider.tag != "Stage1Clear" && rayHit.collider.tag != "Stage2Clear" && rayHit.collider.tag != "Stage3Clear" && rayHit.collider.tag != "enemy")
+            {
+                rayHit_wall = true;
+                rayHit_Slope = false;
+            }
+            else
+            {
+                rayHit_Slope = true;
+            }
+
             /*プレイヤーの位置と幅を取得*/
             //var p_pos = new Vector3((transform.localPosition.x), transform.localPosition.y, transform.localPosition.z);
-            rayHit_wall = true;
+            
+            
             //hit_wall = true;
             Debug.Log("れいが壁に当たっています");
         }
@@ -440,19 +456,29 @@ public class PlayerMove : Padinput
 
     private void OnCollisionStay(Collision collision)
     {
-        //Debug.Log("何かに当たっています");
-        var p_width = new Vector3(0, transform.localScale.y / 2, 0); /*2で割ることにより壁に当たるほうのみの幅を出せる*/
-        if (rayHit_wall == true)
+        if (collision.collider.tag == "Slope")
         {
-            hit_wall = true;
-            Debug.Log("めり込み対処");
-            var p_pos = new Vector3((transform.localPosition.x), transform.localPosition.y, transform.localPosition.z);
-            //move.x = 0;
-            transform.position = p_pos;
-            
-
-            //transform.position = p_pos;
+            hit_wall = false;
         }
+        else if(rayHit_Slope == false)
+        {
+            var p_width = new Vector3(0, transform.localScale.y / 2, 0); /*2で割ることにより壁に当たるほうのみの幅を出せる*/
+            if (rayHit_wall == true)
+            {
+                hit_wall = true;
+                Debug.Log("めり込み対処");
+                var p_pos = new Vector3((transform.localPosition.x), transform.localPosition.y, transform.localPosition.z);
+                //move.x = 0;
+                transform.position = p_pos;
+
+
+                //transform.position = p_pos;
+            }
+        }
+        //Debug.Log("何かに当たっています");
+        
+
+        
     }
     /* 4/18 仲里追加 */
     public static IEnumerator MoveRestriction() /* 移動禁止化コルーチン */

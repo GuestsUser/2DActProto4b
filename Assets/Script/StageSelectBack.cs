@@ -18,8 +18,8 @@ public class StageSelectBack : MonoBehaviour
 
     void Update()
     {
-        /*ゲームパッドのBボタンが押されたら*/
-        if (Gamepad.current.buttonEast.wasPressedThisFrame)
+        /*ゲームパッドのAボタンが押されたら*/
+        if (Gamepad.current.buttonSouth.wasPressedThisFrame)
         {
             /*ステージセレクト画面に切り替える*/
             SceneManager.LoadScene(1);
@@ -27,6 +27,6 @@ public class StageSelectBack : MonoBehaviour
 
         /*操作ボタンが分かるように仮表示*/
         Text stageselectback_text = stageselectback_object.GetComponent<Text>();
-        stageselectback_text.text = "Bボタンでステージセレクト画面に戻ります";
+        stageselectback_text.text = "Aボタンでステージセレクト画面に戻ります";
     }
 }

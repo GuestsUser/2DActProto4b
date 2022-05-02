@@ -25,6 +25,7 @@ public class DamageSystem : MonoBehaviour
 
     [Header("ライフと残機のシステム")]
     [Tooltip("ライフ画像、ヒエラルキーに配置済みの画像を入れる事でその位置を基準にライフを生成")] [SerializeField] RawImage imageLife;
+    [Tooltip("ライフの縁、背景画像")] [SerializeField] RawImage imageBack; /* 【糸数】5月2日追加 */
     [Tooltip("ライフ横配置間隔")] [SerializeField] int placeSpace;
     [Tooltip("ライフ最大値")] [SerializeField] float maxLife = 3;
     [Tooltip("ライフ現在値")] [SerializeField] float life = 3;
@@ -37,6 +38,7 @@ public class DamageSystem : MonoBehaviour
     [Tooltip("ダメージを受けた後無敵時間が切れるまで、このマテリアルのalbedoとemissionをこのオブジェクトに設定されてるマテリアルに設定する")] [SerializeField] Material invincibleColor;
 
     private List<RawImage> drawLife; /* ライフ画像描写用 */
+    private List<RawImage> drawBack; /* ライフ画像描写用 */
 
     private Vector3 imageScale; /* 画像の初期拡大率 */
     private Rect imageRect; /* 画像初期uvRect */
@@ -65,9 +67,16 @@ public class DamageSystem : MonoBehaviour
         imageRect = imageLife.uvRect; /* 元画像uvRect格納 */
         imageWidth = imageLife.rectTransform.rect.width; /* 元画像横幅格納 */
         imageLife.gameObject.SetActive(false); /* 元画像は使わない */
+        imageBack.gameObject.SetActive(false); /* 【糸数】5月2日追加 */ 
 
         drawLife = new List<RawImage>();
         drawLife.Capacity = 0;
+
+        /* 【糸数】5月2日追加 */
+        drawBack = new List<RawImage>();
+        drawBack.Capacity = 0;
+        /* 【糸数】5月2日追加終了 */
+
         AddLife((int)Mathf.Ceil(maxLife)); /* ライフ描写用画像用意用 */
 
         /* 表示更新*/
@@ -101,7 +110,10 @@ public class DamageSystem : MonoBehaviour
             /* 表示更新*/
             LifeVisibleChange();
             DrawSizeChange();
+
+            
         }
+        DrawBack(); /*【糸数】5月2日追加*/
     }
 
     public static void Damage(float dmg, DamageCombo dc) /* dmgに入れた値分ダメージを与える */
@@ -129,12 +141,20 @@ public class DamageSystem : MonoBehaviour
 
         for (int i = drawLife.Count; i < maxLife; i++) /* 加算分だけ追加 */
         {
+            /* 【糸数】5月2日追加 */
+            drawBack.Add(Instantiate(imageBack, imageBack.transform.parent)); /* 追加 */
+            /* 【糸数】5月2日追加 */
+
             drawLife.Add(Instantiate(imageLife, imageLife.transform.parent)); /* 追加 */
             Vector3 pos = drawLife[i].rectTransform.position;
             pos.x += (imageWidth + imageWidth / 2 + placeSpace) * i; /* 個数に応じた配置ずらし */
-            drawLife[i].rectTransform.position = pos; 
+            drawLife[i].rectTransform.position = pos;
             drawLife[i].gameObject.SetActive(false); /* 一旦不可視化する */
 
+            /* 【糸数】5月2日追加 */
+            drawBack[i].rectTransform.position = pos;
+            drawBack[i].gameObject.SetActive(false); /* 一旦不可視化する */
+            /* 【糸数】5月2日追加 */
             /* 増加の際にアニメを追加するならここにすると増加した分のライフを引数に渡せていい感じ */
         }
     }
@@ -165,8 +185,23 @@ public class DamageSystem : MonoBehaviour
         /* 変更の代入 */
         drawLife[current].rectTransform.localScale = scale;
         drawLife[current].uvRect = rect;
+
+        /* 【糸数】5月2日追加 */
+        drawBack[current].rectTransform.localScale = scale;
+        drawBack[current].uvRect = rect;
+        /* 【糸数】5月2日追加 */
     }
 
+    /* 【糸数】5月2日追加 */
+    void DrawBack()
+    {
+        Debug.Log("ライフ背景描画");
+        for (int i = 0; i < maxLife; i++){
+            drawBack[i].rectTransform.localScale = imageScale;
+            drawBack[i].uvRect = imageRect;
+            drawBack[i].gameObject.SetActive(true); /* 表示切替 */
+        }
+    }
 
     private IEnumerator InvincibleSystem() /* 常に実行しておくタイプのやつ */
     {

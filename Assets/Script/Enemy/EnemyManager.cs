@@ -225,7 +225,7 @@ public class EnemyManager : MonoBehaviour
                 animator.SetTrigger("Die");
                 isDead = true;
                 enemyDestroy.isStepOnDead = false;
-                col.enabled = false;
+                //col.enabled = false;
                 Destroy(gameObject, 0.8f);
             }
         }

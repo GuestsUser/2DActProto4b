@@ -483,7 +483,7 @@ GameObject:
   - component: {fileID: 2266871136809551807}
   - component: {fileID: 2266871136809551800}
   - component: {fileID: 2266168566936366212}
-  - component: {fileID: 2438486564271467165}
+  - component: {fileID: 779454929148622010}
   - component: {fileID: 3207186811997384740}
   - component: {fileID: 2266871136809551806}
   m_Layer: 0
@@ -573,7 +573,7 @@ MonoBehaviour:
   damage: 1
   type: 5
   radius: 0.5
---- !u!114 &2438486564271467165
+--- !u!114 &779454929148622010
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -582,11 +582,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 2266168566936366213}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1cb7473d1cd39534aae671b0854a1881, type: 3}
+  m_Script: {fileID: 11500000, guid: 2577f5c419daf08479f19d2609bd996f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   moveDirection: 1
-  speed: 3
+  speed: 2
   nonVisible: 0
   checkCollision: {fileID: 7168170032066725900}
   enemyDestroy: {fileID: 0}

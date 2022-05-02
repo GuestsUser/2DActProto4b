@@ -5,4 +5,5 @@ using UnityEngine;
 public class EnemyObjectCollision : MonoBehaviour
 {
     [Header("このオブジェクトを踏んだかどうか")] public bool playerSteoOn;
+    [Header("このオブジェクトをタックルしたかどうか")] public bool playerDash;
 }

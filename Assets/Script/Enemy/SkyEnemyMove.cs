@@ -78,7 +78,7 @@ public class SkyEnemyMove : MonoBehaviour
             {
                 animator.SetTrigger("Die");
                 isDead = true;
-                enemyDestroy.isDead = false;
+                enemyDestroy.isStepOnDead = false;
                 col.enabled = false;
                 move = Vector3.zero;
                 Destroy(gameObject, 0.8f);

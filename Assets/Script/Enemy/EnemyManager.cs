@@ -224,7 +224,7 @@ public class EnemyManager : MonoBehaviour
             {
                 animator.SetTrigger("Die");
                 isDead = true;
-                enemyDestroy.isDead = false;
+                enemyDestroy.isStepOnDead = false;
                 col.enabled = false;
                 Destroy(gameObject, 0.8f);
             }

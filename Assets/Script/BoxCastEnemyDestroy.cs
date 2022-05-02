@@ -13,7 +13,7 @@ public class BoxCastEnemyDestroy : MonoBehaviour
 	private Vector3 size = new Vector3(1, -1f, 1);  /*boxcastのサイズ*/
 
 	/*敵倒した判定　龍用*/
-	public bool isDead = false;
+	public bool isStepOnDead = false;
 
 
 	void Start()
@@ -28,11 +28,11 @@ public class BoxCastEnemyDestroy : MonoBehaviour
 		/*boxCastの判定(箱の起点, 箱の大きさ * 調整用のscale, 判定をboxの下の面にする, hit , 箱の角度 , rayの長さ)*/
 		if (isHit)
 		{
-			if (hit.collider.tag == "Enemy" && !isDead)
+			if (hit.collider.tag == "Enemy" && !isStepOnDead)
 			{
 				Debug.Log("あたった");
 
-				isDead = true;
+				isStepOnDead = true;
 				EnemyObjectCollision eCollision = hit.collider.GetComponent<EnemyObjectCollision>();
 				if(eCollision != null)
                 {

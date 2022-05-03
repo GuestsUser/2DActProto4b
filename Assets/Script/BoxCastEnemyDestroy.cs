@@ -41,7 +41,12 @@ public class BoxCastEnemyDestroy : MonoBehaviour
 				rb.velocity = new Vector3(0, 0, 0); /*一瞬プレイヤーの動きを止める*/
 				rb.AddForce(new Vector3(0, upForce, 0));    /*敵を踏んだら上にジャンプ*/
 			}
+			else
+			{
+				isStepOnDead = false;
+			}
 		}
+        
 	}
     //void OnDrawGizmos() /*Boxcastを疑似的に可視化する(Gizmosを利用)*/
     //{

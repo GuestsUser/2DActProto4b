@@ -27,11 +27,12 @@ public class Enemy1Manager : MonoBehaviour
     [Header("画面外でも行動するかどうか")] [SerializeField] private bool nonVisible;
     [Header("接触判定")] [SerializeField] private EnemyCollisionCheck checkCollision;
     [Header("敵を倒したかどうか")] [SerializeField] private BoxCastEnemyDestroy enemyDestroy;
+    [Header("trueなら右にfalseなら左に進む")] [SerializeField] private bool RightToLeft;
 
     [SerializeField] private LayerMask stageLayer;
 
     /*trueのとき右に進むfalseのとき左に進む*/
-    private bool RightToLeft = false;
+    //private bool RightToLeft = false;
 
     /*方向転換用*/
     private int xVector;
@@ -121,7 +122,10 @@ public class Enemy1Manager : MonoBehaviour
         /*Rayの作成*/
         Vector3 startVec = transform.up * 0.25f + transform.position + transform.forward * 0.65f * transform.localScale.z;
         Vector3 endVec = startVec - transform.up * 0.5f;
+        Vector3 edVec = endVec - transform.forward * 0.2f;
         Debug.DrawLine(startVec, endVec, Color.red);
-        return Physics.Linecast(startVec, endVec, stageLayer);
+        Debug.DrawLine(endVec, edVec, Color.red);
+        return Physics.Linecast(startVec, endVec, stageLayer)
+            || Physics.Linecast(endVec,edVec, stageLayer);
     }
 }

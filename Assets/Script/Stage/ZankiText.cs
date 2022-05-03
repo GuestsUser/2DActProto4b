@@ -6,15 +6,23 @@ using UnityEngine.UI;
 public class ZankiText : MonoBehaviour
 {
     private Text zankiText = null;
+    private RectTransform zanki_pos; /* 画像 */
+    private RectTransform Text_pos; /* 残機の値 */
+    private RawImage zanki;
     private int oldZankiNum = 0;
 
     private void Start()
     {
         zankiText = GetComponent<Text>();
+        zanki = GameObject.Find("ZankiImage").GetComponent<RawImage>();
 
         if (GManager.instance != null)
         {
-            zankiText.text = "残機数：" + GManager.instance.zankiNum;
+            zanki_pos = zanki.GetComponent<RectTransform>();
+            zanki_pos.localPosition = new Vector3(-25,320,0);
+            zankiText.text += GManager.instance.zankiNum;
+            Text_pos = zankiText.GetComponent<RectTransform>();
+            Text_pos.localPosition = new Vector3(25, 320, 0);
         }
         else
         {
@@ -29,7 +37,7 @@ public class ZankiText : MonoBehaviour
         if (oldZankiNum != GManager.instance.zankiNum)
         {
             /*テキストに現在の残機数を書き込む*/
-            zankiText.text = "残機数：" + GManager.instance.zankiNum;
+            zankiText.text = string.Format("{0:0}",GManager.instance.zankiNum);
             oldZankiNum = GManager.instance.zankiNum;
         }
     }

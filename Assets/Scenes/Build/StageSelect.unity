@@ -511,7 +511,7 @@ PrefabInstance:
     - target: {fileID: 8743491813017517459, guid: 1b398051e4fdfd044b3b928e875c85b5,
         type: 3}
       propertyPath: placeSpace
-      value: -100
+      value: -20
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 4143116439833659347, guid: 1b398051e4fdfd044b3b928e875c85b5, type: 3}

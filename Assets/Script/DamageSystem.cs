@@ -54,6 +54,7 @@ public class DamageSystem : MonoBehaviour
         maxRemain = PlayerPrefs.GetInt("maxRemain", maxRemain);
         remain = PlayerPrefs.GetInt("remain", remain);
 
+        placeSpace = -20; /* 【糸数】5月3日追加　ビルドで見たときの間隔がこれくらいが良かった */
 
         /* static変数の初期化 */
         damage = 0;

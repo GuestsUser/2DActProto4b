@@ -40,6 +40,7 @@ public class DashSystemN : Padinput
 
     public override void Skill()
     {
+        footer.RideCheck();
         /*アビリティ発動ボタンが押されたら*/
         if (timerDashPermit && Gamepad.current.buttonWest.wasPressedThisFrame && (!PlayerKnockBack.runState) && footer.isGround)
         {
@@ -70,6 +71,7 @@ public class DashSystemN : Padinput
             ForceSet();
             rb.velocity = force;
 
+            footer.RideCheck();
             if (count> runTime && footer.isGround) { break; } /* ダッシュジャンプで急失速を防ぐためとりあえずダッシュ時間を超えても接地してないと抜けないようにした、急失速してもいいかどうかは要相談 */
             count += Time.deltaTime;
             yield return StartCoroutine(TimeScaleYield.TimeStop());

@@ -21,7 +21,7 @@ public class Item : MonoBehaviour
             }
         }
 
-        if(GManager.instance.itemNum >= 3)
+        if(GManager.instance.itemNum >= 20)
         {
             GManager.instance.AddZankiNum();
             GManager.instance.itemNum = 0;

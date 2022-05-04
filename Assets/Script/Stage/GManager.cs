@@ -10,7 +10,7 @@ public class GManager : MonoBehaviour
     public static GManager instance = null;
 
     [Header("現在の残機")] public int zankiNum;
-    [Header("コイン要素の取得数")] public int itemNum = 0;
+    [Header("コイン要素の取得数")] public int itemNum;
     [Header("デフォルトの残機")] public int defaultZankiNum;
     [HideInInspector] public bool isGameOver;
 

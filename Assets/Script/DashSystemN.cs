@@ -21,6 +21,7 @@ public class DashSystemN : Padinput
     private Rigidbody rb;
     private PlayerMove control;
     private GroundFooter footer;
+    private RetrySystem retrySys;
 
     public bool CoolTimeFlg = false;
 
@@ -32,6 +33,7 @@ public class DashSystemN : Padinput
         animator = GetComponent<Animator>();
         control = GetComponent<PlayerMove>();
         footer = GetComponent<GroundFooter>();
+        retrySys = GetComponent<RetrySystem>();
 
         adjust = new Vector3(0, transform.localScale.y / 2, 0);
     }
@@ -62,7 +64,7 @@ public class DashSystemN : Padinput
         RaycastHit rayHit;
 
         //ForceSet();
-        while (!PlayerKnockBack.runState) /* ノックバック実行で終了する */
+        while (!PlayerKnockBack.runState && !retrySys.isRetry) /* ノックバック実行、死亡で終了 */
         {
             if (Physics.BoxCast(transform.position + adjust, transform.localScale / 2, transform.right, out rayHit, new Quaternion(), rayDistance))
             {

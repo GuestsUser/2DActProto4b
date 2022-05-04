@@ -1709,7 +1709,7 @@ PrefabInstance:
     - target: {fileID: 6346024904048878351, guid: 1b398051e4fdfd044b3b928e875c85b5,
         type: 3}
       propertyPath: rayDistance
-      value: 0.07
+      value: 0.25
       objectReference: {fileID: 0}
     - target: {fileID: 6346024904048878351, guid: 1b398051e4fdfd044b3b928e875c85b5,
         type: 3}
@@ -7198,7 +7198,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.7779851, y: 1}
+    m_SensorSize: {x: 1.9760479, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0

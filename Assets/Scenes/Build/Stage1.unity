@@ -26,7 +26,7 @@ RenderSettings:
   m_AmbientIntensity: 1
   m_AmbientMode: 0
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
-  m_SkyboxMaterial: {fileID: 10304, guid: 0000000000000000f000000000000000, type: 0}
+  m_SkyboxMaterial: {fileID: 2100000, guid: 669984bf98438b643a23b1a580715dbe, type: 2}
   m_HaloStrength: 0.5
   m_FlareStrength: 1
   m_FlareFadeSpeed: 3
@@ -1771,6 +1771,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 457bbaa97e205d4489b964dc2c8995c1, type: 3}
+--- !u!114 &590246480 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6346024904048878579, guid: 1b398051e4fdfd044b3b928e875c85b5,
+    type: 3}
+  m_PrefabInstance: {fileID: 354491262}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a2fcc87cc20d944a9f5704bdc0d75c5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &610686733
 GameObject:
   m_ObjectHideFlags: 0
@@ -2944,7 +2956,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1058136362
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4076,7 +4088,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 2.1257484, y: 1}
+    m_SensorSize: {x: 1.7779851, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -4424,6 +4436,7 @@ GameObject:
   - component: {fileID: 1598988106}
   - component: {fileID: 1598988105}
   - component: {fileID: 1598988108}
+  - component: {fileID: 1598988109}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -4531,6 +4544,21 @@ MonoBehaviour:
   m_CameraActivatedEvent:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &1598988109
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1598988104}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d64ee44155366144884f5598b08c56ac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 590246480}
+  rot_speed: 1.2
+  state_speed: 0
 --- !u!1001 &1655380884
 PrefabInstance:
   m_ObjectHideFlags: 0

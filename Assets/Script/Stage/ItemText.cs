@@ -14,7 +14,7 @@ public class ItemText : MonoBehaviour
 
         if (GManager.instance != null)
         {
-            itemText.text = "コイン要素：" + GManager.instance.itemNum + " / 2";
+            itemText.text = "♦" + GManager.instance.itemNum + " / 2";
         }
         else
         {

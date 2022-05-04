@@ -30,7 +30,7 @@ public class FadeImage : UnityEngine.UI.Graphic , IFade
 	private Texture maskTexture = null;
 
 	[SerializeField, Range (0, 1)]
-	private float cutoutRange;
+	public float cutoutRange;
 
 	public float Range {
 		get {

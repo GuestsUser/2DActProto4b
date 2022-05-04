@@ -78,6 +78,7 @@ public class PauseMenu : MonoBehaviour
         _item_obj[0] = GameObject.Find("Continue_the_game");
         _item_obj[1] = GameObject.Find("Operation_explanation");
         _item_obj[2] = GameObject.Find("Return_to_StageSelect");
+        
     }
     void Start()
     {

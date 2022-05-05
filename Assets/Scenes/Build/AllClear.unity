@@ -180,9 +180,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   decision: {fileID: 8300000, guid: 6c37ca5a368642742a2642532b398557, type: 3}
-  cancel: {fileID: 8300000, guid: 719de7d5395cd514189e75323ec8a036, type: 3}
+  cancel: {fileID: 0}
   move: {fileID: 8300000, guid: 8547d660131dcfe4bb22184473a5ba62, type: 3}
-  open_menu: {fileID: 8300000, guid: f06547fcab96ad84c9e5ce9db01b0ea5, type: 3}
+  open_menu: {fileID: 8300000, guid: 68a05e8205b823f45b0f68df7d33bbe9, type: 3}
   close_menu: {fileID: 0}
 --- !u!82 &89301253
 AudioSource:

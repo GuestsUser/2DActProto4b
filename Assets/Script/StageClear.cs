@@ -5,11 +5,12 @@ using UnityEngine.SceneManagement;
 
 public class StageClear : MonoBehaviour
 {
-
+    /* クリア時のみtrueになるフラグシーン遷移で初期化 */
     public bool isStage1Clear;   /*ステージ1をクリアしたかどうか*/
     public bool isStage2Clear;   /*ステージ2をクリアしたかどうか*/
     public bool isStage3Clear;   /*ステージ3をクリアしたかどうか*/
 
+    /* 一度クリアしたらずっとtrue */
     static private bool _isStage1Clear;
     static private bool _isStage2Clear;
     static private bool _isStage3Clear; 
@@ -63,7 +64,7 @@ public class StageClear : MonoBehaviour
 
             case "Stage3":
                 /*すべてのステージをクリアしていたら*/
-                if (_isStage1Clear && _isStage2Clear && _isStage3Clear)
+                if (_isStage1Clear && _isStage2Clear && isStage3Clear) /* ステージ3のみ毎回初期化されるフラグにしておく */
                 {
                     /*シーンをオールステージクリア画面に切り替える*/
                     SceneManager.LoadScene("AllClear");

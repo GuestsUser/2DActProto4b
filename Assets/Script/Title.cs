@@ -85,22 +85,24 @@ public class Title : MonoBehaviour
             {
                 /* 【カーソルの色を白に初期化】 */
                 Cursor.color = white;
-            }
-            Cursor_Move();
-            ChangeCursor();
-            Decision();
-            selector_obj.transform.position = item_obj[menu_number].transform.position;
 
-            if (Gamepad.current.buttonEast.wasPressedThisFrame)
-            {
-                show_menu = false;
-                menu_panel.SetActive(false);
-                operation_text.SetActive(true);
+                Cursor_Move();
+                ChangeCursor();
+                Decision();
+                selector_obj.transform.position = item_obj[menu_number].transform.position;
 
-                /* 【キャンセル音を鳴らす】 */
-                menuSE.audio_source.clip = menuSE.cancel; 
-                menuSE.audio_source.PlayOneShot(menuSE.cancel); /* キャンセル音 */
+                if (Gamepad.current.buttonEast.wasPressedThisFrame)
+                {
+                    show_menu = false;
+                    menu_panel.SetActive(false);
+                    operation_text.SetActive(true);
+
+                    /* 【キャンセル音を鳴らす】 */
+                    menuSE.audio_source.clip = menuSE.cancel;
+                    menuSE.audio_source.PlayOneShot(menuSE.cancel); /* キャンセル音 */
+                }
             }
+            
         }
         else
         {

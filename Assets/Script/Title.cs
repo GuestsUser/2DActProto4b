@@ -21,6 +21,7 @@ public class Title : MonoBehaviour
     [SerializeField] private bool push;         /*左スティックが押されたかどうか*/
     [SerializeField] private bool push_scene;   /**/
     [SerializeField] private bool press_a;      /*ゲームパッドのAボタンが押されたかどうか*/
+    [SerializeField] private bool fade_in;
 
     /*int型*/
     [SerializeField] private int menu_number;
@@ -37,6 +38,13 @@ public class Title : MonoBehaviour
     //public MenuSE _menuSE { get { return menuSE; } }
 
     bool se_flg; /* true:既にならした false:ならせます */
+
+    /* 【テキストのFade用】 */
+    [SerializeField] RawImage fade_text;
+
+    [SerializeField] float opacity;                           /* 透明度 */
+    float max_opacity = 100f;                       /* 透明度のMAX値 */
+    float min_opacity = 0;　　　　　　　　 /* 透明度の最低値 */
 
     private void Awake()
     {
@@ -62,6 +70,9 @@ public class Title : MonoBehaviour
 
         /* 【カーソルの色を白に初期化】 */
         Cursor.color = white;
+
+        opacity = 0;
+        fade_in = false;
     }
 
     void Update()
@@ -85,14 +96,24 @@ public class Title : MonoBehaviour
                 show_menu = false;
                 menu_panel.SetActive(false);
                 operation_text.SetActive(true);
+
+                /* 【キャンセル音を鳴らす】 */
+                menuSE.audio_source.clip = menuSE.cancel; 
+                menuSE.audio_source.PlayOneShot(menuSE.cancel); /* キャンセル音 */
             }
         }
         else
         {
+            Fade();
             if (Gamepad.current.buttonSouth.wasPressedThisFrame)
             {
+                /*【フラグ判定切り替え】*/
                 show_menu = true;
                 operation_text.SetActive(false);
+
+                /* 【決定音を鳴らす】 */
+                menuSE.audio_source.clip = menuSE.decision;
+                menuSE.audio_source.PlayOneShot(menuSE.decision); /* 決定音 */
             }
         }
     }
@@ -221,9 +242,22 @@ public class Title : MonoBehaviour
             }
         }
     }
+    void Fade()
+    {
+        fade_text.color = new Color(1,1,1,opacity / max_opacity);
+        if (fade_in == false)
+        {
+            opacity--;
+            if (opacity < 0) fade_in = true;
+        }
+        else 
+        {
+            opacity++;
+            if (opacity > 100) fade_in = false;
+        }
+    }
 
-
-    private IEnumerator StageSelectCoroutine() //シーンチェンジ用
+        private IEnumerator StageSelectCoroutine() //シーンチェンジ用
     {
         push_scene = true;
         yield return new WaitForSecondsRealtime(1.5f);  //処理を待機

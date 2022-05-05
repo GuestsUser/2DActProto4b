@@ -587,7 +587,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveDirection: 1
   speed: 2
-  nonVisible: 0
+  nonVisible: 1
   checkCollision: {fileID: 7168170032066725900}
   enemyDestroy: {fileID: 0}
   stageLayer:

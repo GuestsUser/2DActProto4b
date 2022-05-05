@@ -4558,6 +4558,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Slime
       objectReference: {fileID: 0}
+    - target: {fileID: 15119923237300945, guid: 3c5c2b4f62a84d74e82f6ce6d23119d5,
+        type: 3}
+      propertyPath: enemyDestroy
+      value: 
+      objectReference: {fileID: 354491266}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3c5c2b4f62a84d74e82f6ce6d23119d5, type: 3}
 --- !u!1 &1155057290
@@ -6302,7 +6307,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.7779851, y: 1}
+    m_SensorSize: {x: 1.7777778, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0

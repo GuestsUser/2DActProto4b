@@ -9,9 +9,12 @@ public class AllClear : MonoBehaviour
 {
     int WaitTime = 2;
 
+    public MenuSE menuse;
+    private bool se = false;
+
     void Start()
     {
-
+        se = false;
     }
 
 
@@ -21,6 +24,13 @@ public class AllClear : MonoBehaviour
         /*ゲームパッドのAボタンが押されたら*/
         if (Gamepad.current.buttonSouth.wasPressedThisFrame)
         {
+            if (!se)
+            {
+                se = true;
+                menuse.audio_source.clip = menuse.decision;
+                menuse.audio_source.PlayOneShot(menuse.decision);
+
+            }
             StartCoroutine("BacktoTitle");
         }
 

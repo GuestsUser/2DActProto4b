@@ -11,6 +11,7 @@ public class PlayerKnockBack : MonoBehaviour
     private static float angle; /* 吹っ飛ばす方向 */
     private static bool runOrder; /* trueのコルーチンの実行を更新 */
     private Rigidbody rb; /* リジットボディ記憶用 */
+    private RetrySystem retrySys;
 
     private static bool _runState = false; /* ノックバック実行状況 */
     public static bool runState { get { return _runState; } } /* 上記のプロパティ */
@@ -19,6 +20,7 @@ public class PlayerKnockBack : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+        retrySys = GetComponent<RetrySystem>();
         StartCoroutine(KnockBackSystem());
     }
 
@@ -42,7 +44,7 @@ public class PlayerKnockBack : MonoBehaviour
 
             Reset(); /* 実行前に初期化 */
 
-            while (count < time) /* time分実行 */
+            while (count < time && !retrySys.isRetry) /* time分実行 */
             {
                 rb.velocity = Vector3.zero; /* ノックバック用に加速度停止 */
                 count += Time.deltaTime;

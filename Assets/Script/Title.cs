@@ -11,10 +11,13 @@ public class Title : MonoBehaviour
     cursor_move_type move_type;
 
     /*【タイトル画面用オブジェクト格納用変数】*/
+    [Header("メニューパネル")] [SerializeField] private GameObject menu_panel;
+    [Header("操作テキスト")] [SerializeField] private GameObject operation_text;
     [Header("タイトル選択肢")] [SerializeField] private GameObject[] item_obj;
     [Header("カーソル")] [SerializeField] private GameObject selector_obj;
 
     /*【フラグ】*/
+    [SerializeField] private bool show_menu;
     [SerializeField] private bool push;         /*左スティックが押されたかどうか*/
     [SerializeField] private bool push_scene;   /**/
     [SerializeField] private bool press_a;      /*ゲームパッドのAボタンが押されたかどうか*/
@@ -35,16 +38,24 @@ public class Title : MonoBehaviour
 
     bool se_flg; /* true:既にならした false:ならせます */
 
-    void Start()
+    private void Awake()
     {
         /*【オブジェクトの取得】*/
         selector_obj = GameObject.Find("Cursor");
+        menu_panel = GameObject.Find("Menupanel");
+        operation_text = GameObject.Find("OperationText");
+    }
+    void Start()
+    {
+        menu_panel.SetActive(false);
+        operation_text.SetActive(true);
 
         /*【選択番号の初期化】*/
         menu_number = 0;
         interval = 15;
 
         /*【フラグの初期化】*/
+        show_menu = false;
         push = false;
         push_scene = false;
         press_a = false;
@@ -55,16 +66,35 @@ public class Title : MonoBehaviour
 
     void Update()
     {
-        /* 【シーン遷移を伴う決定がされていない間】 */
-        if (push_scene == false)
+        if (show_menu)
         {
-            /* 【カーソルの色を白に初期化】 */
-            Cursor.color = white;
+            menu_panel.SetActive(true);
+            /* 【シーン遷移を伴う決定がされていない間】 */
+            if (push_scene == false)
+            {
+                /* 【カーソルの色を白に初期化】 */
+                Cursor.color = white;
+            }
+            Cursor_Move();
+            ChangeCursor();
+            Decision();
+            selector_obj.transform.position = item_obj[menu_number].transform.position;
+
+            if (Gamepad.current.buttonEast.wasPressedThisFrame)
+            {
+                show_menu = false;
+                menu_panel.SetActive(false);
+                operation_text.SetActive(true);
+            }
         }
-        Cursor_Move();
-        ChangeCursor();
-        Decision();
-        selector_obj.transform.position = item_obj[menu_number].transform.position;
+        else
+        {
+            if (Gamepad.current.buttonSouth.wasPressedThisFrame)
+            {
+                show_menu = true;
+                operation_text.SetActive(false);
+            }
+        }
     }
 
     void Cursor_Move()
@@ -173,7 +203,7 @@ public class Title : MonoBehaviour
 
     void Decision()
     {
-        if (Gamepad.current.buttonSouth.isPressed && press_a == false)
+        if (Gamepad.current.buttonSouth.wasPressedThisFrame && press_a == false)
         {
             press_a = true;
             Cursor.color = yellow; /* カーソルの色を黄色に変更 */

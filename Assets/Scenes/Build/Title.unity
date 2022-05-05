@@ -1029,11 +1029,14 @@ MonoBehaviour:
   push: 0
   push_scene: 0
   press_a: 0
+  fade_in: 0
   menu_number: 0
   count: 0
   interval: 0
   Cursor: {fileID: 1267570368}
   menuSE: {fileID: 2056091313}
+  fade_text: {fileID: 1005380219}
+  opacity: 0
 --- !u!4 &2056091312
 Transform:
   m_ObjectHideFlags: 0
@@ -1061,7 +1064,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   decision: {fileID: 8300000, guid: 6c37ca5a368642742a2642532b398557, type: 3}
-  cancel: {fileID: 0}
+  cancel: {fileID: 8300000, guid: 719de7d5395cd514189e75323ec8a036, type: 3}
   move: {fileID: 8300000, guid: 8547d660131dcfe4bb22184473a5ba62, type: 3}
   open_menu: {fileID: 0}
   close_menu: {fileID: 0}

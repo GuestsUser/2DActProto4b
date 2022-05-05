@@ -102,7 +102,7 @@ MonoBehaviour:
   move: {x: 0, y: -1, z: 0}
   limit: 3
   inverse: 1
-  nonVisible: 0
+  nonVisible: 1
   enemyDestroy: {fileID: 0}
   isCheck: 0
 --- !u!114 &124669086959586210

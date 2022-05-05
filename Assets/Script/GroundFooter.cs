@@ -12,7 +12,7 @@ public class GroundFooter : MonoBehaviour
     public GameObject floor { get; set; } /* 接地してる床格納 */
 
     private float rad = 0; /* スフィア半径 */
-    private Collision obj;
+    private GameObject obj;
 
     // Start is called before the first frame update
     void Start()
@@ -54,11 +54,11 @@ public class GroundFooter : MonoBehaviour
 
     private void OnCollisionEnter(Collision other)
     {
-        if (other.gameObject.tag == "ground" || other.gameObject.tag == "Slope") { obj = other; }
+        if (other.gameObject.tag == "ground" || other.gameObject.tag == "Slope") { obj = other.gameObject; }
     }
     private void OnCollisionExit(Collision other)
     {
-        obj = null;
+        if (other.gameObject == obj) { obj = null; }
         isGround = false; /* 最後にfalse化する */
         floor = null; /* 空にする */
     }

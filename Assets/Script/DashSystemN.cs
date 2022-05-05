@@ -61,15 +61,22 @@ public class DashSystemN : Padinput
 
         float count = 0f;
         Vector3 force=Vector3.zero;
-        RaycastHit rayHit;
+        //RaycastHit rayHit;
+        Collider[] hitObj;
+        Vector3 overrapAdjust = new Vector3(transform.localScale.x / 2, transform.localScale.y / 2, 0); /* overrap用adjust */
 
         //ForceSet();
         while (!PlayerKnockBack.runState && !retrySys.isRetry) /* ノックバック実行、死亡で終了 */
         {
-            if (Physics.BoxCast(transform.position + adjust, transform.localScale / 2, transform.right, out rayHit, new Quaternion(), rayDistance))
+            hitObj = Physics.OverlapBox(transform.position + overrapAdjust, transform.localScale / 2);
+            foreach(Collider obj in hitObj)
             {
-                if (rayHit.collider.tag == "Enemy") { rayHit.collider.gameObject.SetActive(false); } /* レイキャストに触れたenemyタグを持つオブジェクトは消えることになる */
+                if (obj.tag == "Enemy") { obj.gameObject.SetActive(false); } /* レイキャストに触れたenemyタグを持つオブジェクトは消えることになる */
             }
+            //if (Physics.BoxCast(transform.position + adjust, transform.localScale / 2, transform.right, out rayHit, new Quaternion(), rayDistance))
+            //{
+            //    if (rayHit.collider.tag == "Enemy") { rayHit.collider.gameObject.SetActive(false); } /* レイキャストに触れたenemyタグを持つオブジェクトは消えることになる */
+            //}
             ForceSet();
             rb.velocity = force;
 

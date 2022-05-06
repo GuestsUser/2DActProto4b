@@ -159,7 +159,7 @@ public class GameOverMenu : MonoBehaviour
                 item_obj[1].SetActive(true);
 
                 /* 【カーソルの画像切り替え】 */
-                Cursor.texture = Resources.Load<Texture2D>("Cursor1");
+                Cursor.texture = Resources.Load<Texture2D>("Cゲームをつづける");
                 break;
 
             case 1:
@@ -170,7 +170,7 @@ public class GameOverMenu : MonoBehaviour
                 item_obj[0].SetActive(true);
 
                 /* 【カーソルの画像切り替え】 */
-                Cursor.texture = Resources.Load<Texture2D>("BacktoTitle");
+                Cursor.texture = Resources.Load<Texture2D>("Cタイトルにもどる");
                 break;
         }
     }

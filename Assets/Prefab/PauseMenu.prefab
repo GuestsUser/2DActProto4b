@@ -83,7 +83,6 @@ GameObject:
   m_Component:
   - component: {fileID: 7533014358222611787}
   - component: {fileID: 7533014358222611781}
-  - component: {fileID: 7533014358222611780}
   m_Layer: 5
   m_Name: Operation explanation
   m_TagString: Untagged
@@ -118,38 +117,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7533014358222611786}
   m_CullTransparentMesh: 0
---- !u!114 &7533014358222611780
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7533014358222611786}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
-  m_RaycastTarget: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_FontData:
-    m_Font: {fileID: 12800000, guid: 36347cd07cea7e24682114f09bf14294, type: 3}
-    m_FontSize: 25
-    m_FontStyle: 0
-    m_BestFit: 0
-    m_MinSize: 0
-    m_MaxSize: 40
-    m_Alignment: 4
-    m_AlignByGeometry: 0
-    m_RichText: 1
-    m_HorizontalOverflow: 1
-    m_VerticalOverflow: 1
-    m_LineSpacing: 1
-  m_Text: "\u305D\u3046\u3055\u305B\u3064\u3081\u3044"
 --- !u!1 &7533014358503392301
 GameObject:
   m_ObjectHideFlags: 0
@@ -160,7 +127,6 @@ GameObject:
   m_Component:
   - component: {fileID: 7533014358503392302}
   - component: {fileID: 7533014358503392296}
-  - component: {fileID: 7533014358503392303}
   m_Layer: 5
   m_Name: Continue_the_game
   m_TagString: Untagged
@@ -195,38 +161,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7533014358503392301}
   m_CullTransparentMesh: 0
---- !u!114 &7533014358503392303
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7533014358503392301}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
-  m_RaycastTarget: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_FontData:
-    m_Font: {fileID: 12800000, guid: 36347cd07cea7e24682114f09bf14294, type: 3}
-    m_FontSize: 25
-    m_FontStyle: 0
-    m_BestFit: 0
-    m_MinSize: 0
-    m_MaxSize: 40
-    m_Alignment: 4
-    m_AlignByGeometry: 0
-    m_RichText: 1
-    m_HorizontalOverflow: 1
-    m_VerticalOverflow: 1
-    m_LineSpacing: 1
-  m_Text: "\u30B2\u30FC\u30E0\u3092\u7D9A\u3051\u308B"
 --- !u!1 &7533014359257561539
 GameObject:
   m_ObjectHideFlags: 0
@@ -314,7 +248,6 @@ GameObject:
   m_Component:
   - component: {fileID: 7533014359311279402}
   - component: {fileID: 7533014359311279396}
-  - component: {fileID: 7533014359311279403}
   m_Layer: 5
   m_Name: Return_to_StageSelect
   m_TagString: Untagged
@@ -349,38 +282,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7533014359311279401}
   m_CullTransparentMesh: 0
---- !u!114 &7533014359311279403
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7533014359311279401}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
-  m_RaycastTarget: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_FontData:
-    m_Font: {fileID: 12800000, guid: 36347cd07cea7e24682114f09bf14294, type: 3}
-    m_FontSize: 25
-    m_FontStyle: 0
-    m_BestFit: 0
-    m_MinSize: 0
-    m_MaxSize: 40
-    m_Alignment: 1
-    m_AlignByGeometry: 0
-    m_RichText: 1
-    m_HorizontalOverflow: 1
-    m_VerticalOverflow: 1
-    m_LineSpacing: 1
-  m_Text: "\u30B9\u30C6\u30FC\u30B8\u9078\u629E\u306B\u623B\u308B\r\n"
 --- !u!1 &7533014359419923290
 GameObject:
   m_ObjectHideFlags: 0

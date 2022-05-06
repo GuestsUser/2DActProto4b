@@ -207,7 +207,7 @@ public class Title : MonoBehaviour
                 item_obj[1].SetActive(true);
 
                 /* 【カーソルの画像切り替え】 */
-                Cursor.texture = Resources.Load<Texture2D>("GameStartCursor");
+                Cursor.texture = Resources.Load<Texture2D>("Cゲームをはじめる");
                 break;
 
             case 1:
@@ -218,7 +218,7 @@ public class Title : MonoBehaviour
                 item_obj[0].SetActive(true);
 
                 /* 【カーソルの画像切り替え】 */
-                Cursor.texture = Resources.Load<Texture2D>("EndGameCursor");
+                Cursor.texture = Resources.Load<Texture2D>("Cゲームをおわる");
                 break;
         }
     }

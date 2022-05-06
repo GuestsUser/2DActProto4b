@@ -125,13 +125,13 @@ public class PauseMenu : MonoBehaviour
         }
         if (check_scene)
         {
-            Text item2 = _item_obj[2].GetComponent<Text>();
-            item2.text = "タイトルにもどる";
+            RawImage item2 = _item_obj[2].GetComponent<RawImage>();
+            item2.texture = Resources.Load<Texture2D>("タイトルにもどる");
         }
         else
         {
-            Text item2 = _item_obj[2].GetComponent<Text>();
-            item2.text = "ステージセレクトにもどる";
+            RawImage item2 = _item_obj[2].GetComponent<RawImage>();
+            item2.texture = Resources.Load<Texture2D>("ステージセレクトにもどる");
         }
         /* 【FadePanelの透明度を変更する処理】 */
         Fade();
@@ -359,7 +359,7 @@ public class PauseMenu : MonoBehaviour
                 _item_obj[2].SetActive(true);
 
                 /* 【カーソルの画像切り替え】 */
-                Cursor.texture = Resources.Load<Texture2D>("Cursor1");
+                Cursor.texture = Resources.Load<Texture2D>("Cゲームをつづける");
                 break;
 
             case 1:
@@ -371,7 +371,7 @@ public class PauseMenu : MonoBehaviour
                 _item_obj[2].SetActive(true);
 
                 /* 【カーソルの画像切り替え】 */
-                Cursor.texture = Resources.Load<Texture2D>("Cursor2");
+                Cursor.texture = Resources.Load<Texture2D>("Cそうさせつめい");
                 
                 break;
 
@@ -387,11 +387,11 @@ public class PauseMenu : MonoBehaviour
                 if (check_scene)
                 {
                     Debug.Log("タイトル画像になるはず");
-                    Cursor.texture = Resources.Load<Texture2D>("BacktoTitle");
+                    Cursor.texture = Resources.Load<Texture2D>("Cタイトルにもどる");
                 }
                 else if (check_scene == false)
                 {
-                    Cursor.texture = Resources.Load<Texture2D>("Cursor3");
+                    Cursor.texture = Resources.Load<Texture2D>("Cステージセレクトにもどる");
                 }
                 break;
         }

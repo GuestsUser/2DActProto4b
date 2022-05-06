@@ -26,7 +26,7 @@ public class Enemy3Manager : MonoBehaviour
     [Header("移動速度")] [SerializeField] private float speed;
     [Header("画面外でも行動するかどうか")] [SerializeField] private bool nonVisible;
     [Header("接触判定")] [SerializeField] private EnemyCollisionCheck checkCollision;
-    [Header("敵を倒したかどうか")] [SerializeField] private BoxCastEnemyDestroy enemyDestroy;
+    [Header("敵を倒したかどうか")] [SerializeField] private DashSystemN enemyDashDestroy;
 
     [SerializeField] private LayerMask stageLayer;
 
@@ -48,7 +48,7 @@ public class Enemy3Manager : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (!eoc.playerSteoOn)
+        if (!eoc.playerDash)
         {
             /*画面内に映っていたら*/
             if (targetRenderer.isVisible || nonVisible)
@@ -109,7 +109,7 @@ public class Enemy3Manager : MonoBehaviour
             {
                 animator.SetTrigger("Die");
                 isDead = true;
-                enemyDestroy.isStepOnDead = false;
+                enemyDashDestroy.isDashDead = false;
                 //col.enabled = false;
                 Destroy(gameObject, 0.8f);
             }

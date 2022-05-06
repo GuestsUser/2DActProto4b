@@ -25,13 +25,19 @@ public class RamAttack : MonoBehaviour
     {
         if (other.gameObject.tag == "Player")
         {
-            float angle = transform.rotation.eulerAngles.z * Mathf.Deg2Rad; /* z回転(ラジアンで取得) */
-            Vector3 adjust = new Vector3(radius * Mathf.Sin(angle), radius * Mathf.Cos(angle)); /* 現在の角度に合わせた中心から足元までの距離を取得 */
-
-            Vector3 distance = other.transform.position - (transform.position - adjust);
-            PlayerKnockBack.KnockBack(Mathf.Atan2(distance.y, distance.x), type); /* 向かってきた方向と逆方向に吹っ飛ばす */
-            DamageSystem.Damage(damage, type); /* ダメージを与える */
+            StartCoroutine(Damage(other.gameObject));
             
         }
+    }
+
+    private IEnumerator Damage(GameObject other) /* 接触判定と敵削除の順番を削除優先にする */
+    {
+        yield return StartCoroutine(TimeScaleYield.TimeStop());
+        float angle = transform.rotation.eulerAngles.z * Mathf.Deg2Rad; /* z回転(ラジアンで取得) */
+        Vector3 adjust = new Vector3(radius * Mathf.Sin(angle), radius * Mathf.Cos(angle)); /* 現在の角度に合わせた中心から足元までの距離を取得 */
+
+        Vector3 distance = other.transform.position - (transform.position - adjust);
+        PlayerKnockBack.KnockBack(Mathf.Atan2(distance.y, distance.x), type); /* 向かってきた方向と逆方向に吹っ飛ばす */
+        DamageSystem.Damage(damage, type); /* ダメージを与える */
     }
 }

@@ -56,6 +56,9 @@ public class JumpSystem : Padinput
         JumpFlg = gb.GetComponent<Text>();
         //doublejump = GameObject.Find("Test_DoubleJump");
 
+        /* staticフラグリセット */
+        permit = true;
+        banTaskCount = 0;
     }
     private void Update()
     {

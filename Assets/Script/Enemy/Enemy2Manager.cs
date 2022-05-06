@@ -55,7 +55,7 @@ public class Enemy2Manager : MonoBehaviour
                 if (!isCheck)
                 {
                     isCheck = true;
-                    Debug.Log("画面内にいる");
+                    //Debug.Log("画面内にいる");
 
                     if (!inverse)
                     {

@@ -16,6 +16,7 @@ TagManager:
   - StageObj
   - Stage3Clear
   - Stage2Clear
+  - Enemy3
   layers:
   - Default
   - TransparentFX

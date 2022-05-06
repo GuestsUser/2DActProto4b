@@ -10,7 +10,7 @@ public class EnemyCollisionCheck : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag == "ground" || other.gameObject.tag == "Enemy")
+        if (other.gameObject.tag == "ground" || other.gameObject.tag == "Enemy" || other.gameObject.tag == "Enemy3")
         {
             isOn = true;
         }
@@ -18,7 +18,7 @@ public class EnemyCollisionCheck : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.gameObject.tag == "ground" || other.gameObject.tag == "Enemy")
+        if (other.gameObject.tag == "ground" || other.gameObject.tag == "Enemy" || other.gameObject.tag == "Enemy3")
         {
             isOn = false;
         }

@@ -488,7 +488,7 @@ GameObject:
   - component: {fileID: 2266871136809551806}
   m_Layer: 0
   m_Name: TurtleShell
-  m_TagString: Enemy
+  m_TagString: Enemy3
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -589,7 +589,7 @@ MonoBehaviour:
   speed: 2
   nonVisible: 1
   checkCollision: {fileID: 7168170032066725900}
-  enemyDestroy: {fileID: 0}
+  enemyDashDestroy: {fileID: 0}
   stageLayer:
     serializedVersion: 2
     m_Bits: 256

@@ -170,6 +170,9 @@ public class DashSystemN : Padinput
 
     private ChangeShoes change_shoes;  /*能力切り替え用変数_ChangeShoes*/
 
+    /*追加*/
+    private PlayerMove player;
+
     private Animator animator;
     private bool timerDashPermit = true; /* 時間経過で管理するダッシュ使用可否 */
 
@@ -194,6 +197,9 @@ public class DashSystemN : Padinput
         control = GetComponent<PlayerMove>();
         footer = GetComponent<GroundFooter>();
         retrySys = GetComponent<RetrySystem>();
+
+        /*追加*/
+        player = GetComponent<PlayerMove>();
 
         adjust = new Vector3(0, transform.localScale.y / 2, 0);
     }
@@ -228,18 +234,38 @@ public class DashSystemN : Padinput
         //ForceSet();
         while (!PlayerKnockBack.runState && !retrySys.isRetry) /* ノックバック実行、死亡で終了 */
         {
-            hitObj = Physics.OverlapBox(transform.position + overrapAdjust, transform.localScale / 2);
+            /*追加*/
+            /*右に入力されているとき*/
+            if (player.right != 0)
+            {
+                hitObj = Physics.OverlapBox(transform.position + overrapAdjust, transform.localScale / 2);
+            }
+            else
+            {
+                hitObj = Physics.OverlapBox(transform.position - overrapAdjust, transform.localScale / 2);
+            }
             foreach (Collider obj in hitObj)
             {
-                if (obj.tag == "Enemy") {
-                    /* レイキャストに触れたenemyタグを持つオブジェクトは消えることになる */
-                    obj.gameObject.SetActive(false); 
+                if (obj.tag == "Enemy" && !isDashDead)
+                {
+                    Debug.Log("疾走で倒しました");
+
+                    isDashDead = true;
+                    EnemyObjectCollision eCollision = obj.GetComponent<EnemyObjectCollision>();
+                    if (eCollision != null)
+                    {
+                        eCollision.playerSteoOn = true;
+                    }
+                }
+                else
+                {
+                    //isDashDead = false;
                 }
 
                 /*追加*/
-                if(obj.tag == "Enemy3" && !isDashDead)
+                if (obj.tag == "Enemy3" && !isDashDead)
                 {
-                    Debug.Log("ダッシュで倒しました");
+                    //Debug.Log("疾走で倒しました");
 
                     isDashDead = true;
                     EnemyObjectCollision eCollision = obj.GetComponent<EnemyObjectCollision>();
@@ -250,7 +276,7 @@ public class DashSystemN : Padinput
                 }
                 else
                 {
-                    isDashDead = false;
+                    //isDashDead = false;
                 }
             }
             ForceSet();

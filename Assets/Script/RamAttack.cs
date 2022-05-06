@@ -26,7 +26,7 @@ public class RamAttack : MonoBehaviour
         if (other.gameObject.tag == "Player")
         {
             StartCoroutine(Damage(other.gameObject));
-            
+            Debug.Log("プレイヤーに当たりました");
         }
     }
 

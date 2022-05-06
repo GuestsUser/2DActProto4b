@@ -53,7 +53,7 @@ public class Enemy3Manager : MonoBehaviour
             /*画面内に映っていたら*/
             if (targetRenderer.isVisible || nonVisible)
             {
-                Debug.Log("画面内にいる");
+                //Debug.Log("画面内にいる");
                 /*歩きアニメーションをする*/
                 animator.SetBool("Walk", true);
 
@@ -110,7 +110,7 @@ public class Enemy3Manager : MonoBehaviour
                 animator.SetTrigger("Die");
                 isDead = true;
                 enemyDashDestroy.isDashDead = false;
-                //col.enabled = false;
+                col.enabled = false;
                 Destroy(gameObject, 0.8f);
             }
         }

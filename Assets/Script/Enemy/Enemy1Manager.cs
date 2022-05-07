@@ -245,12 +245,14 @@ public class Enemy1Manager : MonoBehaviour
         {
             if (!isDead)
             {
+                moveDirection = MOVE_DIRECTION.STOP;
+                rb.velocity = new Vector3(0, 0, 0);
                 animator.SetTrigger("Die");
                 isDead = true;
                 enemyDestroy.isStepOnDead = false;
                 enemyDashDestroy.isDashDead = false;
                 col.enabled = false;
-                Destroy(gameObject, 0.8f);
+                Destroy(gameObject, 0.9f);
             }
         }
     }

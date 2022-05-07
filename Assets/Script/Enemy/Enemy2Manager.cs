@@ -11,7 +11,8 @@ public class Enemy2Manager : MonoBehaviour
     [Tooltip("trueにすると初期地点を0とし0、move、0、-move、0(以下ループ)と移動する")] [SerializeField] bool inverse = false;
 
     [Header("画面外でも行動するかどうか")] [SerializeField] private bool nonVisible;
-    [Header("敵を倒したかどうか")] [SerializeField] private BoxCastEnemyDestroy enemyDestroy;
+    [Header("敵を踏んで倒したかどうか")] [SerializeField] private BoxCastEnemyDestroy enemyDestroy;
+    [Header("敵を疾走で倒したかどうか")] [SerializeField] private DashSystemN enemyDashDestroy;
 
     /*コンポーネント*/
     private Animator animator = null;
@@ -34,20 +35,12 @@ public class Enemy2Manager : MonoBehaviour
 
         iniPos = transform.position;
         iniAngle = 0;
-
-        //if (!inverse)
-        //{
-        //    move /= 2; /* 移動量を半分に */
-        //    iniPos += move; /* 記録上の初期位置に移動量の半分を加算 */
-        //    iniAngle = -90; /* 初期移動状態を-1とすることで現在位置から始めることができる */
-        //}
-        //StartCoroutine(Repeat(iniAngle));
     }
 
 
     private void FixedUpdate()
     {
-        if (!eoc.playerSteoOn)
+        if (!eoc.playerSteoOn && !eoc.playerDash)
         {
             /*画面内に映っていたら*/
             if (targetRenderer.isVisible || nonVisible)
@@ -69,7 +62,7 @@ public class Enemy2Manager : MonoBehaviour
             else
             {
                 isCheck = false;
-                Debug.Log("画面外にいる");
+                //Debug.Log("画面外にいる");
             }
         }
         else
@@ -79,6 +72,7 @@ public class Enemy2Manager : MonoBehaviour
                 animator.SetTrigger("Die");
                 isDead = true;
                 enemyDestroy.isStepOnDead = false;
+                enemyDashDestroy.isDashDead = false;
                 col.enabled = false;
                 move = Vector3.zero;
                 Destroy(gameObject, 0.8f);

@@ -150,7 +150,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 14203736947233134}
-  m_LocalRotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071068}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -361,14 +361,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 14510118744272628}
-  m_LocalRotation: {x: 0.3934066, y: -0.5875639, z: -0.3934066, w: 0.5875639}
+  m_LocalRotation: {x: -0.3934066, y: 0.5875639, z: -0.3934066, w: 0.5875639}
   m_LocalPosition: {x: 1.5037661e-32, y: 0.0631712, z: -0.008183928}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 15791241520126880}
   m_Father: {fileID: 11032522203350268}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: -90, z: -67.609}
+  m_LocalEulerAnglesHint: {x: 0, y: 90, z: -67.609}
 --- !u!1 &15119923237300944
 GameObject:
   m_ObjectHideFlags: 0
@@ -442,7 +442,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 120
+  m_Constraints: 124
   m_CollisionDetection: 0
 --- !u!65 &15119923237300947
 BoxCollider:
@@ -456,7 +456,7 @@ BoxCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 1, y: 0.85, z: 1}
-  m_Center: {x: 0, y: 0.5, z: 0}
+  m_Center: {x: 0, y: 0.5, z: -0.27}
 --- !u!114 &15119923237300945
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -474,6 +474,7 @@ MonoBehaviour:
   nonVisible: 1
   checkCollision: {fileID: 3948344296732370034}
   enemyDestroy: {fileID: 0}
+  enemyDashDestroy: {fileID: 0}
   RightToLeft: 0
   stageLayer:
     serializedVersion: 2
@@ -614,8 +615,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3948344296732370032}
-  m_LocalRotation: {x: -0, y: 1, z: -0, w: 0}
-  m_LocalPosition: {x: -0, y: 0, z: 1.097}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: -0.102}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 11032522203350268}

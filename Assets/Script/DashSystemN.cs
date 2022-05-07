@@ -254,7 +254,7 @@ public class DashSystemN : Padinput
                     EnemyObjectCollision eCollision = obj.GetComponent<EnemyObjectCollision>();
                     if (eCollision != null)
                     {
-                        eCollision.playerSteoOn = true;
+                        eCollision.playerDash = true;
                     }
                 }
                 else

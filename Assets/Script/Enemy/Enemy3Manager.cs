@@ -12,8 +12,8 @@ public class Enemy3Manager : MonoBehaviour
         RIGHT,
     }
 
+    /*移動用*/
     [SerializeField] private MOVE_DIRECTION moveDirection = MOVE_DIRECTION.LEFT;
-
 
     /*コンポーネント*/
     private Rigidbody rb;
@@ -28,6 +28,7 @@ public class Enemy3Manager : MonoBehaviour
     [Header("接触判定")] [SerializeField] private EnemyCollisionCheck checkCollision;
     [Header("敵を倒したかどうか")] [SerializeField] private DashSystemN enemyDashDestroy;
 
+    /*反転用*/
     [SerializeField] private LayerMask stageLayer;
 
     /*trueのとき右に進むfalseのとき左に進む*/
@@ -35,6 +36,7 @@ public class Enemy3Manager : MonoBehaviour
 
     /*方向転換用*/
     private int xVector;
+    /*死んだかどうか*/
     private bool isDead;
 
     private void Start()
@@ -107,6 +109,8 @@ public class Enemy3Manager : MonoBehaviour
         {
             if (!isDead)
             {
+                moveDirection = MOVE_DIRECTION.STOP;
+                rb.velocity = new Vector3(0, 0, 0);
                 animator.SetTrigger("Die");
                 isDead = true;
                 enemyDashDestroy.isDashDead = false;
@@ -121,7 +125,10 @@ public class Enemy3Manager : MonoBehaviour
         /*Rayの作成*/
         Vector3 startVec = transform.up * 0.25f + transform.position + transform.forward * 0.8f * transform.localScale.z;
         Vector3 endVec = startVec - transform.up * 0.5f;
+        Vector3 edVec = endVec - transform.forward * 0.2f;
         Debug.DrawLine(startVec, endVec, Color.red);
-        return Physics.Linecast(startVec, endVec, stageLayer);
+        Debug.DrawLine(endVec, edVec, Color.red);
+        return Physics.Linecast(startVec, endVec, stageLayer)
+            || Physics.Linecast(endVec, edVec, stageLayer);
     }
 }

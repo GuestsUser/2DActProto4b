@@ -125,12 +125,9 @@ public class JumpSystem : Padinput
         var scale = transform.lossyScale.x * 0.2f;
         var isHit = Physics.BoxCast(transform.position, size * scale, transform.up * -1, out hit, transform.rotation, rayDistance);
         /*boxCastの判定(箱の起点, 箱の大きさ * 調整用のscale, 判定をboxの下の面にする, hit , 箱の角度 , rayの長さ)*/
-        if (isHit && hit.collider.tag == "ground" || isHit && hit.collider.tag == "Slope")
+        if (isHit && hit.collider.tag == "ground" || isHit && hit.collider.tag == "Slope" && !isGrounded)
         {
-            //if (hit.collider.tag == "ground")
-            //if (hit.collider.tag == "ground" || hit.collider.tag == "Slope")
-            //{
-            Debug.Log("あたってる");
+            //Debug.Log("あたってる");
             switch (jumpFlg_Test)
             {
                 case true:
@@ -145,7 +142,7 @@ public class JumpSystem : Padinput
             animator.SetBool("IsGrounded", true);
         }
         /*地面から離れたら*/
-        else if (isGrounded)
+        else
         {
             if (jumpCount == 2) --jumpCount;//ジャンプ回数を減らす
 
@@ -168,13 +165,13 @@ public class JumpSystem : Padinput
         if (jumping && ySpeed < 0 && !isGrounded)
         {
             fall = true;
+            jumping = false;
             animator.SetBool("Fall", true);
         }
         /*落下中で地面と接触したら*/
         if (fall && isGrounded)
         {
             fall = false;
-            jumping = false;
             animator.SetBool("Jumping", false);
             animator.SetBool("Fall", false);
         }

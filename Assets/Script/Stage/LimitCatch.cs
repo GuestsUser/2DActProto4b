@@ -94,7 +94,7 @@ public class LimitCatch : MonoBehaviour
                         else
                         {
                             _camera = transform.position;
-                            if (now_offset <= old_offset)
+                            if (now_offset == old_offset)
                             {
                                 vir_cam.Follow = GameObject.Find("Haruko").GetComponent<Transform>();
                             }

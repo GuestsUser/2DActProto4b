@@ -969,6 +969,11 @@ PrefabInstance:
       propertyPath: enemyDestroy
       value: 
       objectReference: {fileID: 354491266}
+    - target: {fileID: 779454929148622010, guid: 5600386f53d524d45942e5251325d632,
+        type: 3}
+      propertyPath: enemyDashDestroy
+      value: 
+      objectReference: {fileID: 354491265}
     - target: {fileID: 2262165980509767359, guid: 5600386f53d524d45942e5251325d632,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -4102,6 +4107,11 @@ PrefabInstance:
       propertyPath: enemyDestroy
       value: 
       objectReference: {fileID: 354491266}
+    - target: {fileID: 779454929148622010, guid: 5600386f53d524d45942e5251325d632,
+        type: 3}
+      propertyPath: enemyDashDestroy
+      value: 
+      objectReference: {fileID: 354491265}
     - target: {fileID: 2262165980509767359, guid: 5600386f53d524d45942e5251325d632,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -4563,6 +4573,11 @@ PrefabInstance:
       propertyPath: enemyDestroy
       value: 
       objectReference: {fileID: 354491266}
+    - target: {fileID: 15119923237300945, guid: 3c5c2b4f62a84d74e82f6ce6d23119d5,
+        type: 3}
+      propertyPath: enemyDashDestroy
+      value: 
+      objectReference: {fileID: 354491265}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3c5c2b4f62a84d74e82f6ce6d23119d5, type: 3}
 --- !u!1 &1155057290
@@ -4754,6 +4769,11 @@ PrefabInstance:
       propertyPath: enemyDestroy
       value: 
       objectReference: {fileID: 354491266}
+    - target: {fileID: 5339905182379243775, guid: f5f32d84702b9994ebbabd275fee3583,
+        type: 3}
+      propertyPath: enemyDashDestroy
+      value: 
+      objectReference: {fileID: 354491265}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f5f32d84702b9994ebbabd275fee3583, type: 3}
 --- !u!1001 &1178480711
@@ -7943,6 +7963,11 @@ PrefabInstance:
       propertyPath: enemyDestroy
       value: 
       objectReference: {fileID: 354491266}
+    - target: {fileID: 779454929148622010, guid: 5600386f53d524d45942e5251325d632,
+        type: 3}
+      propertyPath: enemyDashDestroy
+      value: 
+      objectReference: {fileID: 354491265}
     - target: {fileID: 2262165980509767359, guid: 5600386f53d524d45942e5251325d632,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -8584,6 +8609,11 @@ PrefabInstance:
       propertyPath: enemyDestroy
       value: 
       objectReference: {fileID: 354491266}
+    - target: {fileID: 5339905182379243775, guid: f5f32d84702b9994ebbabd275fee3583,
+        type: 3}
+      propertyPath: enemyDashDestroy
+      value: 
+      objectReference: {fileID: 354491265}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f5f32d84702b9994ebbabd275fee3583, type: 3}
 --- !u!1 &1960245562

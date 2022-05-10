@@ -19,6 +19,8 @@ public class LimitCatch : MonoBehaviour
     [SerializeField] private Vector3 start_lim;
     [SerializeField] private Vector3 end_lim;
 
+    [SerializeField] private float p_pos_x;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -41,12 +43,12 @@ public class LimitCatch : MonoBehaviour
                 _camera = transform.position;
                 if(cl_end.end) start_lim = _camera;
                 if (cl_end2.end) end_lim = _camera;
-                old_offset = Vector3.Distance(player.transform.position, transform.position);
+                //old_offset = Vector3.Distance(player.transform.position, transform.position);
 
+                p_pos_x = player.transform.position.x;
             }
             else
             {
-                Debug.Log("カメラ制御発動");
                 if (cl_end.end)
                 {
                     if (cl_end.end_pos.x < player.transform.position.x)
@@ -66,7 +68,7 @@ public class LimitCatch : MonoBehaviour
                         else
                         {
                             _camera = transform.position;
-                            if (now_offset <= old_offset)
+                            if (player.transform.position.x >= p_pos_x)
                             {
                                 vir_cam.Follow = GameObject.Find("Haruko").GetComponent<Transform>();
                                 
@@ -91,11 +93,13 @@ public class LimitCatch : MonoBehaviour
                                 this.transform.position = _camera;
                             }
                         }
-                        else
+                        else if(player.left != 0)
                         {
+                            
                             _camera = transform.position;
-                            if (now_offset == old_offset)
+                            if (player.transform.position.x <= p_pos_x)
                             {
+                                Debug.Log("カメラが動く");
                                 vir_cam.Follow = GameObject.Find("Haruko").GetComponent<Transform>();
                             }
 

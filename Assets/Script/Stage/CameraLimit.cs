@@ -5,14 +5,18 @@ using UnityEngine;
 
 public class CameraLimit : MonoBehaviour
 {
-
-    /*方向転換用*/
+    [SerializeField] private PlayerMove player;
     
     //private Renderer targetRenderer = null;
     public bool end;
     public Vector3 end_pos;
+    bool right; /* true:オブジェクトが右にある */
+    bool left; /* true:オブジェクトが左にある */
+
+    [SerializeField] private float distance; /* playerとobjectの間の距離 */
     private void Start()
     {
+        player = GameObject.Find("Haruko").GetComponent<PlayerMove>();
         //targetRenderer = GetComponent<Renderer>();
         end = false;
     }
@@ -27,17 +31,46 @@ public class CameraLimit : MonoBehaviour
         //{
         //    end = false;
         //}
+        if(player.transform.position.x > transform.position.x)
+        {
+            distance = player.transform.position.x - transform.position.x;
+        }
+        else if(player.transform.position.x < transform.position.x)
+        {
+            distance = transform.position.x - player.transform.position.x;
+        }
+
+        if (distance <= 8)
+        {
+            end = true;
+            end_pos = transform.position;
+        }
+        else if (distance > 8)
+        {
+            end = false;
+            end_pos = Vector3.zero;
+        }
     }
-    void OnBecameVisible()
-    {
-        end = true;
-        end_pos = transform.position;
-    }
-    void OnBecameInvisible()
-    {
-        end = false;
-        end_pos = Vector3.zero;
-    }
+
+    //void OnBecameVisible()
+    //{
+    //    Debug.Log("カメラ");
+    //    if(distance <= 8)
+    //    {
+    //        end = true;
+    //        end_pos = transform.position;
+    //    }
+
+    //}
+    //void OnBecameInvisible()
+    //{
+    //    if (distance > 8)
+    //    {
+    //        end = false;
+    //        end_pos = Vector3.zero;
+    //    }
+
+    //}
 }
 
 

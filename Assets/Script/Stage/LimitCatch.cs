@@ -51,62 +51,72 @@ public class LimitCatch : MonoBehaviour
             {
                 if (cl_end.end)
                 {
-                    if (cl_end.end_pos.x < player.transform.position.x)
-                    {
-                        if (player.left != 0)
-                        {
-                            vir_cam.Follow = null;
-                            if (_camera.x < start_lim.x)
-                            {
-                                this.transform.position = start_lim;
-                            }
-                            else
-                            {
-                                this.transform.position = _camera;
-                            }
-                        }
-                        else
-                        {
-                            _camera = transform.position;
-                            if (player.transform.position.x >= p_pos_x)
-                            {
-                                vir_cam.Follow = GameObject.Find("Haruko").GetComponent<Transform>();
-                                
-                            }
+                    vir_cam.Follow = null;
+                    transform.position = _camera;
+                    //if (cl_end.end_pos.x < player.transform.position.x)
+                    //{
+                    //    if (player.left != 0)
+                    //    {
+                    //        vir_cam.Follow = null;
+                    //        if (_camera.x < start_lim.x)
+                    //        {
+                    //            this.transform.position = start_lim;
+                    //        }
+                    //        else
+                    //        {
+                    //            this.transform.position = _camera;
+                    //        }
+                    //    }
+                    //    else
+                    //    {
+                    //        _camera = transform.position;
+                    //        if (player.transform.position.x >= p_pos_x)
+                    //        {
+                    //            vir_cam.Follow = GameObject.Find("Haruko").GetComponent<Transform>();
 
-                        }
-                    }
+                    //        }
+
+                    //    }
+                    //}
                 }
                 else if (cl_end2.end)
                 {
-                    if (cl_end2.end_pos.x > player.transform.position.x)
-                    {
-                        if (player.right != 0)
-                        {
-                            vir_cam.Follow = null;
-                            if (_camera.x > end_lim.x)
-                            {
-                                this.transform.position = end_lim;
-                            }
-                            else
-                            {
-                                this.transform.position = _camera;
-                            }
-                        }
-                        else if(player.left != 0)
-                        {
-                            
-                            _camera = transform.position;
-                            if (player.transform.position.x <= p_pos_x)
-                            {
-                                Debug.Log("カメラが動く");
-                                vir_cam.Follow = GameObject.Find("Haruko").GetComponent<Transform>();
-                            }
+                    Debug.Log("追跡しなくなるはず");
+                    vir_cam.Follow = null;
+                    transform.position = _camera;
+                    //if (cl_end2.end_pos.x > player.transform.position.x)
+                    //{
 
-                        }
-                    }
+                    //if (player.right != 0)
+                    //{
+                    //    vir_cam.Follow = null;
+                    //    if (_camera.x > end_lim.x)
+                    //    {
+                    //        this.transform.position = end_lim;
+                    //    }
+                    //    else
+                    //    {
+                    //        this.transform.position = _camera;
+                    //    }
+                    //}
+                    //else
+                    //{
+
+                    //    _camera = transform.position;
+                    //    if (player.transform.position.x <= p_pos_x)
+                    //    {
+                    //        Debug.Log("カメラが動く");
+                    //        vir_cam.Follow = GameObject.Find("Haruko").GetComponent<Transform>();
+                    //    }
+
+                    //}
+                    //}
                 }
-                
+                //else if (!cl_end.end || !cl_end2.end)
+                //{
+                    
+                //}
+
                 //_camera = new Vector3(cam_x, 10, transform.position.z);
             }
             
@@ -114,7 +124,9 @@ public class LimitCatch : MonoBehaviour
         }
         else if(!cl_end.end && !cl_end2.end)
         {
-            Debug.Log("Set初期化");
+            //Debug.Log("Set初期化");
+            Debug.Log("カメラ追跡(*´ε`*)ﾁｭｯﾁｭ");
+            vir_cam.Follow = GameObject.Find("Haruko").GetComponent<Transform>();
             set = false;
         }
     }

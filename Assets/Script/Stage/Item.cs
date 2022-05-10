@@ -17,6 +17,10 @@ public class Item : MonoBehaviour
 
     private void Update()
     {
+
+        /*回転させる*/
+        transform.Rotate(new Vector3(0, 90, 0) * Time.deltaTime);
+
         /*チェックがついていたら*/
         if (playerCheck.isOn)
         {

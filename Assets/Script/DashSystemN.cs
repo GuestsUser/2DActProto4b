@@ -230,6 +230,8 @@ public class DashSystemN : Padinput
         //RaycastHit rayHit;
         Collider[] hitObj;
         Vector3 overrapAdjust = new Vector3(transform.localScale.x / 2, transform.localScale.y / 2, 0); /* overrap用adjust */
+        Vector2 old = transform.position; /* 前回位置 */
+        Vector2 move = Vector2.zero; /* 前回から今回の位置を引いて出た値の格納、つまり移動量を取得、2dゲームなので念の為z移動量は加味しない */
 
         //ForceSet();
         while (!PlayerKnockBack.runState && !retrySys.isRetry) /* ノックバック実行、死亡で終了 */
@@ -259,10 +261,10 @@ public class DashSystemN : Padinput
                         eCollision.playerDash = true;
                     }
                 }
-                else
-                {
-                    //isDashDead = false;
-                }
+                //else
+                //{
+                //    //isDashDead = false;
+                //}
 
                 /*追加*/
                 //if (obj.tag == "Enemy3" && !isDashDead)
@@ -284,8 +286,11 @@ public class DashSystemN : Padinput
             ForceSet();
             rb.velocity = force;
 
+            move = (Vector2)transform.position - old; /* 座標移動の量を取得 */
+            old = transform.position;
+
             footer.RideCheck();
-            if (count > runTime && footer.isGround) { break; } /* ダッシュジャンプで急失速を防ぐためとりあえずダッシュ時間を超えても接地してないと抜けないようにした、急失速してもいいかどうかは要相談 */
+            if (count > runTime && (footer.isGround || move==Vector2.zero )) { break; } /* 時間を超えている且つ接地若しくは移動量に変化がない場合終了 */
             count += Time.deltaTime;
             yield return StartCoroutine(TimeScaleYield.TimeStop());
         }

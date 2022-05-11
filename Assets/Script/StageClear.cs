@@ -13,7 +13,11 @@ public class StageClear : MonoBehaviour
     /* 一度クリアしたらずっとtrue */
     static private bool _isStage1Clear;
     static private bool _isStage2Clear;
-    static private bool _isStage3Clear; 
+    static private bool _isStage3Clear;
+
+    /*フラグ持ち込み用_Tomokazu*/
+    static public bool stage1Clear = false;
+
     void Start()
     {
         /*ステージ1が始まったらクリアしてない状態になるから、どうにかしないといけない*/
@@ -30,6 +34,7 @@ public class StageClear : MonoBehaviour
         if (isStage1Clear)
         {
             _isStage1Clear = true;
+            stage1Clear = true;
         }
 
         if (isStage2Clear)

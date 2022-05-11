@@ -182,6 +182,7 @@ public class DashSystemN : Padinput
     private PlayerMove control;
     private GroundFooter footer;
     private RetrySystem retrySys;
+    private Vector3 overrapAdjust; /* overrap用adjust */
 
     public bool CoolTimeFlg = false;
 
@@ -202,6 +203,7 @@ public class DashSystemN : Padinput
         player = GetComponent<PlayerMove>();
 
         adjust = new Vector3(0, transform.localScale.y / 2, 0);
+        overrapAdjust = new Vector3(transform.localScale.x / 2, 0, 0); /* overrap用adjust */
     }
 
 
@@ -229,7 +231,6 @@ public class DashSystemN : Padinput
         Vector3 force = Vector3.zero;
         //RaycastHit rayHit;
         Collider[] hitObj;
-        Vector3 overrapAdjust = new Vector3(transform.localScale.x / 2, transform.localScale.y / 2, 0); /* overrap用adjust */
         Vector2 old = transform.position; /* 前回位置 */
         Vector2 move = Vector2.zero; /* 前回から今回の位置を引いて出た値の格納、つまり移動量を取得、2dゲームなので念の為z移動量は加味しない */
 

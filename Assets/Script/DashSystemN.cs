@@ -236,17 +236,19 @@ public class DashSystemN : Padinput
         {
             /*追加*/
             /*右に入力されているとき*/
-            if (player.right != 0)
-            {
-                hitObj = Physics.OverlapBox(transform.position + overrapAdjust, transform.localScale / 2);
-            }
-            else
-            {
-                hitObj = Physics.OverlapBox(transform.position - overrapAdjust, transform.localScale / 2);
-            }
+            float sub = Mathf.Cos(transform.localEulerAngles.y * Mathf.Deg2Rad); /* プレイヤーのy軸回転から向いている方向を符号で取得、0度なら1が、180なら-1が返ってくる寸法 */
+            hitObj = Physics.OverlapBox(transform.position + overrapAdjust * sub, transform.localScale / 2);
+            //if (player.right != 0)
+            //{
+            //    hitObj = Physics.OverlapBox(transform.position + overrapAdjust, transform.localScale / 2);
+            //}
+            //else
+            //{
+            //    hitObj = Physics.OverlapBox(transform.position - overrapAdjust, transform.localScale / 2);
+            //}
             foreach (Collider obj in hitObj)
             {
-                if (obj.tag == "Enemy" && !isDashDead)
+                if ( (obj.tag == "Enemy" || obj.tag == "Enemy3") && !isDashDead)
                 {
                     Debug.Log("疾走で倒しました");
 
@@ -263,21 +265,21 @@ public class DashSystemN : Padinput
                 }
 
                 /*追加*/
-                if (obj.tag == "Enemy3" && !isDashDead)
-                {
-                    //Debug.Log("疾走で倒しました");
+                //if (obj.tag == "Enemy3" && !isDashDead)
+                //{
+                //    //Debug.Log("疾走で倒しました");
 
-                    isDashDead = true;
-                    EnemyObjectCollision eCollision = obj.GetComponent<EnemyObjectCollision>();
-                    if(eCollision != null)
-                    {
-                        eCollision.playerDash = true;
-                    }
-                }
-                else
-                {
-                    //isDashDead = false;
-                }
+                //    isDashDead = true;
+                //    EnemyObjectCollision eCollision = obj.GetComponent<EnemyObjectCollision>();
+                //    if(eCollision != null)
+                //    {
+                //        eCollision.playerDash = true;
+                //    }
+                //}
+                //else
+                //{
+                //    //isDashDead = false;
+                //}
             }
             ForceSet();
             rb.velocity = force;

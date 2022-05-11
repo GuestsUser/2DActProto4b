@@ -8,6 +8,7 @@ public class FrameRate : MonoBehaviour
     void Start()
     {
         Application.targetFrameRate = 60;//FPS60化
+        Time.fixedDeltaTime = 1f / 60;
     }
 
 }

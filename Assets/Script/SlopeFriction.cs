@@ -36,19 +36,47 @@ public class SlopeFriction : MonoBehaviour
         Vector3 pos = Vector3.zero;
         float power = 0;
 
+        RaycastHit hit;
+        Vector3 direction = move.normalized; /* 方向化 */
+        Vector3 xDirection = direction.x >= 0 ? Vector3.right : Vector3.left;
+        Vector3 yDirection = direction.y >= 0 ? Vector3.up : Vector3.down;
+
         /* 滑る力を掛けられていた方向と同じ方向に動いていた(押し戻された若しくは駆け下りていた)場合摩擦コルーチンを開始(力が掛かっていなかった場合開始しない) */
         if (x_force != 0 && (move.x > 0) == (x_force > 0)) { x_run = true; }
         if (y_force != 0 && (move.y > 0) == (y_force > 0)) { y_run = true; }
         if ( !(x_run||y_run) ) { EndProcess(); }
-        //Debug.Log(move.x);
+        //EndProcess();
+        //yield break;
 
         /* 終了条件は他にもプレイヤーのダッシュやノックバック、死亡、他の移動床に乗った場合 */
         while (count<frictionTime)
         {
             power = 1 - Mathf.Sin(90 / frictionTime * count * Mathf.Deg2Rad); /* 今回の移動量に掛ける値、countがfrictionTimeに近づくとこの値も1から0に近づいてゆき、ブレーキ表現になる */
             pos = transform.position;
-            if (x_run) { pos.x += move.x * power; }
-            if (y_run) { pos.y += move.y * power; }
+            if (x_run)
+            {
+                float velocity= move.x * power;
+                if (Physics.Raycast(pos, xDirection, out hit, Mathf.Abs(velocity))) /* 他colliderと接触があった場合 */
+                {
+                    pos.x = hit.point.x; /* 移動量を衝突点までに抑える */
+                    x_run = false; /* 次回移動移動しない */
+                }
+                else { pos.x += velocity; }
+                
+            }
+            if (y_run) 
+            {
+                Vector3 area = pos;
+                area.y += 0.2f; /* 足元そのままだと床と始点が一致し列挙されないので少し上げる */
+                float velocity = move.y * power;
+                if (Physics.Raycast(area, yDirection, out hit, Mathf.Abs(velocity))) /* 他colliderと接触があった場合 */
+                {
+                    pos.y = hit.point.y; /* 移動量を衝突点までに抑える */
+                    y_run = false; /* 次回移動移動しない */
+                }
+                else { pos.y += velocity; }
+                
+            }
 
             transform.position = pos;
             count += Time.deltaTime;

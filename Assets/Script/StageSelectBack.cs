@@ -7,6 +7,11 @@ using UnityEngine.InputSystem;
 
 public class StageSelectBack : MonoBehaviour
 {
+    /* 表示するアイテムを変更するのにクリアステージのフラグを持ってくる */
+    StageClear clear;
+
+    static bool[] show = {false,false }; /* true:既に表示した */
+
     /*仮：ステージセレクトに戻るとき表記するテキスト入れるオブジェクト*/
     public GameObject stageselectback_object = null;
     public MenuSE menuse;
@@ -27,6 +32,8 @@ public class StageSelectBack : MonoBehaviour
 
     void Start()
     {
+        clear = GetComponent<StageClear>();
+
         se = false;
 
         /*ポップアップをフェードさせる処理_Tomokazu*/
@@ -44,6 +51,18 @@ public class StageSelectBack : MonoBehaviour
 
     void Update()
     {
+        if(clear.stage1Clear && !clear.stage2Clear && show[0] == false)
+        {
+            //Debug.Log("ジャンプシューズ用の画像に変更");
+            show[0] = true;
+            image2.sprite = Resources.Load<Sprite>("ジャンプシューズ用");
+        }
+        else if (clear.stage1Clear && clear.stage2Clear && show[1] == false)
+        {
+            //Debug.Log("ダッシュシューズ２の画像に変更");
+            show[1] = true;
+            image2.sprite = Resources.Load<Sprite>("ダッシュシューズ");
+        }
         ///*ゲームパッドのAボタンが押されたら*/
         //if (Gamepad.current.buttonSouth.wasPressedThisFrame)
         //{

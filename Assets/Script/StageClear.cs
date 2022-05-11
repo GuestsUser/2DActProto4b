@@ -16,7 +16,8 @@ public class StageClear : MonoBehaviour
     static private bool _isStage3Clear;
 
     /*フラグ持ち込み用_Tomokazu*/
-    static public bool stage1Clear = false;
+    public bool stage1Clear {get{ return _isStage1Clear; } } /* 糸数:変数からプロパティに変更 */
+    public bool stage2Clear { get { return _isStage2Clear; } }
 
     void Start()
     {
@@ -34,7 +35,6 @@ public class StageClear : MonoBehaviour
         if (isStage1Clear)
         {
             _isStage1Clear = true;
-            stage1Clear = true;
         }
 
         if (isStage2Clear)

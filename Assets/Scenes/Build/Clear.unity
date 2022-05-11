@@ -275,6 +275,32 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 903667035}
     m_Modifications:
+    - target: {fileID: 7482814953816076636, guid: 8f67d9f0ec5d51342b23189a4672ad40,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 778
+      objectReference: {fileID: 0}
+    - target: {fileID: 7482814953816076636, guid: 8f67d9f0ec5d51342b23189a4672ad40,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 544
+      objectReference: {fileID: 0}
+    - target: {fileID: 7482814953816076637, guid: 8f67d9f0ec5d51342b23189a4672ad40,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7482814953816076639, guid: 8f67d9f0ec5d51342b23189a4672ad40,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 739ceef098a0a1349a756c09e11cc84a,
+        type: 3}
+    - target: {fileID: 7482814954214066420, guid: 8f67d9f0ec5d51342b23189a4672ad40,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7482814954780587580, guid: 8f67d9f0ec5d51342b23189a4672ad40,
         type: 3}
       propertyPath: m_Name
@@ -986,6 +1012,7 @@ GameObject:
   - component: {fileID: 2118530982}
   - component: {fileID: 2118530985}
   - component: {fileID: 2118530984}
+  - component: {fileID: 2118530986}
   m_Layer: 0
   m_Name: StageClearSystem
   m_TagString: Untagged
@@ -1140,3 +1167,18 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &2118530986
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2118530981}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 26f29e361a1739b41b56aa001554dffd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isStage1Clear: 0
+  isStage2Clear: 0
+  isStage3Clear: 0

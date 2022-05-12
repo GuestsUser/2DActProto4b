@@ -23,27 +23,35 @@ public class gauge : MonoBehaviour
 
     void Update()
     {
-
-
-        if (Gamepad.current.buttonWest.wasPressedThisFrame && dashsystem.CoolTimeFlg == true && GaugeFlg == false)    /*Xボタンを押す＋ CoolTimeフラグがtrueなら + ゲージフラグがfalseなら */
+        if (dashsystem._dash)
         {
-            GaugeFlg = true;        /*ゲージのフラグをONに*/
-            fillImg.fillAmount = 0.0f;  /*ゲージの画像を非表示*/
+            this.gameObject.SetActive(true);
+            if (Gamepad.current.buttonWest.wasPressedThisFrame && dashsystem.CoolTimeFlg == true && GaugeFlg == false)    /*Xボタンを押す＋ CoolTimeフラグがtrueなら + ゲージフラグがfalseなら */
+            {
+                GaugeFlg = true;        /*ゲージのフラグをONに*/
+                fillImg.fillAmount = 0.0f;  /*ゲージの画像を非表示*/
+            }
+
+
+            if (GaugeFlg)   /*ゲージのフラグがtrueなら*/
+            {
+                fillImg.fillAmount += 1.0f / timeAmt * Time.deltaTime;  /*ゲージの画像を少しずつ表示*/
+                /*fillAmountは1～0の間で動くので　1 / countTimeの時間で表示がMAXになるように(1 / 5 で5秒間)*/
+            }
+
+            if (fillImg.fillAmount == 1f)
+            {
+                GaugeFlg = false;
+                timeAmt = 5;
+                time += 5;
+            }
+        }
+        else
+        {
+            this.gameObject.SetActive(false);
         }
 
-
-        if (GaugeFlg)   /*ゲージのフラグがtrueなら*/
-        {
-            fillImg.fillAmount += 1.0f / timeAmt * Time.deltaTime;  /*ゲージの画像を少しずつ表示*/
-            /*fillAmountは1～0の間で動くので　1 / countTimeの時間で表示がMAXになるように(1 / 5 で5秒間)*/
-        }
-
-        if (fillImg.fillAmount == 1f)
-        {
-            GaugeFlg = false;
-            timeAmt = 5;
-            time += 5;
-        }
+        
 
 
 

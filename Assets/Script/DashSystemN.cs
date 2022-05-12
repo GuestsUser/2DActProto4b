@@ -170,7 +170,7 @@ public class DashSystemN : Padinput
     [Tooltip("移動方向に伸びる敵削除rayの長さ")] [SerializeField] public float rayDistance = 0.5f;
     [Tooltip("StageClearスクリプト")] [SerializeField] private StageClear stageClear;
     [Tooltip("敵削除overrapサイズ")] [SerializeField] private Vector3 delSize;
-    static public bool dash = true;
+    static public bool dash = false;
      public bool _dash {get { return dash; } }  /* true疾走が使える false 疾走が使えない */
    
     private ChangeShoes change_shoes;  /*能力切り替え用変数_ChangeShoes*/

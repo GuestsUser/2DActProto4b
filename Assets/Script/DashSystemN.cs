@@ -169,7 +169,8 @@ public class DashSystemN : Padinput
     [Tooltip("ダッシュの力")] [SerializeField] float dashForce = 5f;
     [Tooltip("移動方向に伸びる敵削除rayの長さ")] [SerializeField] public float rayDistance = 0.5f;
     [Tooltip("StageClearスクリプト")] [SerializeField] private StageClear stageClear;
-    static public bool dash = false;
+    [Tooltip("敵削除overrapサイズ")] [SerializeField] private Vector3 delSize;
+    static public bool dash = true;
      public bool _dash {get { return dash; } }  /* true疾走が使える false 疾走が使えない */
    
     private ChangeShoes change_shoes;  /*能力切り替え用変数_ChangeShoes*/
@@ -180,7 +181,7 @@ public class DashSystemN : Padinput
     private Animator animator;
     private bool timerDashPermit = true; /* 時間経過で管理するダッシュ使用可否 */
 
-    private Vector3 adjust; /* 基準位置を中心に持ってくる為の変数 */
+    [Tooltip("オーバーラップをプレイヤーの位置に持っていく為にずらす値")] [SerializeField] private Vector3 adjust;
 
     private Rigidbody rb;
     private PlayerMove control;
@@ -212,8 +213,8 @@ public class DashSystemN : Padinput
         /*追加*/
         player = GetComponent<PlayerMove>();
 
-        adjust = new Vector3(0, transform.localScale.y / 2, 0);
-        overrapAdjust = new Vector3(transform.localScale.x / 2, 0, 0); /* overrap用adjust */
+        //adjust = new Vector3(0, transform.localScale.y / 2, 0);
+        overrapAdjust = new Vector3(delSize.x / 2, 0, 0); /* overrap用adjust */
     }
 
     private void Update()
@@ -263,7 +264,7 @@ public class DashSystemN : Padinput
             /*追加*/
             /*右に入力されているとき*/
             float sub = Mathf.Cos(transform.localEulerAngles.y * Mathf.Deg2Rad); /* プレイヤーのy軸回転から向いている方向を符号で取得、0度なら1が、180なら-1が返ってくる寸法 */
-            hitObj = Physics.OverlapBox(transform.position + overrapAdjust * sub, transform.localScale / 2);
+            hitObj = Physics.OverlapBox(transform.position + overrapAdjust * sub, delSize / 2);
             //if (player.right != 0)
             //{
             //    hitObj = Physics.OverlapBox(transform.position + overrapAdjust, transform.localScale / 2);
@@ -377,7 +378,7 @@ public class DashSystemN : Padinput
     {
         //　Cubeのレイを疑似的に視覚化
         Gizmos.color = Color.red;
-        Gizmos.DrawWireCube(transform.position + adjust + transform.right * rayDistance, transform.localScale);
+        Gizmos.DrawWireCube(transform.position + adjust + transform.right * rayDistance, delSize);
     }
 }
 

@@ -8,6 +8,7 @@ public class BreakFloor : MonoBehaviour
     [Header("プレイヤーが乗ると崩れる")]
     [Tooltip("乗ってから崩れるまでの時間、秒指定")] [SerializeField] float notice = 1;
     [Tooltip("この時間分経過すると復活、秒指定")] [SerializeField] float respawn = 5;
+    [Tooltip("この変数にマテリアルが入っていると乗った時、消えるまでの時間オブジェクトをこのマテリアルに変更")] [SerializeField] Material noticeMaterial;
 
     List<GameObject> allObj; /* このオブジェクトと子のオブジェクト全て */
     List<Color32> childColor; /* 子のオブジェクトの元の色 */

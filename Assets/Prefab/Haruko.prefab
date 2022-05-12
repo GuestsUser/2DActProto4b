@@ -893,24 +893,9 @@ MonoBehaviour:
   jumping: 0
   fall: 0
   groundFall: 0
-  rayPosition: {x: 0, y: 0, z: 0}
-  legtrans: {fileID: 8900136756548173130}
-  legtrans2: {fileID: 1812558113}
-  legtrans3: {fileID: 1804974838}
-  legtrans4: {fileID: 131915035800381832}
-  legtrans5: {fileID: 1105246982}
-  legtrans6: {fileID: 1176785691}
-  legposition: {x: 0, y: 0, z: 0}
-  legposition2: {x: 0, y: 0, z: 0}
-  legposition3: {x: 0, y: 0, z: 0}
-  legposition4: {x: 0, y: 0, z: 0}
-  legposition5: {x: 0, y: 0, z: 0}
-  legposition6: {x: 0, y: 0, z: 0}
   rayDistance: 0.07
   JumpFlg: {fileID: 6872543496779070822, guid: 283c3f143a6e1b8428b2582fe27f01a7, type: 3}
   gb: {fileID: 6872543496779070820, guid: 283c3f143a6e1b8428b2582fe27f01a7, type: 3}
-  doublejump: {fileID: 6584657071964395690, guid: 34972a2fc62773647a777ab11b5960a3,
-    type: 3}
 --- !u!114 &6346024904048878348
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -952,11 +937,19 @@ MonoBehaviour:
   right: 0
   left: 0
   max_move_x: 0
+  move: {x: 0, y: 0, z: 0}
   eas_time: 2
   animator: {fileID: 6346024904048878346}
   anim_speed: 0
   rayDistance: 0.5
   rayPosition: {x: 0, y: 0, z: 0}
+  rayPosition2: {x: 0, y: 0, z: 0}
+  rayPosition3: {x: 0, y: 0, z: 0}
+  obj_pos: {x: 0, y: 0, z: 0}
+  rayHit_Slope: 0
+  hit_wall: 0
+  distance: 0
+  _dash: {fileID: 0}
 --- !u!114 &6346024904048878576
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1010,6 +1003,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   imageLife: {fileID: 0}
+  imageBack: {fileID: 0}
   placeSpace: 18
   maxLife: 3
   life: 3
@@ -1048,7 +1042,11 @@ MonoBehaviour:
   coolTime: 5
   dashForce: 6
   rayDistance: 0.5
+  stageClear: {fileID: 0}
+  delSize: {x: 1, y: 1.4, z: 1}
+  adjust: {x: 0, y: 0.7, z: 0}
   CoolTimeFlg: 0
+  isDashDead: 0
 --- !u!114 &4629836387720665810
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1209,6 +1207,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pause_script: {fileID: 0}
+  fade: {fileID: 0}
   pause_menu: {fileID: 0}
   show_menu: 0
   menuSE: {fileID: 0}
@@ -1225,9 +1224,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rayDistance: 0.25
-  rb: {fileID: 0}
   upForce: 300
-  isDead: 0
+  isStepOnDead: 0
 --- !u!1 &6346024904113327281
 GameObject:
   m_ObjectHideFlags: 0

@@ -170,7 +170,7 @@ public class DashSystemN : Padinput
     [Tooltip("移動方向に伸びる敵削除rayの長さ")] [SerializeField] public float rayDistance = 0.5f;
     [Tooltip("StageClearスクリプト")] [SerializeField] private StageClear stageClear;
     [Tooltip("敵削除overrapサイズ")] [SerializeField] private Vector3 delSize;
-    static public bool dash = true;
+    static public bool dash = false;
      public bool _dash {get { return dash; } }  /* true疾走が使える false 疾走が使えない */
    
     private ChangeShoes change_shoes;  /*能力切り替え用変数_ChangeShoes*/
@@ -214,7 +214,7 @@ public class DashSystemN : Padinput
         player = GetComponent<PlayerMove>();
 
         //adjust = new Vector3(0, transform.localScale.y / 2, 0);
-        overrapAdjust = new Vector3(delSize.x / 2, 0, 0); /* overrap用adjust */
+        overrapAdjust = new Vector3(delSize.x / 2, adjust.y, 0); /* overrap用adjust */
     }
 
     private void Update()
@@ -264,7 +264,9 @@ public class DashSystemN : Padinput
             /*追加*/
             /*右に入力されているとき*/
             float sub = Mathf.Cos(transform.localEulerAngles.y * Mathf.Deg2Rad); /* プレイヤーのy軸回転から向いている方向を符号で取得、0度なら1が、180なら-1が返ってくる寸法 */
-            hitObj = Physics.OverlapBox(transform.position + overrapAdjust * sub, delSize / 2);
+            Vector3 useAdjust = overrapAdjust;
+            useAdjust.x *= sub; /* xだけ向きに応じて回転する */
+            hitObj = Physics.OverlapBox(transform.position + useAdjust, delSize / 2);
             //if (player.right != 0)
             //{
             //    hitObj = Physics.OverlapBox(transform.position + overrapAdjust, transform.localScale / 2);

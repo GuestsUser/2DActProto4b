@@ -61,7 +61,7 @@ public class StageClear : MonoBehaviour
 
             case "Stage2":
                 /*ステージ1またはステージ2がクリアしていたら*/
-                if (isStage2Clear) /* 確認用で3を入れた */
+                if (_isStage1Clear && isStage2Clear) /* 確認用で3を入れた */
                 {
                     /*シーンをステージクリア画面に切り替える*/
                     SceneManager.LoadScene("Clear");
@@ -161,7 +161,7 @@ public class StageClear : MonoBehaviour
             if (other.gameObject.tag == ("Player"))
             {
                 /*isStage2Clearがfalseなら*/
-                if (!isStage2Clear)
+                if (_isStage1Clear && !isStage2Clear)
                 {
                     /*ステージ2をクリアにする*/
                     isStage2Clear = true;
@@ -176,7 +176,7 @@ public class StageClear : MonoBehaviour
             if (other.gameObject.tag == ("Player"))
             {
                 /*isStage2Clearがfalseなら*/
-                if (!isStage3Clear)
+                if (_isStage1Clear && _isStage2Clear && !isStage3Clear)
                 {
                     /*ステージ3をクリアにする*/
                     isStage3Clear = true;

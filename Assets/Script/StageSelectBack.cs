@@ -63,6 +63,10 @@ public class StageSelectBack : MonoBehaviour
             show[1] = true;
             image2.sprite = Resources.Load<Sprite>("ダッシュシューズ");
         }
+        else if(!clear.stage1Clear && clear.stage2Clear) /* デバッグ用　Stage1クリアしないでStage2クリアした場合 */
+        {
+            image2.sprite = null;
+        }
         ///*ゲームパッドのAボタンが押されたら*/
         //if (Gamepad.current.buttonSouth.wasPressedThisFrame)
         //{

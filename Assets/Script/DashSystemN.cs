@@ -170,7 +170,9 @@ public class DashSystemN : Padinput
     [Tooltip("移動方向に伸びる敵削除rayの長さ")] [SerializeField] public float rayDistance = 0.5f;
     [Tooltip("StageClearスクリプト")] [SerializeField] private StageClear stageClear;
     [Tooltip("敵削除overrapサイズ")] [SerializeField] private Vector3 delSize;
+    [Tooltip("疾走UI")] [SerializeField] private GameObject dashUI;
     static public bool dash = false;
+
      public bool _dash {get { return dash; } }  /* true疾走が使える false 疾走が使えない */
    
     private ChangeShoes change_shoes;  /*能力切り替え用変数_ChangeShoes*/
@@ -197,13 +199,15 @@ public class DashSystemN : Padinput
     
 
     [System.NonSerialized] public GameObject standSlopeObj; /*現在乗ってる滑る床オブジェクト*/
+
+    
     void Start()
     {
         if (SceneManager.GetActiveScene().name != "StageSelect")
         {
             stageClear = GameObject.Find("ClearPoint").GetComponent<StageClear>();
         }
-        
+        dashUI = GameObject.Find("Gauge");
         change_shoes = GetComponent<ChangeShoes>();
         rb = GetComponent<Rigidbody>();
         animator = GetComponent<Animator>();
@@ -245,7 +249,24 @@ public class DashSystemN : Padinput
         }
         
     }
-
+    public void OnClickButton()
+    {
+        /*二段ジャンプフラグがfalseなら*/
+        if (!dash)
+        {
+            /*二段ジャンプフラグをtrueにし、テスト用二段ジャンプオブジェクトを非表示にする*/
+            dash = true;
+            dashUI.SetActive(true);
+            //doublejump.SetActive(false);
+        }
+        /*二段ジャンプフラグがtrueなら*/
+        else
+        {
+            /*二段ジャンプフラグをfalseにし、テスト用二段ジャンプオブジェクトを表示する*/
+            dash = false;
+            //doublejump.SetActive(true);
+        }
+    }
     IEnumerator Dush()
     {
         /* 移動禁止とアニメ設定 */

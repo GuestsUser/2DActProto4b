@@ -21,6 +21,7 @@ public class StageClear : MonoBehaviour
 
     void Start()
     {
+
         /*ステージ1が始まったらクリアしてない状態になるから、どうにかしないといけない*/
         isStage1Clear = false;
         /*ステージ2が始まったらクリアしてない状態になるから、どうにかしないといけない*/

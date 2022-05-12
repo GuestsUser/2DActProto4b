@@ -159,6 +159,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 public class DashSystemN : Padinput
 {
@@ -167,7 +168,10 @@ public class DashSystemN : Padinput
     [Tooltip("ダッシュしてから再発動可能になるまでの時間")] [SerializeField] float coolTime = 5f;
     [Tooltip("ダッシュの力")] [SerializeField] float dashForce = 5f;
     [Tooltip("移動方向に伸びる敵削除rayの長さ")] [SerializeField] public float rayDistance = 0.5f;
-
+    [Tooltip("StageClearスクリプト")] [SerializeField] private StageClear stageClear;
+    static public bool dash = false;
+     public bool _dash {get { return dash; } }  /* true疾走が使える false 疾走が使えない */
+   
     private ChangeShoes change_shoes;  /*能力切り替え用変数_ChangeShoes*/
 
     /*追加*/
@@ -188,10 +192,16 @@ public class DashSystemN : Padinput
 
     /*追加*/
     public bool isDashDead = false;
+    
 
     [System.NonSerialized] public GameObject standSlopeObj; /*現在乗ってる滑る床オブジェクト*/
     void Start()
     {
+        if (SceneManager.GetActiveScene().name != "StageSelect")
+        {
+            stageClear = GameObject.Find("ClearPoint").GetComponent<StageClear>();
+        }
+        
         change_shoes = GetComponent<ChangeShoes>();
         rb = GetComponent<Rigidbody>();
         animator = GetComponent<Animator>();
@@ -206,18 +216,31 @@ public class DashSystemN : Padinput
         overrapAdjust = new Vector3(transform.localScale.x / 2, 0, 0); /* overrap用adjust */
     }
 
-
+    private void Update()
+    {
+        if (SceneManager.GetActiveScene().name == "Stage2")
+        {
+            if (stageClear.stage2Clear && !dash)
+            {
+                dash = true;
+            }
+        }
+    }
 
     public override void Skill()
     {
-        footer.RideCheck();
-        /*アビリティ発動ボタンが押されたら*/
-        if (timerDashPermit && Gamepad.current.buttonWest.wasPressedThisFrame && (!PlayerKnockBack.runState) && footer.isGround)
+        if (dash)
         {
-            StartCoroutine(Dush());
-            StartCoroutine(ReCharge());
-            CoolTimeFlg = true;
+            footer.RideCheck();
+            /*アビリティ発動ボタンが押されたら*/
+            if (timerDashPermit && Gamepad.current.buttonWest.wasPressedThisFrame && (!PlayerKnockBack.runState) && footer.isGround)
+            {
+                StartCoroutine(Dush());
+                StartCoroutine(ReCharge());
+                CoolTimeFlg = true;
+            }
         }
+        
     }
 
     IEnumerator Dush()

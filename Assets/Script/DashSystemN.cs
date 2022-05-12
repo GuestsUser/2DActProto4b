@@ -170,7 +170,7 @@ public class DashSystemN : Padinput
     [Tooltip("移動方向に伸びる敵削除rayの長さ")] [SerializeField] public float rayDistance = 0.5f;
     [Tooltip("StageClearスクリプト")] [SerializeField] private StageClear stageClear;
     [Tooltip("敵削除overrapサイズ")] [SerializeField] private Vector3 delSize;
-    static public bool dash = false;
+    static public bool dash = true;
      public bool _dash {get { return dash; } }  /* true疾走が使える false 疾走が使えない */
    
     private ChangeShoes change_shoes;  /*能力切り替え用変数_ChangeShoes*/
@@ -188,6 +188,7 @@ public class DashSystemN : Padinput
     private GroundFooter footer;
     private RetrySystem retrySys;
     private Vector3 overrapAdjust; /* overrap用adjust */
+    private SESystem sound;
 
     public bool CoolTimeFlg = false;
 
@@ -209,6 +210,7 @@ public class DashSystemN : Padinput
         control = GetComponent<PlayerMove>();
         footer = GetComponent<GroundFooter>();
         retrySys = GetComponent<RetrySystem>();
+        sound = GetComponent<SESystem>();
 
         /*追加*/
         player = GetComponent<PlayerMove>();
@@ -280,6 +282,8 @@ public class DashSystemN : Padinput
                 if ( (obj.tag == "Enemy" || obj.tag == "Enemy3") && !isDashDead)
                 {
                     Debug.Log("疾走で倒しました");
+
+                    sound.audioSource.PlayOneShot(sound.se[sound.IndexToSub("dashKill")]);
 
                     isDashDead = true;
                     EnemyObjectCollision eCollision = obj.GetComponent<EnemyObjectCollision>();

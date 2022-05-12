@@ -103,21 +103,66 @@ public class StageSelect : MonoBehaviour
         
     }
 
-    private void OnCollisionEnter(Collision collision)
+    /*ステージセレクトをボタン判定に変える場合コメントアウト*/
+    //private void OnCollisionEnter(Collision collision)
+    //{
+    //    if (collision.gameObject.name == "Stage1")
+    //    {
+    //        ControlStop(); /* 入力受付終了 */
+    //        /*ステージ1に切り替える*/
+    //        fade.FadeIn(1.5f, () => SceneManager.LoadScene("Stage1"));
+    //    }
+    //    else if (collision.gameObject.name == "Stage2")
+    //    {
+    //        ControlStop();
+    //        /*ステージ2に切り替える*/
+    //        fade.FadeIn(1.5f, () => SceneManager.LoadScene("Stage2"));
+    //    }
+    //    else if (collision.gameObject.name == "Stage3")
+    //    {
+    //        ControlStop();
+    //        /*ステージ3に切り替える*/
+    //        fade.FadeIn(1.5f, () => SceneManager.LoadScene("Stage3"));
+    //    }
+
+    //    void ControlStop() /* 入力を処理するコンポーネント全停止で入力受付終了とする */
+    //    {
+    //        vcam.Follow = collision.gameObject.transform; /* カメラの追跡対象をワープゾーンに切り替える */
+    //        ObjAllInVisible(gameObject); /* スクリプトを付けたオブジェクトの子から孫まで全て不可視化 */
+
+    //        /* 入力を処理してるコンポーネント全停止 */
+    //        GetComponent<PlayerMove>().enabled = false;
+    //        GetComponent<JumpSystem>().enabled = false;
+    //        GetComponent<DashSystem>().enabled = false;
+    //    }
+    //    void ObjAllInVisible(GameObject obj) /* objに入れたオブジェクトの子から孫まで全てを不可視化する関数 */
+    //    {
+    //        foreach (Transform child in obj.transform) /* objの子全てに処理(孫まで検知しないので再起式を用いて孫の処理をする) */
+    //        {
+    //            if (child.GetComponent<Renderer>() != null) { child.GetComponent<Renderer>().enabled = false; } /* レンダラーコンポーネントが付いてたらfalseにして不可視化 */
+    //            ObjAllInVisible(child.gameObject); /* 再帰式にする事で子から孫まで全てを取得できる */
+    //        }
+    //    }
+    //}
+    /*ステージセレクトをボタン判定に変える場合コメントアウト*/
+
+    /*ステージセレクトをボタンで判定する処理_Tomokazu_5/12*/
+    private void OnTriggerStay(Collider collision)
     {
-        if (collision.gameObject.name == "Stage1")
+        /*Bボタンでステージに入れる*/
+        if (collision.gameObject.name == "Stage1" && Gamepad.current.buttonEast.wasPressedThisFrame)
         {
             ControlStop(); /* 入力受付終了 */
             /*ステージ1に切り替える*/
             fade.FadeIn(1.5f, () => SceneManager.LoadScene("Stage1"));
         }
-        else if (collision.gameObject.name == "Stage2")
+        else if (collision.gameObject.name == "Stage2" && Gamepad.current.buttonEast.wasPressedThisFrame)
         {
             ControlStop();
             /*ステージ2に切り替える*/
             fade.FadeIn(1.5f, () => SceneManager.LoadScene("Stage2"));
         }
-        else if (collision.gameObject.name == "Stage3")
+        else if (collision.gameObject.name == "Stage3" && Gamepad.current.buttonEast.wasPressedThisFrame)
         {
             ControlStop();
             /*ステージ3に切り替える*/
@@ -143,4 +188,5 @@ public class StageSelect : MonoBehaviour
             }
         }
     }
+    /*ステージセレクトをボタンで判定する処理_Tomokazu_5/12*/
 }

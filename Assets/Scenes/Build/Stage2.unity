@@ -13949,7 +13949,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 2.1529052, y: 1}
+    m_SensorSize: {x: 1.7773585, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -23315,6 +23315,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2143209793}
     m_Modifications:
+    - target: {fileID: 2279032051771367791, guid: 11f4cd94535888142889b442320454b4,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 416170537}
+    - target: {fileID: 2279032051771367791, guid: 11f4cd94535888142889b442320454b4,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OnClickButton
+      objectReference: {fileID: 0}
     - target: {fileID: 5361950379830602449, guid: 11f4cd94535888142889b442320454b4,
         type: 3}
       propertyPath: m_RootOrder
@@ -23399,6 +23409,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6872628510470992968, guid: 11f4cd94535888142889b442320454b4,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 48
+      objectReference: {fileID: 0}
+    - target: {fileID: 8506281847754817024, guid: 11f4cd94535888142889b442320454b4,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 134
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 11f4cd94535888142889b442320454b4, type: 3}
@@ -25755,7 +25775,7 @@ GameObject:
   - component: {fileID: 2062617971}
   - component: {fileID: 2062617970}
   m_Layer: 5
-  m_Name: Image
+  m_Name: Gauge
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

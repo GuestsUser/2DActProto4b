@@ -12,14 +12,22 @@ public class PlayerFollowFloor : MonoBehaviour
     }
     private void OnCollisionEnter(Collision other)
     {
-        if (other.gameObject.tag == "Player" || other.gameObject.tag == "Enemy")
+
+        if(other.gameObject.tag == "Player")
+        {
+            GroundFooter gf = other.gameObject.GetComponent<GroundFooter>();
+            gf.RideCheck();
+            if(gf.floor == gameObject) { other.gameObject.transform.parent = transform; }
+        }
+
+        if ( other.gameObject.tag == "Enemy")
         {
             other.gameObject.transform.parent = transform;
         }
     }
     private void OnCollisionExit(Collision other)
     {
-        if (other.gameObject.tag == "Player" || other.gameObject.tag == "Enemy")
+        if (other.gameObject.tag == "Player" || other.gameObject.tag == "Enemy" && other.gameObject.transform.parent==gameObject)
         {
             other.gameObject.transform.parent = null;
         }

@@ -23,7 +23,7 @@ public class ItemText : MonoBehaviour
             item_pos.localPosition = new Vector3(-25, 250, 0);
             itemText.text += GManager.instance.itemNum;
             itemText_pos = itemText.GetComponent<RectTransform>();
-            itemText_pos.localPosition = new Vector3(25, 250, 0);
+            itemText_pos.localPosition = new Vector3(78, 250, 0);
         }
         else
         {
@@ -39,7 +39,7 @@ public class ItemText : MonoBehaviour
         if (oldItemNum != GManager.instance.itemNum)
         {
             /*テキストに現在のアイテム数を書き込む*/
-            itemText.text = string.Format("{0:0}", GManager.instance.itemNum);
+            itemText.text = string.Format("{0:0}", GManager.instance.itemNum + " / 50");
             oldItemNum = GManager.instance.itemNum;
         }
     }

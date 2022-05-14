@@ -10,7 +10,7 @@ public class StageSelectBack : MonoBehaviour
     /* 表示するアイテムを変更するのにクリアステージのフラグを持ってくる */
     StageClear clear;
 
-    static bool[] show = {false,false }; /* true:既に表示した */
+    static bool[] show = new bool[] {false,false }; /* true:既に表示した */
 
     /*仮：ステージセレクトに戻るとき表記するテキスト入れるオブジェクト*/
     public GameObject stageselectback_object = null;
@@ -45,35 +45,91 @@ public class StageSelectBack : MonoBehaviour
         image = GameObject.Find("Image2").GetComponent<Image>();
         image2 = GameObject.Find("Image3").GetComponent<Image>();
         popup = GameObject.Find("Popup");
+
+        popup.SetActive(false);
         /*ポップアップをフェードさせる処理_Tomokazu*/
     }
 
 
     void Update()
     {
-        if(clear.stage1Clear && !clear.stage2Clear && show[0] == false)
+        /* 糸数:5/14 追加　ゲットアイテムの表示/非表示切り替え */
+        /* Stage1普通にクリアした時の処理 */
+        if (show[0] == false)
         {
-            //Debug.Log("ジャンプシューズ用の画像に変更");
-            show[0] = true;
-            image2.sprite = Resources.Load<Sprite>("ジャンプシューズ用");
-        }
-        else if (clear.stage1Clear && clear.stage2Clear && show[1] == false)
-        {
-            //Debug.Log("ダッシュシューズ２の画像に変更");
-            show[1] = true;
-            image2.sprite = Resources.Load<Sprite>("ダッシュシューズ");
-        }
-        else if(!clear.stage1Clear && clear.stage2Clear) /* デバッグ用　Stage1クリアしないでStage2クリアした場合 */
-        {
-            image2.sprite = null;
-        }
-        ///*ゲームパッドのAボタンが押されたら*/
-        //if (Gamepad.current.buttonSouth.wasPressedThisFrame)
-        //{
-        //    /*ステージセレクト画面に切り替える*/
-        //    SceneManager.LoadScene(1);
-        //}
+            if (clear.stage1Clear && !clear.stage2Clear)
+            {
+                //Debug.Log("ジャンプシューズ用の画像に変更");
+                popup.SetActive(true);
+                image2.sprite = Resources.Load<Sprite>("ジャンプシューズ用");
 
+                //show[0] = true;
+
+                BeforeFade();
+            }
+        }
+        else
+        {
+            /*ゲームパットのAボタンが押されて、フェードイン処理が終わっていたら*/
+            if (Gamepad.current.buttonSouth.wasPressedThisFrame)
+            {
+                if (!se)
+                {
+                    se = true;
+                    menuse.audio_source.clip = menuse.decision;
+                    menuse.audio_source.PlayOneShot(menuse.decision);
+
+                }
+                StartCoroutine("BacktoTitle");  /*ステージセレクトに戻る*/
+
+            }
+        }
+
+        /* Stage2普通にクリアした時の処理 */
+        if (show[1] == false)
+        {
+            if (clear.stage1Clear && clear.stage2Clear)
+            {
+                //Debug.Log("ジャンプシューズ用の画像に変更");
+                popup.SetActive(true);
+                image2.sprite = Resources.Load<Sprite>("ダッシュシューズ");
+
+                //show[1] = true;
+
+                BeforeFade();
+            }
+        }
+        else
+        {
+            /*ゲームパットのAボタンが押されて、フェードイン処理が終わっていたら*/
+            if (Gamepad.current.buttonSouth.wasPressedThisFrame)
+            {
+                if (!se)
+                {
+                    se = true;
+                    menuse.audio_source.clip = menuse.decision;
+                    menuse.audio_source.PlayOneShot(menuse.decision);
+
+                }
+                StartCoroutine("BacktoTitle");  /*ステージセレクトに戻る*/
+
+            }
+        }
+        /* 糸数:5/14 追加　ゲットアイテムの表示/非表示切り替え */
+
+    }
+
+    private IEnumerator BacktoTitle() //シーンチェンジ用
+    {
+        yield return new WaitForSecondsRealtime(WaitTime);  //処理を待機
+
+        /*ステージセレクト画面に切り替える*/
+        SceneManager.LoadScene(1);
+
+    }
+
+    private void BeforeFade() /* 糸数:5/14 追加フェード前処理 (中身自体は友一スクリプト)*/
+    {
         /*ゲームパッドのAボタンが押されて、フェードインが始まっていなかったら*/
         if (Gamepad.current.buttonSouth.wasPressedThisFrame && alfa > 0)
         {
@@ -84,8 +140,6 @@ public class StageSelectBack : MonoBehaviour
                 menuse.audio_source.PlayOneShot(menuse.decision);
 
             }
-            ///*ステージセレクト画面に切り替える*/
-            //SceneManager.LoadScene(1);
 
             opasityFlg = true;  /*フェードイン処理を始める*/
 
@@ -111,6 +165,14 @@ public class StageSelectBack : MonoBehaviour
                 menuse.audio_source.PlayOneShot(menuse.decision);
 
             }
+            if(show[0] == false)
+            {
+                show[0] = true;
+            }
+            else if (show[0] && !show[1])
+            {
+                show[1] = true;
+            }
             StartCoroutine("BacktoTitle");  /*ステージセレクトに戻る*/
 
         }
@@ -118,15 +180,6 @@ public class StageSelectBack : MonoBehaviour
         /*操作ボタンが分かるように仮表示*/
         Text stageselectback_text = stageselectback_object.GetComponent<Text>();
         stageselectback_text.text = "Aボタンでステージセレクト画面に戻ります";
-    }
-
-    private IEnumerator BacktoTitle() //シーンチェンジ用
-    {
-        yield return new WaitForSecondsRealtime(WaitTime);  //処理を待機
-
-        /*ステージセレクト画面に切り替える*/
-        SceneManager.LoadScene(1);
-
     }
 
     /*フェードイン処理*/

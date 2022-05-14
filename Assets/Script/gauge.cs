@@ -17,39 +17,62 @@ public class gauge : MonoBehaviour
 
     void Start()
     {
+        dashsystem = GameObject.Find("Haruko").GetComponent<DashSystemN>();
         fillImg = this.GetComponent<Image>();   /*ゲージの画像*/
         time = timeAmt;
     }
 
     void Update()
     {
-        if (dashsystem._dash)
+        this.gameObject.SetActive(true);
+        if (Gamepad.current.buttonWest.wasPressedThisFrame && dashsystem.CoolTimeFlg == true && GaugeFlg == false)    /*Xボタンを押す＋ CoolTimeフラグがtrueなら + ゲージフラグがfalseなら */
         {
-            this.gameObject.SetActive(true);
-            if (Gamepad.current.buttonWest.wasPressedThisFrame && dashsystem.CoolTimeFlg == true && GaugeFlg == false)    /*Xボタンを押す＋ CoolTimeフラグがtrueなら + ゲージフラグがfalseなら */
-            {
-                GaugeFlg = true;        /*ゲージのフラグをONに*/
-                fillImg.fillAmount = 0.0f;  /*ゲージの画像を非表示*/
-            }
-
-
-            if (GaugeFlg)   /*ゲージのフラグがtrueなら*/
-            {
-                fillImg.fillAmount += 1.0f / timeAmt * Time.deltaTime;  /*ゲージの画像を少しずつ表示*/
-                /*fillAmountは1～0の間で動くので　1 / countTimeの時間で表示がMAXになるように(1 / 5 で5秒間)*/
-            }
-
-            if (fillImg.fillAmount == 1f)
-            {
-                GaugeFlg = false;
-                timeAmt = 5;
-                time += 5;
-            }
+            GaugeFlg = true;        /*ゲージのフラグをONに*/
+            fillImg.fillAmount = 0.0f;  /*ゲージの画像を非表示*/
         }
-        else
+
+
+        if (GaugeFlg)   /*ゲージのフラグがtrueなら*/
         {
-            this.gameObject.SetActive(false);
+            fillImg.fillAmount += 1.0f / timeAmt * Time.deltaTime;  /*ゲージの画像を少しずつ表示*/
+            /*fillAmountは1～0の間で動くので　1 / countTimeの時間で表示がMAXになるように(1 / 5 で5秒間)*/
         }
+
+        if (fillImg.fillAmount == 1f)
+        {
+            GaugeFlg = false;
+            timeAmt = 5;
+            time += 5;
+        }
+
+        /* このスクリプトがついているオブジェクトの親に表示、非表示を追加したためコメントアウト */
+        //if (dashsystem._dash)
+        //{
+        //    this.gameObject.SetActive(true);
+        //    if (Gamepad.current.buttonWest.wasPressedThisFrame && dashsystem.CoolTimeFlg == true && GaugeFlg == false)    /*Xボタンを押す＋ CoolTimeフラグがtrueなら + ゲージフラグがfalseなら */
+        //    {
+        //        GaugeFlg = true;        /*ゲージのフラグをONに*/
+        //        fillImg.fillAmount = 0.0f;  /*ゲージの画像を非表示*/
+        //    }
+
+
+        //    if (GaugeFlg)   /*ゲージのフラグがtrueなら*/
+        //    {
+        //        fillImg.fillAmount += 1.0f / timeAmt * Time.deltaTime;  /*ゲージの画像を少しずつ表示*/
+        //        /*fillAmountは1～0の間で動くので　1 / countTimeの時間で表示がMAXになるように(1 / 5 で5秒間)*/
+        //    }
+
+        //    if (fillImg.fillAmount == 1f)
+        //    {
+        //        GaugeFlg = false;
+        //        timeAmt = 5;
+        //        time += 5;
+        //    }
+        //}
+        //else
+        //{
+        //    this.gameObject.SetActive(false);
+        //}
 
         
 

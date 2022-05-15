@@ -34,9 +34,6 @@ public class BackgroudChange : MonoBehaviour
     [Tooltip("Stage1とStage2のdistance")] [SerializeField] private float one_to_two;
     [Tooltip("Stage2とStage3のdistance")] [SerializeField] private float two_to_three;
 
-    /* 1単位当たりの距離を設定 */
-    float alpha1 {get{ return one_to_two / 100; } } /* stage1と2の間の1単位の当たりの距離を設定 */
-    float alpha2 { get { return two_to_three / 100; } } /* stage2と3の間の1単位の当たりの距離を設定 */
 
     // Start is called before the first frame update
     void Start()
@@ -44,8 +41,11 @@ public class BackgroudChange : MonoBehaviour
         player = GameObject.Find("Haruko");
 
         /* Stageオブジェクトは動かないのでStartで計算しておく */
-        one_to_two = Mathf.Abs(Vector3.Distance(changepoint1_1.transform.position, changepoint1_2.transform.position));
-        two_to_three = Mathf.Abs(Vector3.Distance(changepoint2_1.transform.position, changepoint2_2.transform.position));
+        //one_to_two = Mathf.Abs(Vector3.Distance(changepoint1_1.transform.position, changepoint1_2.transform.position));
+        //two_to_three = Mathf.Abs(Vector3.Distance(changepoint2_1.transform.position, changepoint2_2.transform.position));
+        one_to_two = Xdistance(changepoint1_1, changepoint1_2);
+        two_to_three = Xdistance(changepoint2_1, changepoint2_2);
+
 
         /* 透明度の初期化 */
         opacity1 = 1; /* playerの初期位置によりstage1は先に表示 */
@@ -70,12 +70,12 @@ public class BackgroudChange : MonoBehaviour
     void distance()/* Playerと各ステージオブジェクトとの距離を計算 */
     {
         /* Stage1～2 */
-        p_to_1 = Mathf.Abs(Vector3.Distance(player.transform.position, changepoint1_1.transform.position));
-        p_to_2_1 = Mathf.Abs(Vector3.Distance(player.transform.position, changepoint1_2.transform.position));
+        p_to_1 = Xdistance(player, changepoint1_1);
+        p_to_2_1 = Xdistance(player, changepoint1_2);
 
         /* Stage2～3 */
-        p_to_2_2 = Mathf.Abs(Vector3.Distance(player.transform.position, changepoint2_1.transform.position));
-        p_to_3 = Mathf.Abs(Vector3.Distance(player.transform.position, changepoint2_2.transform.position));
+        p_to_2_2 = Xdistance(player, changepoint2_1);
+        p_to_3 = Xdistance(player, changepoint2_2);
     }
 
     void ChangeAlpha()
@@ -104,19 +104,6 @@ public class BackgroudChange : MonoBehaviour
                 opacity1 = 1 - (p_to_1 / (one_to_two));
                 opacity2 = 1 - opacity1;
             }
-            
-            ///* プレイヤーが右に進んでいるいて、単位距離を更新した事に */
-            //if (right != 0 && p_to_1 % alpha1 == 0)
-            //{
-            //    opacity1--;
-            //    opacity2++;
-            //}
-            ///* プレイヤーが左に進んでいるいて、単位距離を更新した事に */
-            //else if (left != 0 && p_to_2 % alpha1 == 0)
-            //{
-            //    opacity2--;
-            //    opacity1++;
-            //}
         }
         /* stage2とstage3の間の時 */
         else if (p_pos_x >= stage2_pos_x_2 && p_pos_x <= stage3_pos_x) 
@@ -128,18 +115,25 @@ public class BackgroudChange : MonoBehaviour
                 opacity2 = 1 - (p_to_2_2 / (two_to_three));
                 opacity3 = 1 - opacity2;
             }
-            ///* プレイヤーが右に進んでいるいて、単位距離を更新した事に */
-            //if (right != 0 && p_to_2 % alpha2 == 0)
-            //{
-            //    opacity2--;
-            //    opacity3++;
-            //}
-            ///* プレイヤーが左に進んでいるいて、単位距離を更新した事に */
-            //else if (left != 0 && p_to_3 % alpha2 == 0)
-            //{
-            //    opacity3--;
-            //    opacity2++;
-            //}
         }
+    }
+    
+    
+    float Xdistance(GameObject pos1, GameObject pos2) /* 2つのオブジェクト間(X軸)の距離を正の値で返してくれる関数 */
+    {
+        var x_pos1 = pos1.transform.position.x;
+        var x_pos2 = pos2.transform.position.x;
+
+        var distance = 0f; /* 初期化 */
+
+        if (x_pos1 > x_pos2)
+        {
+            distance = x_pos1 - x_pos2;
+        }
+        else
+        {
+            distance = x_pos2 - x_pos1;
+        }
+        return distance;
     }
 }

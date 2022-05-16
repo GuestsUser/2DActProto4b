@@ -13,13 +13,14 @@ public class Enemy2Manager : MonoBehaviour
     [Header("画面外でも行動するかどうか")] [SerializeField] private bool nonVisible;
     [Header("敵を踏んで倒したかどうか")] [SerializeField] private BoxCastEnemyDestroy enemyDestroy;
     [Header("敵を疾走で倒したかどうか")] [SerializeField] private DashSystemN enemyDashDestroy;
-
+    
     /*コンポーネント*/
     private Animator animator = null;
     private Renderer targetRenderer = null;
     private BoxCollider col = null;
     private EnemyObjectCollision eoc = null;
 
+    private Rigidbody rb;
     /*変数*/
     private Vector3 iniPos;      /* 初期位置記録 */
     private float iniAngle;
@@ -32,6 +33,7 @@ public class Enemy2Manager : MonoBehaviour
         targetRenderer = GetComponent<Renderer>();
         col = GetComponent<BoxCollider>();
         eoc = GetComponent<EnemyObjectCollision>();
+        rb = GetComponent<Rigidbody>();
 
         iniPos = transform.position;
         iniAngle = 0;
@@ -74,7 +76,6 @@ public class Enemy2Manager : MonoBehaviour
                 enemyDestroy.isStepOnDead = false;
                 enemyDashDestroy.isDashDead = false;
                 col.enabled = false;
-                move = Vector3.zero;
                 Destroy(gameObject, 0.8f);
             }
         }
@@ -83,12 +84,11 @@ public class Enemy2Manager : MonoBehaviour
     IEnumerator Repeat(float iniAngle)
     {
         float count = 0;
-        while (true)
-        {
+        while (!isDead)
+        { 
             transform.position = iniPos + move * Mathf.Sin((float)((360 / limit * count + iniAngle) * Mathf.Deg2Rad));
             count = (count + Time.deltaTime) % limit;
             yield return StartCoroutine(TimeScaleYield.TimeStop());
         }
-
     }
 }

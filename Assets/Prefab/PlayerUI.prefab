@@ -64,7 +64,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Texture: {fileID: 2800000, guid: 8fb7863a7ea2cfc42a219afa7e03a27f, type: 3}
+  m_Texture: {fileID: 2800000, guid: d3738351904be524893e26f667210bbd, type: 3}
   m_UVRect:
     serializedVersion: 2
     x: 0
@@ -116,7 +116,7 @@ PrefabInstance:
     - target: {fileID: 3408532001276741961, guid: 039726cdb6fa652438a344c8ef1c757c,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 308
+      value: 310.1
       objectReference: {fileID: 0}
     - target: {fileID: 3408532001276741961, guid: 039726cdb6fa652438a344c8ef1c757c,
         type: 3}
@@ -126,7 +126,7 @@ PrefabInstance:
     - target: {fileID: 3408532001276741963, guid: 039726cdb6fa652438a344c8ef1c757c,
         type: 3}
       propertyPath: m_FontData.m_FontStyle
-      value: 2
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3408532001276741963, guid: 039726cdb6fa652438a344c8ef1c757c,
         type: 3}
@@ -142,6 +142,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Color.g
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3408532001276741963, guid: 039726cdb6fa652438a344c8ef1c757c,
+        type: 3}
+      propertyPath: m_Text
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3408532001333962346, guid: 039726cdb6fa652438a344c8ef1c757c,
         type: 3}

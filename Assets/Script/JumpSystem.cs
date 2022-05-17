@@ -16,7 +16,7 @@ public class JumpSystem : Padinput
     [SerializeField] private float jumpForce = 5.0f;/*ジャンプ力*/
     [SerializeField] private int jumpCount = 0;     /*ジャンプ回数*/
 
-    [SerializeField] private bool isGrounded = false;       /* 地面と接触しているかどうか*/
+    [SerializeField] public bool isGrounded = false;       /* 地面と接触しているかどうか*/
     [SerializeField] private bool jumping = false;          /*Jumpingアニメーションしているかどうか*/
     [SerializeField] private bool fall = false;             /*Fallアニメーションしているかどうか*/
     [SerializeField] private bool groundFall = false;

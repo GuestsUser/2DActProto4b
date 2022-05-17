@@ -94,13 +94,34 @@ public class StageSelect : MonoBehaviour
     [SerializeField] Fade fade;
     [Tooltip("追従対象切り替え用")] [SerializeField] CinemachineVirtualCamera vcam;
 
+    /*ハルコちゃんを後ろに向かせるための変数*/
+    GameObject haruko;
+    Transform harukotrans;
+    Vector3 harukovector;
+    Animator anim;
+    PlayerMove player;
+    JumpSystem jump;
+
+    float time;
+    bool stage,stage2,stage3;
+    /*ハルコちゃんを後ろに向かせるための変数*/
+
     private void Start()
     {
         //fade = GetComponent<Fade>();
+
+        haruko = GameObject.Find("Haruko");
+        harukotrans = haruko.transform;
+        harukovector = haruko.transform.eulerAngles;
+        anim = haruko.GetComponent<Animator>();
+        player = haruko.GetComponent<PlayerMove>();
+        jump = haruko.GetComponent<JumpSystem>();
+        time = 0f;
+        stage = stage2 = stage3 = false;
     }
     private void Update()
     {
-        
+
     }
 
     /*ステージセレクトをボタン判定に変える場合コメントアウト*/
@@ -150,34 +171,60 @@ public class StageSelect : MonoBehaviour
     private void OnTriggerStay(Collider collision)
     {
         /*Bボタンでステージに入れる*/
-        if (collision.gameObject.name == "Stage1" && Gamepad.current.buttonEast.wasPressedThisFrame)
+        if (collision.gameObject.name == "Stage1" && Gamepad.current.buttonEast.wasPressedThisFrame && jump.isGrounded)
         {
+
+            //player.state = State.walk;
+            anim.SetFloat("Speed",0.8f);
+
             ControlStop(); /* 入力受付終了 */
+
+
             /*ステージ1に切り替える*/
             fade.FadeIn(1.5f, () => SceneManager.LoadScene("Stage1"));
+
+            harukovector.x = 0;
+            harukovector.y = -90;
+            harukovector.z = 0;
+            harukotrans.eulerAngles = harukovector;
+
+
         }
         else if (collision.gameObject.name == "Stage2" && Gamepad.current.buttonEast.wasPressedThisFrame)
         {
             ControlStop();
             /*ステージ2に切り替える*/
             fade.FadeIn(1.5f, () => SceneManager.LoadScene("Stage2"));
+
+            anim.SetFloat("Speed", 0.8f);
+            harukovector.x = 0;
+            harukovector.y = -90;
+            harukovector.z = 0;
+            harukotrans.eulerAngles = harukovector;
+
         }
         else if (collision.gameObject.name == "Stage3" && Gamepad.current.buttonEast.wasPressedThisFrame)
         {
             ControlStop();
             /*ステージ3に切り替える*/
             fade.FadeIn(1.5f, () => SceneManager.LoadScene("Stage3"));
+
+            anim.SetFloat("Speed", 0.8f);
+            harukovector.x = 0;
+            harukovector.y = -90;
+            harukovector.z = 0;
+            harukotrans.eulerAngles = harukovector;
         }
 
         void ControlStop() /* 入力を処理するコンポーネント全停止で入力受付終了とする */
         {
             vcam.Follow = collision.gameObject.transform; /* カメラの追跡対象をワープゾーンに切り替える */
-            ObjAllInVisible(gameObject); /* スクリプトを付けたオブジェクトの子から孫まで全て不可視化 */
+            //ObjAllInVisible(gameObject); /* スクリプトを付けたオブジェクトの子から孫まで全て不可視化 */
 
             /* 入力を処理してるコンポーネント全停止 */
             GetComponent<PlayerMove>().enabled = false;
             GetComponent<JumpSystem>().enabled = false;
-            GetComponent<DashSystem>().enabled = false;
+            GetComponent<DashSystemN>().enabled = false;
         }
         void ObjAllInVisible(GameObject obj) /* objに入れたオブジェクトの子から孫まで全てを不可視化する関数 */
         {

@@ -14,15 +14,15 @@ public class ZankiText : MonoBehaviour
     private void Start()
     {
         zankiText = GetComponent<Text>();
-        zanki = GameObject.Find("ZankiImage").GetComponent<RawImage>();
+        //zanki = GameObject.Find("ZankiImage").GetComponent<RawImage>();
 
         if (GManager.instance != null)
         {
-            zanki_pos = zanki.GetComponent<RectTransform>();
-            zanki_pos.localPosition = new Vector3(-25,320,0);
+            //zanki_pos = zanki.GetComponent<RectTransform>();
+            //zanki_pos.localPosition = new Vector3(-25,320,0);
             zankiText.text += GManager.instance.zankiNum;
-            Text_pos = zankiText.GetComponent<RectTransform>();
-            Text_pos.localPosition = new Vector3(25, 320, 0);
+            //Text_pos = zankiText.GetComponent<RectTransform>();
+            //Text_pos.localPosition = new Vector3(25, 320, 0);
         }
         else
         {

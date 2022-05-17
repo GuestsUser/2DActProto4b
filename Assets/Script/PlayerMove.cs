@@ -415,9 +415,9 @@ public class PlayerMove : Padinput
     private void WallHit()
     {
 
-        rayPosition = new Vector3(transform.localPosition.x, transform.localPosition.y, transform.localPosition.z);
-        rayPosition2 = new Vector3(transform.localPosition.x, transform.localPosition.y, transform.localPosition.z);
-        rayPosition3 = new Vector3(transform.localPosition.x, transform.localPosition.y, transform.localPosition.z);
+        rayPosition = new Vector3(transform.position.x, transform.position.y, transform.position.z);
+        rayPosition2 = new Vector3(transform.position.x, transform.position.y, transform.position.z);
+        rayPosition3 = new Vector3(transform.position.x, transform.position.y, transform.position.z);
         rayPosition.y += 0.5f;
         rayPosition3.y += 1f;
 
@@ -469,7 +469,7 @@ public class PlayerMove : Padinput
             {
                 hit_wall = true;
                 Debug.Log("めり込み対処");
-                var p_pos = new Vector3((transform.localPosition.x), transform.localPosition.y, transform.localPosition.z);
+                var p_pos = new Vector3((transform.position.x), transform.position.y, transform.position.z);
                 //move.x = 0;
                 transform.position = p_pos;
 

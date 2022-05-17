@@ -58,9 +58,13 @@ public class GroundFooter : MonoBehaviour
     }
     private void OnCollisionExit(Collision other)
     {
-        if (other.gameObject == obj) { obj = null; }
+        if (other.gameObject == obj)
+        {
+            obj = null;
+            floor = null; /* 空にする */
+        }
         isGround = false; /* 最後にfalse化する */
-        floor = null; /* 空にする */
+        
     }
 
     public void RideCheck() /* 接地判定 */
@@ -81,5 +85,6 @@ public class GroundFooter : MonoBehaviour
                 }
             }
         }
+        isGround = false;
     }
 }

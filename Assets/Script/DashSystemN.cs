@@ -171,6 +171,7 @@ public class DashSystemN : Padinput
     [Tooltip("StageClearスクリプト")] [SerializeField] private StageClear stageClear;
     [Tooltip("敵削除overrapサイズ")] [SerializeField] private Vector3 delSize;
     [Tooltip("疾走UI")] [SerializeField] private GameObject dashUI;
+    [Tooltip("移動量がこの値以下になった場合動いてない判定")] [SerializeField] private float moveBorder = 0.05f;
     static public bool dash = false;
 
      public bool _dash {get { return dash; } }  /* true疾走が使える false 疾走が使えない */
@@ -342,7 +343,7 @@ public class DashSystemN : Padinput
             old = transform.position;
 
             footer.RideCheck();
-            if (count > runTime && (footer.isGround || move==Vector2.zero )) { break; } /* 時間を超えている且つ接地若しくは移動量に変化がない場合終了 */
+            if (count > runTime && (footer.isGround || Mathf.Abs(move.x)+ Mathf.Abs(move.y)<moveBorder )) { break; } /* 時間を超えている且つ接地若しくは移動量が規定値以下の場合終了 */
             count += Time.deltaTime;
             yield return StartCoroutine(TimeScaleYield.TimeStop());
         }
@@ -357,13 +358,11 @@ public class DashSystemN : Padinput
             float dashVector = dashForce * Mathf.Cos(transform.rotation.eulerAngles.y * Mathf.Deg2Rad); /* 力と方向(x軸用)を持った数学的な意味のベクトル */
             if (standSlopeObj == null) /* 滑る床以外でのダッシュ */
             {
-                //Debug.Log("normal");
                 force.x = dashVector;
                 force.y = rb.velocity.y;
             }
             else /* 床角度に合わせたダッシュ、滑る床以外もこれを使えば滑らないけど傾斜のある床をスムーズにダッシュできるかも */
             {
-                //Debug.Log("slope");
                 float floorZRad = standSlopeObj.transform.rotation.eulerAngles.z * Mathf.Deg2Rad; /* 床のz傾き(ラジアン) */
                 force = new Vector3(dashVector * Mathf.Abs(Mathf.Cos(floorZRad)), dashVector * Mathf.Abs(Mathf.Sin(floorZRad))); /* ダッシュベクトルを床の傾きに合わせて加工する */
             }

@@ -17327,7 +17327,7 @@ PrefabInstance:
     - target: {fileID: -4216859302048453862, guid: 14e49fcf2b8a02845afcb0fe2b5c1b37,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 124.88775
+      value: 124.912
       objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 14e49fcf2b8a02845afcb0fe2b5c1b37,
         type: 3}
@@ -20081,6 +20081,11 @@ PrefabInstance:
       propertyPath: enemyDashDestroy
       value: 
       objectReference: {fileID: 416170537}
+    - target: {fileID: 6810506629677062776, guid: f5f32d84702b9994ebbabd275fee3583,
+        type: 3}
+      propertyPath: m_Constraints
+      value: 122
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f5f32d84702b9994ebbabd275fee3583, type: 3}
 --- !u!4 &1403634260 stripped
@@ -20428,6 +20433,11 @@ PrefabInstance:
       propertyPath: enemyDashDestroy
       value: 
       objectReference: {fileID: 416170537}
+    - target: {fileID: 6810506629677062776, guid: f5f32d84702b9994ebbabd275fee3583,
+        type: 3}
+      propertyPath: m_Constraints
+      value: 122
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f5f32d84702b9994ebbabd275fee3583, type: 3}
 --- !u!1 &1426367640

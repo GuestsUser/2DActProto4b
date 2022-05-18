@@ -9,6 +9,7 @@ public class RetrySystem : MonoBehaviour
     [Header("プレイヤーに付ける復活システム")]
     [Tooltip("リトライ時の開始位置指示用オブジェクト、リトライ時この位置から開始、最初にここに入ってるオブジェクトの位置からステージ開始")] [SerializeField] GameObject retryPoint;
 
+    private Rigidbody rb;
     private bool _isRetry = false; /* trueでリトライを行った事を意味する通知用変数 */
     public bool isRetry { get { return _isRetry; } }
 
@@ -17,6 +18,7 @@ public class RetrySystem : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        rb = GetComponent<Rigidbody>();
         keyStop = GetComponent<CameraOutKeyDisable>();
         StartUp();
     }
@@ -30,7 +32,8 @@ public class RetrySystem : MonoBehaviour
 
     public void Retry()/* リトライさせたいタイミングで呼び出してほしい */
     {
-        StartCoroutine(keyStop.KeyDisable());
+        StartCoroutine(keyStop.KeyDisable()); /* カメラにプレイヤーが映るまで入力禁止 */
+        rb.velocity = Vector3.zero; /* 力のリセット */
         _isRetry = true;
         gameObject.transform.position = retryPoint.transform.position; /* 位置をリトライオブジェクトに揃える */
         GManager.instance.SubZankiNum();

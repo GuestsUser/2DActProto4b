@@ -205,7 +205,10 @@ public class DashSystemN : Padinput
 
     [System.NonSerialized] public GameObject standSlopeObj; /*現在乗ってる滑る床オブジェクト*/
 
-    
+    /* 外部からダッシュを禁止化する為のシステム用変数 */
+    private static bool externalPermit = true;
+    private static int banTaskCount = 0;
+
     void Start()
     {
         if (SceneManager.GetActiveScene().name != "StageSelect")
@@ -227,6 +230,9 @@ public class DashSystemN : Padinput
 
         //adjust = new Vector3(0, transform.localScale.y / 2, 0);
         overrapAdjust = new Vector3(delSize.x / 2, adjust.y, 0); /* overrap用adjust */
+
+        externalPermit = true;
+        banTaskCount = 0;
     }
 
     private void Update()
@@ -246,7 +252,7 @@ public class DashSystemN : Padinput
         {
             footer.RideCheck();
             /*アビリティ発動ボタンが押されたら*/
-            if (timerDashPermit && Gamepad.current.buttonWest.wasPressedThisFrame && (!PlayerKnockBack.runState) && footer.isGround)
+            if (timerDashPermit && externalPermit && Gamepad.current.buttonWest.wasPressedThisFrame && (!PlayerKnockBack.runState) && footer.isGround)
             {
                 StartCoroutine(Dush());
                 StartCoroutine(ReCharge());
@@ -293,7 +299,7 @@ public class DashSystemN : Padinput
         Vector2 move = Vector2.zero; /* 前回から今回の位置を引いて出た値の格納、つまり移動量を取得、2dゲームなので念の為z移動量は加味しない */
 
         //ForceSet();
-        while (!PlayerKnockBack.runState && !retrySys.isRetry) /* ノックバック実行、死亡で終了 */
+        while (!PlayerKnockBack.runState && !retrySys.isRetry && externalPermit) /* ノックバック実行、死亡、外部割込みで終了 */
         {
             move = (Vector2)transform.position - old; /* 座標移動の量を取得 */
             old = transform.position;
@@ -411,7 +417,22 @@ public class DashSystemN : Padinput
         CoolTimeFlg = false;
     }
 
+    
 
+    public static IEnumerator Restriction() /* 禁止化コルーチン */
+    {
+        banTaskCount++; /* コルーチン実行数増加 */
+        if (!externalPermit) { yield break; } /* コルーチンを複数起動させないため既に禁止状態なら抜ける */
+        externalPermit = false; /* 禁止化 */
+        while (banTaskCount > 0) { yield return null; } /* 実行数が0になるまで待機 */
+        externalPermit = true; /* 制限解除 */
+
+    }
+    public static void RestrictionRelease() /* 禁止化解除 */
+    {
+        if (banTaskCount <= 0) { return; } /* 禁止化コルーチンを実行せず実行されると */
+        banTaskCount--; /* 実行数削減 */
+    }
 
     void OnDrawGizmos()
     {

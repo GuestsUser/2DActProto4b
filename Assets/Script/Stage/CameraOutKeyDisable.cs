@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class CameraOutKeyDisable : MonoBehaviour
 {
+    /* CameraInCheckはHarukoBodyに付いている、画面内にいるかどうか判定している */
     [Header("コルーチンを呼ぶとカメラに映るまで動作禁止化")]
     [Tooltip("画面に映った瞬間からこの時間分経過すると動けるようになる")] [SerializeField] float extend;
 
@@ -17,6 +18,7 @@ public class CameraOutKeyDisable : MonoBehaviour
         StartCoroutine(PlayerMove.MoveRestriction());
         StartCoroutine(PlayerMove.RotateRestriction());
         StartCoroutine(JumpSystem.Restriction());
+        StartCoroutine(DashSystemN.Restriction());
 
         do { yield return StartCoroutine(TimeScaleYield.TimeStop()); } while (!CameraInCheck.playerVisible); /* 後置処理にする事でプレイヤーがリトライで画面外に戻った時にフラグをfalseにしてくれる */
 
@@ -31,7 +33,7 @@ public class CameraOutKeyDisable : MonoBehaviour
         PlayerMove.MoveRestrictionRelease();
         PlayerMove.RotateRestrictionRelease();
         JumpSystem.RestrictionRelease();
-
+        DashSystemN.RestrictionRelease();
     }
 
     

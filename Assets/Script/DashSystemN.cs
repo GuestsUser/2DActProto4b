@@ -193,6 +193,10 @@ public class DashSystemN : Padinput
     private Vector3 overrapAdjust; /* overrap用adjust */
     private SESystem sound;
 
+    /*疾走SE用変数*/
+    private AudioSource DashSource;
+    [SerializeField] private AudioClip DashSe;
+
     public bool CoolTimeFlg = false;
 
     /*追加*/
@@ -216,6 +220,7 @@ public class DashSystemN : Padinput
         footer = GetComponent<GroundFooter>();
         retrySys = GetComponent<RetrySystem>();
         sound = GetComponent<SESystem>();
+        DashSource = GetComponent<AudioSource>();
 
         /*追加*/
         player = GetComponent<PlayerMove>();
@@ -276,6 +281,9 @@ public class DashSystemN : Padinput
 
         /*アニメーション開始*/
         animator.SetBool("Attack",true);
+
+        /*疾走音を鳴らす*/
+        DashSource.PlayOneShot(DashSe);
 
         float count = 0f;
         Vector3 force = Vector3.zero;

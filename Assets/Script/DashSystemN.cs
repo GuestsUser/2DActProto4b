@@ -285,6 +285,12 @@ public class DashSystemN : Padinput
         //ForceSet();
         while (!PlayerKnockBack.runState && !retrySys.isRetry) /* ノックバック実行、死亡で終了 */
         {
+            move = (Vector2)transform.position - old; /* 座標移動の量を取得 */
+            old = transform.position;
+
+            footer.RideCheck();
+            if (count > runTime && (footer.isGround || Mathf.Abs(move.x) + Mathf.Abs(move.y) < moveBorder)) { break; } /* 時間を超えている且つ接地若しくは移動量が規定値以下の場合終了 */
+
             /*追加*/
             /*右に入力されているとき*/
             float sub = Mathf.Cos(transform.localEulerAngles.y * Mathf.Deg2Rad); /* プレイヤーのy軸回転から向いている方向を符号で取得、0度なら1が、180なら-1が返ってくる寸法 */
@@ -338,12 +344,6 @@ public class DashSystemN : Padinput
             }
             ForceSet();
             rb.velocity = force;
-
-            move = (Vector2)transform.position - old; /* 座標移動の量を取得 */
-            old = transform.position;
-
-            footer.RideCheck();
-            if (count > runTime && (footer.isGround || Mathf.Abs(move.x)+ Mathf.Abs(move.y)<moveBorder )) { break; } /* 時間を超えている且つ接地若しくは移動量が規定値以下の場合終了 */
             count += Time.deltaTime;
             yield return StartCoroutine(TimeScaleYield.TimeStop());
         }

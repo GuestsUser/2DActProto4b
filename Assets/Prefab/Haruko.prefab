@@ -697,6 +697,7 @@ GameObject:
   - component: {fileID: 5834029954122103087}
   - component: {fileID: 1103888265}
   - component: {fileID: 3530248202892884137}
+  - component: {fileID: 8150122581133534571}
   m_Layer: 0
   m_Name: Haruko
   m_TagString: Player
@@ -1014,6 +1015,7 @@ MonoBehaviour:
   dashUI: {fileID: 0}
   moveBorder: 0.05
   adjust: {x: 0, y: 0.7, z: 0}
+  DashSe: {fileID: 0}
   CoolTimeFlg: 0
   isDashDead: 0
 --- !u!114 &8743491813017517459
@@ -1236,6 +1238,7 @@ MonoBehaviour:
   rayDistance: 0.25
   upForce: 300
   isStepOnDead: 0
+  stepOnSe: {fileID: 0}
 --- !u!114 &3530248202892884137
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1252,6 +1255,19 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 8a6d45f7552bbf5409fdf0b9be64b319, type: 3}
   _index:
   - dashKill
+--- !u!114 &8150122581133534571
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6346024904048878582}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1b225e1ff7330af4c990ceef1ff6d2e0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  extend: 0.3
 --- !u!1 &6346024904113327281
 GameObject:
   m_ObjectHideFlags: 0
@@ -3240,6 +3256,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6346024905763498203}
   - component: {fileID: 6346024905763498202}
+  - component: {fileID: 7688674099999605297}
   m_Layer: 0
   m_Name: Haruko_body
   m_TagString: Untagged
@@ -3333,6 +3350,18 @@ SkinnedMeshRenderer:
     m_Center: {x: 0, y: 0.29403365, z: -0.10505214}
     m_Extent: {x: 0.36747378, y: 0.62340134, z: 0.33538878}
   m_DirtyAABB: 0
+--- !u!114 &7688674099999605297
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6346024905763498200}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 326b218242a919844a48432692e027bc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6346024905778795139
 GameObject:
   m_ObjectHideFlags: 0

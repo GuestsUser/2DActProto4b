@@ -12,9 +12,12 @@ public class RetrySystem : MonoBehaviour
     private bool _isRetry = false; /* trueでリトライを行った事を意味する通知用変数 */
     public bool isRetry { get { return _isRetry; } }
 
+
+    private CameraOutKeyDisable keyStop;
     // Start is called before the first frame update
     void Start()
     {
+        keyStop = GetComponent<CameraOutKeyDisable>();
         StartUp();
     }
 
@@ -27,6 +30,7 @@ public class RetrySystem : MonoBehaviour
 
     public void Retry()/* リトライさせたいタイミングで呼び出してほしい */
     {
+        StartCoroutine(keyStop.KeyDisable());
         _isRetry = true;
         gameObject.transform.position = retryPoint.transform.position; /* 位置をリトライオブジェクトに揃える */
         GManager.instance.SubZankiNum();

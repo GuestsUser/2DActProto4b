@@ -46,6 +46,11 @@ public class DamageSystem : MonoBehaviour
 
     private RetrySystem rty; /* リトライシステム */
 
+    /*ダメージSEようの変数*/
+    AudioSource damageSouce;
+    [SerializeField] AudioClip damageSe;
+    /*ダメージSEようの変数*/
+
     // Start is called before the first frame update
     void Start()
     {
@@ -85,15 +90,25 @@ public class DamageSystem : MonoBehaviour
         DrawSizeChange();
 
         StartCoroutine(InvincibleSystem()); /* コンボ値を無敵時間に合わせてリセットしてくれる */
-        
+
+        /*ダメージSEようの変数初期化*/
+        damageSouce = GetComponent<AudioSource>();
+        /*ダメージSEようの変数初期化*/
+
     }
 
     void LateUpdate()
     {
+
         if (damage != 0  || recover != 0) /* 更新があった場合だけ更新 */
         {
+
             float upDataLife = recover - damage;
             life += upDataLife;
+
+            /*ダメージSEを鳴らす*/
+            damageSouce.PlayOneShot(damageSe);
+            /*ダメージSEを鳴らす*/
 
             /* 加算したのでリセット */
             damage = 0;

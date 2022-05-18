@@ -47,6 +47,11 @@ public class JumpSystem : Padinput
     RaycastHit hit;
     private Vector3 size = new Vector3(1, -1f, 1); /*boxcastのサイズ*/
 
+    /*ジャンプのSEよう変数*/
+    [SerializeField] AudioClip jumpSe;
+    AudioSource jumpSouce;
+    /*ジャンプのSEよう変数*/
+
     void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -59,6 +64,11 @@ public class JumpSystem : Padinput
         /* staticフラグリセット */
         permit = true;
         banTaskCount = 0;
+
+        /*ジャンプのSEよう変数初期化*/
+        jumpSouce = GetComponent<AudioSource>();
+        /*ジャンプのSEよう変数初期化*/
+
     }
     private void Update()
     {
@@ -200,6 +210,8 @@ public class JumpSystem : Padinput
                 rb.AddRelativeForce(rb.velocity.x, jumpForce, 0, ForceMode.VelocityChange);
                 rb.velocity = Vector3.zero;
                 completion = true; /* 成立したらtrue */
+
+                jumpSouce.PlayOneShot(jumpSe);  /*音を鳴らす*/
             }
         }
         else
@@ -210,6 +222,8 @@ public class JumpSystem : Padinput
                 rb.AddRelativeForce(0, jumpForce, 0, ForceMode.VelocityChange);
                 rb.velocity = Vector3.zero;
                 completion = true; /* 成立したらtrue */
+
+                jumpSouce.PlayOneShot(jumpSe);  /*音を鳴らす*/
             }
             else if (jumpCount == 1 && !isGrounded)
             {
@@ -217,6 +231,8 @@ public class JumpSystem : Padinput
                 rb.AddRelativeForce(0, jumpForce * 1.2f, 0, ForceMode.VelocityChange);  /*二段目のジャンプは少し高く*/
                 rb.velocity = Vector3.zero;
                 completion = true; /* 成立したらtrue */
+
+                jumpSouce.PlayOneShot(jumpSe);  /*音を鳴らす*/
             }
         }
     }

@@ -2686,21 +2686,11 @@ PrefabInstance:
       propertyPath: fallPoint.Array.data[0]
       value: 
       objectReference: {fileID: 60787836}
-    - target: {fileID: 6346024904048878346, guid: 1b398051e4fdfd044b3b928e875c85b5,
-        type: 3}
-      propertyPath: m_ApplyRootMotion
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 6346024904048878350, guid: 1b398051e4fdfd044b3b928e875c85b5,
         type: 3}
       propertyPath: retryPoint
       value: 
       objectReference: {fileID: 1227869845}
-    - target: {fileID: 6346024904048878351, guid: 1b398051e4fdfd044b3b928e875c85b5,
-        type: 3}
-      propertyPath: rayDistance
-      value: 0.25
-      objectReference: {fileID: 0}
     - target: {fileID: 6346024904048878582, guid: 1b398051e4fdfd044b3b928e875c85b5,
         type: 3}
       propertyPath: m_Name
@@ -2711,11 +2701,6 @@ PrefabInstance:
       propertyPath: imageLife
       value: 
       objectReference: {fileID: 377766271}
-    - target: {fileID: 8743491813017517459, guid: 1b398051e4fdfd044b3b928e875c85b5,
-        type: 3}
-      propertyPath: placeSpace
-      value: -100
-      objectReference: {fileID: 0}
     - target: {fileID: 8743491813017517459, guid: 1b398051e4fdfd044b3b928e875c85b5,
         type: 3}
       propertyPath: imageBack
@@ -9068,7 +9053,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.778607, y: 1}
+    m_SensorSize: {x: 1.7777778, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0

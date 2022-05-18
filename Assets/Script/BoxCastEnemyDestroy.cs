@@ -15,10 +15,15 @@ public class BoxCastEnemyDestroy : MonoBehaviour
 	/*敵倒した判定　龍用*/
 	public bool isStepOnDead = false;
 
+	/*敵を踏んだ時のSE用*/
+	private AudioSource stepOnSource;
+	[SerializeField] private AudioClip stepOnSe;
+
 
 	void Start()
 	{
 		rb = GetComponent<Rigidbody>();
+		stepOnSource = GetComponent<AudioSource>();
 	}
 
 	void FixedUpdate()
@@ -30,7 +35,10 @@ public class BoxCastEnemyDestroy : MonoBehaviour
 		{
 			if (hit.collider.tag == "Enemy" && !isStepOnDead)
 			{
-				Debug.Log("あたった");
+				//Debug.Log("あたった");
+
+				/*敵を踏んだら音を鳴らす*/
+				stepOnSource.PlayOneShot(stepOnSe);
 
 				isStepOnDead = true;
 				EnemyObjectCollision eCollision = hit.collider.GetComponent<EnemyObjectCollision>();

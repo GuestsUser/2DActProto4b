@@ -273,7 +273,9 @@ public class DashSystemN : Padinput
         /* 移動禁止とアニメ設定 */
         StartCoroutine(PlayerMove.MoveRestriction());
         StartCoroutine(PlayerMove.RotateRestriction());
-        animator.SetTrigger("Attack");
+
+        /*アニメーション開始*/
+        animator.SetBool("Attack",true);
 
         float count = 0f;
         Vector3 force = Vector3.zero;
@@ -347,6 +349,9 @@ public class DashSystemN : Padinput
             count += Time.deltaTime;
             yield return StartCoroutine(TimeScaleYield.TimeStop());
         }
+
+        /*アニメーション終了*/
+        animator.SetBool("Attack", false);
 
         PlayerMove.MoveRestrictionRelease();
         PlayerMove.RotateRestrictionRelease();

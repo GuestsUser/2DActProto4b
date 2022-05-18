@@ -5,7 +5,7 @@ ModelImporter:
   internalIDToNameTable:
   - first:
       74: -203655887218126122
-    second: mixamo.com
+    second: Dash
   externalObjects: {}
   materials:
     materialImportMode: 1
@@ -19,9 +19,14 @@ ModelImporter:
     optimizeGameObjects: 0
     motionNodeName: 
     rigImportErrors: 
-    rigImportWarnings: 
+    rigImportWarnings: "Avatar Rig Configuration mis-match. Inbetween bone rotation
+      in configuration does not match rotation in animation file:\n\t'CH_Spine1'
+      : rotation error = 29.489891 deg\n"
     animationImportErrors: 
-    animationImportWarnings: 
+    animationImportWarnings: "\nClip 'mixamo.com' has import animation warnings that
+      might lower retargeting quality:\nNote: Activate translation DOF on avatar
+      to improve retargeting quality.\n\t'CH_Spine1' is inbetween humanoid transforms
+      and has rotation animation that will be discarded.\n"
     animationRetargetingWarnings: 
     animationDoRetargetingWarnings: 0
     importAnimatedCustomProperties: 0
@@ -33,7 +38,36 @@ ModelImporter:
     animationWrapMode: 0
     extraExposedTransformPaths: []
     extraUserProperties: []
-    clipAnimations: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: Dash
+      takeName: mixamo.com
+      internalID: 0
+      firstFrame: 0
+      lastFrame: 30
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
     isReadable: 0
   meshes:
     lODScreenPercentages: []
@@ -74,8 +108,298 @@ ModelImporter:
   importAnimation: 1
   humanDescription:
     serializedVersion: 3
-    human: []
-    skeleton: []
+    human:
+    - boneName: CH_Hips
+      humanName: Hips
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: CH_LeftUpLeg
+      humanName: LeftUpperLeg
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: CH_RightUpLeg
+      humanName: RightUpperLeg
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: CH_LeftLeg
+      humanName: LeftLowerLeg
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: CH_RightLeg
+      humanName: RightLowerLeg
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: CH_LeftFoot
+      humanName: LeftFoot
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: CH_RightFoot
+      humanName: RightFoot
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: CH_Spine
+      humanName: Spine
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: CH_Neck
+      humanName: Neck
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: CH_Head
+      humanName: Head
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: CH_LeftShoulder
+      humanName: LeftShoulder
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: CH_RightShoulder
+      humanName: RightShoulder
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: CH_LeftArm
+      humanName: LeftUpperArm
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: CH_RightArm
+      humanName: RightUpperArm
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: CH_LeftForeArm
+      humanName: LeftLowerArm
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: CH_RightForeArm
+      humanName: RightLowerArm
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: CH_LeftHand
+      humanName: LeftHand
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: CH_RightHand
+      humanName: RightHand
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: CH_LeftToeBase
+      humanName: LeftToes
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    - boneName: CH_RightToeBase
+      humanName: RightToes
+      limit:
+        min: {x: 0, y: 0, z: 0}
+        max: {x: 0, y: 0, z: 0}
+        value: {x: 0, y: 0, z: 0}
+        length: 0
+        modified: 0
+    skeleton:
+    - name: Haruko@Dash(Clone)
+      parentName: 
+      position: {x: 0, y: 0, z: 0}
+      rotation: {x: 0, y: 0, z: 0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: CH_Reference
+      parentName: Haruko@Dash(Clone)
+      position: {x: 0.015339064, y: 0.03396345, z: 0.2030417}
+      rotation: {x: 0.3558629, y: -0.0595052, z: 0.008927607, w: 0.9325991}
+      scale: {x: 1, y: 1, z: 1}
+    - name: CH_Hips
+      parentName: CH_Reference
+      position: {x: -0.046557456, y: 0.08498454, z: -0.34305567}
+      rotation: {x: -0.35586286, y: 0.05950519, z: -0.008927611, w: 0.9325991}
+      scale: {x: 0.9999998, y: 0.9999998, z: 0.9999997}
+    - name: CH_LeftUpLeg
+      parentName: CH_Hips
+      position: {x: -0.06922225, y: -0.06166137, z: -0.0001589084}
+      rotation: {x: -0.000000029802322, y: -0.0000000037252903, z: 0.000000009313226,
+        w: 1}
+      scale: {x: 0.9999997, y: 0.99999964, z: 0.9999998}
+    - name: CH_LeftLeg
+      parentName: CH_LeftUpLeg
+      position: {x: 0.000000019073491, y: -0.11813093, z: -0.0075943796}
+      rotation: {x: 0.000000029802322, y: 0.0000000037252903, z: -0.000000009313226,
+        w: 1}
+      scale: {x: 0.9999998, y: 1.0000002, z: 0.99999994}
+    - name: CH_LeftFoot
+      parentName: CH_LeftLeg
+      position: {x: 0.000000009536744, y: -0.102736145, z: -0.0056808847}
+      rotation: {x: -0.000000029802322, y: 0.000000011175871, z: 0.0000000018626451,
+        w: 1}
+      scale: {x: 0.99999964, y: 0.99999964, z: 0.99999994}
+    - name: CH_LeftToeBase
+      parentName: CH_LeftFoot
+      position: {x: -0.000000028610236, y: -0.036428485, z: 0.020137023}
+      rotation: {x: -0, y: -0, z: 0.0000000037252903, w: 1}
+      scale: {x: 0.9999998, y: 0.9999999, z: 0.99999964}
+    - name: CH_RightUpLeg
+      parentName: CH_Hips
+      position: {x: 0.06922225, y: -0.06166137, z: -0.0001589084}
+      rotation: {x: -0.000000059604638, y: 0.00000001117587, z: 0.000000009313225,
+        w: 1}
+      scale: {x: 0.99999976, y: 0.99999964, z: 0.9999999}
+    - name: CH_RightLeg
+      parentName: CH_RightUpLeg
+      position: {x: -0.00000003337861, y: -0.1181323, z: -0.007573459}
+      rotation: {x: -0, y: -0, z: -2.2204468e-16, w: 1}
+      scale: {x: 0.9999998, y: 1.0000002, z: 0.9999998}
+    - name: CH_RightFoot
+      parentName: CH_RightLeg
+      position: {x: -0.000000028610234, y: -0.10273489, z: -0.0057018315}
+      rotation: {x: 1.9721527e-31, y: -8.881783e-16, z: 0.000000009313226, w: 1}
+      scale: {x: 0.9999999, y: 0.99999976, z: 0.9999998}
+    - name: CH_RightToeBase
+      parentName: CH_RightFoot
+      position: {x: 0.000000028610236, y: -0.036428485, z: 0.020137023}
+      rotation: {x: 0.000000029802315, y: -0.000000026077032, z: -0.000000007450581,
+        w: 1}
+      scale: {x: 0.99999976, y: 0.99999976, z: 0.99999964}
+    - name: CH_Spine
+      parentName: CH_Hips
+      position: {x: -0, y: 0.052602436, z: -0.0011386182}
+      rotation: {x: -0.000000029802322, y: 0.000000011175871, z: 0.0000000018626451,
+        w: 1}
+      scale: {x: 0.9999997, y: 0.9999999, z: 0.99999976}
+    - name: CH_Spine1
+      parentName: CH_Spine
+      position: {x: -0, y: 0.07717951, z: -0.0077740564}
+      rotation: {x: -0, y: -0, z: 0.0000000037252903, w: 1}
+      scale: {x: 0.9999998, y: 0.9999996, z: 0.9999997}
+    - name: CH_LeftShoulder
+      parentName: CH_Spine1
+      position: {x: -0.036614195, y: 0.0417513, z: -0.01469619}
+      rotation: {x: -2.7755576e-17, y: -0.000000007450581, z: -0.000000009313226,
+        w: 1}
+      scale: {x: 0.9999997, y: 1, z: 1}
+    - name: CH_LeftArm
+      parentName: CH_LeftShoulder
+      position: {x: -0.059929047, y: -0.018481527, z: 3.330669e-18}
+      rotation: {x: 0.000000029802322, y: -8.881784e-16, z: 0.000000033527613, w: 1}
+      scale: {x: 0.99999994, y: 0.99999964, z: 0.99999976}
+    - name: CH_LeftForeArm
+      parentName: CH_LeftArm
+      position: {x: -0.10477731, y: -0.00000229822, z: 0.00000372685}
+      rotation: {x: -0.000000029802322, y: 9.436896e-16, z: -0.0000000018626451, w: 1}
+      scale: {x: 1, y: 0.99999994, z: 1}
+    - name: CH_LeftHand
+      parentName: CH_LeftForeArm
+      position: {x: -0.070863515, y: 1.15818466e-14, z: -0.00000012544004}
+      rotation: {x: -0, y: 0.00000001490116, z: -0.000000022351742, w: 1}
+      scale: {x: 0.9999999, y: 1.0000002, z: 1}
+    - name: CH_RightShoulder
+      parentName: CH_Spine1
+      position: {x: 0.036614195, y: 0.0417513, z: -0.01469619}
+      rotation: {x: -0, y: -0, z: -0.000000011175871, w: 1}
+      scale: {x: 0.9999997, y: 0.99999994, z: 1}
+    - name: CH_RightArm
+      parentName: CH_RightShoulder
+      position: {x: 0.059929047, y: -0.018481527, z: 3.330669e-18}
+      rotation: {x: 2.7755582e-17, y: -0.000000003725291, z: 0.000000033527613, w: 1}
+      scale: {x: 1, y: 1, z: 1.0000001}
+    - name: CH_RightForeArm
+      parentName: CH_RightArm
+      position: {x: 0.10477731, y: -0.0000022982192, z: 0.0000037409015}
+      rotation: {x: -0.000000029802314, y: 0.0000000372529, z: -0.000000024214385,
+        w: 1}
+      scale: {x: 1, y: 0.99999976, z: 0.9999998}
+    - name: CH_RightHand
+      parentName: CH_RightForeArm
+      position: {x: 0.070863515, y: 1.1439738e-14, z: -0.00000012544004}
+      rotation: {x: 0.000000029802314, y: -0.000000074505806, z: 0.000000024214383,
+        w: 1}
+      scale: {x: 0.9999999, y: 0.9999998, z: 0.99999964}
+    - name: CH_Neck
+      parentName: CH_Spine1
+      position: {x: -0, y: 0.07717954, z: -0.018240595}
+      rotation: {x: -0.000000029802315, y: -0.0000000037252916, z: 0.0000000018626436,
+        w: 1}
+      scale: {x: 0.9999999, y: 1.0000002, z: 1}
+    - name: CH_Head
+      parentName: CH_Neck
+      position: {x: -0, y: 0.034397963, z: 0}
+      rotation: {x: 0.000000059604638, y: 1.3322676e-15, z: 1.3322676e-15, w: 1}
+      scale: {x: 0.9999997, y: 0.9999999, z: 0.99999994}
+    - name: Haruko_body
+      parentName: Haruko@Dash(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 1}
     armTwist: 0.5
     foreArmTwist: 0.5
     upperLegTwist: 0.5

@@ -8,7 +8,7 @@ public class INStagePressB : MonoBehaviour
     [Tooltip("表示オブジェクト")] [SerializeField] private GameObject press_b;
     [Tooltip("当たり判定")] [SerializeField] private bool hit;
     [Tooltip("StageObjと表示Objの相対距離")] [SerializeField] private float offset_y;
-
+    float z;
     // Start is called before the first frame update
     void Start()
     {
@@ -16,6 +16,7 @@ public class INStagePressB : MonoBehaviour
         press_b.SetActive(false);
         hit = false;
 
+        z = -1.005f;
     }
     private void OnTriggerEnter(Collider other)
     {
@@ -31,15 +32,15 @@ public class INStagePressB : MonoBehaviour
 
             if (other.name == "Stage1") /* ステージ１なら */
             {
-                press_b.transform.position = new Vector3(pos_x, pos_y - offset_y, press_b.transform.position.z);
+                press_b.transform.position = new Vector3(pos_x, pos_y - offset_y, z);
             }
             else if (other.name == "Stage2") /* ステージ2なら */
             {
-                press_b.transform.position = new Vector3(pos_x, pos_y - offset_y, press_b.transform.position.z);
+                press_b.transform.position = new Vector3(pos_x, pos_y - offset_y, z);
             }
             else if (other.name == "Stage3") /* ステージ3なら */
             {
-                press_b.transform.position = new Vector3(pos_x, pos_y - offset_y, press_b.transform.position.z);
+                press_b.transform.position = new Vector3(pos_x, pos_y - offset_y, z);
             }
         }
     }

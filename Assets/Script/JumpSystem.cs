@@ -159,6 +159,14 @@ public class JumpSystem : Padinput
             isGrounded = false;
             animator.SetBool("IsGrounded", false);
         }
+
+        /*５月19日追加（龍）*/
+        if(isHit && hit.collider.tag == "Slope")
+        {
+            isGrounded = true;
+            animator.SetBool("IsGrounded", true);
+        }
+
         Animation();
     }
 

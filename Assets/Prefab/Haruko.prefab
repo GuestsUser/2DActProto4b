@@ -973,7 +973,8 @@ MonoBehaviour:
   rayDistance: 0.25
   JumpFlg: {fileID: 6872543496779070822, guid: 283c3f143a6e1b8428b2582fe27f01a7, type: 3}
   gb: {fileID: 6872543496779070820, guid: 283c3f143a6e1b8428b2582fe27f01a7, type: 3}
-  jumpSe: {fileID: 8300000, guid: 5f269427eae9f724e810972d10011c5d, type: 3}
+  jumpSe: {fileID: 8300000, guid: d213f2bbae6fc49429e8c1bf3de26292, type: 3}
+  jump2Se: {fileID: 8300000, guid: 57813c8a05db4b643907ecda230b54d1, type: 3}
 --- !u!114 &6346024904048878348
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -50,6 +50,7 @@ public class JumpSystem : Padinput
 
     /*ジャンプのSEよう変数*/
     [SerializeField] AudioClip jumpSe;
+    [SerializeField] AudioClip jump2Se;
     AudioSource jumpSouce;
     /*ジャンプのSEよう変数*/
 
@@ -241,7 +242,7 @@ public class JumpSystem : Padinput
                 rb.velocity = Vector3.zero;
                 completion = true; /* 成立したらtrue */
 
-                jumpSouce.PlayOneShot(jumpSe);  /*音を鳴らす*/
+                jumpSouce.PlayOneShot(jump2Se);  /*音を鳴らす*/
             }
         }
     }

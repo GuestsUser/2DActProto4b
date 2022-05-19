@@ -190,7 +190,7 @@ public class StageSelect : MonoBehaviour
 
 
         }
-        else if (collision.gameObject.name == "Stage2" && Gamepad.current.buttonEast.wasPressedThisFrame)
+        else if (collision.gameObject.name == "Stage2" && Gamepad.current.buttonEast.wasPressedThisFrame && jump.isGrounded)
         {
             ControlStop();
             /*ステージ2に切り替える*/
@@ -203,7 +203,7 @@ public class StageSelect : MonoBehaviour
             harukotrans.eulerAngles = harukovector;
 
         }
-        else if (collision.gameObject.name == "Stage3" && Gamepad.current.buttonEast.wasPressedThisFrame)
+        else if (collision.gameObject.name == "Stage3" && Gamepad.current.buttonEast.wasPressedThisFrame && jump.isGrounded)
         {
             ControlStop();
             /*ステージ3に切り替える*/

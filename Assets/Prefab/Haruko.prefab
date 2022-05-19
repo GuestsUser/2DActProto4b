@@ -909,7 +909,7 @@ MonoBehaviour:
   hit_wall: 0
   distance: 0
   _dash: {fileID: 0}
-  FootSe: {fileID: 0}
+  FootSe: {fileID: 8300000, guid: 4b67731cbce50764a8731c9b57392782, type: 3}
   FootPich: 0
 --- !u!114 &6346024904048878345
 MonoBehaviour:

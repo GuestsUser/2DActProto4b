@@ -1045,7 +1045,7 @@ MonoBehaviour:
   invincible: 2.5
   hitColor: {fileID: 2100000, guid: bd61b33d0c812b345856071d8ac6de67, type: 2}
   invincibleColor: {fileID: 2100000, guid: 958d039d0732c26419294df6f5a4b68b, type: 2}
-  damageSe: {fileID: 8300000, guid: 5f269427eae9f724e810972d10011c5d, type: 3}
+  damageSe: {fileID: 8300000, guid: 259bcd5cdc792404aafae7b933a4bc8d, type: 3}
 --- !u!114 &3141178713863076342
 MonoBehaviour:
   m_ObjectHideFlags: 0

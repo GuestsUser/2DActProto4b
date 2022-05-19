@@ -11,9 +11,9 @@ public class StageClear : MonoBehaviour
     public bool isStage3Clear;   /*ステージ3をクリアしたかどうか*/
 
     /* 一度クリアしたらずっとtrue */
-    static private bool _isStage1Clear;
-    static private bool _isStage2Clear;
-    static private bool _isStage3Clear;
+    static public bool _isStage1Clear;
+    static public bool _isStage2Clear;
+    static public bool _isStage3Clear;
 
     /*フラグ持ち込み用_Tomokazu*/
     public bool stage1Clear {get{ return _isStage1Clear; } } /* 糸数:変数からプロパティに変更 */

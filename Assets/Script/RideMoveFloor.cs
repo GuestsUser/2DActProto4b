@@ -11,9 +11,14 @@ public class RideMoveFloor : MonoBehaviour
     [Tooltip("乗ってから実際に移動を開始するまでの待ち時間")] [SerializeField] float delay = 2;
     [Tooltip("これがtrueなら目標地点に着いた後プレイヤーが再び乗るまで現在位置で待機する")] [SerializeField] bool goalWait = false;
 
+    [Tooltip("これがtrueならプレイヤーがやられると床が元の位置に戻る")] [SerializeField] bool respawnReset = false;
+    //[Tooltip("プレイヤーやられ時床が元の位置に戻るまでの時間")] [SerializeField] float respawnBackTime = 0.7f;
+
     private enum PointFlag { ini = 0, end, move } /* 現在の移動状態を示すフラグ値、iniは初期位置、moveは移動中、endは目標位置にいる */
     Vector3 iniPos; /* 初期位置記録 */
     PointFlag flg = PointFlag.ini; /* 現在の移動状態保持用フラグ */
+
+    private RetrySystem retrySys; /* 元の位置に戻す為のタイミング把握用プレイヤー保持変数、格納はCollisionEnterで行う(そもそもプレイヤーの乗ってない床は動いてないから戻す必要なし) */
 
     // Start is called before the first frame update
     void Start()
@@ -22,6 +27,17 @@ public class RideMoveFloor : MonoBehaviour
         move /= 2; /* 移動量を半分に */
         iniPos += move; /* 記録上の初期位置に移動量の半分を加算 */
     }
+
+    private void LateUpdate()
+    {
+        if(retrySys != null && retrySys.isRetry)
+        {
+            retrySys = null;
+            flg = PointFlag.ini;
+            transform.position = iniPos - move;
+        }
+    }
+
     IEnumerator Move()
     {
         while (true) /* ループにする事で一度乗ったらここ以外でのflgは常にmoveを返す様になり起動タスクを1つにできる */
@@ -30,12 +46,14 @@ public class RideMoveFloor : MonoBehaviour
             flg = PointFlag.move;
             for (float i = 0; i < delay;) /* 乗っても実際に動き出すまでにラグを出す */
             {
+                if (retrySys != null && retrySys.isRetry) { yield break; }
                 i += Time.deltaTime;
                 yield return StartCoroutine(TimeScaleYield.TimeStop());
             }
             
             for (float count = 0; count < limit;) /* 移動部分 */
             {
+                if (retrySys != null && retrySys.isRetry) { yield break; }
                 transform.position = iniPos + move * Mathf.Sin((float)((180 / limit * count + iniAngle) * Mathf.Deg2Rad));
                 count += Time.deltaTime;
                 yield return StartCoroutine(TimeScaleYield.TimeStop());
@@ -53,7 +71,11 @@ public class RideMoveFloor : MonoBehaviour
     {
         if (other.gameObject.tag == "Player")
         {
-            if (flg != PointFlag.move) { StartCoroutine(Move()); }
+            if (flg != PointFlag.move)
+            {
+                retrySys = other.gameObject.GetComponent<RetrySystem>();
+                StartCoroutine(Move());
+            }
         }
     }
 }

@@ -14,6 +14,7 @@ public class GManager : MonoBehaviour
     [Header("デフォルトの残機")] public int defaultZankiNum;
     [HideInInspector] public bool isGameOver;
 
+    private SESystem sound;
     private void Awake()
     {
         if (instance == null)
@@ -28,6 +29,7 @@ public class GManager : MonoBehaviour
             /*中身がすでに入っていた場合インスタンスがくっついているゲームオブジェクトの破棄*/
             Destroy(this.gameObject);
         }
+        sound = GetComponent<SESystem>();
     }
 
     /*残機を1増やす*/
@@ -36,6 +38,7 @@ public class GManager : MonoBehaviour
         /*残機が99より少なかったら*/
         if (zankiNum < 99)
         {
+            sound.audioSource.PlayOneShot(sound.se[sound.IndexToSub("extend")]);
             ++zankiNum;
         }
     }

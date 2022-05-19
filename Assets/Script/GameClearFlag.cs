@@ -15,12 +15,12 @@ public class GameClearFlag : MonoBehaviour
     [SerializeField] private GameObject Stage3;
 
     /*各ステージ宝箱の状態*/
-    [SerializeField] private GameObject Stage1TB;
-    [SerializeField] private GameObject Stage1TBOpne;
-    [SerializeField] private GameObject Stage2TB;
-    [SerializeField] private GameObject Stage2TBOpen;
-    [SerializeField] private GameObject Stage3TB;
-    [SerializeField] private GameObject Stage3TBOpen;
+    //[SerializeField] private GameObject Stage1TB;
+    //[SerializeField] private GameObject Stage1TBOpne;
+    //[SerializeField] private GameObject Stage2TB;
+    //[SerializeField] private GameObject Stage2TBOpen;
+    //[SerializeField] private GameObject Stage3TB;
+    //[SerializeField] private GameObject Stage3TBOpen;
 
     void Start()
     {
@@ -34,22 +34,22 @@ public class GameClearFlag : MonoBehaviour
         {
             Stage1pl.gameObject.SetActive(false);
             Stage1.gameObject.SetActive(true);
-            Stage1TB.gameObject.SetActive(false);
-            Stage1TBOpne.gameObject.SetActive(true);
+            //Stage1TB.gameObject.SetActive(false);
+            //Stage1TBOpne.gameObject.SetActive(true);
         }
         if (StageClear._isStage2Clear)
         {
             Stage2pl.gameObject.SetActive(false);
             Stage2.gameObject.SetActive(true);
-            Stage1TB.gameObject.SetActive(false);
-            Stage1TBOpne.gameObject.SetActive(true);
+            //Stage2TB.gameObject.SetActive(false);
+            //Stage2TBOpne.gameObject.SetActive(true);
         }
         if (StageClear._isStage3Clear)
         {
             Stage3pl.gameObject.SetActive(false);
             Stage3.gameObject.SetActive(true);
-            Stage1TB.gameObject.SetActive(false);
-            Stage1TBOpne.gameObject.SetActive(true);
+            //Stage3TB.gameObject.SetActive(false);
+            //Stage3TBOpne.gameObject.SetActive(true);
         }
     }
 

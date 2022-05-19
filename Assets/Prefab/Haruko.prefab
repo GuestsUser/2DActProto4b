@@ -969,6 +969,7 @@ MonoBehaviour:
   jumping: 0
   fall: 0
   groundFall: 0
+  Dsn: {fileID: 1574921774913152430}
   rayDistance: 0.25
   JumpFlg: {fileID: 6872543496779070822, guid: 283c3f143a6e1b8428b2582fe27f01a7, type: 3}
   gb: {fileID: 6872543496779070820, guid: 283c3f143a6e1b8428b2582fe27f01a7, type: 3}

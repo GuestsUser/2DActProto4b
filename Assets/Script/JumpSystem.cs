@@ -21,6 +21,7 @@ public class JumpSystem : Padinput
     [SerializeField] private bool fall = false;             /*Fallアニメーションしているかどうか*/
     [SerializeField] private bool groundFall = false;
 
+    [SerializeField] private DashSystemN Dsn;
 
     /*（レイキャスト）可視光線の長さ*/
     [SerializeField] public float rayDistance = 0.25f;
@@ -174,7 +175,7 @@ public class JumpSystem : Padinput
     private void Animation()
     {
         /*地面と接触していてAボタンが押されたら（ジャンプモーション）*/
-        if (isGrounded && Gamepad.current.buttonSouth.wasPressedThisFrame)
+        if (isGrounded && Gamepad.current.buttonSouth.wasPressedThisFrame && Dsn.CoolTimeFlg == false)
         {
             jumping = true;
             animator.SetBool("Jumping", true);

@@ -103,7 +103,9 @@ public class StageSelect : MonoBehaviour
     JumpSystem jump;
 
     float time;
-    bool stage,stage2,stage3;
+    bool stage, stage2, stage3;
+
+    public bool startVF; /* VF(VolumeFadeの略) */ 
     /*ハルコちゃんを後ろに向かせるための変数*/
 
     private void Start()
@@ -118,6 +120,7 @@ public class StageSelect : MonoBehaviour
         jump = haruko.GetComponent<JumpSystem>();
         time = 0f;
         stage = stage2 = stage3 = false;
+        startVF = false;
     }
     private void Update()
     {
@@ -173,6 +176,7 @@ public class StageSelect : MonoBehaviour
         /*Bボタンでステージに入れる*/
         if (collision.gameObject.name == "Stage1" && Gamepad.current.buttonEast.wasPressedThisFrame && jump.isGrounded)
         {
+            startVF = true;
 
             //player.state = State.walk;
             anim.SetFloat("Speed",0.8f);
@@ -192,6 +196,8 @@ public class StageSelect : MonoBehaviour
         }
         else if (collision.gameObject.name == "Stage2" && Gamepad.current.buttonEast.wasPressedThisFrame && jump.isGrounded)
         {
+            startVF = true;
+
             ControlStop();
             /*ステージ2に切り替える*/
             fade.FadeIn(1.5f, () => SceneManager.LoadScene("Stage2"));
@@ -205,6 +211,8 @@ public class StageSelect : MonoBehaviour
         }
         else if (collision.gameObject.name == "Stage3" && Gamepad.current.buttonEast.wasPressedThisFrame && jump.isGrounded)
         {
+            startVF = true;
+
             ControlStop();
             /*ステージ3に切り替える*/
             fade.FadeIn(1.5f, () => SceneManager.LoadScene("Stage3"));

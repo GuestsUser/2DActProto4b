@@ -23,7 +23,7 @@ public class RetrySystem : MonoBehaviour
         StartUp();
     }
 
-    private void LateUpdate() /* Retryを呼ぶより前の優先順位で実行する事でフラグリセットを可能にする */
+    private void LateUpdate() /* 実行順をretry→damageにしたのでダメージを受けたフレームから次のretryLateUpDataまでisRetryが参照可能に */
     {
         _isRetry = false;
     }

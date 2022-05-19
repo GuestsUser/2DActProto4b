@@ -1020,7 +1020,7 @@ MonoBehaviour:
   moveBorder: 0.05
   adjust: {x: 0, y: 0.7, z: 0}
   DashSe: {fileID: 8300000, guid: 592621f88f8dbd346b1aa21a24a15015, type: 3}
-  CoolTimeSe: {fileID: 8300000, guid: bdf37798bb8733c4dbdb8a6c1a49d265, type: 3}
+  CoolTimeSe: {fileID: 8300000, guid: 1cd18e158b019dc47bf1658ba4bc63a9, type: 3}
   CoolTimeFlg: 0
   isDashDead: 0
 --- !u!114 &8743491813017517459

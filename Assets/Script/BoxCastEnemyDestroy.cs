@@ -37,15 +37,16 @@ public class BoxCastEnemyDestroy : MonoBehaviour
 			{
 				//Debug.Log("あたった");
 
-				/*敵を踏んだら音を鳴らす*/
-				stepOnSource.PlayOneShot(stepOnSe);
+				
 
 				isStepOnDead = true;
 				EnemyObjectCollision eCollision = hit.collider.GetComponent<EnemyObjectCollision>();
 				if(eCollision != null)
                 {
 					eCollision.playerSteoOn = true;
-                }
+					/*敵を踏んだら音を鳴らす*/
+					stepOnSource.PlayOneShot(stepOnSe);
+				}
 				rb.velocity = new Vector3(0, 0, 0); /*一瞬プレイヤーの動きを止める*/
 				rb.AddForce(new Vector3(0, upForce, 0));    /*敵を踏んだら上にジャンプ*/
 			}

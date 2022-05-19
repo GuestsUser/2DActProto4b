@@ -196,6 +196,7 @@ public class DashSystemN : Padinput
     /*疾走SE用変数*/
     private AudioSource DashSource;
     [SerializeField] private AudioClip DashSe;
+    [SerializeField] private AudioClip CoolTimeSe;
 
     public bool CoolTimeFlg = false;
 
@@ -415,6 +416,7 @@ public class DashSystemN : Padinput
         }
         timerDashPermit = true;
         CoolTimeFlg = false;
+        DashSource.PlayOneShot(CoolTimeSe);
     }
 
     

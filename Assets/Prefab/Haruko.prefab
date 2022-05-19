@@ -1015,7 +1015,8 @@ MonoBehaviour:
   dashUI: {fileID: 0}
   moveBorder: 0.05
   adjust: {x: 0, y: 0.7, z: 0}
-  DashSe: {fileID: 0}
+  DashSe: {fileID: 8300000, guid: 5f269427eae9f724e810972d10011c5d, type: 3}
+  CoolTimeSe: {fileID: 8300000, guid: 5f269427eae9f724e810972d10011c5d, type: 3}
   CoolTimeFlg: 0
   isDashDead: 0
 --- !u!114 &8743491813017517459

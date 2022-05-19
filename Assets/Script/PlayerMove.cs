@@ -101,6 +101,14 @@ public class PlayerMove : Padinput
 
     /* 仲里追加以上 */
 
+    /*足音再生用変数*/
+    AudioSource HarukoSource;
+    AudioSource FootSource;
+    [SerializeField] AudioClip FootSe;
+    JumpSystem isground;
+    public float FootPich = 2;
+    /*足音再生用変数*/
+
     private void Start() /*初期化*/
     {
         _dash = GetComponent<DashSystemN>();
@@ -128,7 +136,14 @@ public class PlayerMove : Padinput
         rotatePermit = true;
         banTaskCountMove = 0;
         banTaskCountRotate = 0;
-}
+
+        /*足音再生用変数初期化*/
+        HarukoSource = GameObject.Find("Haruko").GetComponent<AudioSource>();
+        isground = GameObject.Find("Haruko").GetComponent<JumpSystem>();
+        FootSource = GameObject.Find("Haruko_body").GetComponent<AudioSource>();
+        FootPich = 2;
+        /*足音再生用変数初期化*/
+    }
 
     /*オーバーライド関数(自動で呼び出される 呼び出しタイミングはコントローラー割り当てがされているボタン、スティックが入力された時)*/
     public override void Move() /*動かす時の左スティック入力状態をここで取得*/
@@ -137,6 +152,14 @@ public class PlayerMove : Padinput
         {
             right = Gamepad.current.leftStick.x.ReadValue();
             left = 0;
+            if (!isground.isGrounded)
+            {
+                FootSource.Stop();
+            }
+            else if (isground.isGrounded)
+            {
+                FootSource.Play();
+            }
         }
 
 
@@ -144,6 +167,14 @@ public class PlayerMove : Padinput
         {
             left = Gamepad.current.leftStick.x.ReadValue();
             right = 0;
+            if (!isground.isGrounded)
+            {
+                FootSource.Stop();
+            }
+            else if (isground.isGrounded)
+            {
+                FootSource.Play();
+            }
         }
 
 
@@ -205,6 +236,11 @@ public class PlayerMove : Padinput
             idle = false;
         }
 
+        if (!FootSource.isPlaying && isground.isGrounded)
+        {
+            FootSource.Play();
+        }
+
         ApplyAnimator();
 
         //transform.Translate((move / 10) * speed * Time.deltaTime); /*Update内だと壁にめり込む*/
@@ -226,14 +262,19 @@ public class PlayerMove : Padinput
             case State.idle: /*止まっている時*/
                 run_time = 0;
                 move_x = 0;
+                FootSource.Stop();
                 break;
 
             case State.walk: /*歩き*/
                 run_time = 0;
+                if (!isground.isGrounded) { FootSource.Stop(); }
+                FootSource.pitch = 1;
                 break;
 
             case State.run: /*走り*/
                 RunAccel();
+                if (!isground.isGrounded) { FootSource.Stop(); }
+                FootSource.pitch = FootPich;
                 break;
         }
         /*壁にめり込まないようにする処理(自分版)*/

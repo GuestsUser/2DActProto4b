@@ -115,7 +115,7 @@ public class PlayerMove : Padinput
         idle = true;
         //height = 0;
 
-        anim_speed = 0.1f;
+        anim_speed = 0f;
 
         right = 1; /*最初何も入力していない状態でくっつきの靴に切り替えると入力と移動する方向が逆になる*/
         hit_wall = false;
@@ -187,7 +187,7 @@ public class PlayerMove : Padinput
         move = Vector3.zero;
 
         /*歩きアニメーションに戻すための処理*/
-        anim_speed = 0.1f;
+        anim_speed = 0f;
         player_pos2 = transform.position;
     }
     /*オーバーライド関数*/
@@ -393,7 +393,7 @@ public class PlayerMove : Padinput
     {
         //var speed = Mathf.Abs(input_abs);
         //animator.SetFloat("Speed", speed, 0.1f, Time.deltaTime);
-        animator.SetFloat("Speed", anim_speed, 0.1f, Time.deltaTime);
+        animator.SetFloat("Speed", anim_speed, 0f, Time.deltaTime);
 
         //if (speed == 0)
         //{

@@ -12863,7 +12863,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 892799671}
   m_LocalRotation: {x: -0.06162845, y: 0.7044161, z: -0.06162845, w: 0.7044161}
-  m_LocalPosition: {x: -15.957, y: -1.6087871, z: 16.692966}
+  m_LocalPosition: {x: -12.957, y: -1.6087871, z: 16.692966}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1878277298}
@@ -14686,6 +14686,7 @@ GameObject:
   - component: {fileID: 1064057617}
   - component: {fileID: 1064057619}
   - component: {fileID: 1064057618}
+  - component: {fileID: 1064057620}
   m_Layer: 0
   m_Name: VirtualCamera
   m_TagString: Untagged
@@ -14715,7 +14716,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1064057616}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f385c1557493c324fa0abe26b51fa7e3, type: 3}
   m_Name: 
@@ -14757,7 +14758,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.7773585, y: 1}
+    m_SensorSize: {x: 1.7777778, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -14766,6 +14767,25 @@ MonoBehaviour:
         m_Calls: []
   m_LegacyBlendHint: 0
   m_ComponentOwner: {fileID: 223179640}
+--- !u!114 &1064057620
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1064057616}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce6b9332bce528b4891c3bb045acd113, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  limitObj:
+  - {fileID: 1338991990}
+  - {fileID: 892799671}
+  limitX: 8
+  zoneZ: 2
+  player: {fileID: 416170538}
+  vcam: {fileID: 1064057619}
 --- !u!1 &1085282492
 GameObject:
   m_ObjectHideFlags: 0

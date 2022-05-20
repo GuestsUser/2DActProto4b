@@ -102,6 +102,11 @@ public class StageSelect : MonoBehaviour
     PlayerMove player;
     JumpSystem jump;
 
+    /*5月20日追加　龍*/
+    /*ステージに入るときのSE用*/
+    private AudioSource stageInSource;
+    [SerializeField] private AudioClip stageInSe;
+
     float time;
     bool stage, stage2, stage3;
 
@@ -121,6 +126,9 @@ public class StageSelect : MonoBehaviour
         time = 0f;
         stage = stage2 = stage3 = false;
         startVF = false;
+
+        /*5月20日追加　龍*/
+        stageInSource = GetComponent<AudioSource>();
     }
     private void Update()
     {
@@ -187,6 +195,9 @@ public class StageSelect : MonoBehaviour
             /*ステージ1に切り替える*/
             fade.FadeIn(1.5f, () => SceneManager.LoadScene("Stage1"));
 
+            /*フェード音を鳴らす*/
+            stageInSource.PlayOneShot(stageInSe);
+
             harukovector.x = 0;
             harukovector.y = -90;
             harukovector.z = 0;
@@ -202,6 +213,9 @@ public class StageSelect : MonoBehaviour
             /*ステージ2に切り替える*/
             fade.FadeIn(1.5f, () => SceneManager.LoadScene("Stage2"));
 
+            /*フェード音を鳴らす*/
+            stageInSource.PlayOneShot(stageInSe);
+
             anim.SetFloat("Speed", 0.8f);
             harukovector.x = 0;
             harukovector.y = -90;
@@ -216,6 +230,9 @@ public class StageSelect : MonoBehaviour
             ControlStop();
             /*ステージ3に切り替える*/
             fade.FadeIn(1.5f, () => SceneManager.LoadScene("Stage3"));
+
+            /*フェード音を鳴らす*/
+            stageInSource.PlayOneShot(stageInSe);
 
             anim.SetFloat("Speed", 0.8f);
             harukovector.x = 0;

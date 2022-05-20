@@ -13,6 +13,8 @@ enum cursor_move_type
 }
 public class PauseMenu : MonoBehaviour
 {
+
+    [Header("ポーズメニュースクリプト")]
     [SerializeField] private ShowPause show_pause_script;
 
     cursor_move_type move_type;
@@ -53,6 +55,7 @@ public class PauseMenu : MonoBehaviour
     /* 画像切り替え用 */
     //[SerializeField] private Image[] item_image;
     public RawImage Cursor;
+    public RawImage operation_IMG;
     Image color;
     //Vector3 yellow = new Vector3(1,1,0);
     //Vector3 white = new Vector3(1, 1, 1);
@@ -67,6 +70,7 @@ public class PauseMenu : MonoBehaviour
 
     bool se_flg; /* true:既にならした false:ならせます */
 
+    private StageClear clear;
 
     // Start is called before the first frame update
     void Awake()
@@ -82,10 +86,11 @@ public class PauseMenu : MonoBehaviour
     }
     void Start()
     {
+
+        /* 【コンポネントの取得】 */
         show_pause_script = GameObject.Find("Haruko").GetComponent<ShowPause>();
         menuSE = GetComponent<MenuSE>();
-
-        /* 【オブジェクトの取得】 */
+        operation_IMG = operation.GetComponent<RawImage>();
 
         /* 【オブジェクトの非表示化】 */
         //pause_menu.SetActive(false);
@@ -327,6 +332,14 @@ public class PauseMenu : MonoBehaviour
 
                 case 1: /* 操作説明 */
                     operation.SetActive(true);
+                    if (StageClear._isStage2Clear)
+                    {
+                        operation_IMG.texture = Resources.Load<Texture2D>("疾走とった後");
+                    }
+                    else
+                    {
+                        operation_IMG.texture = Resources.Load<Texture2D>("疾走とる前");
+                    }
                     show_ope = true;
                     break;
 

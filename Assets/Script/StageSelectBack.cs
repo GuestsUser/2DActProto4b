@@ -92,7 +92,7 @@ public class StageSelectBack : MonoBehaviour
             {
                 //Debug.Log("ジャンプシューズ用の画像に変更");
                 popup.SetActive(true);
-                image2.sprite = Resources.Load<Sprite>("ダッシュシューズ");
+                image2.sprite = Resources.Load<Sprite>("疾走シューズ");
 
                 //show[1] = true;
 

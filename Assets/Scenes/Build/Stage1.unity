@@ -3668,34 +3668,6 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 1849278908}
   m_PrefabAsset: {fileID: 0}
---- !u!65 &535964533
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 535964532}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 2.5488281, y: 2.4687474, z: 2.2300668}
-  m_Center: {x: 0.05340576, y: 0.7343737, z: -0.01921989}
---- !u!114 &535964534
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 535964532}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 26f29e361a1739b41b56aa001554dffd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  isStage1Clear: 0
-  isStage2Clear: 0
-  isStage3Clear: 0
 --- !u!1001 &541570677
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4266,34 +4238,6 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 621380726}
   m_PrefabAsset: {fileID: 0}
---- !u!65 &621380728
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 621380727}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 2.27417, y: 3.2515178, z: 2.102443}
-  m_Center: {x: -0.0034332275, y: 1.1257584, z: -0.13795581}
---- !u!114 &621380729
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 621380727}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 26f29e361a1739b41b56aa001554dffd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  isStage1Clear: 0
-  isStage2Clear: 0
-  isStage3Clear: 0
 --- !u!1001 &622227356
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5886,7 +5830,7 @@ GameObject:
   - component: {fileID: 991265587}
   - component: {fileID: 991265586}
   m_Layer: 0
-  m_Name: GameObject
+  m_Name: BoxChange
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5901,16 +5845,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 991265585}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1b4bb1052380e2843a7d5cba78ef8b00, type: 3}
+  m_Script: {fileID: 11500000, guid: 73af742cdb0a515488b7ed74e139f4ec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   StageClear: {fileID: 0}
-  Stage1pl: {fileID: 0}
-  Stage1: {fileID: 0}
-  Stage2pl: {fileID: 0}
-  Stage2: {fileID: 0}
-  Stage3pl: {fileID: 0}
-  Stage3: {fileID: 0}
+  Stage1TB: {fileID: 535964532}
+  Stage1TBOpen: {fileID: 621380727}
 --- !u!4 &991265587
 Transform:
   m_ObjectHideFlags: 0
@@ -9251,7 +9191,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.7777778, y: 1}
+    m_SensorSize: {x: 2.1257484, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -11547,7 +11487,7 @@ PrefabInstance:
     - target: {fileID: 1969052915765123426, guid: 0ae2192dcce3ea34c9b507e5b18652cc,
         type: 3}
       propertyPath: m_Name
-      value: Box9
+      value: ClearPoint
       objectReference: {fileID: 0}
     - target: {fileID: 1969052915765123426, guid: 0ae2192dcce3ea34c9b507e5b18652cc,
         type: 3}

@@ -6,6 +6,8 @@ public class Item : MonoBehaviour
 {
     [Header("プレイヤー判定")] public PlayerTriggerCheck playerCheck;
 
+    [SerializeField] private ParticleSystem ps;
+
     /*コイン取得時の音*/
     //private AudioSource audioSource;
     public AudioClip coinSound;
@@ -33,7 +35,8 @@ public class Item : MonoBehaviour
                 /*コイン要素取得数に1プラス*/
                 ++GManager.instance.itemNum;
                 /*そのオブジェクトを消す*/
-                Destroy(this.gameObject);
+                //Destroy(this.gameObject);
+                StartCoroutine(particleStartToEnd());
             }
         }
 
@@ -42,5 +45,14 @@ public class Item : MonoBehaviour
             GManager.instance.AddZankiNum();
             GManager.instance.itemNum = 0;
         }
+    }
+
+    private IEnumerator particleStartToEnd()
+    {
+        ps.Play();
+        yield return new WaitForSeconds(0);
+        /*そのオブジェクトを消す*/
+        Destroy(this.gameObject);
+        ps.Stop();
     }
 }

@@ -51,12 +51,6 @@ public class SlopeFloor : MonoBehaviour
 
     }
 
-    private void Update()
-    {
-        //Vector3 direction = new Vector3(Mathf.Cos(transform.localRotation.eulerAngles.z * Mathf.Deg2Rad), Mathf.Sin(transform.localRotation.eulerAngles.z * Mathf.Deg2Rad), 0);
-        //Debug.DrawRay(transform.position, 3 * direction, Color.red);
-    }
-
     /* Enterで接触判定を取って足元から真下に向けて長距離(長さ無限が好ましい)rayを飛ばしそのrayがEnterで接触したオブジェクトとの接触を示したら接地とする */
     /* 確実に離れるアクションはジャンプ、消える床との併用 */
     /* プレイヤーx座標が滑る床中心から床x拡大率の半分を超えるか-半分を下回ると離れた事になる */
@@ -176,25 +170,25 @@ public class SlopeFloor : MonoBehaviour
         }
     }
 
-    void OnDrawGizmos() /*boxcastを疑似的に可視化する(gizmosを利用)*/
-    {
-        var scale = transform.lossyScale.x * 0.2f;
-        Gizmos.color = Color.green;
+    //void OnDrawGizmos() /*boxcastを疑似的に可視化する(gizmosを利用)*/
+    //{
+    //    var scale = transform.lossyScale.x * 0.2f;
+    //    Gizmos.color = Color.green;
 
-        Vector3 start = transform.position;
-        Vector3 end = transform.position;
-        start.x = minMax[0];
-        end.x = minMax[0];
-        end.y = -4;
+    //    Vector3 start = transform.position;
+    //    Vector3 end = transform.position;
+    //    start.x = minMax[0];
+    //    end.x = minMax[0];
+    //    end.y = -4;
 
-        Gizmos.DrawLine(start,end);
+    //    Gizmos.DrawLine(start,end);
 
-        start = transform.position;
-        end = transform.position;
-        start.x = minMax[1];
-        end.x = minMax[1];
-        end.y = 9;
+    //    start = transform.position;
+    //    end = transform.position;
+    //    start.x = minMax[1];
+    //    end.x = minMax[1];
+    //    end.y = 9;
 
-        Gizmos.DrawLine(start, end);
-    }
+    //    Gizmos.DrawLine(start, end);
+    //}
 }

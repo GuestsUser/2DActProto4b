@@ -143,23 +143,17 @@ public class JumpSystem : Padinput
         var scale = transform.lossyScale.x * 0.2f;
         var isHit = Physics.BoxCast(transform.position, size * scale, transform.up * -1, out hit, transform.rotation, rayDistance);
         /*boxCastの判定(箱の起点, 箱の大きさ * 調整用のscale, 判定をboxの下の面にする, hit , 箱の角度 , rayの長さ)*/
-        if (isHit && (hit.collider.tag == "ground" || hit.collider.tag == "Slope")) // || isHit && hit.collider.tag == "Slope" && !isGrounded
-        {
-            //Debug.Log("あたってる");
-            switch (jumpFlg_Test)
-            {
-                case true:
-                    jumpCount = 2;
-                    break;
-                case false:
-                    jumpCount = 1;
-                    break;
-            }
 
+        if(isHit && (hit.collider.tag == "ground" || isHit && hit.collider.tag == "Slope"))
+        {
             isGrounded = true;
             animator.SetBool("IsGrounded", true);
+            if(hit.collider.tag == "ground")
+            {
+                if (jumpFlg_Test) { jumpCount = 2; }
+                else { jumpCount = 1; }
+            }
         }
-        /*地面から離れたら*/
         else
         {
             if (jumpCount == 2) --jumpCount;//ジャンプ回数を減らす
@@ -168,8 +162,34 @@ public class JumpSystem : Padinput
             animator.SetBool("IsGrounded", false);
         }
 
+
+        //if (isHit && hit.collider.tag == "ground") // || isHit && hit.collider.tag == "Slope" && !isGrounded
+        //{
+        //    //Debug.Log("あたってる");
+        //    switch (jumpFlg_Test)
+        //    {
+        //        case true:
+        //            jumpCount = 2;
+        //            break;
+        //        case false:
+        //            jumpCount = 1;
+        //            break;
+        //    }
+
+        //    isGrounded = true;
+        //    animator.SetBool("IsGrounded", true);
+        //}
+        ///*地面から離れたら*/
+        //else
+        //{
+        //    if (jumpCount == 2) --jumpCount;//ジャンプ回数を減らす
+
+        //    isGrounded = false;
+        //    animator.SetBool("IsGrounded", false);
+        //}
+
         /*５月19日追加（龍）*/
-        //if(isHit && hit.collider.tag == "Slope")
+        //if (isHit && hit.collider.tag == "Slope")
         //{
         //    isGrounded = true;
         //    animator.SetBool("IsGrounded", true);

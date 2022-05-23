@@ -197,6 +197,13 @@ public class DashSystemN : Padinput
     private AudioSource DashSource;
     [SerializeField] private AudioClip DashSe;
     [SerializeField] private AudioClip CoolTimeSe;
+    /*疾走SE用変数*/
+
+    /*エフェクト発生用変数*/
+    [SerializeField] ParticleSystem DashEfect;
+    ParticleSystem newParticle;
+    [SerializeField] Transform ts;
+    /*エフェクト発生用変数*/
 
     public bool CoolTimeFlg = false;
 
@@ -234,6 +241,8 @@ public class DashSystemN : Padinput
 
         externalPermit = true;
         banTaskCount = 0;
+
+
     }
 
     private void Update()
@@ -245,6 +254,8 @@ public class DashSystemN : Padinput
                 dash = true;
             }
         }
+        //newParticle = Instantiate(DashEfect, ts.transform.position, Quaternion.identity);
+        newParticle.transform.position = ts.transform.position;
     }
 
     public override void Skill()
@@ -291,6 +302,13 @@ public class DashSystemN : Padinput
 
         /*疾走音を鳴らす*/
         DashSource.PlayOneShot(DashSe);
+
+        /*プリファブからエフェクトをセット*/
+        newParticle = Instantiate(DashEfect,ts.transform.position, Quaternion.identity);
+        newParticle.transform.position = ts.transform.position;
+        newParticle.loop = true;
+        newParticle.Play(); /*エフェクトを発生*/
+        /*プリファブからエフェクトをセット*/
 
         float count = 0f;
         Vector3 force = Vector3.zero;
@@ -402,6 +420,8 @@ public class DashSystemN : Padinput
             }
 
             rb.velocity = force;
+            newParticle.loop = false;
+            newParticle.Stop();
         }
     }
 
@@ -417,6 +437,7 @@ public class DashSystemN : Padinput
         timerDashPermit = true;
         CoolTimeFlg = false;
         DashSource.PlayOneShot(CoolTimeSe);
+
     }
 
     

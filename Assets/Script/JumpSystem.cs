@@ -54,6 +54,12 @@ public class JumpSystem : Padinput
     AudioSource jumpSouce;
     /*ジャンプのSEよう変数*/
 
+    /*エフェクト発生用変数*/
+    [SerializeField] ParticleSystem jumpEfect;
+    ParticleSystem newParticle;
+    [SerializeField] Transform ts;
+    /*エフェクト発生用変数*/
+
     void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -234,6 +240,7 @@ public class JumpSystem : Padinput
                 completion = true; /* 成立したらtrue */
 
                 jumpSouce.PlayOneShot(jumpSe);  /*音を鳴らす*/
+
             }
             else if (jumpCount == 1 && !isGrounded)
             {
@@ -243,6 +250,12 @@ public class JumpSystem : Padinput
                 completion = true; /* 成立したらtrue */
 
                 jumpSouce.PlayOneShot(jump2Se);  /*音を鳴らす*/
+
+                /*プリファブからエフェクトをセット*/
+                newParticle = Instantiate(jumpEfect);
+                newParticle.transform.position = ts.transform.position;
+                newParticle.Play(); /*エフェクトを発生*/
+                /*プリファブからエフェクトをセット*/
             }
         }
     }

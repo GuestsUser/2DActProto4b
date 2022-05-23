@@ -17,6 +17,7 @@ public class RideMoveFloor : MonoBehaviour
     private enum PointFlag { ini = 0, end, move } /* 現在の移動状態を示すフラグ値、iniは初期位置、moveは移動中、endは目標位置にいる */
     Vector3 iniPos; /* 初期位置記録 */
     PointFlag flg = PointFlag.ini; /* 現在の移動状態保持用フラグ */
+    Vector3 newPos; /* fixedUpdateで更新する新しい位置 */
 
     private RetrySystem retrySys; /* 元の位置に戻す為のタイミング把握用プレイヤー保持変数、格納はCollisionEnterで行う(そもそもプレイヤーの乗ってない床は動いてないから戻す必要なし) */
 
@@ -24,9 +25,12 @@ public class RideMoveFloor : MonoBehaviour
     void Start()
     {
         iniPos = transform.position;
+        newPos = iniPos;
         move /= 2; /* 移動量を半分に */
         iniPos += move; /* 記録上の初期位置に移動量の半分を加算 */
     }
+
+    private void FixedUpdate() { transform.position = newPos; } /* 位置変更タイミングをFixedUpdateにする事でプレイヤーが床にめり込まず、疾走を通常速で扱える */
 
     private void LateUpdate()
     {
@@ -34,7 +38,8 @@ public class RideMoveFloor : MonoBehaviour
         {
             retrySys = null;
             flg = PointFlag.ini;
-            transform.position = iniPos - move;
+            //transform.position = iniPos - move;
+            newPos = iniPos - move;
         }
     }
 
@@ -54,12 +59,14 @@ public class RideMoveFloor : MonoBehaviour
             for (float count = 0; count < limit;) /* 移動部分 */
             {
                 if (retrySys != null && retrySys.isRetry) { yield break; }
-                transform.position = iniPos + move * Mathf.Sin((float)((180 / limit * count + iniAngle) * Mathf.Deg2Rad));
+                newPos = iniPos + move * Mathf.Sin((float)((180 / limit * count + iniAngle) * Mathf.Deg2Rad));
+                //transform.position = iniPos + move * Mathf.Sin((float)((180 / limit * count + iniAngle) * Mathf.Deg2Rad));
                 count += Time.deltaTime;
                 yield return StartCoroutine(TimeScaleYield.TimeStop());
             }
             float code = Mathf.Sin((float)((iniAngle + 180) * Mathf.Deg2Rad)); /* 初期角に180を足す事で対岸へ綺麗に移動できる */
-            transform.position = iniPos + move * code;
+            newPos = iniPos + move * code;
+            //transform.position = iniPos + move * code;
 
             if (code > 0) { flg = PointFlag.end; } /* sinで返ってきた値が1なら目標地点、-1なら初期地点に到達したことになる */
             else { flg = PointFlag.ini; }

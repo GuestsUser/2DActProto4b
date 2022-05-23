@@ -1,5 +1,35 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &991515160
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 991515161}
+  m_Layer: 0
+  m_Name: DashEffect
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &991515161
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 991515160}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0.578, y: -0.008, z: 0.02}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 6346024904048878341}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1105246981
 GameObject:
   m_ObjectHideFlags: 0
@@ -700,6 +730,8 @@ GameObject:
   - component: {fileID: 8150122581133534571}
   - component: {fileID: 1027865235}
   - component: {fileID: 1027865258}
+  - component: {fileID: 6406530935583046881}
+  - component: {fileID: 8272962949629296382}
   m_Layer: 0
   m_Name: Haruko
   m_TagString: Player
@@ -723,6 +755,7 @@ Transform:
   - {fileID: 1385435775788147854}
   - {fileID: 8244270656062928175}
   - {fileID: 2865753466683468645}
+  - {fileID: 991515161}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1026,7 +1059,7 @@ MonoBehaviour:
   DashSe: {fileID: 8300000, guid: 592621f88f8dbd346b1aa21a24a15015, type: 3}
   CoolTimeSe: {fileID: 8300000, guid: 1cd18e158b019dc47bf1658ba4bc63a9, type: 3}
   DashEfect: {fileID: 19800000, guid: 83cd9cc9f9c88824ba18dc59b05ae328, type: 3}
-  ts: {fileID: 2865753466683468645}
+  ts: {fileID: 991515161}
   CoolTimeFlg: 0
   isDashDead: 0
 --- !u!114 &8743491813017517459
@@ -1297,6 +1330,37 @@ MonoBehaviour:
   stageInSe: {fileID: 0}
   startVF: 0
 --- !u!114 &1027865258
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6346024904048878582}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e0a1e9ed29e31349a406820992d7edc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  press_b: {fileID: 0}
+  hit: 0
+  offset_y: 1.35
+--- !u!114 &6406530935583046881
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6346024904048878582}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 78514ed0942140b49a95533a23ee322d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fade: {fileID: 0}
+  vcam: {fileID: 0}
+  stageInSe: {fileID: 8300000, guid: a3c1cd2439cb1534c923c2926fc4d207, type: 3}
+  startVF: 0
+--- !u!114 &8272962949629296382
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

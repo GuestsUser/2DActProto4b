@@ -125,7 +125,7 @@ public class Enemy3Manager : MonoBehaviour
         /*Rayの作成*/
         Vector3 startVec = transform.up * 0.25f + transform.position + transform.forward * 0.8f * transform.localScale.z;
         Vector3 endVec = startVec - transform.up * 0.5f;
-        Vector3 edVec = endVec - transform.forward * 0.2f;
+        Vector3 edVec = endVec - transform.forward * 0.1f;
         Debug.DrawLine(startVec, endVec, Color.red);
         Debug.DrawLine(endVec, edVec, Color.red);
         return Physics.Linecast(startVec, endVec, stageLayer)

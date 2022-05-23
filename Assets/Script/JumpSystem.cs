@@ -148,6 +148,8 @@ public class JumpSystem : Padinput
         {
             isGrounded = true;
             animator.SetBool("IsGrounded", true);
+            animator.SetBool("Jumping", false);
+            animator.SetBool("Fall", false);
             if(hit.collider.tag == "ground")
             {
                 if (jumpFlg_Test) { jumpCount = 2; }
@@ -202,7 +204,7 @@ public class JumpSystem : Padinput
     private void Animation()
     {
         /*地面と接触していてAボタンが押されたら（ジャンプモーション）*/
-        if (isGrounded && Gamepad.current.buttonSouth.wasPressedThisFrame && Dsn.CoolTimeFlg == false)
+        if (isGrounded && Gamepad.current.buttonSouth.wasPressedThisFrame/* && Dsn.CoolTimeFlg == false*/)
         {
             jumping = true;
             animator.SetBool("Jumping", true);

@@ -317,6 +317,7 @@ public class DashSystemN : Padinput
         Vector2 old = transform.position; /* 前回位置 */
         Vector2 move = Vector2.zero; /* 前回から今回の位置を引いて出た値の格納、つまり移動量を取得、2dゲームなので念の為z移動量は加味しない */
 
+        bool jump = true;
         //ForceSet();
         while (!PlayerKnockBack.runState && !retrySys.isRetry && externalPermit) /* ノックバック実行、死亡、外部割込みで終了 */
         {
@@ -325,7 +326,18 @@ public class DashSystemN : Padinput
             old = transform.position;
 
             footer.RideCheck();
-            if (count > runTime && (footer.isGround || Mathf.Abs(move.x) + Mathf.Abs(move.y) < moveBorder)) { break; } /* 時間を超えている且つ接地若しくは移動量が規定値以下の場合終了 */
+            bool movable = Mathf.Abs(move.x) + Mathf.Abs(move.y) < moveBorder; /* 移動量が規定以下ならtrue */
+            if (count > runTime && (footer.isGround || movable)) { break; } /* 時間を超えている且つ接地若しくは移動量が規定値以下の場合終了 */
+            if (movable && jump)
+            {
+                StartCoroutine(JumpSystem.Restriction());
+                jump = false;
+            }
+            if ( !(movable || jump) )
+            {
+                JumpSystem.RestrictionRelease();
+                jump = true;
+            }
 
             /*追加*/
             /*右に入力されているとき*/
@@ -390,6 +402,7 @@ public class DashSystemN : Padinput
         PlayerMove.MoveRestrictionRelease();
         //PlayerMove.RotateRestrictionRelease();
 
+        if (jump == false) { JumpSystem.RestrictionRelease(); } /* ジャンプが禁止化されていた場合取り消す */
         newParticle.Stop();
         ForceReSet();
 

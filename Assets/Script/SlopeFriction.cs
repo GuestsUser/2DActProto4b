@@ -6,6 +6,7 @@ public class SlopeFriction : MonoBehaviour
 {
     [Header("滑る床から落とされた時の力を抑えるスクリプト")]
     [Tooltip("滑る床から落とされた時、吹っ飛びの力が消えるまでの時間(正確には吹っ飛びにvelocityは使用してないが……)")] [SerializeField] float frictionTime = 0.1f;
+    [Tooltip("吹っ飛ばされた時の移動量がこの値以下の時はこの値に補正される)")] [SerializeField] float velocityBorder = 0.5f;
     private Rigidbody rb; /* リジットボディ保持 */
     private PlayerMove pm; /* 移動用コンポーネント保持 */
 
@@ -25,6 +26,7 @@ public class SlopeFriction : MonoBehaviour
     /* 床が消えると困るのでこのコルーチンは別の場所に移すべきかも */
     public IEnumerator CourseOutFriction(float x_force, float y_force, Vector3 move) /* 床を抜けると凄まじい力が掛かるのでオリジナル摩擦 */
     {
+        StartCoroutine(JumpSystem.Restriction()); /* ジャンプ禁止化 */
         StartCoroutine(PlayerMove.MoveRestriction());
         rb.velocity = Vector3.zero;
         float count = 0; /* 実行された時、1瞬プレイヤーの動きが止まるようなら初期値にTime.deltaTimeを設定し動かしてみる */
@@ -44,9 +46,20 @@ public class SlopeFriction : MonoBehaviour
         /* 滑る力を掛けられていた方向と同じ方向に動いていた(押し戻された若しくは駆け下りていた)場合摩擦コルーチンを開始(力が掛かっていなかった場合開始しない) */
         if (x_force != 0 && (move.x > 0) == (x_force > 0)) { x_run = true; }
         if (y_force != 0 && (move.y > 0) == (y_force > 0)) { y_run = true; }
-        if ( !(x_run||y_run) ) { EndProcess(); }
-        //EndProcess();
-        //yield break;
+        if ( !(x_run||y_run))
+        {
+            EndProcess();
+            yield break;
+        }
+        if (move.x + move.y < velocityBorder)
+        {
+            float total = move.x + move.y;
+            int[] sub_xy = { move.x > 0 ? 1 : -1, move.y > 0 ? 1 : -1 };
+            float[] ration_xy = { move.x / total, move.y / total };
+            move.x = velocityBorder * ration_xy[0] * sub_xy[0];
+            move.y = velocityBorder * ration_xy[1] * sub_xy[1];
+        }
+
 
         /* 終了条件は他にもプレイヤーのダッシュやノックバック、死亡、他の移動床に乗った場合 */
         while (count<frictionTime)

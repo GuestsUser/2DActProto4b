@@ -284,7 +284,7 @@ public class DashSystemN : Padinput
     {
         /* 移動禁止とアニメ設定 */
         StartCoroutine(PlayerMove.MoveRestriction());
-        StartCoroutine(PlayerMove.RotateRestriction());
+        //StartCoroutine(PlayerMove.RotateRestriction());
 
         /*アニメーション開始*/
         animator.SetBool("Attack",true);
@@ -369,7 +369,7 @@ public class DashSystemN : Padinput
         animator.SetBool("Attack", false);
 
         PlayerMove.MoveRestrictionRelease();
-        PlayerMove.RotateRestrictionRelease();
+        //PlayerMove.RotateRestrictionRelease();
 
         ForceReSet();
 

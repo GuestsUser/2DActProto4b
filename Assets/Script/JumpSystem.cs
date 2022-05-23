@@ -137,7 +137,7 @@ public class JumpSystem : Padinput
         var scale = transform.lossyScale.x * 0.2f;
         var isHit = Physics.BoxCast(transform.position, size * scale, transform.up * -1, out hit, transform.rotation, rayDistance);
         /*boxCastの判定(箱の起点, 箱の大きさ * 調整用のscale, 判定をboxの下の面にする, hit , 箱の角度 , rayの長さ)*/
-        if (isHit && hit.collider.tag == "ground") // || isHit && hit.collider.tag == "Slope" && !isGrounded
+        if (isHit && (hit.collider.tag == "ground" || hit.collider.tag == "Slope")) // || isHit && hit.collider.tag == "Slope" && !isGrounded
         {
             //Debug.Log("あたってる");
             switch (jumpFlg_Test)
@@ -163,11 +163,11 @@ public class JumpSystem : Padinput
         }
 
         /*５月19日追加（龍）*/
-        if(isHit && hit.collider.tag == "Slope")
-        {
-            isGrounded = true;
-            animator.SetBool("IsGrounded", true);
-        }
+        //if(isHit && hit.collider.tag == "Slope")
+        //{
+        //    isGrounded = true;
+        //    animator.SetBool("IsGrounded", true);
+        //}
 
         Animation();
     }

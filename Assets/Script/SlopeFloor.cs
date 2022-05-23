@@ -132,7 +132,7 @@ public class SlopeFloor : MonoBehaviour
 
         Vector3 moveVol = Vector3.zero; /* フレーム間の各軸移動量を取得 */
         Vector3 oldPos = player.transform.position; /* 前回位置 */
-        Vector3 angle = Vector3.zero;
+        Vector3 angle = transform.rotation.eulerAngles;
         while (run)
         {
             //Debug.Log(pb.velocity.x);

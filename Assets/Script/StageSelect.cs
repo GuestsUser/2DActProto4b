@@ -107,6 +107,8 @@ public class StageSelect : MonoBehaviour
     private AudioSource stageInSource;
     [SerializeField] private AudioClip stageInSe;
 
+    private bool isCallOnce = false;
+
     float time;
     bool stage, stage2, stage3;
 
@@ -196,8 +198,11 @@ public class StageSelect : MonoBehaviour
             fade.FadeIn(1.5f, () => SceneManager.LoadScene("Stage1"));
 
             /*フェード音を鳴らす*/
-            stageInSource.PlayOneShot(stageInSe);
-
+            if (!isCallOnce)
+            {
+                stageInSource.PlayOneShot(stageInSe);
+                isCallOnce = true;
+            }
             harukovector.x = 0;
             harukovector.y = -90;
             harukovector.z = 0;
@@ -214,7 +219,11 @@ public class StageSelect : MonoBehaviour
             fade.FadeIn(1.5f, () => SceneManager.LoadScene("Stage2"));
 
             /*フェード音を鳴らす*/
-            stageInSource.PlayOneShot(stageInSe);
+            if (!isCallOnce)
+            {
+                stageInSource.PlayOneShot(stageInSe);
+                isCallOnce = true;
+            }
 
             anim.SetFloat("Speed", 0.8f);
             harukovector.x = 0;
@@ -232,7 +241,11 @@ public class StageSelect : MonoBehaviour
             fade.FadeIn(1.5f, () => SceneManager.LoadScene("Stage3"));
 
             /*フェード音を鳴らす*/
-            stageInSource.PlayOneShot(stageInSe);
+            if (!isCallOnce)
+            {
+                stageInSource.PlayOneShot(stageInSe);
+                isCallOnce = true;
+            }
 
             anim.SetFloat("Speed", 0.8f);
             harukovector.x = 0;

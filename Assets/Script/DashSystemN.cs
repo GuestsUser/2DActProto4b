@@ -201,7 +201,7 @@ public class DashSystemN : Padinput
 
     /*エフェクト発生用変数*/
     [SerializeField] ParticleSystem DashEfect;
-    ParticleSystem newParticle;
+    //ParticleSystem newParticle;
     [SerializeField] Transform ts;
     /*エフェクト発生用変数*/
 
@@ -255,7 +255,7 @@ public class DashSystemN : Padinput
             }
         }
         //newParticle = Instantiate(DashEfect, ts.transform.position, Quaternion.identity);
-        newParticle.transform.position = ts.transform.position;
+        //newParticle.transform.position = ts.transform.position;
     }
 
     public override void Skill()
@@ -303,9 +303,9 @@ public class DashSystemN : Padinput
         /*疾走音を鳴らす*/
         DashSource.PlayOneShot(DashSe);
 
+
         /*プリファブからエフェクトをセット*/
-        newParticle = Instantiate(DashEfect,ts.transform.position, Quaternion.identity);
-        newParticle.transform.position = ts.transform.position;
+        ParticleSystem newParticle = Instantiate(DashEfect, ts.transform.position, Quaternion.identity);
         newParticle.loop = true;
         newParticle.Play(); /*エフェクトを発生*/
         /*プリファブからエフェクトをセット*/
@@ -320,6 +320,7 @@ public class DashSystemN : Padinput
         //ForceSet();
         while (!PlayerKnockBack.runState && !retrySys.isRetry && externalPermit) /* ノックバック実行、死亡、外部割込みで終了 */
         {
+            newParticle.transform.position = ts.transform.position;
             move = (Vector2)transform.position - old; /* 座標移動の量を取得 */
             old = transform.position;
 

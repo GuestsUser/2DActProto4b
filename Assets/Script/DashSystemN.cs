@@ -390,7 +390,7 @@ public class DashSystemN : Padinput
         PlayerMove.MoveRestrictionRelease();
         //PlayerMove.RotateRestrictionRelease();
 
-        Destroy(newParticle);
+        newParticle.Stop();
         ForceReSet();
 
         void ForceSet() /* 毎フレームこれを実行する事によるダッシュ中の方向転換、それによる滑る床上でのvelocity.y固定化によるジャンプ無効問題の解決から */

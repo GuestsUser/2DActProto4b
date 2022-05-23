@@ -6958,7 +6958,7 @@ PrefabInstance:
     - target: {fileID: 3244881916376542065, guid: 0ae2192dcce3ea34c9b507e5b18652cc,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 167.97382
+      value: 168.119
       objectReference: {fileID: 0}
     - target: {fileID: 3244881916376542065, guid: 0ae2192dcce3ea34c9b507e5b18652cc,
         type: 3}
@@ -9499,17 +9499,17 @@ PrefabInstance:
     - target: {fileID: 2392778844405928136, guid: ee4d379565ed6264c9928bab8ee13061,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 139.7
+      value: 139.72
       objectReference: {fileID: 0}
     - target: {fileID: 2392778844405928136, guid: ee4d379565ed6264c9928bab8ee13061,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -2.3658915
+      value: -2.3659
       objectReference: {fileID: 0}
     - target: {fileID: 2392778844405928136, guid: ee4d379565ed6264c9928bab8ee13061,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 15.715977
+      value: 15.716
       objectReference: {fileID: 0}
     - target: {fileID: 2392778844405928136, guid: ee4d379565ed6264c9928bab8ee13061,
         type: 3}
@@ -9658,12 +9658,12 @@ PrefabInstance:
     - target: {fileID: 2392778844405928136, guid: ee4d379565ed6264c9928bab8ee13061,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -3.1537378
+      value: -3.14
       objectReference: {fileID: 0}
     - target: {fileID: 2392778844405928136, guid: ee4d379565ed6264c9928bab8ee13061,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 15.854895
+      value: 15.91
       objectReference: {fileID: 0}
     - target: {fileID: 2392778844405928136, guid: ee4d379565ed6264c9928bab8ee13061,
         type: 3}
@@ -14864,7 +14864,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.7777778, y: 1}
+    m_SensorSize: {x: 1.9279661, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -14888,7 +14888,7 @@ MonoBehaviour:
   limitObj:
   - {fileID: 1338991990}
   - {fileID: 892799671}
-  limitX: 8
+  limitX: 7
   zoneZ: 2
   player: {fileID: 416170538}
   vcam: {fileID: 1064057619}
@@ -14922,7 +14922,7 @@ PrefabInstance:
     - target: {fileID: 8237054037857417072, guid: e9dc2f560015ae44991f849a5a21bdb0,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 167.96364
+      value: 168.116
       objectReference: {fileID: 0}
     - target: {fileID: 8237054037857417072, guid: e9dc2f560015ae44991f849a5a21bdb0,
         type: 3}
@@ -15462,17 +15462,17 @@ PrefabInstance:
     - target: {fileID: 958788209744656063, guid: c27ed50f49ca06043b55a32277cb8adc,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 111.6
+      value: 111.62
       objectReference: {fileID: 0}
     - target: {fileID: 958788209744656063, guid: c27ed50f49ca06043b55a32277cb8adc,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -6.0252495
+      value: -6.0432
       objectReference: {fileID: 0}
     - target: {fileID: 958788209744656063, guid: c27ed50f49ca06043b55a32277cb8adc,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 15.776648
+      value: 15.78
       objectReference: {fileID: 0}
     - target: {fileID: 958788209744656063, guid: c27ed50f49ca06043b55a32277cb8adc,
         type: 3}

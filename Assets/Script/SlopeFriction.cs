@@ -53,11 +53,21 @@ public class SlopeFriction : MonoBehaviour
         }
         if (move.x + move.y < velocityBorder)
         {
-            float total = move.x + move.y;
-            int[] sub_xy = { move.x > 0 ? 1 : -1, move.y > 0 ? 1 : -1 };
-            float[] ration_xy = { move.x / total, move.y / total };
-            move.x = velocityBorder * ration_xy[0] * sub_xy[0];
-            move.y = velocityBorder * ration_xy[1] * sub_xy[1];
+            float total = Mathf.Abs(move.x) + Mathf.Abs(move.y);
+            float[] ration_xy = { 0,0 };
+            if (total == 0)
+            {
+                total = Mathf.Abs(x_force) + Mathf.Abs(y_force);
+                ration_xy[0] = x_force / total;
+                ration_xy[1] = y_force / total;
+            }
+            else
+            {
+                ration_xy[0] = move.x / total;
+                ration_xy[1] = move.y / total;
+            }
+            move.x = velocityBorder * ration_xy[0];
+            move.y = velocityBorder * ration_xy[1];
         }
 
 

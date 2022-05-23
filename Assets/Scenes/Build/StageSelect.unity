@@ -32118,7 +32118,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fade: {fileID: 1150843144}
   vcam: {fileID: 1418567089}
-  stageInSe: {fileID: 0}
+  stageInSe: {fileID: 8300000, guid: a3c1cd2439cb1534c923c2926fc4d207, type: 3}
   startVF: 0
 --- !u!114 &1027865244 stripped
 MonoBehaviour:

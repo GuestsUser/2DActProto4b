@@ -11,6 +11,10 @@ public class Oneup : MonoBehaviour
 
     [SerializeField] public GManager gManager;
 
+    private void Start()
+    {
+        gManager = GameObject.Find("GameManager").GetComponent<GManager>();
+    }
     void Update()
     {
         if (gManager.OneupHP)

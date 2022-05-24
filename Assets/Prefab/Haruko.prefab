@@ -728,10 +728,7 @@ GameObject:
   - component: {fileID: 1103888265}
   - component: {fileID: 3530248202892884137}
   - component: {fileID: 8150122581133534571}
-  - component: {fileID: 1027865235}
-  - component: {fileID: 1027865258}
   - component: {fileID: 6406530935583046881}
-  - component: {fileID: 8272962949629296382}
   m_Layer: 0
   m_Name: Haruko
   m_TagString: Player
@@ -1313,37 +1310,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   extend: 0.3
---- !u!114 &1027865235
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6346024904048878582}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 78514ed0942140b49a95533a23ee322d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  fade: {fileID: 0}
-  vcam: {fileID: 0}
-  stageInSe: {fileID: 0}
-  startVF: 0
---- !u!114 &1027865258
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6346024904048878582}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6e0a1e9ed29e31349a406820992d7edc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  press_b: {fileID: 0}
-  hit: 0
-  offset_y: 1.35
 --- !u!114 &6406530935583046881
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1360,21 +1326,6 @@ MonoBehaviour:
   vcam: {fileID: 0}
   stageInSe: {fileID: 8300000, guid: a3c1cd2439cb1534c923c2926fc4d207, type: 3}
   startVF: 0
---- !u!114 &8272962949629296382
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6346024904048878582}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6e0a1e9ed29e31349a406820992d7edc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  press_b: {fileID: 0}
-  hit: 0
-  offset_y: 1.35
 --- !u!1 &6346024904113327281
 GameObject:
   m_ObjectHideFlags: 0

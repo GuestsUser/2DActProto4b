@@ -406,7 +406,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2144271343146636222}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.01, y: -0.008, z: 0.02}
+  m_LocalPosition: {x: 0.01, y: 0.024, z: 0.02}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 6346024904048878341}
@@ -491,6 +491,36 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!1 &3055418326235165990
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2549959760971826214}
+  m_Layer: 0
+  m_Name: JumpEffect
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2549959760971826214
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3055418326235165990}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.01, y: 0.177, z: 0.02}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 6346024904048878341}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4637543678676020843
 GameObject:
   m_ObjectHideFlags: 0
@@ -753,6 +783,7 @@ Transform:
   - {fileID: 8244270656062928175}
   - {fileID: 2865753466683468645}
   - {fileID: 991515161}
+  - {fileID: 2549959760971826214}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1007,7 +1038,7 @@ MonoBehaviour:
   gb: {fileID: 0}
   jumpSe: {fileID: 8300000, guid: d213f2bbae6fc49429e8c1bf3de26292, type: 3}
   jump2Se: {fileID: 8300000, guid: 57813c8a05db4b643907ecda230b54d1, type: 3}
-  jumpEfect: {fileID: 19800000, guid: 83cd9cc9f9c88824ba18dc59b05ae328, type: 3}
+  jumpEfect: {fileID: 19882816, guid: d5c86ceb0aad6e6429f441a1a2b0a4c9, type: 3}
   ts: {fileID: 2865753466683468645}
 --- !u!114 &6346024904048878348
 MonoBehaviour:

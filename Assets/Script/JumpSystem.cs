@@ -82,6 +82,9 @@ public class JumpSystem : Padinput
     {
         /*ジャンプフラグをテキストで表示*/
         JumpFlg.text = "JumpFlg : " + jumpFlg_Test.ToString() + "\nジャンプ可能回数" + jumpCount.ToString();
+
+
+        //newParticle.transform.position = ts.transform.position;
     }
 
     private void OnTriggerEnter(Collider other)

@@ -14,6 +14,8 @@ public class GManager : MonoBehaviour
     [Header("デフォルトの残機")] public int defaultZankiNum;
     [HideInInspector] public bool isGameOver;
 
+    public bool OneupHP;
+
     private SESystem sound;
     private void Awake()
     {
@@ -30,6 +32,8 @@ public class GManager : MonoBehaviour
             Destroy(this.gameObject);
         }
         sound = GetComponent<SESystem>();
+
+        OneupHP = false;
     }
 
     /*残機を1増やす*/
@@ -40,6 +44,7 @@ public class GManager : MonoBehaviour
         {
             sound.audioSource.PlayOneShot(sound.se[sound.IndexToSub("extend")]);
             ++zankiNum;
+            OneupHP = true;
         }
     }
 

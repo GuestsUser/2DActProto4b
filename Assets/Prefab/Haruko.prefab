@@ -759,6 +759,7 @@ GameObject:
   - component: {fileID: 3530248202892884137}
   - component: {fileID: 8150122581133534571}
   - component: {fileID: 6406530935583046881}
+  - component: {fileID: 205603511993773524}
   m_Layer: 0
   m_Name: Haruko
   m_TagString: Player
@@ -784,6 +785,7 @@ Transform:
   - {fileID: 2865753466683468645}
   - {fileID: 991515161}
   - {fileID: 2549959760971826214}
+  - {fileID: 4498734782070226000}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1357,6 +1359,21 @@ MonoBehaviour:
   vcam: {fileID: 0}
   stageInSe: {fileID: 8300000, guid: a3c1cd2439cb1534c923c2926fc4d207, type: 3}
   startVF: 0
+--- !u!114 &205603511993773524
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6346024904048878582}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d980d64c737c5564ea9016322c133c6e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  jumpEfect: {fileID: 19800004, guid: 3af6f68141914ca43ba39b2403757bd0, type: 3}
+  ts: {fileID: 4498734782070226000}
+  gManager: {fileID: 0}
 --- !u!1 &6346024904113327281
 GameObject:
   m_ObjectHideFlags: 0
@@ -3871,6 +3888,36 @@ Transform:
   m_Father: {fileID: 6346024904048878341}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
+--- !u!1 &8796604010293841516
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4498734782070226000}
+  m_Layer: 0
+  m_Name: 1UP
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4498734782070226000
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8796604010293841516}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 1.53, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 6346024904048878341}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &9207255197404479175
 GameObject:
   m_ObjectHideFlags: 0

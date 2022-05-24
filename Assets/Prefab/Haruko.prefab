@@ -1041,7 +1041,7 @@ MonoBehaviour:
   gb: {fileID: 0}
   jumpSe: {fileID: 8300000, guid: d213f2bbae6fc49429e8c1bf3de26292, type: 3}
   jump2Se: {fileID: 8300000, guid: 57813c8a05db4b643907ecda230b54d1, type: 3}
-  jumpEfect: {fileID: 19882816, guid: 8e6f9c0d94571a34182bdb090775ecc7, type: 3}
+  jumpEfect: {fileID: 19882816, guid: d5c86ceb0aad6e6429f441a1a2b0a4c9, type: 3}
   ts: {fileID: 2865753466683468645}
 --- !u!114 &6346024904048878348
 MonoBehaviour:

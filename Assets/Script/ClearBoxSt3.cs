@@ -19,7 +19,7 @@ public class ClearBoxSt3 : MonoBehaviour
     {
         /*ステージのクリアフラグがたつとポールのみのオブジェクトが非アクティブ化され、旗のフラグがアクティブ化される*/
 
-        if (StageClear._isStage2Clear)
+        if (StageClear._isStage3Clear)
         {
             Stage3TB.gameObject.SetActive(false);
             Stage3TBOpen.gameObject.SetActive(true);

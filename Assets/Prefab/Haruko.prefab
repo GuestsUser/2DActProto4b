@@ -1077,9 +1077,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 99859c8865b1915479b09f36c29c84ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  runTime: 2
+  runTime: 1.75
   coolTime: 5
-  dashForce: 6
+  dashForce: 8
   rayDistance: 0.5
   stageClear: {fileID: 0}
   delSize: {x: 1, y: 1.4, z: 1}

@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657695, g: 0.49641138, b: 0.5748176, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657755, g: 0.4964127, b: 0.57481825, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -43936,6 +43936,7 @@ GameObject:
   - component: {fileID: 1408259100}
   - component: {fileID: 1408259099}
   - component: {fileID: 1408259101}
+  - component: {fileID: 1408259102}
   m_Layer: 0
   m_Name: BGM
   m_TagString: Untagged
@@ -44069,6 +44070,21 @@ MonoBehaviour:
   volume: 0
   _audio: {fileID: 0}
   volume_down: 0
+  ob: {fileID: 0}
+--- !u!114 &1408259102
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1408259098}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cd161a79c0c7ad64f84fa1e7118574e0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  stop_bgm: 0
+  _audio: {fileID: 0}
 --- !u!1 &1408639368
 GameObject:
   m_ObjectHideFlags: 0

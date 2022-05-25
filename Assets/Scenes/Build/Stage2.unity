@@ -10628,6 +10628,7 @@ GameObject:
   m_Component:
   - component: {fileID: 734878801}
   - component: {fileID: 734878800}
+  - component: {fileID: 734878802}
   m_Layer: 0
   m_Name: BGM
   m_TagString: Untagged
@@ -10745,6 +10746,20 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 18
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &734878802
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 734878799}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cd161a79c0c7ad64f84fa1e7118574e0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  stop_bgm: 0
+  _audio: {fileID: 0}
 --- !u!1 &735476881
 GameObject:
   m_ObjectHideFlags: 0
@@ -26274,6 +26289,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: FortGround (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 3263830619673690075, guid: ee4d379565ed6264c9928bab8ee13061,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ee4d379565ed6264c9928bab8ee13061, type: 3}

@@ -7306,6 +7306,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1130506931}
   - component: {fileID: 1130506930}
+  - component: {fileID: 1130506932}
   m_Layer: 0
   m_Name: BGM
   m_TagString: Untagged
@@ -7423,6 +7424,20 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 14
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1130506932
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1130506929}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cd161a79c0c7ad64f84fa1e7118574e0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  stop_bgm: 0
+  _audio: {fileID: 0}
 --- !u!1001 &1140288476
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9534,7 +9549,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 2.2082112, y: 1}
+    m_SensorSize: {x: 1.7777778, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0

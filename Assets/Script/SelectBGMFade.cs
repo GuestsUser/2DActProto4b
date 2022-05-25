@@ -9,13 +9,14 @@ public class SelectBGMFade : MonoBehaviour
     [Tooltip("音量")] [SerializeField] float volume;
     [Tooltip("BGMのAudioSource")] [SerializeField] AudioSource _audio;
     [Tooltip("処理動作確認用フラグ")] [SerializeField] private bool volume_down;
-
+    [Tooltip("BGMが消されている時用の処理を発動させる為の物")] [SerializeField] OffBGM ob;
     // Start is called before the first frame update
     void Start()
     {
         /* 必要なコンポネントの取得 */
         _audio = GetComponent<AudioSource>();
         select = GameObject.Find("Haruko").GetComponent<StageSelect>();
+        ob = GetComponent<OffBGM>();
 
         /* 変数の初期化 */
         volume = 0.01f;
@@ -35,10 +36,15 @@ public class SelectBGMFade : MonoBehaviour
     }
     public void FadeVolume()
     {
-        /* 処理確認用フラグをオン！インスペクターで確認出来る */
-        volume_down = true;
+        /* BGMが止められていなければ */
+        if (!ob.stop_bgm)
+        {
+            /* 処理確認用フラグをオン！インスペクターで確認出来る */
+            volume_down = true;
 
-        /* 音量を毎フレーム下げていく */
-        if (_audio.volume > 0) _audio.volume -= volume;
+            /* 音量を毎フレーム下げていく */
+            if (_audio.volume > 0) _audio.volume -= volume;
+        }
     }
+        
 }

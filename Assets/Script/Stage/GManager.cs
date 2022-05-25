@@ -39,8 +39,8 @@ public class GManager : MonoBehaviour
     /*残機を1増やす*/
     public void AddZankiNum()
     {
-        /*残機が10より少なかったら*/
-        if (zankiNum < 10)
+        /*残機が9より少なかったら*/
+        if (zankiNum < 9)
         {
             sound.audioSource.PlayOneShot(sound.se[sound.IndexToSub("extend")]);
             ++zankiNum;

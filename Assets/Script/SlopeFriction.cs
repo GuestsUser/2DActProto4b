@@ -57,6 +57,8 @@ public class SlopeFriction : MonoBehaviour
             float[] ration_xy = { 0,0 };
             if (total == 0)
             {
+                EndProcess();
+                yield break;
                 total = Mathf.Abs(x_force) + Mathf.Abs(y_force);
                 ration_xy[0] = x_force / total;
                 ration_xy[1] = y_force / total;

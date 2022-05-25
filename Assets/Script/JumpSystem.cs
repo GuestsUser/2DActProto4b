@@ -66,7 +66,10 @@ public class JumpSystem : Padinput
         animator = GetComponent<Animator>();
 
         gb = GameObject.Find("JumpFlg");
-        JumpFlg = gb.GetComponent<Text>();
+        if (gb)
+        {
+            JumpFlg = gb.GetComponent<Text>();
+        }
         //doublejump = GameObject.Find("Test_DoubleJump");
 
         /* staticフラグリセット */

@@ -15,6 +15,7 @@ public class GManager : MonoBehaviour
     [HideInInspector] public bool isGameOver;
 
     public bool OneupHP;
+    public bool ZankiMax;
 
     private SESystem sound;
     private void Awake()
@@ -34,6 +35,7 @@ public class GManager : MonoBehaviour
         sound = GetComponent<SESystem>();
 
         OneupHP = false;
+        ZankiMax = false;
     }
 
     /*残機を1増やす*/
@@ -45,6 +47,11 @@ public class GManager : MonoBehaviour
             sound.audioSource.PlayOneShot(sound.se[sound.IndexToSub("extend")]);
             ++zankiNum;
             OneupHP = true;
+        }
+        /*残機が10以上だったら*/
+        else if(zankiNum <= 10) {
+            Debug.Log("残機がMAX ");
+            ZankiMax = true;
         }
     }
 

@@ -7,6 +7,7 @@ public class Item : MonoBehaviour
     [Header("プレイヤー判定")] public PlayerTriggerCheck playerCheck;
 
     [SerializeField] private ParticleSystem ps;
+    [SerializeField] private GameObject coin_model;
 
     /*コイン取得時の音*/
     //private AudioSource audioSource;
@@ -27,7 +28,7 @@ public class Item : MonoBehaviour
         if (playerCheck.isOn)
         {
             /*ゲームマネージャーがあるかどうか（あった場合）*/
-            if (GManager.instance != null)
+            if (coin_model)
             {
                 /*音を鳴らす*/
                 AudioSource.PlayClipAtPoint(coinSound, this.transform.position);
@@ -35,7 +36,7 @@ public class Item : MonoBehaviour
                 /*コイン要素取得数に1プラス*/
                 ++GManager.instance.itemNum;
                 /*そのオブジェクトを消す*/
-                //Destroy(this.gameObject);
+                Destroy(coin_model);
                 StartCoroutine(particleStartToEnd());
             }
         }
@@ -52,7 +53,7 @@ public class Item : MonoBehaviour
         ps.Play();
         yield return new WaitForSeconds(0);
         /*そのオブジェクトを消す*/
-        Destroy(this.gameObject);
+        //Destroy(coin_model);
         ps.Stop();
     }
 }

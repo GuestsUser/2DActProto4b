@@ -1374,6 +1374,7 @@ MonoBehaviour:
   jumpEfect: {fileID: 19800004, guid: 3af6f68141914ca43ba39b2403757bd0, type: 3}
   ts: {fileID: 4498734782070226000}
   gManager: {fileID: 0}
+  maxEffect: {fileID: 19800000, guid: 1bc4a709f24528b40984e62f32e398a0, type: 3}
 --- !u!1 &6346024904113327281
 GameObject:
   m_ObjectHideFlags: 0

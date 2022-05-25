@@ -11773,6 +11773,11 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: OnClickButton
       objectReference: {fileID: 0}
+    - target: {fileID: 5361950379808459665, guid: 11f4cd94535888142889b442320454b4,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5361950379830602449, guid: 11f4cd94535888142889b442320454b4,
         type: 3}
       propertyPath: m_RootOrder
@@ -44083,7 +44088,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd161a79c0c7ad64f84fa1e7118574e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  stop_bgm: 0
+  stop_bgm: 1
   _audio: {fileID: 0}
 --- !u!1 &1408639368
 GameObject:

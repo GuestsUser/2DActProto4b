@@ -83,8 +83,12 @@ public class JumpSystem : Padinput
     }
     private void Update()
     {
-        /*ジャンプフラグをテキストで表示*/
-        JumpFlg.text = "JumpFlg : " + jumpFlg_Test.ToString() + "\nジャンプ可能回数" + jumpCount.ToString();
+        if (gb)
+        {
+
+            /*ジャンプフラグをテキストで表示*/
+            JumpFlg.text = "JumpFlg : " + jumpFlg_Test.ToString() + "\nジャンプ可能回数" + jumpCount.ToString();
+        }
 
 
         //newParticle.transform.position = ts.transform.position;

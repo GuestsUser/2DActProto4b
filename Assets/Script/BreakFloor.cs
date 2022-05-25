@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
+[RequireComponent(typeof(SESystem))]
 public class BreakFloor : MonoBehaviour
 {
     [Header("プレイヤーが乗ると崩れる")]
@@ -23,6 +24,8 @@ public class BreakFloor : MonoBehaviour
     bool useFlg = false; /* 破壊と再生のコルーチンが使用中か否かフラグ */
     Material originMat; /* 元のマテリアル */
 
+    SESystem sound;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -32,6 +35,7 @@ public class BreakFloor : MonoBehaviour
         white = new Color32(186, 35, 128, 255);
         isCollider = new List<bool>();
         isRender = new List<bool>();
+        sound = GetComponent<SESystem>();
 
         /* 関数の方では自身を格納できないので先に入れておく */
         allObj.Add(gameObject);
@@ -79,7 +83,11 @@ public class BreakFloor : MonoBehaviour
                 ColorReset();
                 if (noticeMaterial != null) { MaterialChange(originMat); }
             }
-            else { ColorChange(clear); }
+            else
+            {
+                sound.audioSource.PlayOneShot(sound.se[sound.IndexToSub("break")]);
+                ColorChange(clear);
+            }
             for (int i = 0; i < allObj.Count; i++) { if (isCollider[i]) { allObj[i].GetComponent<Collider>().enabled = flg; } } /* 所属オブジェクトの当たり判定の削除と復活 */
         }
         useFlg = false; /* 解放 */
@@ -131,6 +139,7 @@ public class BreakFloor : MonoBehaviour
     {
         if (other.gameObject.tag == "Player" && !useFlg)
         {
+            sound.audioSource.PlayOneShot(sound.se[sound.IndexToSub("ride")]);
             StartCoroutine(Del());
         }
     }

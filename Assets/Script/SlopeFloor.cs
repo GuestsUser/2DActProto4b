@@ -119,7 +119,7 @@ public class SlopeFloor : MonoBehaviour
         calculatRad = rad;
         //float size = (transform.localScale.x ) * Mathf.Cos(transform.localEulerAngles.z * Mathf.Deg2Rad) / 2; /* xサイズ半分とプレイヤー当たり判定半径半分が床に乗れる限界位置 */
         minMax[0] -= rad / 2;
-        //minMax[1] += rad / 2;
+        minMax[1] += rad / 2;
     }
 
     IEnumerator SlopeForce()

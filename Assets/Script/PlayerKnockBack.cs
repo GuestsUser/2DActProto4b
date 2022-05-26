@@ -19,6 +19,9 @@ public class PlayerKnockBack : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        runOrder = false;
+        _runState = false;
+
         rb = GetComponent<Rigidbody>();
         retrySys = GetComponent<RetrySystem>();
         StartCoroutine(KnockBackSystem());

@@ -211,7 +211,7 @@ public class DamageSystem : MonoBehaviour
     /* 【糸数】5月2日追加 */
     void DrawBack()
     {
-        Debug.Log("ライフ背景描画");
+        //Debug.Log("ライフ背景描画");
         for (int i = 0; i < maxLife; i++){
             drawBack[i].rectTransform.localScale = imageScale;
             drawBack[i].uvRect = imageRect;

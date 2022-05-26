@@ -311,10 +311,10 @@ public class JumpSystem : Padinput
     }
     /* 仲里追加以上 */
     /*久場追加*/
-    void OnDrawGizmos() /*boxcastを疑似的に可視化する(gizmosを利用)*/
-    {
-        var scale = transform.lossyScale.x * 0.2f;
-        Gizmos.color = Color.yellow;
-        Gizmos.DrawWireCube(transform.position + transform.up * -1 * hit.distance, size * scale * 2);
-    }
+    //void OnDrawGizmos() /*boxcastを疑似的に可視化する(gizmosを利用)*/
+    //{
+    //    var scale = transform.lossyScale.x * 0.2f;
+    //    Gizmos.color = Color.yellow;
+    //    Gizmos.DrawWireCube(transform.position + transform.up * -1 * hit.distance, size * scale * 2);
+    //}
 }

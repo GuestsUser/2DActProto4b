@@ -32,7 +32,7 @@ public class Item : MonoBehaviour
             {
                 /*音を鳴らす*/
                 AudioSource.PlayClipAtPoint(coinSound, this.transform.position);
-                Debug.Log("音が鳴りました");
+                //Debug.Log("音が鳴りました");
                 /*コイン要素取得数に1プラス*/
                 ++GManager.instance.itemNum;
                 /*そのオブジェクトを消す*/

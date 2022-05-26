@@ -14,7 +14,7 @@ public class PlayerTriggerCheck : MonoBehaviour
         {
             /*チェックする*/
             isOn = true;
-            Debug.Log("プレイヤーと接触しました");
+            //Debug.Log("プレイヤーと接触しました");
         }
     }
 

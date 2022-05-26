@@ -357,7 +357,7 @@ public class DashSystemN : Padinput
             {
                 if ( (obj.tag == "Enemy" || obj.tag == "Enemy3") && !isDashDead)
                 {
-                    Debug.Log("疾走で倒しました");
+                    //Debug.Log("疾走で倒しました");
 
                     sound.audioSource.PlayOneShot(sound.se[sound.IndexToSub("dashKill")]);
 

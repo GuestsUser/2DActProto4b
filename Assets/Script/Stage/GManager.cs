@@ -50,7 +50,7 @@ public class GManager : MonoBehaviour
         }
         /*残機が10以上だったら*/
         else if(zankiNum <= 10) {
-            Debug.Log("残機がMAX ");
+            //Debug.Log("残機がMAX ");
             ZankiMax = true;
         }
     }

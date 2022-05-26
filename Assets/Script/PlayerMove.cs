@@ -470,7 +470,7 @@ public class PlayerMove : Padinput
         /* 正面から出ているレイが当たったら */
         if (Physics.Raycast(ray, out rayHit, rayDistance) || Physics.Raycast(ray2, out rayHit, rayDistance) || Physics.Raycast(ray3, out rayHit, rayDistance))
         {
-            Debug.Log(rayHit.collider.name);
+            //Debug.Log(rayHit.collider.name);
             if (rayHit.collider.tag != "Slope" && rayHit.collider.tag != "StageObj" && rayHit.collider.tag != "SavePoint" && rayHit.collider.tag != "Stage1Clear" && rayHit.collider.tag != "Stage2Clear" && rayHit.collider.tag != "Stage3Clear" && rayHit.collider.tag != "Enemy" && rayHit.collider.tag != "Item" && rayHit.collider.tag != "Enemy3")
             {
                 //Debug.Log(rayHit.collider.transform.position);
@@ -488,7 +488,7 @@ public class PlayerMove : Padinput
             
             
             //hit_wall = true;
-            Debug.Log("れいが壁に当たっています");
+            //Debug.Log("れいが壁に当たっています");
         }
         else
         {
@@ -510,7 +510,7 @@ public class PlayerMove : Padinput
             if (rayHit_wall == true)
             {
                 hit_wall = true;
-                Debug.Log("めり込み対処");
+                //Debug.Log("めり込み対処");
                 var p_pos = new Vector3((transform.position.x), transform.position.y, transform.position.z);
                 //move.x = 0;
                 transform.position = p_pos;

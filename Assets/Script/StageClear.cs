@@ -89,7 +89,7 @@ public class StageClear : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log("aa");
+        //Debug.Log("aa");
         ///*現在のシーンがStage1なら*/
         //if (SceneManager.GetActiveScene().name == "PreStage1")
         //{
@@ -150,7 +150,7 @@ public class StageClear : MonoBehaviour
                 {
                     /*ステージ１をクリアにする*/
                     isStage1Clear = true;
-                    Debug.Log("ステージ1クリア" + isStage1Clear);
+                    //Debug.Log("ステージ1クリア" + isStage1Clear);
                 }
             }
         }
@@ -165,7 +165,7 @@ public class StageClear : MonoBehaviour
                 {
                     /*ステージ2をクリアにする*/
                     isStage2Clear = true;
-                    Debug.Log("ステージ2クリア" + isStage2Clear);
+                    //Debug.Log("ステージ2クリア" + isStage2Clear);
                 }
             }
         }
@@ -180,7 +180,7 @@ public class StageClear : MonoBehaviour
                 {
                     /*ステージ3をクリアにする*/
                     isStage3Clear = true;
-                    Debug.Log("ステージ3クリア" + isStage3Clear);
+                    //Debug.Log("ステージ3クリア" + isStage3Clear);
                 }
             }
         }

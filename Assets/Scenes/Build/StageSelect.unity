@@ -44093,7 +44093,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd161a79c0c7ad64f84fa1e7118574e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  stop_bgm: 1
+  stop_bgm: 0
   _audio: {fileID: 0}
 --- !u!1 &1408639368
 GameObject:

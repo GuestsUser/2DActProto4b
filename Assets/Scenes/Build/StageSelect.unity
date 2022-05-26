@@ -35674,6 +35674,11 @@ MonoBehaviour:
   p_to_3: 0
   one_to_two: 0
   two_to_three: 0
+  lighting: {fileID: 486289582}
+  lightColor:
+  - {r: 0.9622642, g: 0.93887854, b: 0.6036846, a: 0}
+  - {r: 1, g: 0.25859666, b: 0.18396229, a: 0}
+  - {r: 0.17958543, g: 0.114587024, b: 0.9716981, a: 0}
 --- !u!1 &1139508245
 GameObject:
   m_ObjectHideFlags: 0

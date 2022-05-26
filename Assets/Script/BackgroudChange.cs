@@ -35,6 +35,11 @@ public class BackgroudChange : MonoBehaviour
     [Tooltip("Stage2とStage3のdistance")] [SerializeField] private float two_to_three;
 
 
+    [Tooltip("背景フェードに合わせて切り替えるライト")] [SerializeField] private Light lighting;
+    [Tooltip("切り替えライトの色、ステージの順番と配列の順番は対応している")] [SerializeField] private Color[] lightColor;
+    private Color[] colorDiff; /* 一番近い添え字との色差、「大きい添え字-小さい添え字」の値になっている */
+    private Color currentColor; /* 現在色 */
+
     // Start is called before the first frame update
     void Start()
     {
@@ -51,6 +56,12 @@ public class BackgroudChange : MonoBehaviour
         opacity1 = 1; /* playerの初期位置によりstage1は先に表示 */
         opacity2 = 0;
         opacity3 = 0;
+
+        /* 色の差を出す */
+        currentColor = lightColor[0];
+        colorDiff = new Color[2];
+        colorDiff[0] = lightColor[1] - lightColor[0];
+        colorDiff[1] = lightColor[2] - lightColor[1];
     }
 
     // Update is called once per frame
@@ -65,6 +76,7 @@ public class BackgroudChange : MonoBehaviour
         stage1_Back.color = new Color(1, 1, 1, opacity1);
         stage2_Back.color = new Color(1, 1, 1, opacity2);
         stage3_Back.color = new Color(1, 1, 1, opacity3);
+        lighting.color = currentColor;
     }
 
     void distance()/* Playerと各ステージオブジェクトとの距離を計算 */
@@ -103,6 +115,7 @@ public class BackgroudChange : MonoBehaviour
             {
                 opacity1 = 1 - (p_to_1 / (one_to_two));
                 opacity2 = 1 - opacity1;
+                currentColor = lightColor[0] + colorDiff[0] * opacity2;
             }
         }
         /* stage2とstage3の間の時 */
@@ -114,6 +127,7 @@ public class BackgroudChange : MonoBehaviour
             {
                 opacity2 = 1 - (p_to_2_2 / (two_to_three));
                 opacity3 = 1 - opacity2;
+                currentColor = lightColor[1] + colorDiff[1] * opacity3;
             }
         }
     }

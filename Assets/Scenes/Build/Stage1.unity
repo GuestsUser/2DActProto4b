@@ -2053,6 +2053,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Pause
       objectReference: {fileID: 0}
+    - target: {fileID: 2618197239470411366, guid: 7df5d8b93a84fd341b61b528a1c7af30,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2618197239470411367, guid: 7df5d8b93a84fd341b61b528a1c7af30,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -9091,6 +9096,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: FadePanel
       objectReference: {fileID: 0}
+    - target: {fileID: 6639700848456096782, guid: 3c268937a10829b43bcdf18bfe524885,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3c268937a10829b43bcdf18bfe524885, type: 3}
 --- !u!224 &1384975697 stripped
@@ -9621,7 +9631,7 @@ MonoBehaviour:
   limitObj:
   - {fileID: 1084601009}
   - {fileID: 1752144947}
-  limitX: 11.5
+  limitX: 8
   zoneZ: 2
   lerpTime: 1.5
   player: {fileID: 1439423584}
@@ -11328,7 +11338,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1752144947}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 189.67, y: 4.2, z: -0.86}
+  m_LocalPosition: {x: 186.67, y: 4.2, z: -0.86}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 547502451}

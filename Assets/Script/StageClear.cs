@@ -55,6 +55,7 @@ public class StageClear : MonoBehaviour
                 if (isStage1Clear) /* 確認用で3を入れた */
                 {
                     /*シーンをステージクリア画面に切り替える*/
+                    TimeAttack.BestTimeUpDate(1);
                     SceneManager.LoadScene("Clear");
                 }
                 break;
@@ -64,6 +65,7 @@ public class StageClear : MonoBehaviour
                 if (_isStage1Clear && isStage2Clear) /* 確認用で3を入れた */
                 {
                     /*シーンをステージクリア画面に切り替える*/
+                    TimeAttack.BestTimeUpDate(2);
                     SceneManager.LoadScene("Clear");
                 }
                 break;
@@ -73,6 +75,7 @@ public class StageClear : MonoBehaviour
                 if (_isStage1Clear && _isStage2Clear && isStage3Clear) /* ステージ3のみ毎回初期化されるフラグにしておく */
                 {
                     /*シーンをオールステージクリア画面に切り替える*/
+                    TimeAttack.BestTimeUpDate(3);
                     SceneManager.LoadScene("AllClear");
                 }
                 break;

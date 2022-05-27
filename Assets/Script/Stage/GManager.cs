@@ -22,6 +22,15 @@ public class GManager : MonoBehaviour
     {
         if (instance == null)
         {
+            PlayerPrefs.SetInt("bestSt1TimeMin", 99);
+            PlayerPrefs.SetInt("bestSt1TimeSec", 59);
+            PlayerPrefs.SetInt("bestSt1TimeMil", 9);
+            PlayerPrefs.SetInt("bestSt2TimeMin", 99);
+            PlayerPrefs.SetInt("bestSt2TimeSec", 59);
+            PlayerPrefs.SetInt("bestSt2TimeMil", 9);
+            PlayerPrefs.SetInt("bestSt3TimeMin", 99);
+            PlayerPrefs.SetInt("bestSt3TimeSec", 59);
+            PlayerPrefs.SetInt("bestSt3TimeMil", 9);
             /*確保されたメモリ領域に自分自身を入れる*/
             instance = this;
             /*シーン切り替え時に破棄されない状態にする命令*/
